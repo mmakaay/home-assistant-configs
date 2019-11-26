@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cpu=$(cat /sys/class/thermal/thermal_zone0/temp)
+degrees="$((cpu/1000))"
+echo $degrees

@@ -1,0 +1,6 @@
+---
+trigger_blackout_event:
+  alias: Blackout (zzz...)
+  sequence:
+    - event: blackout
+      event_data: {}

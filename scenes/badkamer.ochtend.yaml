@@ -1,0 +1,6 @@
+name: Badkamer ochtend
+entities:
+  light.badkamer_plafond:
+    brightness: 160
+    color_temp: 390
+    state: 'on'

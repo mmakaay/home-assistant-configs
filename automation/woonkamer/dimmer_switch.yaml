@@ -1,0 +1,64 @@
+---
+- id: woonkamer_dimmer_on
+  alias: "[WOONKAMER DIMMER] 'on' activeert scene 'TV kijken'"
+  description: ''
+  trigger:
+  - device_id: 32d5b64e890f40879159f0c63b7c80fd
+    domain: deconz
+    platform: device
+    subtype: turn_on
+    type: remote_button_short_release
+  condition: []
+  action:
+  - data:
+      entity_id: scene.woonkamer_tv_kijken
+    service: scene.turn_on
+
+
+- id: woonkamer_dimmer_off
+  alias: "[WOONKAMER DIMMER] 'off' zet lampen in de woonkamer uit"
+  description: ''
+  trigger:
+  - device_id: 32d5b64e890f40879159f0c63b7c80fd
+    domain: deconz
+    platform: device
+    subtype: turn_off
+    type: remote_button_short_release
+  condition: []
+  action:
+  - device_id: b6686897806344baac29b494f949ae4b
+    domain: light
+    entity_id: light.woonkamer_groep_deconz
+    type: turn_off
+
+
+- id: woonkamer_dimmer_up
+  alias: "[WOONKAMER DIMMER] 'dim up' activeert scene 'Klaprozen'"
+  description: ''
+  trigger:
+  - device_id: 32d5b64e890f40879159f0c63b7c80fd
+    domain: deconz
+    platform: device
+    subtype: dim_up
+    type: remote_button_short_release
+  condition: []
+  action:
+  - data:
+      entity_id: scene.woonkamer_klaprozen
+    service: scene.turn_on
+
+
+- id: woonkamer_dimmer_down
+  alias: "[WOONKAMER DIMMER] 'dim down' activeert scene 'Feet up!'"
+  description: ''
+  trigger:
+  - device_id: 32d5b64e890f40879159f0c63b7c80fd
+    domain: deconz
+    platform: device
+    subtype: dim_down
+    type: remote_button_short_release
+  condition: []
+  action:
+  - data:
+      entity_id: scene.woonkamer_feet_up
+    service: scene.turn_on

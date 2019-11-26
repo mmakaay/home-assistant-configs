@@ -1,0 +1,9 @@
+---
+# Integration with the FRITZ!Box PBX. This can be used to track
+# the status of the telephony landline.
+platform: fritzbox_callmonitor
+name: Telefoon
+host: !secret fritzbox-host 
+username: !secret fritzbox-home-assistant-username
+password: !secret fritzbox-home-assistant-password
+phonebook: 0

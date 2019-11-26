@@ -1,0 +1,32 @@
+# This template light is used to accomodate for the limited range
+# over which the zigbee Icasa dimmer has effect on the Philips
+# dimmable LED light that I use. The dimmer itself has a setting
+# for the minimum power (which I use to prevent low power flickering),
+# but there is no built-in feature for the maximum power.
+platform: template
+lights:
+  gang_plafond_dimbaar:
+    friendly_name: Gang plafond (dimbaar)
+    level_template: >
+      {% if is_state('light.gang_plafond', 'on') %}
+        {% if (state_attr('light.gang_plafond', 'brightness') > 100) %}
+          255
+        {% else %}
+          {{ ((state_attr('light.gang_plafond', 'brightness')|float)*255/100)|round }}
+        {% endif %}
+      {% else %}
+        0
+      {% endif %}
+    value_template: >
+      {% if is_state('light.gang_plafond', 'on') %}on{% else %}off{% endif %}
+    turn_on:
+      service: light.turn_on
+      entity_id: light.gang_plafond
+    turn_off:
+      service: light.turn_off
+      entity_id: light.gang_plafond
+    set_level:
+      service: light.turn_on
+      entity_id: light.gang_plafond
+      data_template:
+        brightness: "{{ (brightness|float/255*100)|int }}"

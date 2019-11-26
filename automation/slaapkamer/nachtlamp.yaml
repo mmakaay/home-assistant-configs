@@ -1,0 +1,93 @@
+---
+- id: slaapkamer_nachtlamp_A
+  alias: "[SLAAPKAMER NACHTLAMP] A. zet aan bij beweging in het donker"
+  description: >
+    Nachtlamp aan op een nachtstand als het donker is en er
+    beweging wordt gedetecteerd.
+  trigger:
+    - entity_id: binary_sensor.slaapkamer_beweging
+      platform: state
+      to: 'on'
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.slaapkamer_lichtsterkte
+      below: 5
+    - condition: state
+      entity_id: light.onder_het_bed
+      state: 'off'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.onder_het_bed
+        brightness: 150
+        color_temp: 328
+    - delay: 4
+    - service: timer.start
+      data:
+        entity_id: timer.slaapkamer
+
+
+- id: slaapkamer_nachtlamp_B
+  alias: "[SLAAPKAMER NACHTLAMP] B. herstart timer bij beweging"
+  description: >
+    Als de nachtlamp timer actief is, en er wordt beweging
+    gedetecteerd, herstart dan de timer, zodat de nachtlamp
+    langer actief blijft.
+  trigger:
+    - entity_id: binary_sensor.slaapkamer_beweging
+      platform: state
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: timer.slaapkamer
+      state: 'active'
+  action:
+    # cancel/start, because of this bug:
+    # https://github.com/home-assistant/home-assistant/issues/12013
+    - service: timer.cancel
+      data:
+        entity_id: timer.slaapkamer
+    - service: timer.start
+      data:
+        entity_id: timer.slaapkamer
+  
+
+- id: slaapkamer_nachtlamp_C
+  alias: "[SLAAPKAMER NACHTLAMP] C. zet uit na een tijdje geen beweging"
+  description: >
+    Wanneer de timer afloopt en er is geen beweging in de ruimte, maak
+    dan de nachtlamp weer uit.
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.slaapkamer
+  condition:
+    - condition: state
+      entity_id: binary_sensor.slaapkamer_beweging
+      state: 'off'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.onder_het_bed
+        transition: 10
+
+
+- id: slaapkamer_nachtlamp_D
+  alias: "[SLAAPKAMER NACHTLAMP] D. herstarten na timeout maar wel beweging"
+  description: >
+    Wanneer de timer afloopt en er is beweging in de ruimte, herstart
+    dan de nachtlamp timer.
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.slaapkamer
+  condition:
+    - condition: state
+      entity_id: binary_sensor.slaapkamer_beweging
+      state: 'on'
+  action:
+    - service: timer.start
+      data:
+        entity_id: timer.slaapkamer

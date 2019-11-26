@@ -1,0 +1,4 @@
+platform: group
+name: Gang groep HA
+entities:
+  - light.gang_plafond

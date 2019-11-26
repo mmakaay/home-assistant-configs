@@ -1,0 +1,108 @@
+---
+- id: badkamer_lamp_A
+  alias: "[BADKAMER LAMP] A. zet aan bij beweging"
+  description: >
+    Lamp aan als er beweging wordt gedetecteerd.
+  trigger:
+    - entity_id: binary_sensor.badkamer_beweging
+      platform: state
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: light.badkamer_plafond
+      state: 'off'
+  action:
+    - service: scene.turn_on
+      data_template:
+        entity_id: >
+          {% if now().hour > 4 and now().hour < 16 %}
+            scene.badkamer_ochtend
+          {% else %}
+            scene.badkamer_avond
+          {% endif %}
+    - delay: 4
+    - service: timer.start
+      data_template:
+        entity_id: timer.badkamer
+        duration: >
+          {% if now().hour > 4 and now().hour < 16 %}
+            00:05:00
+          {% else %}
+            00:02:00
+          {% endif %}
+
+- id: badkamer_lamp_B
+  alias: "[BADKAMER LAMP] B. herstart timer bij beweging"
+  description: >
+    Als de lamp timer actief is, en er wordt beweging
+    gedetecteerd, herstart dan de timer, zodat de lamp
+    langer actief blijft.
+  trigger:
+    - entity_id: binary_sensor.badkamer_beweging
+      platform: state
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: timer.badkamer
+      state: 'active'
+  action:
+    # cancel/start, because of this bug:
+    # https://github.com/home-assistant/home-assistant/issues/12013
+    - service: timer.cancel
+      data:
+        entity_id: timer.badkamer
+    - service: timer.start
+      data_template:
+        entity_id: timer.badkamer
+        duration: >
+          {% if now().hour > 4 and now().hour < 16 %}
+            00:05:00
+          {% else %}
+            00:02:00
+          {% endif %}
+  
+
+- id: badkamer_lamp_C
+  alias: "[BADKAMER LAMP] C. zet uit na een tijdje geen beweging"
+  description: >
+    Wanneer de timer afloopt en er is geen beweging in de ruimte, maak
+    dan de lamp weer uit.
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.badkamer
+  condition:
+    - condition: state
+      entity_id: binary_sensor.badkamer_beweging
+      state: 'off'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.badkamer_plafond
+
+
+- id: badkamer_lamp_d
+  alias: "[BADKAMER LAMP] D. herstarten na timeout maar wel beweging"
+  description: >
+    Wanneer de timer afloopt en er is beweging in de ruimte, herstart
+    dan de nachtlamp timer.
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.badkamer
+  condition:
+    - condition: state
+      entity_id: binary_sensor.badkamer_beweging
+      state: 'on'
+  action:
+    - service: timer.start
+      data_template:
+        entity_id: timer.badkamer
+        duration: >
+          {% if now().hour > 4 and now().hour < 16 %}
+            00:05:00
+          {% else %}
+            00:02:00
+          {% endif %}

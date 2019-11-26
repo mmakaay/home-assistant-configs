@@ -1,0 +1,9 @@
+platform: group
+name: Keuken groep HA
+entities:
+  - light.keukenspot1
+  - light.keukenspot2
+  - light.keukenspot3
+  - light.keukenspot4
+  - light.keukenspot5
+  - light.keukenspot6

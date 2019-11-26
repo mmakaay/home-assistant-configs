@@ -1,0 +1,7 @@
+---
+# A templated sensor, used to extract the power usage from an AVM power switch.
+platform: template
+sensors:
+  switch_for_itv_ps4_netswitch_tvstrip_power:
+    value_template: "{{ state_attr('switch.switch_for_itv_ps4_netswitch_tvstrip', 'current_consumption') }}"
+    unit_of_measurement: "W"

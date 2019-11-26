@@ -1,0 +1,8 @@
+---
+# A templated sensor, that is used to extract Maurice's phone battery level
+# from the owntracks data.
+platform: template
+sensors:
+  privetelefoon_maurice_batterij:
+    value_template: "{{ state_attr('device_tracker.owntracks_maurice', 'battery_level') }}"
+    unit_of_measurement: '%'

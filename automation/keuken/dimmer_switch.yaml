@@ -1,0 +1,61 @@
+---
+- id: keuken_dimmer_on
+  alias: "[KEUKEN DIMMER] 'on' activeert scene 'Koken'"
+  trigger:
+  - device_id: 4cb86a7dab7443f6acaff513255374b4
+    domain: deconz
+    platform: device
+    subtype: turn_on
+    type: remote_button_short_release
+  condition: []
+  action:
+  - data:
+      entity_id: scene.keuken_koken
+    service: scene.turn_on
+
+
+- id: keuken_dimmer_off
+  alias: "[KEUKEN DIMMER] 'off' zet lampen in de keuken uit"
+  trigger:
+  - device_id: 4cb86a7dab7443f6acaff513255374b4
+    domain: deconz
+    platform: device
+    subtype: turn_off
+    type: remote_button_short_release
+  condition: []
+  action:
+  - device_id: 3b3a736ca06540c98a9c85dc142b0f3f
+    domain: light
+    entity_id: light.keuken_groep_deconz
+    type: turn_off
+
+
+- id: keuken_dimmer_up
+  alias: "[KEUKEN DIMMER] 'dim up' activeert scene 'Gedimd'"
+  description: ''
+  trigger:
+  - device_id: 4cb86a7dab7443f6acaff513255374b4
+    domain: deconz
+    platform: device
+    subtype: dim_up
+    type: remote_button_short_release
+  condition: []
+  action:
+  - data:
+      entity_id: scene.keuken_gedimd
+    service: scene.turn_on
+
+
+- id: keuken_dimmer_down
+  alias: "[KEUKEN DIMMER] 'dim down' activeert scene 'Nachtlamp'"
+  trigger:
+  - device_id: 4cb86a7dab7443f6acaff513255374b4
+    domain: deconz
+    platform: device
+    subtype: dim_down
+    type: remote_button_short_press
+  condition: []
+  action:
+  - data:
+      entity_id: scene.keuken_nachtlicht
+    service: scene.turn_on

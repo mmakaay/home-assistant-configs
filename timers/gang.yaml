@@ -1,0 +1,8 @@
+gang:
+  name: Gang timer
+  duration: 00:05:00
+  icon: mdi:timer
+gang_cooldown:
+  name: Gang motion cooldown timer
+  duration: 00:00:30
+  icon: mdi:snowflake

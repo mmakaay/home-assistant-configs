@@ -1,0 +1,5 @@
+name: Gang nachtlicht
+entities:
+  light.gang_plafond_dimbaar:
+    state: 'on'
+    brightness: 40

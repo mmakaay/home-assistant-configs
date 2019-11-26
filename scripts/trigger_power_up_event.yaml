@@ -1,0 +1,6 @@
+---
+trigger_power_up_event:
+  alias: Power up
+  sequence:
+    - event: power_up
+      event_data: {}

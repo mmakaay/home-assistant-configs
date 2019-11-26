@@ -1,0 +1,17 @@
+---
+# Using a secondary source, because that is in the side street where
+# we can leave our paper container on a different date than is used
+# for the front of the house.
+platform: afvalbeheer
+name: zijkant
+nameprefix: 1
+wastecollector: !secret afvalbeheer-wastecollector
+resources:
+  - papier
+postcode: !secret afvalbeheer-secondary-postcode
+streetnumber: !secret afvalbeheer-secondary-streetnumber
+upcomingsensor: 1
+dateformat: '%Y-%m-%d'
+dateonly: 1
+builtinicons: 1  
+dutch: 1

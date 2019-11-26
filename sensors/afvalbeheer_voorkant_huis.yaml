@@ -1,0 +1,16 @@
+---
+platform: afvalbeheer
+name: voorkant
+nameprefix: 1
+wastecollector: !secret afvalbeheer-wastecollector
+resources:
+  - restafval
+  - gft
+  - papier
+postcode: !secret afvalbeheer-postcode
+streetnumber: !secret afvalbeheer-streetnumber
+upcomingsensor: 1
+dateformat: '%Y-%m-%d'
+dateonly: 1
+builtinicons: 1  
+dutch: 1

@@ -1,0 +1,52 @@
+name: Woonkamer feet up
+entities:
+  light.achter_de_koelkast:
+    brightness: 59
+    state: 'on'
+    xy_color:
+    - 0.257
+    - 0.506
+  light.achter_tv_strip:
+    brightness: 176
+    state: 'on'
+    xy_color:
+    - 0.501
+    - 0.45
+  light.droogkap:
+    brightness: 154
+    state: 'on'
+    xy_color:
+    - 0.589
+    - 0.383
+  light.kast_boven:
+    brightness: 202
+    state: 'on'
+    xy_color:
+    - 0.626
+    - 0.314
+  light.kast_midden:
+    brightness: 122
+    state: 'on'
+    xy_color:
+    - 0.49
+    - 0.421
+  light.kast_onder:
+    brightness: 167
+    state: 'on'
+    xy_color:
+    - 0.533
+    - 0.414
+  light.staande_lamp:
+    brightness: 155
+    state: 'on'
+    xy_color:
+    - 0.505
+    - 0.414
+  light.zon:
+    brightness: 139
+    state: 'on'
+    xy_color:
+    - 0.56
+    - 0.379
+  switch.switch_stekker_bij_de_tuindeuren:
+    state: 'on'

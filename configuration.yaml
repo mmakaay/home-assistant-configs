@@ -1,0 +1,110 @@
+default_config:
+
+# The home-assistant server lives behind a proxy.
+http:
+  base_url: !secret http-proxy-base-url
+  use_x_forwarded_for: true
+  trusted_proxies: !secret http-proxy-ip-address
+
+recorder:
+  db_url: postgresql://@/homeassistant
+  purge_keep_days: 1
+  purge_interval: 1
+  exclude:
+    entities:
+      - sensor.date_time
+      - sensor.time
+      - sun.sun
+      - sensor.gas_consumption
+      - sensor.long_power_failure_count
+      - sensor.power_consumption_low
+      - sensor.power_consumption_normal
+      - sensor.power_consumption_phase_l1
+      - sensor.power_consumption_phase_l2
+      - sensor.power_consumption_phase_l3
+      - sensor.power_production
+      - sensor.power_production_low
+      - sensor.power_production_normal
+      - sensor.power_production_phase_l1
+      - sensor.power_production_phase_l2
+      - sensor.power_production_phase_l3
+      - sensor.power_tariff
+      - sensor.voltage_phase_l1
+      - sensor.voltage_phase_l2
+      - sensor.voltage_phase_l3
+      - sensor.voltage_sags_phase_l1
+      - sensor.voltage_sags_phase_l2
+      - sensor.voltage_sags_phase_l3
+      - sensor.voltage_swells_phase_l1
+      - switch.switch_for_tv_amp_and_pickup_2
+      - switch.switch_for_itv_ps4_netswitch_tvstrip_2
+      - sensor.dar_voorkant_gft
+      - sensor.dar_voorkant_papier
+      - sensor.dar_voorkant_restafval
+      - sensor.dar_voorkant_vandaag
+      - sensor.dar_voorkant_morgen
+      - sensor.dar_zijkant_papier
+      - sensor.dar_zijkant_vandaag
+      - sensor.dar_zijkant_morgen
+
+#logger:
+#  default: debug
+
+# Expose a Prometheus metrics endpoint.
+prometheus:
+  namespace: hass
+
+frontend:
+  themes: !include themes.yaml
+
+# This must be included like stated here, in order to make
+# it possible to edit these customization through the GUI.
+homeassistant:
+  customize: !include customize.yaml
+
+# Automation old is for manual automation files. The 
+# auomations.yaml is used for automations that are
+# edited through the admin GUI.
+automation: !include automations.yaml
+automation old: !include_dir_merge_list automation
+
+script: !include_dir_merge_named scripts/
+
+scene: !include_dir_list scenes
+
+sensor: !include_dir_list sensors
+
+binary_sensor: !include_dir_list binary_sensors
+
+timer: !include_dir_merge_named timers
+
+light: !include_dir_list lights
+
+switch: !include_dir_list switches
+
+fritzbox:
+  devices:
+    - host: fritzbox.home.makaay.nl
+      username: !secret fritzbox-home-assistant-username
+      password: !secret fritzbox-home-assistant-password
+
+media_player:
+  - platform: braviatv
+    host: !secret braviatv-ip-address
+
+# Experiment to link the iTV set top box, but can't get it
+# to work at this moment (or possibly ever).
+#device_tracker:
+#  - platform: bluetooth_le_tracker
+#    track_new_devices: true
+
+proximity:
+  maurice:
+    ignored_zones:
+      - home
+    devices:
+      - device_tracker.owntracks_maurice
+    tolerance: 50
+    unit_of_measurement: km
+
+shopping_list:

@@ -1,0 +1,6 @@
+---
+# Measure the raspberry pi CPU temperature.
+platform: command_line
+name: HA CPU temperature
+command: ~/.homeassistant/bin/sensor.ha_cpu_temperature
+unit_of_measurement: "°C"

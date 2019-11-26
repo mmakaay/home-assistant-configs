@@ -1,0 +1,7 @@
+---
+# A templated sensor, used to extract the power usage from an AVM power switch.
+platform: template
+sensors:
+  switch_for_tv_amp_and_pickup_power:
+    value_template: "{{ state_attr('switch.switch_for_tv_amp_and_pickup', 'current_consumption') }}"
+    unit_of_measurement: "W"

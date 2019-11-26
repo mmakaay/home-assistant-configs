@@ -1,0 +1,11 @@
+platform: group
+name: Woonkamer groep HA
+entities:
+  - light.achter_de_koelkast
+  - light.achter_tv_strip
+  - light.droogkap
+  - light.kast_boven
+  - light.kast_midden
+  - light.kast_onder
+  - light.staande_lamp
+  - light.zon

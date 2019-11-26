@@ -1,0 +1,52 @@
+name: Woonkamer klaprozen
+entities:
+  light.achter_de_koelkast:
+    brightness: 55
+    state: 'on'
+    xy_color:
+    - 0.516
+    - 0.333
+  light.achter_tv_strip:
+    brightness: 74
+    state: 'on'
+    xy_color:
+    - 0.327
+    - 0.391
+  light.droogkap:
+    brightness: 118
+    state: 'on'
+    xy_color:
+    - 0.543
+    - 0.348
+  light.kast_boven:
+    brightness: 173
+    state: 'on'
+    xy_color:
+    - 0.4
+    - 0.506
+  light.kast_midden:
+    brightness: 102
+    state: 'on'
+    xy_color:
+    - 0.416
+    - 0.489
+  light.kast_onder:
+    brightness: 109
+    state: 'on'
+    xy_color:
+    - 0.469
+    - 0.4
+  light.staande_lamp:
+    brightness: 87
+    state: 'on'
+    xy_color:
+    - 0.368
+    - 0.439
+  light.zon:
+    brightness: 129
+    state: 'on'
+    xy_color:
+    - 0.344
+    - 0.388
+  switch.switch_stekker_bij_de_tuindeuren:
+    state: 'on'

@@ -1,0 +1,158 @@
+---
+- id: keuken_nachtlamp_A
+  alias: "[KEUKEN NACHTLAMP] A. zet aan bij beweging in het donker"
+  description: >
+    Nachtlamp aan op een nachtstand als het donker is en er
+    beweging wordt gedetecteerd.
+  trigger:
+    - entity_id: binary_sensor.keuken_beweging
+      platform: state
+      to: 'on'
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.keuken_lichtsterkte
+      below: 5
+    - condition: state
+      entity_id: light.keuken_groep_ha
+      state: 'off'
+    - condition: state
+      entity_id: timer.keuken_cooldown
+      state: 'idle'
+  action:
+    - service: scene.turn_on
+      data:
+        entity_id: scene.keuken_nachtlicht
+    - delay: 4
+    - service: timer.start
+      data:
+        entity_id: timer.keuken
+
+
+- id: keuken_nachtlamp_B
+  alias: "[KEUKEN NACHTLAMP] B. herstart timer bij beweging"
+  description: >
+    Als de nachtlamp timer actief is, en er wordt beweging
+    gedetecteerd, herstart dan de timer, zodat de nachtlamp
+    langer actief blijft.
+  trigger:
+    - entity_id: binary_sensor.keuken_beweging
+      platform: state
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: timer.keuken
+      state: 'active'
+  action:
+    # cancel/start, because of this bug:
+    # https://github.com/home-assistant/home-assistant/issues/12013
+    - service: timer.cancel
+      data:
+        entity_id: timer.keuken
+    - service: timer.start
+      data:
+        entity_id: timer.keuken
+  
+
+- id: keuken_nachtlamp_C
+  alias: "[KEUKEN NACHTLAMP] C. zet uit na een tijdje geen beweging"
+  description: >
+    Wanneer de timer afloopt en er is geen beweging in de ruimte, maak
+    dan de nachtlamp weer uit. De beweging cooldown timer wordt ook
+    uitgezet, omdat we best willen dat na dit event de lampen meteen
+    weer aangaan bij beweging.
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.keuken
+  condition:
+    - condition: state
+      entity_id: binary_sensor.keuken_beweging
+      state: 'off'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.keuken_groep_ha
+    - delay: 4
+    - service: timer.cancel
+      data:
+        entity_id: timer.keuken_cooldown
+
+
+- id: keuken_nachtlamp_D
+  alias: "[KEUKEN NACHTLAMP] D. herstarten na timeout maar wel beweging"
+  description: >
+    Wanneer de timer afloopt en er is beweging in de ruimte, herstart
+    dan de nachtlamp timer.
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.keuken
+  condition:
+    - condition: state
+      entity_id: binary_sensor.keuken_beweging
+      state: 'on'
+  action:
+    - service: timer.start
+      data:
+        entity_id: timer.keuken
+
+
+- id: keuken_nachtlamp_E
+  alias: "[KEUKEN NACHTLAMP] E. bij aanpassing lampen, nachtlamp uitschakelen"
+  description: >
+    Wanneer er aanpassingen worden gedaan in de verlichting, stop dan
+    een eventuele nachtlamp of cooldown timer. Vanaf dan is het de
+    verantwoordelijkheid van het mens dat de instellingen heeft aangepast.
+  trigger:
+    - entity_id: light.keuken_groep_ha
+      platform: state
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.keuken
+    - service: timer.cancel
+      data:
+        entity_id: timer.keuken_cooldown
+
+
+- id: keuken_nachtlamp_F
+  alias: "[KEUKEN NACHTLAMP] F. cooldown activeren als alle lampen uit gaan"
+  description: >
+    Wanneer alle lampen uitgaan in de keuken, dan willen we de bewegingssensors
+    even negeren, zodat eventuele beweging niet direct de nachtlamp weer
+    aanzet. Denk aan het scenario waarbij je in de ruimte met de hand de
+    lampen uitmaakt en dan wegloopt (wat een beweging is, waarmee je de
+    nachtlamp zou kunnen triggeren).
+  trigger:
+    - entity_id: light.keuken_groep_ha
+      platform: state
+      to: 'off'
+  condition: []
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.keuken
+    - service: timer.start
+      data:
+        entity_id: timer.keuken_cooldown
+
+
+- id: keuken_nachtlamp_G
+  alias: "[KEUKEN NACHTLAMP] G. cooldown deactiveren als er lampen aan gaan"
+  description: >
+    Wanneer er lampen aan worden gezet, dan kan een eventuele cooldown
+    timer worden gestopt.
+  trigger:
+    - entity_id: light.keuken_groep_ha
+      platform: state
+      to: 'on'
+  condition: []
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.keuken
+    - service: timer.cancel
+      data:
+        entity_id: timer.keuken_cooldown

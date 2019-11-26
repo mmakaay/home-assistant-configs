@@ -1,0 +1,7 @@
+---
+# A templated sensor, used to extract the temperature from an AVM power switch.
+platform: template
+sensors:
+  switch_for_itv_ps4_netswitch_tvstrip_temperature:
+    value_template: "{{ state_attr('switch.switch_for_itv_ps4_netswitch_tvstrip', 'temperature') }}"
+    unit_of_measurement: "°C"

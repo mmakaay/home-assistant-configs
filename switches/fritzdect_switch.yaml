@@ -1,0 +1,6 @@
+---
+# For integration with FRITZ!Box switches / power plugs.
+platform: fritzdect
+host: fritzbox.home.makaay.nl
+username: !secret fritzbox-home-assistant-username
+password: !secret fritzbox-home-assistant-password

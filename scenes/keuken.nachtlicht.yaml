@@ -1,0 +1,20 @@
+name: Keuken nachtlicht
+entities:
+  light.keukenspot1:
+    brightness: 5
+    color_temp: 367
+    state: 'on'
+  light.keukenspot2:
+    brightness: 5
+    color_temp: 367
+    state: 'on'
+  light.keukenspot3:
+    brightness: 5
+    color_temp: 367
+    state: 'on'
+  light.keukenspot4:
+    state: 'off'
+  light.keukenspot5:
+    state: 'off'
+  light.keukenspot6:
+    state: 'off'

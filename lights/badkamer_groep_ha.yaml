@@ -1,0 +1,4 @@
+platform: group
+name: Badkamer groep HA
+entities:
+  - light.badkamer_plafond

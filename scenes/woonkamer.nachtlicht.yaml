@@ -1,0 +1,24 @@
+name: Woonkamer nachtlicht
+entities:
+  light.droogkap:
+    state: 'on'
+    brightness: 100
+    color_temp: 396
+  light.staande_lamp:
+    state: 'on'
+    brightness: 100
+    color_temp: 396
+  light.achter_de_koelkast:
+    state: 'off'
+  light.achter_tv_strip:
+    state: 'off'
+  light.kast_boven:
+    state: 'off'
+  light.kast_midden:
+    brightness: 123
+    color_temp: 438
+    state: 'on'
+  light.kast_onder:
+    state: 'off'
+  light.zon:
+    state: 'off'

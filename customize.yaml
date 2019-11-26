@@ -1,0 +1,13 @@
+device_tracker.privetelefoon_app_maurice:
+  entity_picture: /local/avatar.maurice.png
+  icon: mdi:human-greeting
+person.maurice:
+  entity_picture: /local/avatar.maurice.png
+person.esther:
+  entity_picture: /local/avatar.esther.jpg
+device_tracker.chromecast:
+  entity_picture: /local/avatar.chromecast.png
+device_tracker.owntracks_maurice:
+  entity_picture: /local/avatar.maurice.png
+person.niek:
+  entity_picture: /local/avatar.niek.jpg

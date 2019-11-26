@@ -1,0 +1,88 @@
+---
+- id: power_up_stroom_aan
+  alias: "[POWER UP EVENT] stroom aan"
+  description: >
+    Reageert op een 'power_on' event door de stekkerblokken in te schakelen.
+  trigger:
+    - platform: event
+      event_type: power_up
+      event_data: {}
+  condition: []
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.switch_for_tv_amp_and_pickup
+    # Trigger an update, because the FRITZ!Box is polled and has no direct feedback.
+    # Without this, it might take quite a while before HA sees the switch as active.
+    - service: homeassistant.update_entity
+      data:
+        entity_id: switch.switch_for_tv_amp_and_pickup
+    - service: switch.turn_on
+      data:
+        entity_id: switch.switch_stekker_links_van_de_bank
+
+
+- id: power_up_lampen_woonkamer_aan
+  alias: "[POWER UP EVENT] lampen in de woonkamer aan"
+  description: >
+    Reageert op een 'power_up' event door de lampen in de woonkamer aan
+    te doen als donker is/wordt.
+  trigger:
+    - platform: event
+      event_type: power_up
+      event_data: {}
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.woonkamer_lichtsterkte
+      below: '4'
+  action:
+    - type: turn_on
+      device_id: b6686897806344baac29b494f949ae4b
+      domain: light
+      entity_id: light.woonkamer_groep_deconz
+
+
+- id: huis_dimmer_start_power_up
+  alias: "[POWER UP EVENT] trigger met 'on' lang ingedrukt op dimmers"
+  description: >
+    Wanneer de dimmer "on" knop lang wordt ingedrukt in de woonkamer of
+    keuken, dan wordt het power up event verstuurd om bijvoorbeeld de
+    stroom op de TV te zetten en de lampen aan te doen als het donker is.
+  trigger:
+    - platform: device
+      device_id: 32d5b64e890f40879159f0c63b7c80fd
+      domain: deconz
+      subtype: turn_on
+      type: remote_button_long_press
+    - platform: device
+      device_id: 4cb86a7dab7443f6acaff513255374b4
+      domain: deconz
+      subtype: turn_on
+      type: remote_button_long_press
+  condition: []
+  action:
+    - service: script.turn_on
+      data:
+        entity_id: script.trigger_power_up_event
+
+
+- id: ps4_powers_up_tv_and_amp_too
+  alias: "[PLAYSTATION4 AAN] dan ook de TV en versterker van stroom voorzien"
+  description: >
+    Wanneer de playstation wordt aangezet, maar de stroom voor de TV en
+    versterker staat uit, zet deze dan aan.
+  trigger:
+    - platform: state
+      entity_id: media_player.ps4
+      from: 'off'
+  condition:
+    - condition: state
+      entity_id: switch.switch_for_tv_amp_and_pickup
+      state: 'off'
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.switch_for_tv_amp_and_pickup
+    - service: homeassistant.update_entity
+      data:
+        entity_id: switch.switch_for_tv_amp_and_pickup

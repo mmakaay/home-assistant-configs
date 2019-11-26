@@ -1,0 +1,48 @@
+name: Woonkamer gaming 
+entities:
+  light.achter_de_koelkast:
+    state: 'off'
+  light.achter_tv_strip:
+    brightness: 155
+    state: 'on'
+    xy_color:
+    - 0.29
+    - 0.146
+  light.droogkap:
+    brightness: 113
+    state: 'on'
+    xy_color:
+    - 0.243
+    - 0.134
+  light.kast_boven:
+    brightness: 147
+    state: 'on'
+    xy_color:
+    - 0.209
+    - 0.119
+  light.kast_midden:
+    brightness: 139
+    state: 'on'
+    xy_color:
+    - 0.209
+    - 0.119
+  light.kast_onder:
+    brightness: 139
+    state: 'on'
+    xy_color:
+    - 0.209
+    - 0.119
+  light.staande_lamp:
+    brightness: 139
+    state: 'on'
+    xy_color:
+    - 0.243
+    - 0.09
+  light.zon:
+    brightness: 161
+    state: 'on'
+    xy_color:
+    - 0.243
+    - 0.09
+  switch.switch_stekker_bij_de_tuindeuren:
+    state: 'off'

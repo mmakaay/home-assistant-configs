@@ -1,0 +1,4 @@
+platform: group
+name: Slaapkamer groep HA
+entities:
+  - light.onder_het_bed
