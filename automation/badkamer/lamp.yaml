@@ -15,20 +15,19 @@
     - service: scene.turn_on
       data_template:
         entity_id: >
-          {% if now().hour > 4 and now().hour < 16 %}
-            scene.badkamer_ochtend
-          {% else %}
+          {% if is_state("binary_sensor.sleepy_time", "on") %}
             scene.badkamer_avond
+          {% else %}
+            scene.badkamer_ochtend
           {% endif %}
-    - delay: 4
     - service: timer.start
       data_template:
         entity_id: timer.badkamer
         duration: >
-          {% if now().hour > 4 and now().hour < 16 %}
-            00:05:00
-          {% else %}
+          {% if is_state("binary_sensor.sleepy_time", "on") %}
             00:02:00
+          {% else %}
+            00:05:00
           {% endif %}
 
 - id: badkamer_lamp_B
@@ -55,10 +54,10 @@
       data_template:
         entity_id: timer.badkamer
         duration: >
-          {% if now().hour > 4 and now().hour < 16 %}
-            00:05:00
-          {% else %}
+          {% if is_state("binary_sensor.sleepy_time", "on") %}
             00:02:00
+          {% else %}
+            00:05:00
           {% endif %}
   
 
@@ -101,8 +100,8 @@
       data_template:
         entity_id: timer.badkamer
         duration: >
-          {% if now().hour > 4 and now().hour < 16 %}
-            00:05:00
-          {% else %}
+          {% if is_state("binary_sensor.sleepy_time", "on") %}
             00:02:00
+          {% else %}
+            00:05:00
           {% endif %}
