@@ -58,8 +58,10 @@ prometheus:
 frontend:
   themes: !include themes.yaml
 
-# This must be included like stated here, in order to make
+# These must be included like stated here, in order to make
 # it possible to edit these customization through the GUI.
+script: !include_dir_merge_named scripts/
+scene: !include scenes.yaml
 homeassistant:
   customize: !include customize.yaml
 
@@ -68,10 +70,6 @@ homeassistant:
 # edited through the admin GUI.
 automation: !include automations.yaml
 automation old: !include_dir_merge_list automation
-
-script: !include_dir_merge_named scripts/
-
-scene: !include_dir_list scenes
 
 sensor: !include_dir_list sensors
 
