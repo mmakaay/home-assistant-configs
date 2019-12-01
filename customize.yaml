@@ -11,3 +11,5 @@ device_tracker.owntracks_maurice:
   entity_picture: /local/avatar.maurice.png
 person.niek:
   entity_picture: /local/avatar.niek.jpg
+media_player.sony_bravia_tv:
+  icon: mdi:television

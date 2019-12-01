@@ -47,6 +47,7 @@ recorder:
       - sensor.dar_zijkant_papier
       - sensor.dar_zijkant_vandaag
       - sensor.dar_zijkant_morgen
+      - switch.ambilite
 
 #logger:
 #  default: debug

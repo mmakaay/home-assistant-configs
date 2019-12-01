@@ -1,0 +1,17 @@
+- id: ambilite_update
+  alias: '[AMBILITE] zet kleur lichtstrip achter de tv'
+  description: >
+    Wanneer er een kleur-update binnenkomt van de mediacontroller ambilite
+    server, pas dan de kleur van de LED achter de tv aan.
+  trigger:
+    - platform: mqtt
+      topic: homeassistant/switch/ambilite/attributes
+  action:
+    - service_template: light.turn_on
+      data_template:
+        entity_id: light.achter_tv_strip
+        brightness: 110
+        transition: 4
+        xy_color:
+          - "{{ state_attr('switch.ambilite', 'x') }}"
+          - "{{ state_attr('switch.ambilite', 'y') }}"
