@@ -1,10 +1,10 @@
 ---
-- id: badkamer_lamp_A
-  alias: "[BADKAMER LAMP] A. zet aan bij beweging"
+- id: toilet_lamp_A
+  alias: "[TOILET LAMP] A. zet aan bij beweging"
   description: >
     Lamp aan als er beweging wordt gedetecteerd.
   trigger:
-    - entity_id: binary_sensor.badkamer_beweging
+    - entity_id: binary_sensor.toilet_beweging
       platform: state
       to: 'on'
   action:
@@ -12,37 +12,31 @@
       data_template:
         entity_id: >
           {% if is_state("binary_sensor.sleepy_time", "on") %}
-            scene.badkamer_sleepy_time
+            scene.toilet_sleepy_time
           {% else %}
-            scene.badkamer_normaal
+            scene.toilet_normaal
           {% endif %}
         transition: 2
     # cancel/start, because of this bug:
     # https://github.com/home-assistant/home-assistant/issues/12013
     - service: timer.cancel
       data:
-        entity_id: timer.badkamer
+        entity_id: timer.toilet
     - service: timer.start
       data_template:
-        entity_id: timer.badkamer
-        duration: >
-          {% if is_state("binary_sensor.sleepy_time", "on") %}
-            00:02:00
-          {% else %}
-            00:05:00
-          {% endif %}
+        entity_id: timer.toilet
 
-- id: badkamer_lamp_B
-  alias: "[BADKAMER LAMP] B. zet uit na een tijdje geen beweging"
+- id: toilet_lamp_B
+  alias: "[TOILET LAMP] B. zet uit na een tijdje geen beweging"
   description: >
-    Wanneer de timer afloopt, maak dan de lamp weer uit.
+    Wanneer de timer afloopt, maak de lamp dan weer uit.
   trigger:
     - platform: event
       event_type: timer.finished
       event_data:
-        entity_id: timer.badkamer
+        entity_id: timer.toilet
   action:
     - service: light.turn_off
       data:
-        entity_id: light.badkamer_plafond
+        entity_id: light.toilet_plafond
         transition: 5

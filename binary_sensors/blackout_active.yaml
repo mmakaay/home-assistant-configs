@@ -7,7 +7,6 @@ sensors:
       - media_player.ps4
       - light.woonkamer_groep_deconz
       - light.keuken_groep_deconz
-      - light.gang_groep_deconz
       - switch.switch_stekker_links_van_de_bank
       - switch.switch_stekker_bij_de_tuindeuren
       - switch.switch_for_tv_amp_and_pickup
@@ -16,7 +15,6 @@ sensors:
             is_state("media_player.ps4", "standby")) and
            is_state("light.woonkamer_groep_deconz", "off") and
            is_state("light.keuken_groep_deconz", "off") and
-           is_state("light.gang_groep_deconz", "off") and
            is_state("switch.switch_stekker_links_van_de_bank", "off") and
            is_state("switch.switch_stekker_bij_de_tuindeuren", "off") and
            is_state("switch.switch_for_tv_amp_and_pickup", "off") }}

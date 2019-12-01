@@ -14,9 +14,6 @@
   - data:
       entity_id: light.woonkamer_groep_deconz
     service: light.turn_off
-  - data:
-      entity_id: light.gang_groep_deconz
-    service: light.turn_off
 
 
 - id: blackout_enable_motion_cooldown
@@ -35,9 +32,6 @@
     - service: timer.start
       data:
         entity_id: timer.woonkamer_cooldown
-    - service: timer.start
-      data:
-        entity_id: timer.gang_cooldown
 
 
 - id: blackout_ps4_uit

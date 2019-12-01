@@ -1,26 +1,23 @@
-- id: badkamer_avond
-  name: Badkamer avond
+- id: badkamer_sleepy_time
+  name: Badkamer sleepy time
   entities:
     light.badkamer_plafond:
-      brightness: 80
-      color_temp: 400
+      brightness: 60
+      color_temp: 423
       state: 'on'
-
-- id: badkamer_ochtend
-  name: Badkamer ochtend
+- id: badkamer_normaal
+  name: Badkamer normaal
   entities:
     light.badkamer_plafond:
-      brightness: 140
-      color_temp: 390
+      brightness: 94
+      color_temp: 359
       state: 'on'
-
 - id: gang_nachtlicht
   name: Gang nachtlicht
   entities:
     light.gang_plafond_dimbaar:
       state: 'on'
       brightness: 40
-
 - id: keuken_gedimd
   name: Keuken gedimd
   entities:
@@ -48,7 +45,6 @@
       brightness: 10
       color_temp: 331
       state: 'on'
-
 - id: keuken_koken
   name: Keuken koken
   entities:
@@ -76,7 +72,6 @@
       brightness: 100
       color_temp: 327
       state: 'on'
-
 - id: keuken_nachtlicht
   name: Keuken nachtlicht
   entities:
@@ -98,7 +93,6 @@
       state: 'off'
     light.keukenspot6:
       state: 'off'
-
 - id: wookamer_feet_up
   name: Woonkamer feet up
   entities:
@@ -152,9 +146,8 @@
       - 0.379
     switch.switch_stekker_bij_de_tuindeuren:
       state: 'on'
-
 - id: woonkamer_gaming
-  name: Woonkamer gaming 
+  name: Woonkamer gaming
   entities:
     light.achter_de_koelkast:
       state: 'off'
@@ -202,7 +195,6 @@
       - 0.09
     switch.switch_stekker_bij_de_tuindeuren:
       state: 'off'
-
 - id: woonkamer_klaprozen
   name: Woonkamer klaprozen
   entities:
@@ -256,7 +248,6 @@
       - 0.388
     switch.switch_stekker_bij_de_tuindeuren:
       state: 'on'
-
 - id: woonkamer_nachtlicht
   name: Woonkamer nachtlicht
   entities:
@@ -282,7 +273,6 @@
       state: 'off'
     light.zon:
       state: 'off'
-
 - id: woonkamer_tv_kijken
   name: Woonkamer TV kijken
   entities:
@@ -335,4 +325,18 @@
       - 0.503
       - 0.411
     switch.switch_stekker_bij_de_tuindeuren:
+      state: 'on'
+- id: toilet_sleepy_time
+  name: Toilet sleepy time
+  entities:
+    light.toilet_plafond:
+      brightness: 38
+      color_temp: 380
+      state: 'on'
+- id: toilet_normaal
+  name: Toilet normaal
+  entities:
+    light.toilet_plafond:
+      brightness: 106
+      color_temp: 393
       state: 'on'
