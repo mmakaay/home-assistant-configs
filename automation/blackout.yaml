@@ -49,6 +49,21 @@
         entity_id: media_player.ps4
 
 
+- id: blackout_ambilite_uit
+  alias: "[BLACKOUT EVENT] Ambilite uit"
+  description: >
+    Reageert op een 'blackout' event door de ambilite uit te zetten.
+  trigger:
+    - platform: event
+      event_data: {}
+      event_type: blackout
+  condition: []
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.ambilite
+
+
 - id: blackout_stroom_uit
   alias: "[BLACKOUT EVENT] stroom uit"
   description: Reageert op een 'blackout' event door stekkerblokken uit te zetten

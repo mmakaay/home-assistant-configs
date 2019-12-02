@@ -10,16 +10,16 @@
     - service_template: light.turn_on
       data_template:
         entity_id: light.achter_tv_strip
-        brightness: 100
-        transition: 4
+        brightness: 80
+        transition: 7
         xy_color:
-          - "{{ state_attr('switch.ambilite', 'x') }}"
-          - "{{ state_attr('switch.ambilite', 'y') }}"
+          - "{{ state_attr('switch.ambilite', 'gamutC_x') }}"
+          - "{{ state_attr('switch.ambilite', 'gamutC_y') }}"
     - service_template: light.turn_on
       data_template:
         entity_id: light.staande_lamp
-        brightness: 70
-        transition: 6
+        brightness: 60
+        transition: 7 
         xy_color:
-          - "{{ state_attr('switch.ambilite', 'x') }}"
-          - "{{ state_attr('switch.ambilite', 'y') }}"
+          - "{{ state_attr('switch.ambilite', 'gamutC_x') }}"
+          - "{{ state_attr('switch.ambilite', 'gamutC_y') }}"

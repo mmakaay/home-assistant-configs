@@ -1,9 +1,8 @@
 ---
-- id: woonkamer_nachtlamp_A
-  alias: "[WOONKAMER NACHTLAMP] A. zet aan bij beweging in het donker"
+- id: woonkamer_licht_A
+  alias: "[WOONKAMER LICHT] A. zet aan bij beweging in het donker"
   description: >
-    Nachtlamp aan op een nachtstand als het donker is en er
-    beweging wordt gedetecteerd.
+    Zet het licht aan als het donker is en er beweging wordt gedetecteerd.
   trigger:
     - entity_id: binary_sensor.woonkamer_beweging
       platform: state
@@ -11,7 +10,7 @@
   condition:
     - condition: numeric_state
       entity_id: sensor.woonkamer_lichtsterkte
-      below: 5
+      below: 4
     - condition: state
       entity_id: light.woonkamer_groep_ha
       state: 'off'
@@ -28,12 +27,11 @@
         entity_id: timer.woonkamer
 
 
-- id: woonkamer_nachtlamp_B
-  alias: "[WOONKAMER NACHTLAMP] B. herstart timer bij beweging"
+- id: woonkamer_licht_B
+  alias: "[WOONKAMER LICHT] B. herstart timer bij beweging"
   description: >
-    Als de nachtlamp timer actief is, en er wordt beweging
-    gedetecteerd, herstart dan de timer, zodat de nachtlamp
-    langer actief blijft.
+    Als de timer actief is, en er wordt beweging gedetecteerd, herstart
+    dan de timer, zodat het licht langer aan blijft.
   trigger:
     - entity_id: binary_sensor.woonkamer_beweging
       platform: state
@@ -53,13 +51,13 @@
         entity_id: timer.woonkamer
   
 
-- id: woonkamer_nachtlamp_C
-  alias: "[WOONKAMER NACHTLAMP] C. zet uit na een tijdje geen beweging"
+- id: woonkamer_licht_C
+  alias: "[WOONKAMER LICHT] C. zet uit na een tijdje geen beweging"
   description: >
     Wanneer de timer afloopt en er is geen beweging in de ruimte, maak
-    dan de nachtlamp weer uit. De beweging cooldown timer wordt ook
-    uitgezet, omdat we best willen dat na dit event de lampen meteen
-    weer aangaan bij beweging.
+    dan het licht weer uit. De cooldown timer wordt ook uitgezet, omdat
+    we best willen dat na dit event de lampen meteen weer aangaan
+    bij beweging.
   trigger:
     - platform: event
       event_type: timer.finished
@@ -79,11 +77,11 @@
         entity_id: timer.woonkamer_cooldown
 
 
-- id: woonkamer_nachtlamp_D
-  alias: "[WOONKAMER NACHTLAMP] D. herstarten na timeout maar wel beweging"
+- id: woonkamer_licht_D
+  alias: "[WOONKAMER LICHT] D. herstarten na timeout maar wel beweging"
   description: >
     Wanneer de timer afloopt en er is beweging in de ruimte, herstart
-    dan de nachtlamp timer.
+    dan de timer.
   trigger:
     - platform: event
       event_type: timer.finished
@@ -99,12 +97,12 @@
         entity_id: timer.woonkamer
 
 
-- id: woonkamer_nachtlamp_E
-  alias: "[WOONKAMER NACHTLAMP] E. bij aanpassing lampen, nachtlamp uitschakelen"
+- id: woonkamer_licht_E
+  alias: "[WOONKAMER LICHT] E. bij aanpassing lampen, timer uitschakelen"
   description: >
     Wanneer er aanpassingen worden gedaan in de verlichting, stop dan
-    een eventuele nachtlamp of cooldown timer. Vanaf dan is het de
-    verantwoordelijkheid van het mens dat de instellingen heeft aangepast.
+    een eventuele timer. Vanaf dan is het de verantwoordelijkheid van
+    het mens dat de instellingen heeft aangepast.
   trigger:
     - entity_id: light.woonkamer_groep_ha
       platform: state
@@ -117,14 +115,14 @@
         entity_id: timer.woonkamer_cooldown
 
 
-- id: woonkamer_nachtlamp_F
-  alias: "[WOONKAMER NACHTLAMP] F. cooldown activeren als alle lampen uit gaan"
+- id: woonkamer_licht_F
+  alias: "[WOONKAMER LICHT] F. cooldown activeren als alle lampen uit gaan"
   description: >
-    Wanneer alle lampen uitgaan in de woonkamer, dan willen we de bewegingssensors
-    even negeren, zodat eventuele beweging niet direct de nachtlamp weer
-    aanzet. Denk aan het scenario waarbij je in de ruimte met de hand de
-    lampen uitmaakt en dan wegloopt (wat een beweging is, waarmee je de
-    nachtlamp zou kunnen triggeren).
+    Wanneer alle lampen uitgaan in de woonkamer, dan willen we de
+    bewegingssensors even negeren, zodat eventuele beweging niet direct
+    het licht weer aanzet. Denk aan het scenario waarbij je in de ruimte
+    met de hand de lampen uitmaakt en dan wegloopt (wat een beweging is,
+    waarmee je het licht zou kunnen triggeren).
   trigger:
     - entity_id: light.woonkamer_groep_ha
       platform: state
@@ -139,8 +137,8 @@
         entity_id: timer.woonkamer_cooldown
 
 
-- id: woonkamer_nachtlamp_G
-  alias: "[WOONKAMER NACHTLAMP] G. cooldown deactiveren als er lampen aan gaan"
+- id: woonkamer_licht_G
+  alias: "[WOONKAMER LICHT] G. cooldown deactiveren als er lampen aan gaan"
   description: >
     Wanneer er lampen aan worden gezet, dan kan een eventuele cooldown
     timer worden gestopt.

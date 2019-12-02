@@ -1,6 +1,6 @@
 ---
 - id: toilet_lamp_A
-  alias: "[TOILET LAMP] A. zet aan bij beweging"
+  alias: "[TOILET LICHT] A. zet aan bij beweging"
   description: >
     Lamp aan als er beweging wordt gedetecteerd.
   trigger:
@@ -16,7 +16,6 @@
           {% else %}
             scene.toilet_normaal
           {% endif %}
-        transition: 2
     # cancel/start, because of this bug:
     # https://github.com/home-assistant/home-assistant/issues/12013
     - service: timer.cancel
@@ -27,7 +26,7 @@
         entity_id: timer.toilet
 
 - id: toilet_lamp_B
-  alias: "[TOILET LAMP] B. zet uit na een tijdje geen beweging"
+  alias: "[TOILET LICHT] B. zet uit na een tijdje geen beweging"
   description: >
     Wanneer de timer afloopt, maak de lamp dan weer uit.
   trigger:
@@ -39,4 +38,4 @@
     - service: light.turn_off
       data:
         entity_id: light.toilet_plafond
-        transition: 5
+        transition: 10 

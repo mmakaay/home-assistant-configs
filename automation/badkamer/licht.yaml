@@ -1,6 +1,6 @@
 ---
 - id: badkamer_lamp_A
-  alias: "[BADKAMER LAMP] A. zet aan bij beweging"
+  alias: "[BADKAMER LICHT] A. zet aan bij beweging"
   description: >
     Lamp aan als er beweging wordt gedetecteerd.
   trigger:
@@ -16,7 +16,6 @@
           {% else %}
             scene.badkamer_normaal
           {% endif %}
-        transition: 2
     # cancel/start, because of this bug:
     # https://github.com/home-assistant/home-assistant/issues/12013
     - service: timer.cancel
@@ -33,7 +32,7 @@
           {% endif %}
 
 - id: badkamer_lamp_B
-  alias: "[BADKAMER LAMP] B. zet uit na een tijdje geen beweging"
+  alias: "[BADKAMER LICHT] B. zet uit na een tijdje geen beweging"
   description: >
     Wanneer de timer afloopt, maak dan de lamp weer uit.
   trigger:
@@ -45,4 +44,4 @@
     - service: light.turn_off
       data:
         entity_id: light.badkamer_plafond
-        transition: 5
+        transition: 10
