@@ -12,9 +12,10 @@
         entity_id: light.achter_tv_strip
         brightness: 80
         transition: 7
-        xy_color:
-          - "{{ state_attr('switch.ambilite', 'gamutC_x') }}"
-          - "{{ state_attr('switch.ambilite', 'gamutC_y') }}"
+        rgb_color:
+          - "{{ [[state_attr('switch.ambilite', 'r'), 50] | max, 220] | min }}"
+          - "{{ [[state_attr('switch.ambilite', 'g'), 50] | max, 220] | min }}"
+          - "{{ [[state_attr('switch.ambilite', 'b'), 50] | max, 220] | min }}"
     - service_template: light.turn_on
       data_template:
         entity_id: light.staande_lamp

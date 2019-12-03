@@ -1,8 +1,14 @@
 ---
-- id: toilet_lamp_A
+# This automation is based on the IKEA Trådfri motion sensor
+# This sensor reports "ON" for 1 minute, then "OFF" for 30 seconds when
+# detecing motion. The state "ON" is not kept when there is still
+# motion going on. While this is a bit basic, it does allow for a pretty
+# simple automation.
+
+- id: toilet_licht_A
   alias: "[TOILET LICHT] A. zet aan bij beweging"
   description: >
-    Lamp aan als er beweging wordt gedetecteerd.
+    Lamp aan en de timer (her)starten als er beweging wordt gedetecteerd.
   trigger:
     - entity_id: binary_sensor.toilet_beweging
       platform: state
@@ -25,7 +31,7 @@
       data_template:
         entity_id: timer.toilet
 
-- id: toilet_lamp_B
+- id: toilet_licht_B
   alias: "[TOILET LICHT] B. zet uit na een tijdje geen beweging"
   description: >
     Wanneer de timer afloopt, maak de lamp dan weer uit.
@@ -38,4 +44,3 @@
     - service: light.turn_off
       data:
         entity_id: light.toilet_plafond
-        transition: 10 

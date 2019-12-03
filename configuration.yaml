@@ -108,3 +108,9 @@ proximity:
     unit_of_measurement: km
 
 shopping_list:
+
+# Running into av dependency issues, but bug ticket is closed:
+# https://github.com/home-assistant/home-assistant/issues/26251
+#camera:
+#  - platform: mqtt
+#    topic: homeassistant/switch/ambilite/tv_image

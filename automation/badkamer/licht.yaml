@@ -1,8 +1,14 @@
 ---
+# This automation is based on the IKEA Trådfri motion sensor.
+# This sensor reports "ON" for 1 minute, then "OFF" for 30 seconds when
+# detecing motion. The state "ON" is not kept when there is still
+# motion going on. While this is a bit basic, it does allow for a pretty
+# simple automation.
+
 - id: badkamer_lamp_A
   alias: "[BADKAMER LICHT] A. zet aan bij beweging"
   description: >
-    Lamp aan als er beweging wordt gedetecteerd.
+    Lamp aan en de timer (her)starten als er beweging wordt gedetecteerd.
   trigger:
     - entity_id: binary_sensor.badkamer_beweging
       platform: state
@@ -44,4 +50,3 @@
     - service: light.turn_off
       data:
         entity_id: light.badkamer_plafond
-        transition: 10
