@@ -57,5 +57,5 @@
   condition: []
   action:
   - data:
-      entity_id: scene.keuken_nachtlicht
+      entity_id: scene.keuken_night_time
     service: scene.turn_on

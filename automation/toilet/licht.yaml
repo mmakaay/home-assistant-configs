@@ -17,10 +17,10 @@
     - service: scene.turn_on
       data_template:
         entity_id: >
-          {% if is_state("binary_sensor.sleepy_time", "on") %}
-            scene.toilet_sleepy_time
+          {% if is_state("binary_sensor.day_time", "on") %}
+            scene.toilet_day_time
           {% else %}
-            scene.toilet_normaal
+            scene.toilet_night_time
           {% endif %}
     # cancel/start, because of this bug:
     # https://github.com/home-assistant/home-assistant/issues/12013

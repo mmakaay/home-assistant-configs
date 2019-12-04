@@ -19,8 +19,13 @@
       state: 'idle'
   action:
     - service: scene.turn_on
-      data:
-        entity_id: scene.keuken_nachtlicht
+      data_template:
+        entity_id: >
+          {% if is_state("binary_sensor.day_time", "on") %}
+            scene.keuken_day_time
+          {% else %}
+            scene.keuken_night_time
+          {% endif %}
     - delay: 4
     - service: timer.start
       data:

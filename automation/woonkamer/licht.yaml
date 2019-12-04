@@ -19,8 +19,13 @@
       state: 'idle'
   action:
     - service: scene.turn_on
-      data:
-        entity_id: scene.woonkamer_nachtlicht
+      data_template:
+        entity_id: >
+          {% if is_state("binary_sensor.day_time", "on") %}
+            scene.woonkamer_day_time
+          {% else %}
+            scene.woonkamer_night_time
+          {% endif %}
     - delay: 4
     - service: timer.start
       data:
@@ -106,6 +111,15 @@
   trigger:
     - entity_id: light.woonkamer_groep_ha
       platform: state
+  condition:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: timer.woonkamer
+          state: 'active'
+        - condition: state
+          entity_id: timer.woonkamer_cooldown
+          state: 'active'
   action:
     - service: timer.cancel
       data:

@@ -26,6 +26,13 @@ install:
 
 install_afvalbeheer:
 	mkdir -p repos
-	/bin/rm -fR repos/Home-Assistant-Sensor-Afvalbeheer
+	cd repos && /bin/rm -fR repos/Home-Assistant-Sensor-Afvalbeheer
 	cd repos && git clone https://github.com/pippyn/Home-Assistant-Sensor-Afvalbeheer.git
+	/bin/rm -fR custom_components/afvalbeheer
 	cd custom_components && ln -s ../repos/Home-Assistant-Sensor-Afvalbeheer/custom_components/afvalbeheer
+
+install_fold:
+	cd repos && /bin/rm -fR lovelace-fold-entity-row
+	cd repos && git clone https://github.com/thomasloven/lovelace-fold-entity-row
+	/bin/rm -fR www/fold-entity-row.js
+	cd www && cp ../repos/lovelace-fold-entity-row/fold-entity-row.js .

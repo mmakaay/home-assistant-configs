@@ -10,11 +10,23 @@ recorder:
   db_url: postgresql://@/homeassistant
   purge_keep_days: 1
   purge_interval: 1
+  include:
+    domains:
+      - switch
+      - sensor
+      - binary_sensor
   exclude:
+    event_types:
+      - call_service
+      - state_changed
+      - timer.cancelled
+      - automation_trigered
+    domains:
+      - light
     entities:
+      - switch.ambilite
       - sensor.date_time
       - sensor.time
-      - binary_sensor.sleepy_time
       - sun.sun
       - sensor.gas_consumption
       - sensor.long_power_failure_count
@@ -37,7 +49,9 @@ recorder:
       - sensor.voltage_sags_phase_l2
       - sensor.voltage_sags_phase_l3
       - sensor.voltage_swells_phase_l1
+      - switch.switch_for_tv_amp_and_pickup
       - switch.switch_for_tv_amp_and_pickup_2
+      - sensor.switch_for_tv_amp_and_pickup_power
       - switch.switch_for_itv_ps4_netswitch_tvstrip_2
       - sensor.dar_voorkant_gft
       - sensor.dar_voorkant_papier
@@ -47,7 +61,6 @@ recorder:
       - sensor.dar_zijkant_papier
       - sensor.dar_zijkant_vandaag
       - sensor.dar_zijkant_morgen
-      - switch.ambilite
 
 #logger:
 #  default: debug
