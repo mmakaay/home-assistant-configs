@@ -1,0 +1,15 @@
+---
+platform: template
+sensors:
+  # Used for the GUI, to give the  button for "turn light in the kitchen
+  # off" a clean "on" state color. When using the light group for
+  # this, the button will color along with the color state of the lights
+  # in the room, which is not very clear.
+  keuken_lights_active:
+    friendly_name: One or more lights in the living room turned on
+    entity_id:
+      - light.keuken_groep_ha
+      - switch.switch_stekker_bij_de_tuindeuren
+    value_template: >-
+        {{ is_state("light.keuken_groep_ha", "on") }}
+    icon_template: mdi:power-sleep
