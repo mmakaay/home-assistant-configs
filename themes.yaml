@@ -2,3 +2,7 @@ maurice:
   # Header
   primary-color: '#567'
   text-primary-color: '#DADADB'
+
+separator:
+  paper-card-background-color: "#f0f0f0"
+  primary-text-color: "#44739e"
