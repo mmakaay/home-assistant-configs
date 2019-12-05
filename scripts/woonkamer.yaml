@@ -28,7 +28,7 @@ zet_woonkamer_licht_uit:
     - service: light.turn_off
       data:
         entity_id: light.kast_midden
-    - service: light.turn_off
+    - service: switch.turn_off
       data:
         entity_id: switch.switch_stekker_bij_de_tuindeuren
 
