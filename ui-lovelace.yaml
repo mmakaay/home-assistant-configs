@@ -1,0 +1,1049 @@
+title: Home Mautomation
+views:
+  - badges: []
+    cards:
+      - cards:
+          - card:
+              entities:
+                - entity: sensor.dar_voorkant_morgen
+                  icon: 'mdi:trash-can-outline'
+                  name: Afval morgen
+              type: entities
+            conditions:
+              - entity: sensor.dar_voorkant_morgen
+                state_not: Geen
+              - entity: sensor.dar_voorkant_morgen
+                state_not: unknown
+            type: conditional
+          - card:
+              entities:
+                - entity: sensor.dar_voorkant_vandaag
+                  icon: 'mdi:trash-can-outline'
+                  name: Afval vandaag
+              type: entities
+            conditions:
+              - entity: sensor.dar_voorkant_vandaag
+                state_not: Geen
+              - entity: sensor.dar_voorkant_vandaag
+                state_not: unknown
+            type: conditional
+          - card:
+              entities:
+                - entity: sensor.dar_zijkant_morgen
+                  icon: 'mdi:trash-can-outline'
+                  name: Papier zijkant morgen
+              type: entities
+            conditions:
+              - entity: sensor.dar_zijkant_morgen
+                state_not: Geen
+              - entity: sensor.dar_zijkant_morgen
+                state_not: unknown
+            type: conditional
+          - card:
+              entities:
+                - entity: sensor.dar_zijkant_vandaag
+                  icon: 'mdi:trash-can-outline'
+                  name: Papier zijkant vandaag
+              type: entities
+            conditions:
+              - entity: sensor.dar_zijkant_vandaag
+                state_not: Geen
+              - entity: sensor.dar_zijkant_vandaag
+                state_not: unknown
+            type: conditional
+        type: vertical-stack
+      - cards:
+          - card:
+              entity: script.trigger_blackout_event
+              hold_action:
+                action: none
+              icon: 'mdi:power-sleep'
+              icon_height: 40px
+              name: Zet alles uit (zzz...)
+              show_icon: true
+              show_name: true
+              tap_action:
+                action: call-service
+                confirmation:
+                  text: Zeker weten?
+                service: script.turn_on
+                service_data:
+                  entity_id: script.trigger_blackout_event
+              type: entity-button
+            conditions:
+              - entity: binary_sensor.blackout_active
+                state: 'off'
+            type: conditional
+          - card:
+              entity: script.trigger_power_up_event
+              hold_action:
+                action: none
+              icon: 'mdi:power'
+              icon_height: 40px
+              show_icon: true
+              show_name: true
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.trigger_power_up_event
+              type: entity-button
+            conditions:
+              - entity: binary_sensor.blackout_active
+                state: 'on'
+            type: conditional
+        type: vertical-stack
+      - cards:
+          - content: '### WOONKAMER'
+            theme: separator
+            type: markdown
+          - cards:
+              - entity: scene.woonkamer_tv_kijken
+                hold_action:
+                  action: more-info
+                icon: 'mdi:eye-outline'
+                name: TV Kijken
+                tap_action:
+                  action: call-service
+                  service: scene.turn_on
+                  service_data:
+                    entity_id: scene.woonkamer_tv_kijken
+                theme: light-button
+                type: entity-button
+              - entity: scene.woonkamer_klaprozen
+                hold_action:
+                  action: more-info
+                icon: 'mdi:flower'
+                name: Klaprozen
+                tap_action:
+                  action: call-service
+                  service: scene.turn_on
+                  service_data:
+                    entity_id: scene.woonkamer_klaprozen
+                theme: light-button
+                type: entity-button
+              - entity: scene.woonkamer_feet_up
+                hold_action:
+                  action: more-info
+                icon: 'mdi:foot-print'
+                name: Feet up
+                tap_action:
+                  action: call-service
+                  service: scene.turn_on
+                  service_data:
+                    entity_id: scene.woonkamer_feet_up
+                theme: light-button
+                type: entity-button
+              - entity: switch.gui_woonkamer_licht
+                tap_action:
+                  action: toggle
+                theme: light-button
+                type: entity-button
+            type: horizontal-stack
+          - cards:
+              - entity: switch.gui_woonkamer_ambilite
+                tap_action:
+                  action: toggle
+                type: entity-button
+              - entity: switch.switch_for_tv_amp_and_pickup
+                hold_action:
+                  action: more-info
+                name: Televisie
+                tap_action:
+                  action: toggle
+                type: entity-button
+              - entity: switch.switch_stekker_links_van_de_bank
+                hold_action:
+                  action: more-info
+                name: Bank links
+                tap_action:
+                  action: toggle
+                type: entity-button
+              - entity: switch.gui_woonkamer_stroom
+                tap_action:
+                  action: toggle
+                type: entity-button
+            type: horizontal-stack
+          - entities:
+              - entity: media_player.ps4
+                name: Playstation4
+              - entity: media_player.sony_bravia_tv
+            show_header_toggle: false
+            type: entities
+          - content: '### KEUKEN'
+            theme: separator
+            type: markdown
+          - cards:
+              - entity: scene.keuken_koken
+                icon: 'mdi:chef-hat'
+                name: Koken
+                tap_action:
+                  action: call-service
+                  service: scene.turn_on
+                  service_data:
+                    entity_id: scene.keuken_koken
+                theme: light-button
+                type: entity-button
+              - entity: scene.keuken_gedimd
+                icon: 'mdi:weather-sunny'
+                name: Gedimd
+                tap_action:
+                  action: call-service
+                  service: scene.turn_on
+                  service_data:
+                    entity_id: scene.keuken_gedimd
+                theme: light-button
+                type: entity-button
+              - entity: scene.keuken_automatisch_nacht
+                icon: 'mdi:weather-night'
+                name: Nachtlicht
+                tap_action:
+                  action: call-service
+                  service: scene.turn_on
+                  service_data:
+                    entity_id: scene.keuken_automatisch_nacht
+                theme: light-button
+                type: entity-button
+              - entity: switch.gui_keuken_licht
+                tap_action:
+                  action: toggle
+                theme: light-button
+                type: entity-button
+            type: horizontal-stack
+          - content: '### OVERIGE'
+            theme: separator
+            type: markdown
+          - cards:
+              - entity: switch.gui_gang_licht
+                tap_action:
+                  action: toggle
+                theme: light-button
+                type: entity-button
+              - entity: switch.gui_toilet_licht
+                tap_action:
+                  action: toggle
+                theme: light-button
+                type: entity-button
+              - entity: switch.gui_badkamer_licht
+                tap_action:
+                  action: toggle
+                theme: light-button
+                type: entity-button
+            type: horizontal-stack
+        type: vertical-stack
+      - card:
+          content: >
+            Nieuwe versie: {{ state_attr("binary_sensor.updater",
+            "newest_version") }}
+
+            Release notes: [kijk op de website]({{
+            state_attr("binary_sensor.updater", "release_notes") }})
+          title: Update beschikbaar voor Home Assistant!
+          type: markdown
+        conditions:
+          - entity: binary_sensor.updater
+            state: 'on'
+        type: conditional
+    icon: 'mdi:home'
+    path: default_view
+    title: Home
+
+
+  - badges: []
+    cards:
+      - elements:
+          - entity: switch.switch_stekker_links_van_de_bank
+            style:
+              '--iron-icon-height': 30px
+              '--iron-icon-width': 30px
+              left: 15%
+              top: 68%
+            title: Vaaslamp
+            type: state-icon
+          - entity: switch.switch_for_tv_amp_and_pickup
+            style:
+              '--iron-icon-height': 30px
+              '--iron-icon-width': 30px
+              left: 56%
+              top: 88%
+            title: 'TV, amp, pickup'
+            type: state-icon
+          - entity: light.kast_boven
+            icon: 'mdi:circle'
+            style:
+              '--iron-icon-height': 25px
+              '--iron-icon-width': 25x
+              left: 15%
+              top: 77%
+            tap_action:
+              action: toggle
+            title: Boven
+            type: state-icon
+          - entity: light.kast_midden
+            icon: 'mdi:circle'
+            style:
+              '--iron-icon-height': 25px
+              '--iron-icon-width': 25px
+              left: 15%
+              top: 82%
+            tap_action:
+              action: toggle
+            title: Midden
+            type: state-icon
+          - entity: light.kast_onder
+            icon: 'mdi:circle'
+            style:
+              '--iron-icon-height': 25px
+              '--iron-icon-width': 25px
+              left: 15%
+              top: 87%
+            tap_action:
+              action: toggle
+            title: Onbovender
+            type: state-icon
+          - entity: light.zon
+            icon: 'mdi:circle'
+            style:
+              '--iron-icon-height': 33px
+              '--iron-icon-width': 33px
+              left: 32%
+              top: 90%
+            tap_action:
+              action: toggle
+            title: Zon
+            type: state-icon
+          - entity: light.staande_lamp
+            icon: 'mdi:floor-lamp'
+            style:
+              '--iron-icon-height': 45px
+              '--iron-icon-width': 45px
+              left: 49%
+              top: 89%
+            tap_action:
+              action: toggle
+            title: Staande lamp
+            type: state-icon
+          - entity: light.achter_tv_strip
+            icon: 'mdi:led-strip-variant'
+            style:
+              '--iron-icon-height': 40px
+              '--iron-icon-width': 40px
+              left: 55%
+              top: 74%
+            tap_action:
+              action: toggle
+            title: TV strip
+            type: state-icon
+          - entity: light.droogkap
+            icon: 'mdi:floor-lamp'
+            style:
+              '--iron-icon-height': 45px
+              '--iron-icon-width': 45px
+              left: 17%
+              top: 59%
+            tap_action:
+              action: toggle
+            title: Droogkap
+            type: state-icon
+          - entity: light.vaaslamp
+            style:
+              '--iron-icon-height': 30px
+              '--iron-icon-width': 30px
+              left: 17.5%
+              top: 44%
+            tap_action:
+              action: toggle
+            title: Vaaslamp
+            type: state-icon
+          - entity: light.achter_de_koelkast
+            icon: 'mdi:led-strip-variant'
+            style:
+              '--iron-icon-height': 40px
+              '--iron-icon-width': 40px
+              left: 51%
+              top: 19%
+            tap_action:
+              action: toggle
+            title: Koelkast strip
+            type: state-icon
+          - conditions:
+              - entity: binary_sensor.heater_on
+                state: 'off'
+            elements:
+              - entity: binary_sensor.heater_on
+                icon: 'mdi:radiator-disabled'
+                style:
+                  '--iron-icon-height': 35px
+                  '--iron-icon-width': 35px
+                  left: 53%
+                  top: 57%
+                type: state-icon
+            type: conditional
+          - conditions:
+              - entity: binary_sensor.heater_on
+                state: 'on'
+            elements:
+              - entity: binary_sensor.heater_on
+                icon: 'mdi:radiator'
+                style:
+                  '--iron-icon-height': 35px
+                  '--iron-icon-width': 35px
+                  left: 53%
+                  top: 57%
+                type: state-icon
+            type: conditional
+          - conditions:
+              - entity: media_player.sony_bravia_tv
+                state_not: 'off'
+            elements:
+              - entity: media_player.sony_bravia_tv
+                style:
+                  '--iron-icon-height': 40px
+                  '--iron-icon-width': 40px
+                  left: 45%
+                  top: 74%
+                type: state-icon
+            type: conditional
+          - conditions:
+              - entity: media_player.ps4
+                state_not: 'off'
+              - entity: media_player.ps4
+                state_not: standby
+            elements:
+              - entity: media_player.ps4
+                style:
+                  '--iron-icon-height': 34px
+                  '--iron-icon-width': 34x
+                  left: 54.5%
+                  top: 67%
+                type: state-icon
+            type: conditional
+          - conditions:
+              - entity: sensor.telefoon
+                state_not: idle
+            elements:
+              - entity: sensor.telefoon
+                icon: 'mdi:phone'
+                style:
+                  '--iron-icon-height': 32px
+                  '--iron-icon-width': 32x
+                  left: 55%
+                  top: 81%
+                type: state-icon
+            type: conditional
+          - entity: sensor.power_consumption
+            style:
+              font-size: 18px
+              left: 15%
+              top: 6.5%
+            type: state-label
+          - conditions:
+              - entity: binary_sensor.woonkamer_beweging
+                state: 'on'
+            elements:
+              - entity: binary_sensor.woonkamer_beweging
+                style:
+                  '--iron-icon-height': 25px
+                  '--iron-icon-width': 25px
+                  left: 38%
+                  top: 52%
+                type: state-icon
+            type: conditional
+          - conditions:
+              - entity: binary_sensor.keuken_beweging
+                state: 'on'
+            elements:
+              - entity: binary_sensor.keuken_beweging
+                style:
+                  '--iron-icon-height': 25px
+                  '--iron-icon-width': 25px
+                  left: 63%
+                  top: 27%
+                type: state-icon
+            type: conditional
+          - conditions:
+              - entity: binary_sensor.gang_beweging
+                state: 'on'
+            elements:
+              - entity: binary_sensor.gang_beweging
+                style:
+                  '--iron-icon-height': 25px
+                  '--iron-icon-width': 25px
+                  left: 68%
+                  top: 68%
+                type: state-icon
+            type: conditional
+          - conditions:
+              - entity: binary_sensor.trap_beweging
+                state: 'on'
+            elements:
+              - entity: binary_sensor.trap_beweging
+                style:
+                  '--iron-icon-height': 25px
+                  '--iron-icon-width': 25px
+                  left: 83%
+                  top: 62%
+                type: state-icon
+            type: conditional
+          - conditions:
+              - entity: binary_sensor.toilet_beweging
+                state: 'on'
+            elements:
+              - entity: binary_sensor.toilet_beweging
+                style:
+                  '--iron-icon-height': 25px
+                  '--iron-icon-width': 25px
+                  left: 79.5%
+                  top: 46.5%
+                type: state-icon
+            type: conditional
+          - entity: sensor.woonkamer_temperatuur
+            style:
+              font-size: 13px
+              left: 36%
+              top: 62%
+            type: state-label
+          - entity: sensor.gang_temperatuur
+            style:
+              font-size: 13px
+              left: 68%
+              top: 46%
+            type: state-label
+          - entity: sensor.trap_temperatuur
+            style:
+              background: white
+              font-size: 11px
+              left: 82%
+              line-height: 11px
+              padding: 0px
+              top: 79%
+            type: state-label
+          - entity: sensor.br_temperature
+            style:
+              font-size: 15px
+              left: 85%
+              top: 5%
+            type: state-label
+          - entity: sensor.br_humidity
+            style:
+              font-size: 15px
+              left: 85.6%
+              top: 9%
+            type: state-label
+          - entity: sensor.br_symbol
+            style:
+              left: 75%
+              top: 7%
+            type: state-icon
+          - entity: light.keukenspot1
+            icon: 'mdi:circle'
+            style:
+              '--iron-icon-height': 20px
+              '--iron-icon-width': 20px
+              left: 80%
+              top: 26%
+            tap_action:
+              action: toggle
+            title: Keukenspot 1
+            type: state-icon
+          - entity: light.keukenspot2
+            icon: 'mdi:circle'
+            style:
+              '--iron-icon-height': 20px
+              '--iron-icon-width': 20px
+              left: 80%
+              top: 30.5%
+            tap_action:
+              action: toggle
+            title: Keukenspot 2
+            type: state-icon
+          - entity: light.keukenspot3
+            icon: 'mdi:circle'
+            style:
+              '--iron-icon-height': 20px
+              '--iron-icon-width': 20px
+              left: 80%
+              top: 35%
+            tap_action:
+              action: toggle
+            title: Keukenspot 3
+            type: state-icon
+          - entity: light.keukenspot4
+            icon: 'mdi:circle'
+            style:
+              '--iron-icon-height': 20px
+              '--iron-icon-width': 20px
+              left: 74%
+              top: 35%
+            tap_action:
+              action: toggle
+            title: Keukenspot 4
+            type: state-icon
+          - entity: light.keukenspot5
+            icon: 'mdi:circle'
+            style:
+              '--iron-icon-height': 20px
+              '--iron-icon-width': 20px
+              left: 68%
+              top: 35%
+            tap_action:
+              action: toggle
+            title: Keukenspot 5
+            type: state-icon
+          - entity: light.keukenspot6
+            icon: 'mdi:circle'
+            style:
+              '--iron-icon-height': 20px
+              '--iron-icon-width': 20px
+              left: 62%
+              top: 35%
+            tap_action:
+              action: toggle
+            title: Keukenspot 6
+            type: state-icon
+          - entity: light.gang_plafond_dimbaar
+            icon: 'mdi:square'
+            style:
+              '--iron-icon-height': 25px
+              '--iron-icon-width': 205x
+              left: 68%
+              top: 60%
+            tap_action:
+              action: toggle
+            title: Gang plafond
+            type: state-icon
+          - entity: light.toilet_plafond
+            icon: 'mdi:circle'
+            style:
+              '--iron-icon-height': 25px
+              '--iron-icon-width': 205x
+              left: 83%
+              top: 50%
+            tap_action:
+              action: toggle
+            title: Gang plafond
+            type: state-icon
+          - conditions:
+              - entity: timer.toilet
+                state: active
+            elements:
+              - entity: timer.toilet
+                style:
+                  '--iron-icon-height': 25px
+                  '--iron-icon-width': 25px
+                  left: 86.4%
+                  top: 53.5%
+                type: state-icon
+            type: conditional
+          - conditions:
+              - entity: timer.keuken
+                state: active
+            elements:
+              - entity: timer.keuken
+                style:
+                  '--iron-icon-height': 25px
+                  '--iron-icon-width': 25px
+                  left: 72%
+                  top: 29%
+                type: state-icon
+            type: conditional
+          - conditions:
+              - entity: timer.keuken_cooldown
+                state: active
+            elements:
+              - entity: timer.keuken_cooldown
+                style:
+                  '--iron-icon-height': 25px
+                  '--iron-icon-width': 25px
+                  left: 72%
+                  top: 29%
+                type: state-icon
+            type: conditional
+          - conditions:
+              - entity: timer.woonkamer
+                state: active
+            elements:
+              - entity: timer.woonkamer
+                style:
+                  '--iron-icon-height': 25px
+                  '--iron-icon-width': 25px
+                  left: 37%
+                  top: 77%
+                type: state-icon
+            type: conditional
+          - conditions:
+              - entity: timer.woonkamer_cooldown
+                state: active
+            elements:
+              - entity: timer.woonkamer_cooldown
+                style:
+                  '--iron-icon-height': 25px
+                  '--iron-icon-width': 25px
+                  left: 37%
+                  top: 77%
+                type: state-icon
+            type: conditional
+          - conditions:
+              - entity: timer.gang
+                state: active
+            elements:
+              - entity: timer.gang
+                style:
+                  '--iron-icon-height': 25px
+                  '--iron-icon-width': 25px
+                  left: 68%
+                  top: 53.5%
+                type: state-icon
+            type: conditional
+          - conditions:
+              - entity: timer.gang_cooldown
+                state: active
+            elements:
+              - entity: timer.gang_cooldown
+                style:
+                  '--iron-icon-height': 25px
+                  '--iron-icon-width': 25px
+                  left: 68%
+                  top: 54%
+                type: state-icon
+            type: conditional
+        image: /local/blueprint_1stfloor.png
+        title: Beneden
+        type: picture-elements
+      - elements:
+          - conditions:
+              - entity: binary_sensor.trap_beweging
+                state: 'on'
+            elements:
+              - entity: binary_sensor.trap_beweging
+                style:
+                  '--iron-icon-height': 25px
+                  '--iron-icon-width': 25px
+                  left: 83%
+                  top: 50%
+                type: state-icon
+            type: conditional
+          - conditions:
+              - entity: binary_sensor.slaapkamer_beweging
+                state: 'on'
+            elements:
+              - entity: binary_sensor.slaapkamer_beweging
+                style:
+                  '--iron-icon-height': 25px
+                  '--iron-icon-width': 25px
+                  left: 33%
+                  top: 35%
+                type: state-icon
+            type: conditional
+          - conditions:
+              - entity: timer.slaapkamer
+                state: active
+            elements:
+              - entity: timer.slaapkamer
+                style:
+                  '--iron-icon-height': 25px
+                  '--iron-icon-width': 25px
+                  left: 45.5%
+                  top: 37%
+                type: state-icon
+            type: conditional
+          - conditions:
+              - entity: timer.badkamer
+                state: active
+            elements:
+              - entity: timer.badkamer
+                style:
+                  '--iron-icon-height': 25px
+                  '--iron-icon-width': 25px
+                  left: 70%
+                  top: 88%
+                type: state-icon
+            type: conditional
+          - conditions:
+              - entity: binary_sensor.badkamer_beweging
+                state: 'on'
+            elements:
+              - entity: binary_sensor.badkamer_beweging
+                style:
+                  '--iron-icon-height': 25px
+                  '--iron-icon-width': 25px
+                  left: 83%
+                  top: 88%
+                type: state-icon
+            type: conditional
+          - entity: light.badkamer_plafond
+            icon: 'mdi:circle'
+            style:
+              '--iron-icon-height': 28px
+              '--iron-icon-width': 28px
+              left: 76.6%
+              top: 87.7%
+            tap_action:
+              action: toggle
+            title: Lamp badkamer plafond
+            type: state-icon
+          - entity: light.onder_het_bed
+            icon: 'mdi:circle'
+            style:
+              '--iron-icon-height': 25px
+              '--iron-icon-width': 25px
+              left: 45%
+              top: 30.5%
+            tap_action:
+              action: toggle
+            title: Lamp onder het bed
+            type: state-icon
+        image: /local/blueprint_2ndfloor.png
+        title: Boven
+        type: picture-elements
+      - card:
+          show_header_toggle: false
+          type: entities
+        entities:
+          - timer.keuken
+          - timer.keuken_cooldown
+          - timer.woonkamer
+          - timer.woonkamer_cooldown
+          - timer.gang
+          - timer.gang_cooldown
+          - timer.toilet
+          - timer.slaapkamer
+          - timer.badkamer
+        state_filter:
+          - active
+        type: entity-filter
+      - entities:
+          - entity: sensor.periode_van_de_dag
+        type: entities
+    icon: 'mdi:floor-plan'
+    path: floorplan
+    title: floorplan
+
+
+  - badges: []
+    cards:
+      - card:
+          title: Aanwezig
+          type: glance
+        entities:
+          - person.maurice
+          - person.esther
+          - person.niek
+        state_filter:
+          - home
+        type: entity-filter
+      - content: >-
+          Maurice
+
+          {%- if state_attr("proximity.maurice", "dir_of_travel") == "arriving"
+          or is_state("person.maurice", "home") %} is thuis{%- else %}
+
+          {%- if state_attr("proximity.maurice", "dir_of_travel") ==
+          "stationary" %} staat stil op{%- endif %}
+
+          {%- if state_attr("proximity.maurice", "dir_of_travel") == "arrived"
+          %} is thuis aangekomen{%- endif %}
+
+          {%- if state_attr("proximity.maurice", "dir_of_travel") == "towards"
+          %} gaat richting huis en is op{%- endif %}
+
+          {%- if state_attr("proximity.maurice", "dir_of_travel") == "away_from"
+          %} gaat weg van huis en is op{%- endif %}
+
+          {%- if state_attr("proximity.maurice", "dir_of_travel") == "unknown"
+          %} is op{%- endif %}
+
+          {%- if state_attr("proximity.maurice", "dir_of_travel") == "not set"
+          %} is kwijt{%- endif %}
+
+          {%- if state_attr("proximity.maurice", "dir_of_travel") in
+          ["stationary", "towards", "away_from", "unknown"] %} {{
+          states("proximity.maurice") }} {{ state_attr("proximity.maurice",
+          "unit_of_measurement") }} afstand{% endif %}
+
+          {%- endif %}
+        title: Waar zit ie?
+        type: markdown
+      - entities:
+          - entity: zone.home
+          - entity: device_tracker.owntracks_maurice
+        type: map
+    icon: 'mdi:map-marker'
+    panel: false
+    path: kaart
+    title: Locatie
+
+
+  - badges: []
+    cards:
+      - entity: weather.thuis
+        name: Het weer
+        type: weather-forecast
+      - entities:
+          - entity: sensor.date
+            name: Datum
+          - type: divider
+          - entity: sensor.dar_voorkant_restafval
+            name: Restafval
+          - entity: sensor.dar_voorkant_gft
+            name: GFT container
+          - entity: sensor.dar_voorkant_papier
+            name: Papier voorkant huis
+          - entity: sensor.dar_zijkant_papier
+            name: Papier zijkant huis
+        show_header_toggle: false
+        title: Afvalkalender
+        type: entities
+    icon: 'mdi:information-outline'
+    path: information
+    title: Info
+
+
+  - badges: []
+    cards:
+      - entities:
+          - label: Woonkamer
+            type: section
+          - entity: light.achter_tv_strip
+          - entity: light.staande_lamp
+          - entity: light.zon
+          - entity: light.kast_boven
+          - entity: light.kast_midden
+          - entity: light.kast_onder
+          - entity: light.droogkap
+          - entity: light.achter_de_koelkast
+          - label: Keuken
+            type: section
+          - entity: light.keukenspot1
+          - entity: light.keukenspot2
+          - entity: light.keukenspot2
+          - entity: light.keukenspot4
+          - entity: light.keukenspot5
+          - entity: light.keukenspot6
+          - label: Overige
+            type: section
+          - entity: light.gang_plafond_dimbaar
+          - entity: light.toilet_plafond
+          - entity: light.badkamer_plafond
+          - entity: light.onder_het_bed
+        type: entities
+    icon: 'mdi:lightbulb'
+    path: lampen
+    title: Lampen
+
+
+  - badges: []
+    cards:
+      - entity: sensor.dimmer_switch_battery_level
+        max: 100
+        min: 0
+        name: Switch keuken
+        severity:
+          green: 10
+          red: 2
+          yellow: 5
+        theme: default
+        type: gauge
+      - entity: sensor.dimmer_switch_woonkamer_battery_level
+        max: 100
+        min: 0
+        name: Switch woonkamer
+        severity:
+          green: 10
+          red: 2
+          yellow: 5
+        theme: default
+        type: gauge
+      - entity: sensor.bewegingssensor_keuken_batterij
+        max: 100
+        min: 0
+        name: Sensor keuken
+        severity:
+          green: 10
+          red: 2
+          yellow: 5
+        theme: default
+        type: gauge
+      - entity: sensor.bewegingssensor_trap_batterij
+        max: 100
+        min: 0
+        name: Sensor trap
+        severity:
+          green: 10
+          red: 2
+          yellow: 5
+        theme: default
+        type: gauge
+      - entity: sensor.bewegingssensor_gang_batterij
+        max: 100
+        min: 0
+        name: Sensor gang
+        severity:
+          green: 10
+          red: 2
+          yellow: 5
+        theme: default
+        type: gauge
+      - entity: sensor.bewegingssensor_slaapkamer_batterij
+        max: 100
+        min: 0
+        name: Sensor slaapkamer
+        severity:
+          green: 10
+          red: 2
+          yellow: 5
+        theme: default
+        type: gauge
+      - entity: sensor.bewegingssensor_woonkamer_batterij
+        max: 100
+        min: 0
+        name: Sensor woonkamer
+        severity:
+          green: 10
+          red: 2
+          yellow: 5
+        theme: default
+        type: gauge
+      - entity: sensor.bewegingssensor_badkamer_battery_level
+        max: 100
+        min: 0
+        name: Sensor badkamer
+        severity:
+          green: 10
+          red: 2
+          yellow: 5
+        theme: default
+        type: gauge
+      - entity: sensor.bewegingssensor_toilet_battery_level
+        max: 100
+        min: 0
+        name: Sensor toilet
+        severity:
+          green: 10
+          red: 2
+          yellow: 5
+        theme: default
+        type: gauge
+      - entity: sensor.letsencrypt_makaay_nl
+        max: 100
+        min: 0
+        name: HOME certificate
+        severity:
+          green: 21
+          red: 7
+          yellow: 14
+        theme: default
+        type: gauge
+      - entity: sensor.letsencrypt_gitaar_net
+        max: 100
+        min: 0
+        name: VPS certificate
+        severity:
+          green: 21
+          red: 7
+          yellow: 14
+        theme: default
+        type: gauge
+    icon: 'mdi:battery-20'
+    path: batterijen
+    title: Batterijen

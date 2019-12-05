@@ -19,6 +19,8 @@ system_health:
 updater:
 #zeroconf:
 
+lovelace:
+  mode: yaml
 
 # The home-assistant server lives behind a proxy.
 http:

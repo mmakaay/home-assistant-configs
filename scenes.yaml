@@ -259,8 +259,6 @@
       - 0.379
     switch.switch_stekker_bij_de_tuindeuren:
       state: 'on'
-    switch.ambilite:
-      state: 'off'
 - id: woonkamer_lampen_uit
   name: Woonkamer lampen uit
   entities:
@@ -384,8 +382,6 @@
       - 0.388
     switch.switch_stekker_bij_de_tuindeuren:
       state: 'on'
-    switch.ambilite:
-      state: 'off'
 - id: woonkamer_automatisch_nacht
   name: Woonkamer (automatisch, nacht)
   entities:
@@ -538,8 +534,6 @@
       - 0.503
       - 0.411
     switch.switch_stekker_bij_de_tuindeuren:
-      state: 'on'
-    switch.ambilite:
       state: 'on'
 - id: toilet_automatisch_nacht
   name: Toilet (automatisch, nacht)

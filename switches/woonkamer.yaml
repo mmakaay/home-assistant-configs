@@ -27,16 +27,13 @@ switches:
         mdi:power
       {% endif %}
     turn_on:
-      service: light.turn_on
+      service: script.turn_on
       data:
-        entity_id: light.woonkamer_groep_ha
+        entity_id: script.zet_woonkamer_licht_aan
     turn_off:
-      - service: light.turn_off
-        data:
-          entity_id: light.woonkamer_groep_ha
-      - service: switch.turn_off
-        data:
-          entity_id: switch.switch_stekker_bij_de_tuindeuren
+      service: script.turn_on
+      data:
+        entity_id: script.zet_woonkamer_licht_uit
 
 
   gui_woonkamer_ambilite:
@@ -67,19 +64,10 @@ switches:
          is_state("switch.switch_for_tv_amp_and_pickup", "on") }}
     icon_template: mdi:power
     turn_on:
-      - service: switch.turn_on
-        data:
-          entity_id: switch.switch_stekker_links_van_de_bank
-      - service: switch.turn_on
-        data:
-          entity_id: switch.switch_for_tv_amp_and_pickup
+      service: script.turn_on
+      data:
+        entity_id: script.zet_woonkamer_stroom_aan
     turn_off:
-      - service: script.turn_on
-        data:
-          entity_id: script.zet_ambilite_uit
-      - service: switch.turn_off
-        data:
-          entity_id: switch.switch_stekker_links_van_de_bank
-      - service: switch.turn_off
-        data:
-          entity_id: switch.switch_for_tv_amp_and_pickup
+      service: script.turn_on
+      data:
+        entity_id: script.zet_woonkamer_stroom_uit
