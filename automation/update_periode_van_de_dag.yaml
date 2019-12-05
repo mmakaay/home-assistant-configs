@@ -1,0 +1,12 @@
+---
+- id: update_periode_van_de_dag
+  alias: "[UPDATE] Update periode_van_de_dag"
+  description: Update de periode_van_de_dag sensorwaarde.
+  trigger:
+    - platform: time_pattern
+      minutes: 0
+    - platform: time_pattern
+      minutes: 30
+  action:
+    - service: homeassistant.update_entity
+      entity_id: sensor.periode_van_de_dag

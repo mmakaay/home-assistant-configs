@@ -1,6 +1,14 @@
 title: Home Mautomation
 views:
+
+  # ==========================================================================
+  # HOME
+  # ==========================================================================
+
   - badges: []
+    icon: 'mdi:home'
+    path: default_view
+    title: Home
     cards:
 
       # ----------------------------------------------------------------------
@@ -109,14 +117,16 @@ views:
       # ----------------------------------------------------------------------
 
       - cards:
-          - content: '### WOONKAMER'
+          - content: WOONKAMER
             theme: separator
             type: markdown
           - cards:
-              - entity: scene.woonkamer_tv_kijken
+              - type: entity-button
+                entity: scene.woonkamer_tv_kijken
                 hold_action:
                   action: more-info
                 icon: 'mdi:eye-outline'
+                icon_height: 30px
                 name: TV Kijken
                 tap_action:
                   action: call-service
@@ -124,11 +134,12 @@ views:
                   service_data:
                     entity_id: scene.woonkamer_tv_kijken
                 theme: light-button
-                type: entity-button
-              - entity: scene.woonkamer_klaprozen
+              - type: entity-button
+                entity: scene.woonkamer_klaprozen
                 hold_action:
                   action: more-info
                 icon: 'mdi:flower'
+                icon_height: 30px
                 name: Klaprozen
                 tap_action:
                   action: call-service
@@ -136,11 +147,12 @@ views:
                   service_data:
                     entity_id: scene.woonkamer_klaprozen
                 theme: light-button
-                type: entity-button
-              - entity: scene.woonkamer_feet_up
+              - type: entity-button
+                entity: scene.woonkamer_feet_up
                 hold_action:
                   action: more-info
                 icon: 'mdi:foot-print'
+                icon_height: 30px
                 name: Feet up
                 tap_action:
                   action: call-service
@@ -148,43 +160,54 @@ views:
                   service_data:
                     entity_id: scene.woonkamer_feet_up
                 theme: light-button
-                type: entity-button
-              - entity: switch.gui_woonkamer_licht
+              - type: entity-button
+                entity: switch.gui_woonkamer_licht
+                icon_height: 30px
                 tap_action:
                   action: toggle
                 theme: light-button
-                type: entity-button
             type: horizontal-stack
           - cards:
-              - entity: switch.gui_woonkamer_ambilite
+              - type: entity-button
+                entity: switch.gui_woonkamer_ambilite
+                icon_height: 30px
                 tap_action:
                   action: toggle
-                type: entity-button
-              - entity: switch.gui_televisie_stroom
+                theme: other-button
+              - type: entity-button
+                entity: switch.gui_televisie_stroom
+                icon_height: 30px
                 tap_action:
                   action: toggle
-                type: entity-button
-              - entity: switch.gui_bank_links_stroom
+                theme: other-button
+              - type: entity-button
+                entity: switch.gui_bank_links_stroom
+                icon_height: 30px
                 tap_action:
                   action: toggle
-                type: entity-button
-              - entity: switch.gui_woonkamer_stroom
+                theme: other-button
+              - type: entity-button
+                entity: switch.gui_woonkamer_stroom
+                icon_height: 30px
                 tap_action:
                   action: toggle
-                type: entity-button
+                theme: other-button
             type: horizontal-stack
-          - entities:
-              - entity: media_player.ps4
-                name: Playstation4
-              - entity: media_player.sony_bravia_tv
-            show_header_toggle: false
-            type: entities
-          - content: '### KEUKEN'
+          # Not that useful currentely.
+          #- entities:
+          #    - entity: media_player.ps4
+          #      name: Playstation4
+          #    - entity: media_player.sony_bravia_tv
+          #  show_header_toggle: false
+          #  type: entities
+          - content: KEUKEN
             theme: separator
             type: markdown
           - cards:
-              - entity: scene.keuken_koken
+              - type: entity-button
+                entity: scene.keuken_koken
                 icon: 'mdi:chef-hat'
+                icon_height: 30px
                 name: Koken
                 tap_action:
                   action: call-service
@@ -192,9 +215,10 @@ views:
                   service_data:
                     entity_id: scene.keuken_koken
                 theme: light-button
-                type: entity-button
-              - entity: scene.keuken_gedimd
+              - type: entity-button
+                entity: scene.keuken_gedimd
                 icon: 'mdi:weather-sunny'
+                icon_height: 30px
                 name: Gedimd
                 tap_action:
                   action: call-service
@@ -202,9 +226,10 @@ views:
                   service_data:
                     entity_id: scene.keuken_gedimd
                 theme: light-button
-                type: entity-button
-              - entity: scene.keuken_automatisch_nacht
+              - type: entity-button
+                entity: scene.keuken_automatisch_nacht
                 icon: 'mdi:weather-night'
+                icon_height: 30px
                 name: Nachtlicht
                 tap_action:
                   action: call-service
@@ -212,34 +237,48 @@ views:
                   service_data:
                     entity_id: scene.keuken_automatisch_nacht
                 theme: light-button
-                type: entity-button
-              - entity: switch.gui_keuken_licht
+              - type: entity-button
+                entity: switch.gui_keuken_licht
+                icon_height: 30px
                 tap_action:
                   action: toggle
                 theme: light-button
-                type: entity-button
             type: horizontal-stack
-          - content: '### OVERIGE'
+          - content: OVERIGE
             theme: separator
             type: markdown
           - cards:
-              - entity: switch.gui_gang_licht
+              - type: entity-button
+                entity: switch.gui_gang_licht
+                icon_height: 30px
                 tap_action:
                   action: toggle
                 theme: light-button
-                type: entity-button
-              - entity: switch.gui_toilet_licht
+              - type: entity-button
+                entity: switch.gui_toilet_licht
+                icon_height: 30px
                 tap_action:
                   action: toggle
                 theme: light-button
-                type: entity-button
-              - entity: switch.gui_badkamer_licht
+              - type: entity-button
+                entity: switch.gui_badkamer_licht
+                icon_height: 30px
                 tap_action:
                   action: toggle
                 theme: light-button
-                type: entity-button
+              - type: entity-button
+                entity: switch.gui_slaapkamer_licht
+                icon_height: 30px
+                tap_action:
+                  action: toggle
+                theme: light-button
             type: horizontal-stack
         type: vertical-stack
+
+      # ----------------------------------------------------------------------
+      # Version update notifier
+      # ----------------------------------------------------------------------
+
       - card:
           content: >
             Nieuwe versie: {{ state_attr("binary_sensor.updater",
@@ -253,13 +292,21 @@ views:
           - entity: binary_sensor.updater
             state: 'on'
         type: conditional
-    icon: 'mdi:home'
-    path: default_view
-    title: Home
 
+  # ==========================================================================
+  # FLOORPLAN
+  # ==========================================================================
 
   - badges: []
+    icon: 'mdi:floor-plan'
+    path: floorplan
+    title: floorplan
     cards:
+
+      # ----------------------------------------------------------------------
+      # Downstairs
+      # ----------------------------------------------------------------------
+
       - elements:
           - entity: switch.switch_stekker_links_van_de_bank
             style:
@@ -719,6 +766,11 @@ views:
         image: /local/blueprint_1stfloor.png
         title: Beneden
         type: picture-elements
+
+      # ----------------------------------------------------------------------
+      # Upstairs
+      # ----------------------------------------------------------------------
+
       - elements:
           - conditions:
               - entity: binary_sensor.trap_beweging
@@ -805,6 +857,11 @@ views:
         image: /local/blueprint_2ndfloor.png
         title: Boven
         type: picture-elements
+
+      # ----------------------------------------------------------------------
+      # Automatic light timer overview
+      # ----------------------------------------------------------------------
+
       - card:
           show_header_toggle: false
           type: entities
@@ -821,16 +878,30 @@ views:
         state_filter:
           - active
         type: entity-filter
+
+      # ----------------------------------------------------------------------
+      # Display my custom time of day sensor
+      # ----------------------------------------------------------------------
+
       - entities:
           - entity: sensor.periode_van_de_dag
         type: entities
-    icon: 'mdi:floor-plan'
-    path: floorplan
-    title: floorplan
 
+  # ==========================================================================
+  # LOCATION / PRESENCE
+  # ==========================================================================
 
   - badges: []
+    icon: 'mdi:map-marker'
+    panel: false
+    path: kaart
+    title: Locatie
     cards:
+
+      # ----------------------------------------------------------------------
+      # Person presence
+      # ----------------------------------------------------------------------
+
       - card:
           title: Aanwezig
           type: glance
@@ -841,6 +912,11 @@ views:
         state_filter:
           - home
         type: entity-filter
+
+      # ----------------------------------------------------------------------
+      # Where is Maurice?
+      # ----------------------------------------------------------------------
+
       - content: >-
           Maurice
 
@@ -873,17 +949,24 @@ views:
           {%- endif %}
         title: Waar zit ie?
         type: markdown
+
+      # ----------------------------------------------------------------------
+      # Map
+      # ----------------------------------------------------------------------
+
       - entities:
           - entity: zone.home
           - entity: device_tracker.owntracks_maurice
         type: map
-    icon: 'mdi:map-marker'
-    panel: false
-    path: kaart
-    title: Locatie
 
+  # ==========================================================================
+  # INFORMATION (WEATHER / GARBAGE DISPOSAL)
+  # ==========================================================================
 
   - badges: []
+    icon: 'mdi:information-outline'
+    path: information
+    title: Info
     cards:
       - entity: weather.thuis
         name: Het weer
@@ -903,12 +986,15 @@ views:
         show_header_toggle: false
         title: Afvalkalender
         type: entities
-    icon: 'mdi:information-outline'
-    path: information
-    title: Info
 
+  # ==========================================================================
+  # ALL LIGHTS
+  # ==========================================================================
 
   - badges: []
+    icon: 'mdi:lightbulb'
+    path: lampen
+    title: Lampen
     cards:
       - entities:
           - label: Woonkamer
@@ -937,12 +1023,15 @@ views:
           - entity: light.badkamer_plafond
           - entity: light.onder_het_bed
         type: entities
-    icon: 'mdi:lightbulb'
-    path: lampen
-    title: Lampen
 
+  # ==========================================================================
+  # BATTERY STATUSES
+  # ==========================================================================
 
   - badges: []
+    icon: 'mdi:battery-20'
+    path: batterijen
+    title: Batterijen
     cards:
       - entity: sensor.dimmer_switch_battery_level
         max: 100
@@ -1054,6 +1143,3 @@ views:
           yellow: 14
         theme: default
         type: gauge
-    icon: 'mdi:battery-20'
-    path: batterijen
-    title: Batterijen

@@ -1,15 +1,11 @@
-maurice:
-  primary-color: '#264d73'
-  text-primary-color: '#f0f0f0'
-
 separator:
-  paper-card-background-color: "#eeeeee"
-  primary-text-color: "#111111"
+  paper-card-background-color: "#03a9f4"
+  primary-text-color: "#ffffff"
 
 light-button:
-  paper-card-background-color: "#ffffee"
+  paper-card-background-color: "#efffff"
   primary-text-color: "#264d73"
 
 other-button:
-  paper-card-background-color: "#f0f0f0"
+  paper-card-background-color: "#f6f6f6"
   primary-text-color: "#264d73"

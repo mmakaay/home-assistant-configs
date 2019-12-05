@@ -36,3 +36,6 @@ install_fold:
 	cd repos && git clone https://github.com/thomasloven/lovelace-fold-entity-row
 	/bin/rm -fR www/fold-entity-row.js
 	cd www && cp ../repos/lovelace-fold-entity-row/fold-entity-row.js .
+
+lovelace-dump:
+	jq .data.config .storage/lovelace | python -c 'import sys, yaml, json; yaml.safe_dump(json.load(sys.stdin), sys.stdout, default_flow_style=False)' > lovelace-dump.yaml
