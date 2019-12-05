@@ -1,0 +1,68 @@
+---
+zet_woonkamer_stroom_aan:
+  alias: Zet woonkamer stroom aan 
+  sequence:
+    - service: script.turn_on
+      data:
+        entity_id: script.zet_televisie_stroom_aan
+    - service: script.turn_on
+      data:
+        entity_id: script.zet_bank_links_stroom_aan
+
+
+zet_woonkamer_stroom_uit:
+  alias: Zet woonkamer stroom uit 
+  sequence:
+    - service: script.turn_on
+      data:
+        entity_id: script.zet_televisie_stroom_uit
+    - service: script.turn_on
+      data:
+        entity_id: script.zet_bank_links_stroom_uit
+    - service: script.turn_on
+      data:
+        entity_id: script.zet_ambilite_uit
+
+
+zet_televisie_stroom_aan:
+  alias: Zet televisie stroom aan
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.switch_for_tv_amp_and_pickup
+    - service: homeassistant.update_entity
+      data:
+        entity_id: switch.switch_for_tv_amp_and_pickup
+
+
+zet_televisie_stroom_uit:
+  alias: Zet televisie stroom uit
+  sequence:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.switch_for_tv_amp_and_pickup
+    - service: homeassistant.update_entity
+      data:
+        entity_id: switch.switch_for_tv_amp_and_pickup
+
+
+zet_bank_links_stroom_aan:
+  alias: Zet bank_links stroom aan
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.switch_stekker_links_van_de_bank
+    - service: homeassistant.update_entity
+      data:
+        entity_id: switch.switch_stekker_links_van_de_bank
+
+
+zet_bank_links_stroom_uit:
+  alias: Zet bank_links stroom uit
+  sequence:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.switch_stekker_links_van_de_bank
+    - service: homeassistant.update_entity
+      data:
+        entity_id: switch.switch_stekker_links_van_de_bank

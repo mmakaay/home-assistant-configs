@@ -43,28 +43,3 @@ zet_woonkamer_licht_uit:
     - service: light.turn_off
       data:
         entity_id: light.staande_lamp
-
-
-zet_woonkamer_stroom_aan:
-  alias: Zet woonkamer stroom aan 
-  sequence:
-    - service: switch.turn_on
-      data:
-        entity_id: switch.switch_stekker_links_van_de_bank
-    - service: switch.turn_on
-      data:
-        entity_id: switch.switch_for_tv_amp_and_pickup
-
-
-zet_woonkamer_stroom_uit:
-  alias: Zet woonkamer stroom uit 
-  sequence:
-    - service: switch.turn_off
-      data:
-        entity_id: switch.switch_stekker_links_van_de_bank
-    - service: switch.turn_off
-      data:
-        entity_id: switch.switch_for_tv_amp_and_pickup
-    - service: script.turn_on
-      data:
-        entity_id: script.zet_ambilite_uit

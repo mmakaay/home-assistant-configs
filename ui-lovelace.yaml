@@ -2,6 +2,11 @@ title: Home Mautomation
 views:
   - badges: []
     cards:
+
+      # ----------------------------------------------------------------------
+      # DAR waste disposal information.
+      # ----------------------------------------------------------------------
+
       - cards:
           - card:
               entities:
@@ -52,6 +57,11 @@ views:
                 state_not: unknown
             type: conditional
         type: vertical-stack
+
+      # ----------------------------------------------------------------------
+      # Blackout button
+      # ----------------------------------------------------------------------
+
       - cards:
           - card:
               entity: script.trigger_blackout_event
@@ -93,6 +103,11 @@ views:
                 state: 'on'
             type: conditional
         type: vertical-stack
+
+      # ----------------------------------------------------------------------
+      # Light and power buttons
+      # ----------------------------------------------------------------------
+
       - cards:
           - content: '### WOONKAMER'
             theme: separator
@@ -145,17 +160,11 @@ views:
                 tap_action:
                   action: toggle
                 type: entity-button
-              - entity: switch.switch_for_tv_amp_and_pickup
-                hold_action:
-                  action: more-info
-                name: Televisie
+              - entity: switch.gui_televisie_stroom
                 tap_action:
                   action: toggle
                 type: entity-button
-              - entity: switch.switch_stekker_links_van_de_bank
-                hold_action:
-                  action: more-info
-                name: Bank links
+              - entity: switch.gui_bank_links_stroom
                 tap_action:
                   action: toggle
                 type: entity-button
