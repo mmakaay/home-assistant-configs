@@ -1,0 +1,4 @@
+platform: group
+name: Toilet groep HA
+entities:
+  - light.toilet_plafond

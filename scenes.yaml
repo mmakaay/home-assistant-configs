@@ -1,29 +1,55 @@
-- id: badkamer_night_time
-  name: Badkamer night time
+- id: badkamer_automatisch_nacht
+  name: Badkamer (automatisch, nacht)
+  entities:
+    light.badkamer_plafond:
+      brightness: 50
+      color_temp: 440
+      state: 'on'
+- id: badkamer_automatisch_ochtend
+  name: Badkamer (automatisch, ochtend)
   entities:
     light.badkamer_plafond:
       brightness: 60
       color_temp: 423
       state: 'on'
-- id: badkamer_day_time
-  name: Badkamer day time
+- id: badkamer_automatisch_dag
+  name: Badkamer (automatisch, dag)
   entities:
     light.badkamer_plafond:
       brightness: 94
       color_temp: 359
       state: 'on'
-- id: gang_night_time
-  name: Gang night time
+- id: badkamer_automatisch_avond
+  name: Badkamer (automatisch, avond)
+  entities:
+    light.badkamer_plafond:
+      brightness: 60
+      color_temp: 423
+      state: 'on'
+- id: gang_automatisch_nacht
+  name: Gang (automatisch, nacht)
   entities:
     light.gang_plafond_dimbaar:
       state: 'on'
       brightness: 40
-- id: gang_day_time
-  name: Gang day time
+- id: gang_automatisch_ochtend
+  name: Gang (automatisch, ochtend)
+  entities:
+    light.gang_plafond_dimbaar:
+      state: 'on'
+      brightness: 40
+- id: gang_automatisch_dag
+  name: Gang (automatisch, dag)
   entities:
     light.gang_plafond_dimbaar:
       state: 'on'
       brightness: 60
+- id: gang_automatisch_avond
+  name: Gang (automatisch, avond)
+  entities:
+    light.gang_plafond_dimbaar:
+      state: 'on'
+      brightness: 40
 - id: keuken_gedimd
   name: Keuken gedimd
   entities:
@@ -78,8 +104,8 @@
       brightness: 100
       color_temp: 327
       state: 'on'
-- id: keuken_night_time
-  name: Keuken night time
+- id: keuken_automatisch_nacht
+  name: Keuken (automatisch, nacht)
   entities:
     light.keukenspot1:
       brightness: 5
@@ -99,8 +125,62 @@
       state: 'off'
     light.keukenspot6:
       state: 'off'
-- id: keuken_day_time
-  name: Keuken day time
+- id: keuken_automatisch_ochtend
+  name: Keuken (automatisch, ochtend)
+  entities:
+    light.keukenspot1:
+      brightness: 5
+      color_temp: 367
+      state: 'on'
+    light.keukenspot2:
+      brightness: 5
+      color_temp: 367
+      state: 'on'
+    light.keukenspot3:
+      brightness: 5
+      color_temp: 367
+      state: 'on'
+    light.keukenspot4:
+      brightness: 5
+      color_temp: 367
+      state: 'on'
+    light.keukenspot5:
+      brightness: 5
+      color_temp: 367
+      state: 'on'
+    light.keukenspot6:
+      brightness: 5
+      color_temp: 367
+      state: 'on'
+- id: keuken_automatisch_dag
+  name: Keuken (automatisch, dag)
+  entities:
+    light.keukenspot1:
+      brightness: 10
+      color_temp: 331
+      state: 'on'
+    light.keukenspot2:
+      brightness: 10
+      color_temp: 331
+      state: 'on'
+    light.keukenspot3:
+      brightness: 10
+      color_temp: 331
+      state: 'on'
+    light.keukenspot4:
+      brightness: 10
+      color_temp: 331
+      state: 'on'
+    light.keukenspot5:
+      brightness: 10
+      color_temp: 331
+      state: 'on'
+    light.keukenspot6:
+      brightness: 10
+      color_temp: 331
+      state: 'on'
+- id: keuken_automatisch_avond
+  name: Keuken (automatisch, avond)
   entities:
     light.keukenspot1:
       brightness: 10
@@ -201,15 +281,6 @@
     light.zon:
       state: 'off'
     switch.switch_stekker_bij_de_tuindeuren:
-      state: 'off'
-- id: woonkamer_stroom_uit
-  name: Woonkamer stroom uit
-  entities:
-    switch.switch_for_tv_amp_and_pickup:
-      state: 'off'
-    switch.switch_stekker_links_van_de_bank:
-      state: 'off'
-    switch.ambilite:
       state: 'off'
 - id: woonkamer_gaming
   name: Woonkamer gaming
@@ -315,8 +386,8 @@
       state: 'on'
     switch.ambilite:
       state: 'off'
-- id: woonkamer_day_time
-  name: Woonkamer day time
+- id: woonkamer_automatisch_nacht
+  name: Woonkamer (automatisch, nacht)
   entities:
     light.droogkap:
       state: 'on'
@@ -340,8 +411,58 @@
       state: 'off'
     light.zon:
       state: 'off'
-- id: woonkamer_night_time
-  name: Woonkamer night time
+- id: woonkamer_automatisch_ochtend
+  name: Woonkamer (automatisch, ochtend)
+  entities:
+    light.droogkap:
+      state: 'on'
+      brightness: 100
+      color_temp: 396
+    light.staande_lamp:
+      state: 'on'
+      brightness: 100
+      color_temp: 396
+    light.achter_de_koelkast:
+      state: 'off'
+    light.achter_tv_strip:
+      state: 'off'
+    light.kast_boven:
+      state: 'off'
+    light.kast_midden:
+      brightness: 123
+      color_temp: 438
+      state: 'on'
+    light.kast_onder:
+      state: 'off'
+    light.zon:
+      state: 'off'
+- id: woonkamer_automatisch_dag
+  name: Woonkamer (automatisch, dag)
+  entities:
+    light.droogkap:
+      state: 'on'
+      brightness: 100
+      color_temp: 396
+    light.staande_lamp:
+      state: 'on'
+      brightness: 100
+      color_temp: 396
+    light.achter_de_koelkast:
+      state: 'off'
+    light.achter_tv_strip:
+      state: 'off'
+    light.kast_boven:
+      state: 'off'
+    light.kast_midden:
+      brightness: 123
+      color_temp: 438
+      state: 'on'
+    light.kast_onder:
+      state: 'off'
+    light.zon:
+      state: 'off'
+- id: woonkamer_automatisch_avond
+  name: Woonkamer (automatisch, avond)
   entities:
     light.droogkap:
       state: 'on'
@@ -420,15 +541,29 @@
       state: 'on'
     switch.ambilite:
       state: 'on'
-- id: toilet_night_time
-  name: Toilet night time
+- id: toilet_automatisch_nacht
+  name: Toilet (automatisch, nacht)
   entities:
     light.toilet_plafond:
       brightness: 38
       color_temp: 380
       state: 'on'
-- id: toilet_day_time
-  name: Toilet day time
+- id: toilet_automatisch_ochtend
+  name: Toilet (automatisch, ochtend)
+  entities:
+    light.toilet_plafond:
+      brightness: 38
+      color_temp: 380
+      state: 'on'
+- id: toilet_automatisch_dag
+  name: Toilet (automatisch, dag)
+  entities:
+    light.toilet_plafond:
+      brightness: 106
+      color_temp: 393
+      state: 'on'
+- id: toilet_automatisch_avond
+  name: Toilet (automatisch, avond)
   entities:
     light.toilet_plafond:
       brightness: 106

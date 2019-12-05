@@ -1,5 +1,0 @@
----
-platform: tod
-name: Day time
-after: '09:00'
-before: '22:00'

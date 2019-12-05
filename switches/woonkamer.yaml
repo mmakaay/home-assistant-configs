@@ -1,0 +1,85 @@
+---
+platform: template
+switches:
+  gui_woonkamer_licht:
+    friendly_name: Lampen
+    # Because the ambilite feature uses lights from the living room,
+    # those lights are excluded from the decision "are there any
+    # lights on" in case the ambilite feature is enabled.
+    value_template: >-
+      {{ is_state("light.achter_de_koelkast", "on") or
+         is_state("light.droogkap", "on") or
+         is_state("light.kast_boven", "on") or
+         is_state("light.kast_midden", "on") or
+         is_state("light.kast_onder", "on") or
+         is_state("light.zon", "on") or
+         is_state("switch.switch_stekker_bij_de_tuindeuren", "on") or
+         (is_state("switch.ambilite", "off") and (
+           is_state("light.achter_tv_strip", "on") or
+           is_state("light.staande_lamp", "on")
+         )) }}
+    icon_template: >-
+      {% if is_state("timer.woonkamer", "active") %}
+        mdi:timer 
+      {% elif is_state("timer.woonkamer_cooldown", "active") %}
+        mdi:snowflake 
+      {% else %}
+        mdi:power
+      {% endif %}
+    turn_on:
+      service: light.turn_on
+      data:
+        entity_id: light.woonkamer_groep_ha
+    turn_off:
+      - service: light.turn_off
+        data:
+          entity_id: light.woonkamer_groep_ha
+      - service: switch.turn_off
+        data:
+          entity_id: switch.switch_stekker_bij_de_tuindeuren
+
+
+  gui_woonkamer_ambilite:
+    friendly_name: Ambilite
+    value_template: >-
+      {{ is_state("switch.ambilite", "on") }}
+    icon_template: >-
+      {% if is_state("switch.ambilite", "on") %}
+        mdi:shape-rectangle-plus 
+      {% else %}
+        mdi:rectangle-outline 
+      {% endif %}
+    turn_on:
+      service: script.turn_on
+      data:
+        entity_id: script.zet_ambilite_aan
+    turn_off:
+      service: script.turn_on
+      data:
+        entity_id: script.zet_ambilite_uit
+
+
+  gui_woonkamer_stroom:
+    friendly_name: Stroom
+    value_template: >-
+      {{ is_state("switch.ambilite", "on") or
+         is_state("switch.switch_stekker_links_van_de_bank", "on") or 
+         is_state("switch.switch_for_tv_amp_and_pickup", "on") }}
+    icon_template: mdi:power
+    turn_on:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.switch_stekker_links_van_de_bank
+      - service: switch.turn_on
+        data:
+          entity_id: switch.switch_for_tv_amp_and_pickup
+    turn_off:
+      - service: script.turn_on
+        data:
+          entity_id: script.zet_ambilite_uit
+      - service: switch.turn_off
+        data:
+          entity_id: switch.switch_stekker_links_van_de_bank
+      - service: switch.turn_off
+        data:
+          entity_id: switch.switch_for_tv_amp_and_pickup

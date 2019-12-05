@@ -17,11 +17,7 @@
     - service: scene.turn_on
       data_template:
         entity_id: >
-          {% if is_state("binary_sensor.day_time", "on") %}
-            scene.badkamer_day_time
-          {% else %}
-            scene.badkamer_night_time
-          {% endif %}
+          scene.badkamer_automatisch_{{ states('sensor.periode_van_de_dag') }}
     # cancel/start, because of this bug:
     # https://github.com/home-assistant/home-assistant/issues/12013
     - service: timer.cancel
@@ -31,10 +27,11 @@
       data_template:
         entity_id: timer.badkamer
         duration: >
-          {% if is_state("binary_sensor.day_time", "on") %}
-            00:05:00
-          {% else %}
+          {% if is_state("sensor.periode_van_de_dag", "avond") or
+                is_state("sensor.periode_van_de_dag", "nacht") %}
             00:02:00
+          {% else %}
+            00:05:00
           {% endif %}
 
 - id: badkamer_lamp_B

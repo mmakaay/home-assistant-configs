@@ -1,8 +1,15 @@
 maurice:
-  # Header
-  primary-color: '#567'
-  text-primary-color: '#DADADB'
+  primary-color: '#264d73'
+  text-primary-color: '#f0f0f0'
 
 separator:
+  paper-card-background-color: "#eeeeee"
+  primary-text-color: "#111111"
+
+light-button:
+  paper-card-background-color: "#ffffee"
+  primary-text-color: "#264d73"
+
+other-button:
   paper-card-background-color: "#f0f0f0"
-  primary-text-color: "#44739e"
+  primary-text-color: "#264d73"

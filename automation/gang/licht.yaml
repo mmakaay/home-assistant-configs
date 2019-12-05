@@ -25,11 +25,7 @@
     - service: scene.turn_on
       data_template:
         entity_id: >
-          {% if is_state("binary_sensor.day_time", "on") %}
-            scene.gang_day_time
-          {% else %}
-            scene.gang_night_time
-          {% endif %}
+          scene.gang_automatisch_{{ states('sensor.periode_van_de_dag') }}
     - delay: 4
     - service: timer.start
       data:

@@ -13,9 +13,3 @@ person.niek:
   entity_picture: /local/avatar.niek.jpg
 media_player.sony_bravia_tv:
   icon: mdi:television
-binary_sensor.day_time:
-  friendly_name: Automatische verlichting in dagmodus
-  icon: mdi:weather-sunny
-binary_sensor.night_time:
-  friendly_name: Automatische verlichting in nachtmodus
-  icon: mdi:weather-night

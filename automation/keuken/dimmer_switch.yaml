@@ -47,7 +47,7 @@
 
 
 - id: keuken_dimmer_down
-  alias: "[KEUKEN DIMMER] 'dim down' activeert scene 'Nachtlamp'"
+  alias: "[KEUKEN DIMMER] 'dim down' activeert de nacht-scene"
   trigger:
   - device_id: 4cb86a7dab7443f6acaff513255374b4
     domain: deconz
@@ -57,5 +57,5 @@
   condition: []
   action:
   - data:
-      entity_id: scene.keuken_night_time
+      entity_id: scene.keuken_nacht
     service: scene.turn_on

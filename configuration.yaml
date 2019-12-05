@@ -1,4 +1,24 @@
-default_config:
+# These are from default_config, with the ones that I don't need
+# commented out. It would be nice if the default_config: could have
+# an exclude list, to stay in sync with the distributed defaults,
+# but currently this is not possible.(I have seen talk about it as
+# an implementation idea though.
+#automation:
+#cloud:
+config:
+#frontend:
+#history:
+logbook:
+#map:
+#mobile_app:
+person:
+#script:
+#ssdp:
+#sun:
+system_health:
+updater:
+#zeroconf:
+
 
 # The home-assistant server lives behind a proxy.
 http:
@@ -108,12 +128,10 @@ prometheus:
       - sensor.sim_1
       - sensor.ssid
       - sensor.geocoded_location
+      - sensor.periode_van_de_dag
       - binary_sensor.woonkamer_lights_active
       - binary_sensor.woonkamer_power_active
       - binary_sensor.keuken_lights_active
-      - binary_sensor.day_time
-      - binary_sensor.night_time
-      
 
 frontend:
   themes: !include themes.yaml

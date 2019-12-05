@@ -1,0 +1,31 @@
+---
+platform: template
+sensors:
+  periode_van_de_dag:
+    friendly_name: Periode van de dag  
+    value_template: >-
+      {% set h = now().hour %}
+      {% if h < 6 %}
+        nacht
+      {% elif h < 10 %}
+        ochtend
+      {% elif h < 18 %}
+        dag
+      {% elif h < 22 %}
+        avond
+      {% else %}
+        nacht
+      {% endif %}
+    icon_template: >-
+      {% set h = now().hour %}
+      {% if h < 6 %}
+        mdi:weather-night
+      {% elif h < 10 %}
+        mdi:alarm
+      {% elif h < 18 %}
+        mdi:weather-sunny
+      {% elif h < 22 %}
+        mdi:weather-sunset  
+      {% else %}
+        mdi:weather-night
+      {% endif %}
