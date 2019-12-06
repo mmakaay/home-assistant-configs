@@ -44,16 +44,16 @@ switches:
       {% if is_state("switch.ambilite", "on") %}
         mdi:shape-rectangle-plus 
       {% else %}
-        mdi:rectangle-outline 
+        mdi:rectangle-outline
       {% endif %}
     turn_on:
-      service: script.turn_on
+      service: switch.turn_on
       data:
-        entity_id: script.zet_ambilite_aan
+        entity_id: switch.ambilite
     turn_off:
-      service: script.turn_on
+      service: switch.turn_off
       data:
-        entity_id: script.zet_ambilite_uit
+        entity_id: switch.ambilite
 
 
   gui_woonkamer_stroom:
@@ -74,10 +74,10 @@ switches:
 
 
   gui_televisie_stroom:
-    friendly_name: Televisie
+    friendly_name: TV/Amp
     value_template: >-
       {{ is_state("switch.switch_for_tv_amp_and_pickup", "on") }}
-    icon_template: mdi:power
+    icon_template: mdi:flash
     turn_on:
       service: script.turn_on
       data:
@@ -92,7 +92,7 @@ switches:
     friendly_name: Bank links
     value_template: >-
       {{ is_state("switch.switch_stekker_links_van_de_bank", "on") }}
-    icon_template: mdi:power
+    icon_template: mdi:flash
     turn_on:
       service: script.turn_on
       data:

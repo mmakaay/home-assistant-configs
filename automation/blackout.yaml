@@ -1,46 +1,79 @@
 ---
-- id: blackout_lampen_uit
-  alias: "[BLACKOUT EVENT] Lampen uit"
-  description: Reageert op een 'blackout' event door de lampen uit te doen.
-  trigger:
-  - event_data: {}
-    event_type: blackout
-    platform: event
-  condition: []
-  action:
-  - data:
-      entity_id: light.keuken_groep_deconz
-    service: light.turn_off
-  - data:
-      entity_id: light.woonkamer_groep_deconz
-    service: light.turn_off
-
-
-- id: blackout_enable_motion_cooldown
-  alias: "[BLACKOUT EVENT] nachtlamp cooldown aanzetten"
-  description: >
-    Reageert op een 'blackout' event door de nachtlamp cooldown te activeren
-  trigger:
-    - event_data: {}
-      event_type: blackout
-      platform: event
-  condition: []
-  action:
-    - service: timer.start
-      data:
-        entity_id: timer.keuken_cooldown
-    - service: timer.start
-      data:
-        entity_id: timer.woonkamer_cooldown
-
-
-- id: blackout_ps4_uit
-  alias: "[BLACKOUT EVENT] Playstation 4 uit"
-  description: >
-    Reageert op een 'blackout' event door de playstation uit te zetten.
+- id: blackout_licht_keuken_uit
+  alias: "[BLACKOUT] Licht keuken uit"
   trigger:
     - platform: event
-      event_data: {}
+      event_type: blackout
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.keuken_groep_deconz
+ 
+- id: blackout_licht_woonkamer_uit
+  alias: "[BLACKOUT] Licht woonkamer uit"
+  trigger:
+    - platform: event
+      event_type: blackout
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.woonkamer_groep_deconz
+
+- id: blackout_licht_gang_uit
+  alias: "[BLACKOUT] Licht gang uit"
+  trigger:
+    - platform: event
+      event_type: blackout
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.gang_groep_deconz
+    # Stop the cooldown timer, so movement will trigger the light in the
+    # hallway to go on. If we triggered a blackout from within the living
+    # room, we want the hallway light to work when going to bed for example.
+    - wait_template: "{{ is_state('light.gang_groep_ha', 'off') }}"
+      timeout: 5      
+      continue_on_timeout: 'false'
+    - service: timer.cancel
+      data:
+        entity_id: timer.gang_cooldown
+
+- id: blackout_licht_toilet_uit
+  alias: "[BLACKOUT] Licht toilet uit"
+  trigger:
+    - platform: event
+      event_type: blackout
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.toilet_groep_deconz
+
+- id: blackout_licht_badkamer_uit
+  alias: "[BLACKOUT] Licht badkamer uit"
+  trigger:
+    - platform: event
+      event_type: blackout
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.badkamer_groep_deconz
+
+- id: blackout_licht_slaapkamer_uit
+  alias: "[BLACKOUT] Licht slaapkamer uit"
+  trigger:
+    - platform: event
+      event_type: blackout
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.slaapkamer_groep_deconz
+
+- id: blackout_ps4_uit
+  alias: "[BLACKOUT] Playstation4 uit"
+  description: >
+    Reageert op een 'blackout' event door de Playstation4 uit te zetten.
+  trigger:
+    - platform: event
       event_type: blackout
   condition: []
   action:
@@ -48,63 +81,17 @@
       data:
         entity_id: media_player.ps4
 
-
-- id: blackout_ambilite_uit
-  alias: "[BLACKOUT EVENT] Ambilite uit"
+- id: blackout_woonkamer_stroom_uit
+  alias: "[BLACKOUT] woonkamer stroom uit"
   description: >
-    Reageert op een 'blackout' event door de ambilite uit te zetten.
+    Reageert op een 'blackout' event door stroom uit te zetten in de woonkamer.
+    Het script dat hiervoor wordt gestart zet ook de ambilite feature uit, aangezien
+    die geen nut meer heeft zodra de stroom van de tv af is.
   trigger:
     - platform: event
-      event_data: {}
       event_type: blackout
-  condition: []
-  action:
-    - service: switch.turn_off
-      data:
-        entity_id: switch.ambilite
-
-
-- id: blackout_stroom_uit
-  alias: "[BLACKOUT EVENT] stroom uit"
-  description: Reageert op een 'blackout' event door stekkerblokken uit te zetten
-  trigger:
-    - platform: event
-      event_data: {}
-      event_type: blackout
-  condition: []
-  action:
-    - service: switch.turn_off
-      data:
-        entity_id: switch.switch_for_tv_amp_and_pickup
-    - service: homeassistant.update_entity
-      data:
-        entity_id: switch.switch_for_tv_amp_and_pickup
-    - service: switch.turn_off
-      data:
-        entity_id: switch.switch_stekker_links_van_de_bank
-    - service: switch.turn_off
-      data:
-        entity_id: switch.switch_stekker_bij_de_tuindeuren
-
-
-- id: start_blackout_from_dimmer
-  alias: "[BLACKOUT EVENT] trigger met 'off' lang ingedrukt op dimmers"
-  description: >
-    Wanneer de uit-knop van de dimmer in de woonkamer of keuken lang wordt
-    ingedrukt, dan wordt een blackout event gestuurd om alles uit te zetten.
-  trigger:
-    - device_id: 32d5b64e890f40879159f0c63b7c80fd
-      domain: deconz
-      platform: device
-      subtype: turn_off
-      type: remote_button_long_press
-    - device_id: 4cb86a7dab7443f6acaff513255374b4
-      domain: deconz
-      platform: device
-      subtype: turn_off
-      type: remote_button_long_press
   condition: []
   action:
     - service: script.turn_on
       data:
-        entity_id: script.trigger_blackout_event
+        entity_id: script.zet_woonkamer_stroom_uit

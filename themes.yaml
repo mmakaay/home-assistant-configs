@@ -1,9 +1,9 @@
 separator:
-  paper-card-background-color: "#03a9f4"
+  paper-card-background-color: "#0399e4"
   primary-text-color: "#ffffff"
 
 light-button:
-  paper-card-background-color: "#efffff"
+  paper-card-background-color: "#efefff"
   primary-text-color: "#264d73"
 
 other-button:

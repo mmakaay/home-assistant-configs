@@ -58,3 +58,10 @@ zet_ambilite_uit:
     - service: light.turn_off
       data:
         entity_id: light.staande_lamp
+
+ververs_ambilite_snapshot:
+  sequence:    
+    - service: mqtt.publish
+      data:
+        topic: homeassistant/switch/ambilite/snapshot
+        qos: 0

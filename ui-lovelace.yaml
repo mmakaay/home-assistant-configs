@@ -122,17 +122,17 @@ views:
             type: markdown
           - cards:
               - type: entity-button
-                entity: scene.woonkamer_tv_kijken
+                entity: scene.woonkamer_bingen
                 hold_action:
                   action: more-info
                 icon: 'mdi:eye-outline'
                 icon_height: 30px
-                name: TV Kijken
+                name: Bingen 
                 tap_action:
                   action: call-service
                   service: scene.turn_on
                   service_data:
-                    entity_id: scene.woonkamer_tv_kijken
+                    entity_id: scene.woonkamer_bingen
                 theme: light-button
               - type: entity-button
                 entity: scene.woonkamer_klaprozen

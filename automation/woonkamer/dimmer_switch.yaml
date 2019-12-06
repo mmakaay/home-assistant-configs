@@ -1,6 +1,39 @@
 ---
+- id: woonkamer_dimmer_long_on
+  alias: "[WOONKAMER DIMMER] long 'on' trigger powerup"
+  description: >
+    Wanneer de dimmer "on" knop lang wordt ingedrukt, dan wordt het power
+    up event verstuurd om bijvoorbeeld de stroom op de TV te zetten en de
+    lampen aan te doen als het donker is.
+  trigger:
+    - platform: device
+      device_id: 32d5b64e890f40879159f0c63b7c80fd
+      domain: deconz
+      subtype: turn_on
+      type: remote_button_long_press
+  action:
+    - service: script.turn_on
+      data:
+        entity_id: script.trigger_power_up_event
+
+- id: woonkamer_dimmer_long_off
+  alias: "[WOONKAMER DIMMER] long 'off' triggert blackout"
+  description: >
+    Wanneer de uit-knop van de dimmer lang wordt ingedrukt, dan wordt een
+    blackout event gestuurd om alles uit te zetten.
+  trigger:
+    - device_id: 32d5b64e890f40879159f0c63b7c80fd
+      domain: deconz
+      platform: device
+      subtype: turn_off
+      type: remote_button_long_press
+  action:
+    - service: script.turn_on
+      data:
+        entity_id: script.trigger_blackout_event
+
 - id: woonkamer_dimmer_on
-  alias: "[WOONKAMER DIMMER] 'on' activeert scene 'TV kijken'"
+  alias: "[WOONKAMER DIMMER] 'on' activeert scene 'Bingen'"
   description: ''
   trigger:
   - device_id: 32d5b64e890f40879159f0c63b7c80fd
@@ -11,7 +44,7 @@
   condition: []
   action:
   - data:
-      entity_id: scene.woonkamer_tv_kijken
+      entity_id: scene.woonkamer_bingen
     service: scene.turn_on
 
 

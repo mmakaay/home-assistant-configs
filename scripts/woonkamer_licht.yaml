@@ -4,7 +4,7 @@ zet_woonkamer_licht_aan:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.woonkamer_groep_ha
+        entity_id: light.woonkamer_groep_deconz
 
 
 zet_woonkamer_licht_uit:

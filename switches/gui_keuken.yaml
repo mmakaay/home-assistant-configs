@@ -16,8 +16,8 @@ switches:
     turn_on:
       service: light.turn_on
       data:
-        entity_id: light.keuken_groep_ha
+        entity_id: light.keuken_groep_deconz
     turn_off:
       service: light.turn_off
       data:
-        entity_id: light.keuken_groep_ha
+        entity_id: light.keuken_groep_deconz

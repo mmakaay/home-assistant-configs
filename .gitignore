@@ -9,3 +9,4 @@ home-assistant.log
 repos
 secrets.yaml
 www
+*.sw?

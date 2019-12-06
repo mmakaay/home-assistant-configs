@@ -482,8 +482,8 @@
       state: 'off'
     light.zon:
       state: 'off'
-- id: woonkamer_tv_kijken
-  name: Woonkamer TV kijken
+- id: woonkamer_bingen
+  name: Woonkamer Bingen
   entities:
     light.achter_de_koelkast:
       brightness: 100
@@ -539,27 +539,27 @@
   name: Toilet (automatisch, nacht)
   entities:
     light.toilet_plafond:
-      brightness: 38
-      color_temp: 380
+      brightness: 96
+      color_temp: 427
       state: 'on'
 - id: toilet_automatisch_ochtend
   name: Toilet (automatisch, ochtend)
   entities:
     light.toilet_plafond:
-      brightness: 38
+      brightness: 109
       color_temp: 380
       state: 'on'
 - id: toilet_automatisch_dag
   name: Toilet (automatisch, dag)
   entities:
     light.toilet_plafond:
-      brightness: 106
-      color_temp: 393
+      brightness: 183
+      color_temp: 338
       state: 'on'
 - id: toilet_automatisch_avond
   name: Toilet (automatisch, avond)
   entities:
     light.toilet_plafond:
-      brightness: 106
-      color_temp: 393
+      brightness: 166
+      color_temp: 388
       state: 'on'
