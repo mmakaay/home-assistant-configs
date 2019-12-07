@@ -30,7 +30,7 @@ zet_woonkamer_licht_uit:
         entity_id: light.kast_midden
     - service: switch.turn_off
       data:
-        entity_id: switch.switch_stekker_bij_de_tuindeuren
+        entity_id: switch.stekker_bij_de_tuindeuren
 
     # When the ambilite feature is enabled, we don't turn off
     # the ambilite-related lights.

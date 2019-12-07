@@ -10,8 +10,8 @@ sensors:
       - light.gang_groep_deconz
       - light.toilet_groep_deconz
       - light.badkamer_groep_deconz
-      - switch.switch_stekker_links_van_de_bank
-      - switch.switch_stekker_bij_de_tuindeuren
+      - switch.stekker_links_van_de_bank
+      - switch.stekker_bij_de_tuindeuren
       - switch.switch_for_tv_amp_and_pickup
     value_template: >-
         {{ (is_state("media_player.ps4", "off") or
@@ -21,7 +21,7 @@ sensors:
            is_state("light.gang_groep_deconz", "off") and
            is_state("light.toilet_groep_deconz", "off") and
            is_state("light.badkamer_groep_deconz", "off") and
-           is_state("switch.switch_stekker_links_van_de_bank", "off") and
-           is_state("switch.switch_stekker_bij_de_tuindeuren", "off") and
+           is_state("switch.stekker_links_van_de_bank", "off") and
+           is_state("switch.stekker_bij_de_tuindeuren", "off") and
            is_state("switch.switch_for_tv_amp_and_pickup", "off") }}
     icon_template: mdi:power-sleep

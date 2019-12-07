@@ -185,8 +185,16 @@ proximity:
 
 shopping_list:
 
-# Running into av dependency issues, but bug ticket is closed:
+# Running into av dependency issues:
 # https://github.com/home-assistant/home-assistant/issues/26251
-#camera:
-#  - platform: mqtt
-#    topic: homeassistant/switch/ambilite/tv_image
+# https://github.com/home-assistant/home-assistant/issues/26711
+# Fix:
+# $ sudo apt-get install -y python-dev pkg-config libavformat-dev \
+#   libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev \
+#   libavresample-dev libavfilter-dev
+# $ hacheckconf
+camera:
+  - platform: mqtt
+    unique_id: ambilite
+    name: ambilite
+    topic: homeassistant/switch/ambilite/television

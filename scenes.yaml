@@ -257,7 +257,7 @@
       xy_color:
       - 0.56
       - 0.379
-    switch.switch_stekker_bij_de_tuindeuren:
+    switch.stekker_bij_de_tuindeuren:
       state: 'on'
 - id: woonkamer_lampen_uit
   name: Woonkamer lampen uit
@@ -278,7 +278,7 @@
       state: 'off'
     light.zon:
       state: 'off'
-    switch.switch_stekker_bij_de_tuindeuren:
+    switch.stekker_bij_de_tuindeuren:
       state: 'off'
 - id: woonkamer_gaming
   name: Woonkamer gaming
@@ -327,7 +327,7 @@
       xy_color:
       - 0.243
       - 0.09
-    switch.switch_stekker_bij_de_tuindeuren:
+    switch.stekker_bij_de_tuindeuren:
       state: 'off'
 - id: woonkamer_klaprozen
   name: Woonkamer klaprozen
@@ -380,7 +380,7 @@
       xy_color:
       - 0.344
       - 0.388
-    switch.switch_stekker_bij_de_tuindeuren:
+    switch.stekker_bij_de_tuindeuren:
       state: 'on'
 - id: woonkamer_automatisch_nacht
   name: Woonkamer (automatisch, nacht)
@@ -533,7 +533,7 @@
       xy_color:
       - 0.503
       - 0.411
-    switch.switch_stekker_bij_de_tuindeuren:
+    switch.stekker_bij_de_tuindeuren:
       state: 'on'
 - id: toilet_automatisch_nacht
   name: Toilet (automatisch, nacht)

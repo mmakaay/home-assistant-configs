@@ -13,7 +13,8 @@ switches:
          is_state("light.kast_midden", "on") or
          is_state("light.kast_onder", "on") or
          is_state("light.zon", "on") or
-         is_state("switch.switch_stekker_bij_de_tuindeuren", "on") or
+         is_state("light.buitenstopcontact", "on") or
+         is_state("switch.stekker_bij_de_tuindeuren", "on") or
          (is_state("switch.ambilite", "off") and (
            is_state("light.achter_tv_strip", "on") or
            is_state("light.staande_lamp", "on")
@@ -60,7 +61,7 @@ switches:
     friendly_name: Stroom
     value_template: >-
       {{ is_state("switch.ambilite", "on") or
-         is_state("switch.switch_stekker_links_van_de_bank", "on") or 
+         is_state("switch.stekker_links_van_de_bank", "on") or 
          is_state("switch.switch_for_tv_amp_and_pickup", "on") }}
     icon_template: mdi:power
     turn_on:
@@ -91,7 +92,7 @@ switches:
   gui_bank_links_stroom:
     friendly_name: Bank links
     value_template: >-
-      {{ is_state("switch.switch_stekker_links_van_de_bank", "on") }}
+      {{ is_state("switch.stekker_links_van_de_bank", "on") }}
     icon_template: mdi:flash
     turn_on:
       service: script.turn_on
@@ -101,3 +102,17 @@ switches:
       service: script.turn_on
       data:
         entity_id: script.zet_bank_links_stroom_uit
+
+  gui_buitenstopcontact_stroom:
+    friendly_name: Buitenstopcontact
+    value_template: >-
+      {{ is_state("light.buitenstopcontact", "on") }}
+    icon_template: mdi:flash
+    turn_on:
+      service: script.turn_on
+      data:
+        entity_id: script.zet_buitenstopcontact_stroom_aan
+    turn_off:
+      service: script.turn_on
+      data:
+        entity_id: script.zet_buitenstopcontact_stroom_uit

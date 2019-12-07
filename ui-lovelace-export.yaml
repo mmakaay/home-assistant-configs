@@ -264,7 +264,7 @@ views:
 - badges: []
   cards:
   - elements:
-    - entity: switch.switch_stekker_links_van_de_bank
+    - entity: switch.stekker_links_van_de_bank
       style:
         --iron-icon-height: 30px
         --iron-icon-width: 30px
@@ -916,7 +916,7 @@ views:
     - entity: light.kast_onder
     - entity: light.droogkap
     - entity: light.achter_de_koelkast
-    - entity: switch.switch_stekker_bij_de_tuindeuren
+    - entity: switch.stekker_bij_de_tuindeuren
     - label: Keuken
       type: section
     - entity: light.keukenspot1
