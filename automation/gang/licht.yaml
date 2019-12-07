@@ -14,7 +14,7 @@
   condition:
     - condition: numeric_state
       entity_id: sensor.gang_lichtsterkte
-      below: 10
+      below: 5
     - condition: state
       entity_id: light.gang_groep_ha
       state: 'off'
@@ -22,11 +22,13 @@
       entity_id: timer.gang_cooldown
       state: 'idle'
   action:
+    - service: timer.start
+      data:
+        entity_id: timer.gang_warmup
     - service: scene.turn_on
       data_template:
         entity_id: >
           scene.gang_automatisch_{{ states('sensor.periode_van_de_dag') }}
-    - delay: 4
     - service: timer.start
       data:
         entity_id: timer.gang
@@ -82,7 +84,9 @@
     - service: light.turn_off
       data:
         entity_id: light.gang_plafond_dimbaar
-    - delay: 4
+    - wait_template: "{{ is_state('timer.gang_cooldown', 'active') }}"
+      timeout: 5
+      continue_on_timeout: 'false'
     - service: timer.cancel
       data:
         entity_id: timer.gang_cooldown
@@ -122,6 +126,10 @@
   trigger:
     - entity_id: light.gang_groep_ha
       platform: state
+  condition:
+    - condition: state
+      entity_id: timer.gang_warmup
+      state: 'idle'
   action:
     - service: timer.cancel
       data:
@@ -134,20 +142,22 @@
 - id: gang_licht_F
   alias: "[GANG LICHT] F. cooldown activeren als alle lampen uit gaan"
   description: >
-    Wanneer alle lampen uitgaan in de gang, dan willen we de bewegingssensors
-    even negeren, zodat eventuele beweging niet direct het licht weer
-    aanzet. Denk aan het scenario waarbij je in de ruimte met de hand de
-    lampen uitmaakt en dan wegloopt (wat een beweging is, waarmee je het
-    licht zou kunnen triggeren).
+    Wanneer alle lampen uitgaan, dan willen we de bewegingssensors even
+    negeren, zodat eventuele beweging niet direct het licht weer aanzet.
+    Denk aan het scenario waarbij je in de ruimte met de hand de lampen
+    uitmaakt en dan wegloopt (wat een beweging is, waarmee je het licht
+    zou kunnen triggeren).
   trigger:
     - entity_id: light.gang_groep_ha
       platform: state
       to: 'off'
-  condition: []
   action:
     - service: timer.cancel
       data:
         entity_id: timer.gang
+    - service: timer.cancel
+      data:
+        entity_id: timer.gang_warmup
     - service: timer.start
       data:
         entity_id: timer.gang_cooldown
@@ -164,9 +174,6 @@
       to: 'on'
   condition: []
   action:
-    - service: timer.cancel
-      data:
-        entity_id: timer.gang
     - service: timer.cancel
       data:
         entity_id: timer.gang_cooldown
