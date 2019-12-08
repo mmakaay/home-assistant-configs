@@ -40,7 +40,6 @@
     platform: device
     subtype: turn_on
     type: remote_button_short_release
-  condition: []
   action:
   - data:
       entity_id: scene.keuken_koken
@@ -55,7 +54,6 @@
     platform: device
     subtype: turn_off
     type: remote_button_short_release
-  condition: []
   action:
   - device_id: 3b3a736ca06540c98a9c85dc142b0f3f
     domain: light
@@ -72,7 +70,6 @@
     platform: device
     subtype: dim_up
     type: remote_button_short_release
-  condition: []
   action:
   - data:
       entity_id: scene.keuken_gedimd
@@ -87,7 +84,6 @@
     platform: device
     subtype: dim_down
     type: remote_button_short_press
-  condition: []
   action:
   - data:
       entity_id: scene.keuken_nacht

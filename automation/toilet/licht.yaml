@@ -1,9 +1,8 @@
 ---
-# This automation is based on the IKEA Trådfri motion sensor
-# This sensor reports "ON" for 1 minute, then "OFF" for 30 seconds when
-# detecing motion. The state "ON" is not kept when there is still
-# motion going on. While this is a bit basic, it does allow for a pretty
-# simple automation.
+# This automation is based on the IKEA Trådfri motion sensorthat I use in my
+# toilet. This sensor reports "ON" for 1 minute, then "OFF" for 30 seconds when
+# detecing motion. The state "ON" is not kept when there is still motion going
+# on. While this is a bit basic, it does allow for a pretty simple automation.
 
 - id: toilet_licht_A
   alias: "[TOILET LICHT] A. zet aan bij beweging"
@@ -26,9 +25,38 @@
     - service: timer.start
       data_template:
         entity_id: timer.toilet
+        duration: 00:10:00
 
 - id: toilet_licht_B
-  alias: "[TOILET LICHT] B. zet uit na een tijdje geen beweging"
+  alias: "[TOILET LICHT] B. verkort timer bij beweging in de gang"
+  description: >
+    Als de toilet timer actief is, en er wordt beweging gedetecteerd
+    in de gang, dan kan het zijn dat iemand van het toilet naar de gang
+    is gegaan. In dat geval verlagen we de toilet timer. Dit lijkt een
+    redelijke oplossing om de standaard toilet timer niet kort te hoeven
+    zetten. De timer wordt niet zo kort gezet dat iemand per direct in
+    het donker komt te zitten.
+  trigger:
+    - entity_id: binary_sensor.gang_beweging
+      platform: state
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: timer.toilet
+      state: 'active'
+  action:
+    # cancel/start, because of this bug:
+    # https://github.com/home-assistant/home-assistant/issues/12013
+    - service: timer.cancel
+      data:
+        entity_id: timer.toilet
+    - service: timer.start
+      data_template:
+        entity_id: timer.toilet
+        duration: 00:03:00
+
+- id: toilet_licht_C
+  alias: "[TOILET LICHT] C. zet uit na een tijdje geen beweging"
   description: >
     Wanneer de timer afloopt, maak de lamp dan weer uit.
   trigger:

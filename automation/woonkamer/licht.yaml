@@ -18,11 +18,13 @@
       entity_id: timer.woonkamer_cooldown
       state: 'idle'
   action:
+    - service: timer.start
+      data:
+        entity_id: timer.woonkamer_warmup
     - service: scene.turn_on
       data_template:
         entity_id: >
           scene.woonkamer_automatisch_{{ states('sensor.periode_van_de_dag') }}
-    - delay: 4
     - service: timer.start
       data:
         entity_id: timer.woonkamer
@@ -108,14 +110,9 @@
     - entity_id: light.woonkamer_groep_ha
       platform: state
   condition:
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: timer.woonkamer
-          state: 'active'
-        - condition: state
-          entity_id: timer.woonkamer_cooldown
-          state: 'active'
+    - condition: state
+      entity_id: timer.woonkamer_warmup
+      state: 'idle'
   action:
     - service: timer.cancel
       data:
@@ -137,11 +134,13 @@
     - entity_id: light.woonkamer_groep_ha
       platform: state
       to: 'off'
-  condition: []
   action:
     - service: timer.cancel
       data:
         entity_id: timer.woonkamer
+    - service: timer.cancel
+      data:
+        entity_id: timer.woonkamer_warmup
     - service: timer.start
       data:
         entity_id: timer.woonkamer_cooldown
@@ -156,11 +155,7 @@
     - entity_id: light.woonkamer_groep_ha
       platform: state
       to: 'on'
-  condition: []
   action:
-    - service: timer.cancel
-      data:
-        entity_id: timer.woonkamer
     - service: timer.cancel
       data:
         entity_id: timer.woonkamer_cooldown

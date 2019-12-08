@@ -2,11 +2,16 @@
 - id: keuken_licht_A
   alias: "[KEUKEN LICHT] A. zet aan bij beweging in het donker"
   description: >
-    Licht aan als het donker is en er beweging wordt gedetecteerd.
+    Licht aan als het donker is en er beweging wordt gedetecteerd. Ook beweging
+    buiten bij de achterdeur zorgt ervoor dat het licht aangaat.
   trigger:
     - entity_id: binary_sensor.keuken_beweging
       platform: state
       to: 'on'
+    - entity_id: binary_sensor.achterdeur_beweging
+      platform: state
+      to: 'on'
+      for: 00:00:10
   condition:
     - condition: numeric_state
       entity_id: sensor.keuken_lichtsterkte
@@ -18,11 +23,13 @@
       entity_id: timer.keuken_cooldown
       state: 'idle'
   action:
+    - service: timer.start
+      data:
+        entity_id: timer.keuken_warmup
     - service: scene.turn_on
       data_template:
         entity_id: >
           scene.keuken_automatisch_{{ states('sensor.periode_van_de_dag') }}
-    - delay: 4
     - service: timer.start
       data:
         entity_id: timer.keuken
@@ -53,7 +60,7 @@
   
 
 - id: keuken_licht_C
-  alias: "[KEUKEN LICHT] C. zet uit na een tijdje geen beweging"
+  alias: "[KEUKEN LICHT] C. uitzetten na timeout en geen beweging"
   description: >
     Wanneer de timer afloopt en er is geen beweging in de ruimte, maak
     dan het licht weer uit. De beweging cooldown timer wordt ook
@@ -107,6 +114,10 @@
   trigger:
     - entity_id: light.keuken_groep_ha
       platform: state
+  condition:
+    - condition: state
+      entity_id: timer.keuken_warmup
+      state: 'active'
   action:
     - service: timer.cancel
       data:
@@ -128,11 +139,13 @@
     - entity_id: light.keuken_groep_ha
       platform: state
       to: 'off'
-  condition: []
   action:
     - service: timer.cancel
       data:
         entity_id: timer.keuken
+    - service: timer.cancel
+      data:
+        entity_id: timer.keuken_warmup
     - service: timer.start
       data:
         entity_id: timer.keuken_cooldown
@@ -147,11 +160,7 @@
     - entity_id: light.keuken_groep_ha
       platform: state
       to: 'on'
-  condition: []
   action:
-    - service: timer.cancel
-      data:
-        entity_id: timer.keuken
     - service: timer.cancel
       data:
         entity_id: timer.keuken_cooldown

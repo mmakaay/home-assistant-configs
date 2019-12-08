@@ -62,7 +62,7 @@
   
 
 - id: gang_licht_C
-  alias: "[GANG LICHT] C. zet uit na een tijdje geen beweging"
+  alias: "[GANG LICHT] C. uitzetten na timeout en geen beweging"
   description: >
     Wanneer de timer afloopt en er is geen beweging in de ruimte, maak
     dan het licht weer uit. De beweging cooldown timer wordt ook
@@ -172,7 +172,6 @@
     - entity_id: light.gang_groep_ha
       platform: state
       to: 'on'
-  condition: []
   action:
     - service: timer.cancel
       data:

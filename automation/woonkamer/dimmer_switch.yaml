@@ -41,7 +41,6 @@
     platform: device
     subtype: turn_on
     type: remote_button_short_release
-  condition: []
   action:
   - data:
       entity_id: scene.woonkamer_bingen
@@ -57,7 +56,6 @@
     platform: device
     subtype: turn_off
     type: remote_button_short_release
-  condition: []
   action:
   - device_id: b6686897806344baac29b494f949ae4b
     domain: light
@@ -74,7 +72,6 @@
     platform: device
     subtype: dim_up
     type: remote_button_short_release
-  condition: []
   action:
   - data:
       entity_id: scene.woonkamer_klaprozen
@@ -90,7 +87,6 @@
     platform: device
     subtype: dim_down
     type: remote_button_short_release
-  condition: []
   action:
   - data:
       entity_id: scene.woonkamer_feet_up

@@ -198,3 +198,7 @@ camera:
     unique_id: ambilite
     name: ambilite
     topic: homeassistant/switch/ambilite/television
+  - platform: mqtt
+    unique_id: settopbox
+    name: settopbox
+    topic: homeassistant/switch/ambilite/settopbox

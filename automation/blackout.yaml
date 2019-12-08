@@ -75,7 +75,6 @@
   trigger:
     - platform: event
       event_type: blackout
-  condition: []
   action:
     - service: media_player.turn_off
       data:
@@ -90,7 +89,6 @@
   trigger:
     - platform: event
       event_type: blackout
-  condition: []
   action:
     - service: script.turn_on
       data:
