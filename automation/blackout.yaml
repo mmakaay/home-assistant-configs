@@ -8,7 +8,7 @@
     - service: light.turn_off
       data:
         entity_id: light.keuken_groep_deconz
- 
+
 - id: blackout_licht_woonkamer_uit
   alias: "[BLACKOUT] Licht woonkamer uit"
   trigger:
@@ -18,6 +18,19 @@
     - service: light.turn_off
       data:
         entity_id: light.woonkamer_groep_deconz
+    - service: light.turn_off
+      data:
+        entity_id: light.vaaslamp
+ 
+- id: blackout_licht_buiten_uit
+  alias: "[BLACKOUT] Licht buiten uit"
+  trigger:
+    - platform: event
+      event_type: blackout
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.buitenstopcontact
 
 - id: blackout_licht_gang_uit
   alias: "[BLACKOUT] Licht gang uit"

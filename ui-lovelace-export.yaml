@@ -53,47 +53,6 @@ views:
       type: conditional
     type: vertical-stack
   - cards:
-    - card:
-        entity: script.trigger_blackout_event
-        hold_action:
-          action: none
-        icon: mdi:power-sleep
-        icon_height: 40px
-        name: Zet alles uit (zzz...)
-        show_icon: true
-        show_name: true
-        tap_action:
-          action: call-service
-          confirmation:
-            text: Zeker weten?
-          service: script.turn_on
-          service_data:
-            entity_id: script.trigger_blackout_event
-        type: entity-button
-      conditions:
-      - entity: binary_sensor.blackout_active
-        state: 'off'
-      type: conditional
-    - card:
-        entity: script.trigger_power_up_event
-        hold_action:
-          action: none
-        icon: mdi:power
-        icon_height: 40px
-        show_icon: true
-        show_name: true
-        tap_action:
-          action: call-service
-          service: script.turn_on
-          service_data:
-            entity_id: script.trigger_power_up_event
-        type: entity-button
-      conditions:
-      - entity: binary_sensor.blackout_active
-        state: 'on'
-      type: conditional
-    type: vertical-stack
-  - cards:
     - content: WOONKAMER
       theme: separator
       type: markdown
@@ -145,8 +104,9 @@ views:
         type: entity-button
       type: horizontal-stack
     - cards:
-      - entity: switch.gui_woonkamer_ambilite
+      - entity: switch.gui_buitenstopcontact_stroom
         icon_height: 30px
+        name: Buiten
         tap_action:
           action: toggle
         theme: other-button
@@ -169,6 +129,57 @@ views:
           action: toggle
         theme: other-button
         type: entity-button
+      type: horizontal-stack
+    - cards:
+      - entity: switch.gui_woonkamer_ambilite
+        icon_height: 30px
+        tap_action:
+          action: toggle
+        theme: other-button
+        type: entity-button
+      - cards:
+        - card:
+            entity: script.trigger_blackout_event
+            hold_action:
+              action: none
+            icon: mdi:power-sleep
+            icon_height: 30px
+            name: Zet alles uit (zzz...)
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: call-service
+              confirmation:
+                text: Zeker weten?
+              service: script.turn_on
+              service_data:
+                entity_id: script.trigger_blackout_event
+            theme: other-button
+            type: entity-button
+          conditions:
+          - entity: binary_sensor.blackout_active
+            state: 'off'
+          type: conditional
+        - card:
+            entity: script.trigger_power_up_event
+            hold_action:
+              action: none
+            icon: mdi:power
+            icon_height: 30px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: call-service
+              service: script.turn_on
+              service_data:
+                entity_id: script.trigger_power_up_event
+            theme: other-button
+            type: entity-button
+          conditions:
+          - entity: binary_sensor.blackout_active
+            state: 'on'
+          type: conditional
+        type: horizontal-stack
       type: horizontal-stack
     - content: KEUKEN
       theme: separator
@@ -214,6 +225,15 @@ views:
         theme: light-button
         type: entity-button
       type: horizontal-stack
+    - cards:
+      - entity: switch.stekker_koffiezetapparaat
+        icon_height: 30px
+        name: Koffie (stekker, z-wave experimentje)
+        tap_action:
+          action: toggle
+        theme: other-button
+        type: entity-button
+      type: horizontal-stack
     - content: OVERIGE
       theme: separator
       type: markdown
@@ -244,20 +264,14 @@ views:
         type: entity-button
       type: horizontal-stack
     type: vertical-stack
-  - card:
-      content: 'Nieuwe versie: {{ state_attr("binary_sensor.updater", "newest_version")
-        }}
-
-        Release notes: [kijk op de website]({{ state_attr("binary_sensor.updater",
-        "release_notes") }})
-
-        '
-      title: Update beschikbaar voor Home Assistant!
-      type: markdown
-    conditions:
-    - entity: binary_sensor.updater
-      state: 'on'
-    type: conditional
+  - entities:
+    - entity: switch.playstation4
+    - entity: switch.settopbox
+    - entity: zwave.hal_sensor
+    - entity: binary_sensor.hal_beweging
+    show_header_toggle: false
+    title: Experimenteel
+    type: entities
   icon: mdi:home
   path: default_view
   title: Home
@@ -279,6 +293,23 @@ views:
         left: 56%
         top: 88%
       title: TV, amp, pickup
+      type: state-icon
+    - entity: switch.gui_buitenstopcontact_stroom
+      icon: mdi:wall-sconce-flat
+      style:
+        --iron-icon-height: 30px
+        --iron-icon-width: 30px
+        left: 15%
+        top: 9%
+      title: Kerstlampjes buiten
+      type: state-icon
+    - entity: switch.switch_for_itv_ps4_netswitch_tvstrip
+      style:
+        --iron-icon-height: 30px
+        --iron-icon-width: 30px
+        left: 56%
+        top: 66%
+      title: ITV, PS4, netwerk
       type: state-icon
     - entity: light.kast_boven
       icon: mdi:circle
@@ -418,15 +449,13 @@ views:
       type: conditional
     - conditions:
       - entity: media_player.ps4
-        state_not: 'off'
-      - entity: media_player.ps4
-        state_not: standby
+        state: 'on'
       elements:
       - entity: media_player.ps4
         style:
           --iron-icon-height: 34px
           --iron-icon-width: 34x
-          left: 54.5%
+          left: 45%
           top: 67%
         type: state-icon
       type: conditional
@@ -444,11 +473,36 @@ views:
         type: state-icon
       type: conditional
     - entity: sensor.power_consumption
+      prefix: 'Verbruik: '
       style:
-        font-size: 18px
-        left: 15%
-        top: 6.5%
+        font-size: 15px
+        left: 49%
+        top: 1%
       type: state-label
+    - entity: sensor.switch_for_itv_ps4_netswitch_tvstrip_power
+      style:
+        font-size: 11px
+        left: 53.5%
+        top: 62.7%
+      type: state-label
+    - entity: sensor.switch_for_tv_amp_and_pickup_power
+      style:
+        font-size: 11px
+        left: 53.5%
+        top: 84.5%
+      type: state-label
+    - conditions:
+      - entity: binary_sensor.achterdeur_beweging
+        state: 'on'
+      elements:
+      - entity: binary_sensor.woonkamer_beweging
+        style:
+          --iron-icon-height: 25px
+          --iron-icon-width: 25px
+          left: 67%
+          top: 9%
+        type: state-icon
+      type: conditional
     - conditions:
       - entity: binary_sensor.woonkamer_beweging
         state: 'on'
@@ -486,6 +540,18 @@ views:
         type: state-icon
       type: conditional
     - conditions:
+      - entity: binary_sensor.hal_beweging
+        state: 'on'
+      elements:
+      - entity: binary_sensor.hal_beweging
+        style:
+          --iron-icon-height: 25px
+          --iron-icon-width: 25px
+          left: 68%
+          top: 88%
+        type: state-icon
+      type: conditional
+    - conditions:
       - entity: binary_sensor.trap_beweging
         state: 'on'
       elements:
@@ -509,6 +575,12 @@ views:
           top: 46.5%
         type: state-icon
       type: conditional
+    - entity: sensor.achterdeur_temperatuur
+      style:
+        font-size: 13px
+        left: 85%
+        top: 1%
+      type: state-label
     - entity: sensor.woonkamer_temperatuur
       style:
         font-size: 13px
@@ -530,22 +602,16 @@ views:
         padding: 0px
         top: 79%
       type: state-label
-    - entity: sensor.br_temperature
-      style:
-        font-size: 15px
-        left: 85%
-        top: 5%
-      type: state-label
     - entity: sensor.br_humidity
       style:
         font-size: 15px
         left: 85.6%
-        top: 9%
+        top: 5%
       type: state-label
     - entity: sensor.br_symbol
       style:
         left: 75%
-        top: 7%
+        top: 3%
       type: state-icon
     - entity: light.keukenspot1
       icon: mdi:circle
@@ -900,14 +966,29 @@ views:
     show_header_toggle: false
     title: Afvalkalender
     type: entities
+  - card:
+      content: 'Nieuwe versie: {{ state_attr("binary_sensor.updater", "newest_version")
+        }}
+
+        Release notes: [kijk op de website]({{ state_attr("binary_sensor.updater",
+        "release_notes") }})
+
+        '
+      title: Update beschikbaar voor Home Assistant!
+      type: markdown
+    conditions:
+    - entity: binary_sensor.updater
+      state: 'on'
+    type: conditional
+  - entities:
+    - entity: sensor.ha_cpu_temperature
+    type: entities
   icon: mdi:information-outline
   path: information
   title: Info
 - badges: []
   cards:
   - entities:
-    - label: Woonkamer
-      type: section
     - entity: light.achter_tv_strip
     - entity: light.staande_lamp
     - entity: light.zon
@@ -916,21 +997,27 @@ views:
     - entity: light.kast_onder
     - entity: light.droogkap
     - entity: light.achter_de_koelkast
-    - entity: switch.stekker_bij_de_tuindeuren
-    - label: Keuken
-      type: section
+    - entity: light.vaaslamp
+      icon: mdi:lightbulb
+    title: Woonkamer
+    type: entities
+  - entities:
     - entity: light.keukenspot1
     - entity: light.keukenspot2
     - entity: light.keukenspot2
     - entity: light.keukenspot4
     - entity: light.keukenspot5
     - entity: light.keukenspot6
-    - label: Overige
-      type: section
+    title: Keuken
+    type: entities
+  - entities:
+    - entity: light.buitenstopcontact
+      name: Kerslampjes achter het huis
     - entity: light.gang_plafond_dimbaar
     - entity: light.toilet_plafond
     - entity: light.badkamer_plafond
     - entity: light.onder_het_bed
+    title: Overige
     type: entities
   icon: mdi:lightbulb
   path: lampen

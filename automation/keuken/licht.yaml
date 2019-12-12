@@ -8,10 +8,11 @@
     - entity_id: binary_sensor.keuken_beweging
       platform: state
       to: 'on'
-    - entity_id: binary_sensor.achterdeur_beweging
-      platform: state
-      to: 'on'
-      for: 00:00:10
+# This one isn't position well, it triggers on the hedge moving :-/
+# Disable it for now, until the sensor is placed better.
+#    - entity_id: binary_sensor.achterdeur_beweging
+#      platform: state
+#      to: 'on'
   condition:
     - condition: numeric_state
       entity_id: sensor.keuken_lichtsterkte

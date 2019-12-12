@@ -1,5 +1,5 @@
 ---
 # This sensor is connected to the DSMR P1 port of our smart meter.
 platform: dsmr
-port: /dev/ttyUSB0
+port: /dev/smartmeter
 dsmr_version: 4

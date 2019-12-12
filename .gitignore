@@ -5,8 +5,15 @@
 .uuid
 bravia.conf
 home-assistant.log
-home-assistant.log
 repos
 secrets.yaml
 www
+# Vim swap files.
 *.sw?
+# Files that are used by openzwave
+OZW*
+zwave_device*
+zwcfg*
+zwscene*
+options.xml
+pyozw.sqlite

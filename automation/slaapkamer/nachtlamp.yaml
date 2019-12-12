@@ -18,7 +18,7 @@
         entity_id: light.onder_het_bed
         brightness: 150
         color_temp: 328
-        transition: 5
+        transition: 2
     # cancel/start, because of this bug:
     # https://github.com/home-assistant/home-assistant/issues/12013
     - service: timer.cancel

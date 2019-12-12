@@ -32,4 +32,4 @@ install_afvalbeheer:
 	cd custom_components && ln -s ../repos/Home-Assistant-Sensor-Afvalbeheer/custom_components/afvalbeheer
 
 lovelace-export:
-	jq .data.config .storage/lovelace | python -c 'import sys, yaml, json; yaml.safe_dump(json.load(sys.stdin), sys.stdout, default_flow_style=False)' > ui-lovelace-export.yaml
+	jq .data.config .storage/lovelace | python3 -c 'import sys, yaml, json; yaml.safe_dump(json.load(sys.stdin), sys.stdout, default_flow_style=False)' > ui-lovelace-export.yaml

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+sudo grep INFO /var/log/syslog  \
+	| grep -v "Document object at"  \
+	| grep -v "proximity calculation complete"  \
+	| grep -v "Parse ws data"  \
+	| grep -v "Connection closed by client"  \
+	| grep -v "Update periode_van_de_dag"   \
+	| grep -v "Running script#"  \
+	| grep -v "Executing step call service#" \
+  | less
+

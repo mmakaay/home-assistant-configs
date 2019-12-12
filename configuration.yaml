@@ -29,57 +29,57 @@ recorder:
   db_url: postgresql://@/homeassistant
   purge_keep_days: 1
   purge_interval: 1
-  include:
-    domains:
-      - switch
-      - sensor
-      - binary_sensor
-  exclude:
-    event_types:
-      - call_service
-      - state_changed
-      - timer.cancelled
-      - automation_trigered
-    domains:
-      - light
-    entities:
-      - switch.ambilite
-      - sensor.date_time
-      - sensor.time
-      - sun.sun
-      - sensor.gas_consumption
-      - sensor.long_power_failure_count
-      - sensor.power_consumption_low
-      - sensor.power_consumption_normal
-      - sensor.power_consumption_phase_l1
-      - sensor.power_consumption_phase_l2
-      - sensor.power_consumption_phase_l3
-      - sensor.power_production
-      - sensor.power_production_low
-      - sensor.power_production_normal
-      - sensor.power_production_phase_l1
-      - sensor.power_production_phase_l2
-      - sensor.power_production_phase_l3
-      - sensor.power_tariff
-      - sensor.voltage_phase_l1
-      - sensor.voltage_phase_l2
-      - sensor.voltage_phase_l3
-      - sensor.voltage_sags_phase_l1
-      - sensor.voltage_sags_phase_l2
-      - sensor.voltage_sags_phase_l3
-      - sensor.voltage_swells_phase_l1
-      - switch.switch_for_tv_amp_and_pickup
-      - switch.switch_for_tv_amp_and_pickup_2
-      - sensor.switch_for_tv_amp_and_pickup_power
-      - switch.switch_for_itv_ps4_netswitch_tvstrip_2
-      - sensor.dar_voorkant_gft
-      - sensor.dar_voorkant_papier
-      - sensor.dar_voorkant_restafval
-      - sensor.dar_voorkant_vandaag
-      - sensor.dar_voorkant_morgen
-      - sensor.dar_zijkant_papier
-      - sensor.dar_zijkant_vandaag
-      - sensor.dar_zijkant_morgen
+#  include:
+#    domains:
+#      - switch
+#      - sensor
+#      - binary_sensor
+#  exclude:
+#    event_types:
+#      - call_service
+#      - state_changed
+#      - timer.cancelled
+#      - automation_trigered
+#    domains:
+#      - light
+#    entities:
+#      - switch.ambilite
+#      - sensor.date_time
+#      - sensor.time
+#      - sun.sun
+#      - sensor.gas_consumption
+#      - sensor.long_power_failure_count
+#      - sensor.power_consumption_low
+#      - sensor.power_consumption_normal
+#      - sensor.power_consumption_phase_l1
+#      - sensor.power_consumption_phase_l2
+#      - sensor.power_consumption_phase_l3
+#      - sensor.power_production
+#      - sensor.power_production_low
+#      - sensor.power_production_normal
+#      - sensor.power_production_phase_l1
+#      - sensor.power_production_phase_l2
+#      - sensor.power_production_phase_l3
+#      - sensor.power_tariff
+#      - sensor.voltage_phase_l1
+#      - sensor.voltage_phase_l2
+#      - sensor.voltage_phase_l3
+#      - sensor.voltage_sags_phase_l1
+#      - sensor.voltage_sags_phase_l2
+#      - sensor.voltage_sags_phase_l3
+#      - sensor.voltage_swells_phase_l1
+#      - switch.switch_for_tv_amp_and_pickup
+#      - switch.switch_for_tv_amp_and_pickup_2
+#      - sensor.switch_for_tv_amp_and_pickup_power
+#      - switch.switch_for_itv_ps4_netswitch_tvstrip_2
+#      - sensor.dar_voorkant_gft
+#      - sensor.dar_voorkant_papier
+#      - sensor.dar_voorkant_restafval
+#      - sensor.dar_voorkant_vandaag
+#      - sensor.dar_voorkant_morgen
+#      - sensor.dar_zijkant_papier
+#      - sensor.dar_zijkant_vandaag
+#      - sensor.dar_zijkant_morgen
 
 #logger:
 #  default: debug
@@ -185,6 +185,20 @@ proximity:
 
 shopping_list:
 
+mqtt:
+  broker: !secret mosquitto-host
+  port: !secret mosquitto-port
+  username: !secret mosquitto-username
+  password: !secret mosquitto-password
+  discovery: true
+  discovery_prefix: homeassistant
+  birth_message:
+    topic: 'homeassistant/status'
+    payload: 'online'
+  will_message:
+    topic: 'homeassistant/status'
+    payload: 'offline'
+
 # Running into av dependency issues:
 # https://github.com/home-assistant/home-assistant/issues/26251
 # https://github.com/home-assistant/home-assistant/issues/26711
@@ -193,12 +207,12 @@ shopping_list:
 #   libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev \
 #   libavresample-dev libavfilter-dev
 # $ hacheckconf
-camera:
-  - platform: mqtt
-    unique_id: ambilite
-    name: ambilite
-    topic: homeassistant/switch/ambilite/television
-  - platform: mqtt
-    unique_id: settopbox
-    name: settopbox
-    topic: homeassistant/switch/ambilite/settopbox
+#camera:
+#  - platform: mqtt
+#    unique_id: ambilite
+#    name: ambilite
+#    topic: homeassistant/switch/ambilite/television
+#  - platform: mqtt
+#    unique_id: settopbox
+#    name: settopbox
+#    topic: homeassistant/switch/ambilite/settopbox
