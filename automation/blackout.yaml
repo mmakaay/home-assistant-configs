@@ -93,6 +93,18 @@
       data:
         entity_id: media_player.ps4
 
+- id: blackout_keuken_stroom_uit
+  alias: "[BLACKOUT] keuken stroom uit"
+  description: >
+    Reageert op een 'blackout' event door stroom uit te zetten in de keuken.
+  trigger:
+    - platform: event
+      event_type: blackout
+  action:
+    - service: script.turn_on
+      data:
+        entity_id: script.zet_keuken_stroom_uit
+
 - id: blackout_woonkamer_stroom_uit
   alias: "[BLACKOUT] woonkamer stroom uit"
   description: >

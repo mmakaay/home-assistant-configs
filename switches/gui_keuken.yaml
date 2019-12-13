@@ -11,7 +11,7 @@ switches:
         {% elif is_state("timer.keuken_cooldown", "active") %}
           mdi:snowflake 
         {% else %}
-          mdi:power
+          mdi:lightbulb
         {% endif %}
     turn_on:
       service: light.turn_on
@@ -21,3 +21,18 @@ switches:
       service: light.turn_off
       data:
         entity_id: light.keuken_groep_deconz
+
+
+  gui_koffiezetapparaat_stroom:
+    friendly_name: Koffie
+    value_template: >-
+      {{ is_state("switch.stekker_koffiezetapparaat", "on") }}
+    icon_template: mdi:coffee-maker
+    turn_on:
+      service: switch.turn_on
+      data:
+        entity_id: switch.stekker_koffiezetapparaat
+    turn_off:
+      service: switch.turn_off
+      data:
+        entity_id: switch.stekker_koffiezetapparaat

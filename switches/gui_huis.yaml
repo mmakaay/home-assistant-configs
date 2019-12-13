@@ -1,0 +1,40 @@
+---
+platform: template
+switches:
+  gui_powerup:
+    friendly_name: Power up
+    value_template: >-
+      {{ is_state("binary_sensor.blackout_active", "off") }}
+    icon_template: >-
+      {% if is_state("binary_sensor.blackout_active", "off") %}
+        mdi:circle
+      {% else %}
+        mdi:circle-outline
+      {% endif %}
+    turn_on:
+      service: script.turn_on
+      data:
+        entity_id: script.trigger_power_up_event
+    turn_off:
+      service: script.turn_on
+      data:
+        entity_id: script.trigger_power_up_event
+
+  gui_powerdown:
+    friendly_name: Power down
+    value_template: >-
+      {{ is_state("binary_sensor.blackout_active", "on") }}
+    icon_template: >-
+      {% if is_state("binary_sensor.blackout_active", "on") %}
+        mdi:circle
+      {% else %}
+        mdi:circle-outline
+      {% endif %}
+    turn_on:
+      service: script.turn_on
+      data:
+        entity_id: script.trigger_blackout_event
+    turn_off:
+      service: script.turn_on
+      data:
+        entity_id: script.trigger_blackout_event

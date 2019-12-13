@@ -11,7 +11,7 @@ switches:
         {% elif is_state("timer.slaapkamer_cooldown", "active") %}
           mdi:snowflake 
         {% else %}
-          mdi:power
+          mdi:lightbulb
         {% endif %}
     turn_on:
       service: light.turn_on

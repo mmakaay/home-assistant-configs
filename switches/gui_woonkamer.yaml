@@ -25,7 +25,7 @@ switches:
       {% elif is_state("timer.woonkamer_cooldown", "active") %}
         mdi:snowflake 
       {% else %}
-        mdi:power
+        mdi:lightbulb
       {% endif %}
     turn_on:
       service: script.turn_on
@@ -104,10 +104,10 @@ switches:
         entity_id: script.zet_bank_links_stroom_uit
 
   gui_buitenstopcontact_stroom:
-    friendly_name: Buitenstopcontact
+    friendly_name: Tuinlampjes
     value_template: >-
       {{ is_state("light.buitenstopcontact", "on") }}
-    icon_template: mdi:flash
+    icon_template: mdi:wall-sconce-flat
     turn_on:
       service: script.turn_on
       data:

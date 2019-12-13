@@ -16,7 +16,7 @@
   condition:
     - condition: numeric_state
       entity_id: sensor.keuken_lichtsterkte
-      below: 2
+      below: 5
     - condition: state
       entity_id: light.keuken_groep_ha
       state: 'off'

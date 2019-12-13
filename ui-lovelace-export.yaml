@@ -53,6 +53,49 @@ views:
       type: conditional
     type: vertical-stack
   - cards:
+    - cards:
+      - card:
+          entity: script.trigger_blackout_event
+          hold_action:
+            action: none
+          icon: mdi:power-sleep
+          icon_height: 30px
+          name: Zet alles uit (zzz...)
+          show_icon: true
+          show_name: true
+          tap_action:
+            action: call-service
+            confirmation:
+              text: Zeker weten?
+            service: script.turn_on
+            service_data:
+              entity_id: script.trigger_blackout_event
+          theme: other-button
+          type: entity-button
+        conditions:
+        - entity: binary_sensor.blackout_active
+          state: 'off'
+        type: conditional
+      - card:
+          entity: script.trigger_power_up_event
+          hold_action:
+            action: none
+          icon: mdi:power
+          icon_height: 30px
+          show_icon: true
+          show_name: true
+          tap_action:
+            action: call-service
+            service: script.turn_on
+            service_data:
+              entity_id: script.trigger_power_up_event
+          theme: other-button
+          type: entity-button
+        conditions:
+        - entity: binary_sensor.blackout_active
+          state: 'on'
+        type: conditional
+      type: horizontal-stack
     - content: WOONKAMER
       theme: separator
       type: markdown
@@ -104,13 +147,6 @@ views:
         type: entity-button
       type: horizontal-stack
     - cards:
-      - entity: switch.gui_buitenstopcontact_stroom
-        icon_height: 30px
-        name: Buiten
-        tap_action:
-          action: toggle
-        theme: other-button
-        type: entity-button
       - entity: switch.gui_televisie_stroom
         icon_height: 30px
         tap_action:
@@ -131,55 +167,12 @@ views:
         type: entity-button
       type: horizontal-stack
     - cards:
-      - entity: switch.gui_woonkamer_ambilite
+      - entity: switch.gui_buitenstopcontact_stroom
         icon_height: 30px
         tap_action:
           action: toggle
         theme: other-button
         type: entity-button
-      - cards:
-        - card:
-            entity: script.trigger_blackout_event
-            hold_action:
-              action: none
-            icon: mdi:power-sleep
-            icon_height: 30px
-            name: Zet alles uit (zzz...)
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: call-service
-              confirmation:
-                text: Zeker weten?
-              service: script.turn_on
-              service_data:
-                entity_id: script.trigger_blackout_event
-            theme: other-button
-            type: entity-button
-          conditions:
-          - entity: binary_sensor.blackout_active
-            state: 'off'
-          type: conditional
-        - card:
-            entity: script.trigger_power_up_event
-            hold_action:
-              action: none
-            icon: mdi:power
-            icon_height: 30px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: call-service
-              service: script.turn_on
-              service_data:
-                entity_id: script.trigger_power_up_event
-            theme: other-button
-            type: entity-button
-          conditions:
-          - entity: binary_sensor.blackout_active
-            state: 'on'
-          type: conditional
-        type: horizontal-stack
       type: horizontal-stack
     - content: KEUKEN
       theme: separator
@@ -218,17 +211,16 @@ views:
             entity_id: scene.keuken_automatisch_nacht
         theme: light-button
         type: entity-button
-      - entity: switch.gui_keuken_licht
+      type: horizontal-stack
+    - cards:
+      - entity: switch.gui_koffiezetapparaat_stroom
         icon_height: 30px
         tap_action:
           action: toggle
-        theme: light-button
+        theme: other-button
         type: entity-button
-      type: horizontal-stack
-    - cards:
-      - entity: switch.stekker_koffiezetapparaat
+      - entity: switch.gui_keuken_licht
         icon_height: 30px
-        name: Koffie (stekker, z-wave experimentje)
         tap_action:
           action: toggle
         theme: other-button
@@ -267,8 +259,9 @@ views:
   - entities:
     - entity: switch.playstation4
     - entity: switch.settopbox
-    - entity: zwave.hal_sensor
+    - entity: switch.gui_woonkamer_ambilite
     - entity: binary_sensor.hal_beweging
+    - entity: sensor.stekker_koffiezetapparaat_power
     show_header_toggle: false
     title: Experimenteel
     type: entities
@@ -301,6 +294,14 @@ views:
         --iron-icon-width: 30px
         left: 15%
         top: 9%
+      title: Kerstlampjes buiten
+      type: state-icon
+    - entity: switch.gui_koffiezetapparaat_stroom
+      style:
+        --iron-icon-height: 30px
+        --iron-icon-width: 30px
+        left: 56%
+        top: 39%
       title: Kerstlampjes buiten
       type: state-icon
     - entity: switch.switch_for_itv_ps4_netswitch_tvstrip
@@ -490,6 +491,12 @@ views:
         font-size: 11px
         left: 53.5%
         top: 84.5%
+      type: state-label
+    - entity: sensor.stekker_koffiezetapparaat_power
+      style:
+        font-size: 11px
+        left: 54.3%
+        top: 35.6%
       type: state-label
     - conditions:
       - entity: binary_sensor.achterdeur_beweging

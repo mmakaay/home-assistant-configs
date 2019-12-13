@@ -1,16 +1,1 @@
-- id: '1576137967598'
-  alias: AAA Test hall sensor
-  description: Just an experimental automation
-  trigger:
-  - device_id: a078c0f042244aa2817a0e2085e86c2a
-    domain: binary_sensor
-    entity_id: binary_sensor.hal_beweging
-    platform: device
-    type: turned_on
-  condition: []
-  action:
-  - data:
-      message: Bewegingssensor hal triggerde (kan Harry zijn)
-      notification_id: binary_sensor.hal_beweging
-      title: Hal sensortest
-    service: persistent_notification.create
+[]
