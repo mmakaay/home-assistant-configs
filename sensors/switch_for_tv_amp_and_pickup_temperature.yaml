@@ -2,6 +2,6 @@
 # A templated sensor, used to extract the temperature from an AVM power switch.
 platform: template
 sensors:
-  switch_for_tv_amp_and_pickup_temperature:
-    value_template: "{{ state_attr('switch.switch_for_tv_amp_and_pickup', 'temperature') }}"
+  stekker_tvkast_rechts_temperature:
+    value_template: "{{ state_attr('switch.stekker_tvkast_rechts', 'temperature') }}"
     unit_of_measurement: "°C"

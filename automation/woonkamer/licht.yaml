@@ -1,4 +1,13 @@
 ---
+# This set of automation rules takes care of automatic lighting in the
+# living room. Lights are automatically turned on when motion is detected.
+#
+# Besides these automation rules, there is also script.activate_scene.
+# When that script is run to activate a scene (linked to hardware and
+# web GUI buttons), then automatic lighting timers will be cancelled.
+# This way, when a human changes the lights, they will not be turned off
+# automatically.
+
 - id: woonkamer_licht_A
   alias: "[WOONKAMER LICHT] A. zet aan bij beweging in het donker"
   description: >
@@ -18,9 +27,6 @@
       entity_id: timer.woonkamer_cooldown
       state: 'idle'
   action:
-    - service: timer.start
-      data:
-        entity_id: timer.woonkamer_warmup
     - service: scene.turn_on
       data_template:
         entity_id: >
@@ -101,29 +107,7 @@
 
 
 - id: woonkamer_licht_E
-  alias: "[WOONKAMER LICHT] E. bij aanpassing lampen, timer uitschakelen"
-  description: >
-    Wanneer er aanpassingen worden gedaan in de verlichting, stop dan
-    een eventuele timer. Vanaf dan is het de verantwoordelijkheid van
-    het mens dat de instellingen heeft aangepast.
-  trigger:
-    - entity_id: light.woonkamer_groep_ha
-      platform: state
-  condition:
-    - condition: state
-      entity_id: timer.woonkamer_warmup
-      state: 'idle'
-  action:
-    - service: timer.cancel
-      data:
-        entity_id: timer.woonkamer
-    - service: timer.cancel
-      data:
-        entity_id: timer.woonkamer_cooldown
-
-
-- id: woonkamer_licht_F
-  alias: "[WOONKAMER LICHT] F. cooldown activeren als alle lampen uit gaan"
+  alias: "[WOONKAMER LICHT] E. cooldown activeren als alle lampen uit gaan"
   description: >
     Wanneer alle lampen uitgaan in de woonkamer, dan willen we de
     bewegingssensors even negeren, zodat eventuele beweging niet direct
@@ -138,16 +122,13 @@
     - service: timer.cancel
       data:
         entity_id: timer.woonkamer
-    - service: timer.cancel
-      data:
-        entity_id: timer.woonkamer_warmup
     - service: timer.start
       data:
         entity_id: timer.woonkamer_cooldown
 
 
-- id: woonkamer_licht_G
-  alias: "[WOONKAMER LICHT] G. cooldown deactiveren als er lampen aan gaan"
+- id: woonkamer_licht_F
+  alias: "[WOONKAMER LICHT] F. cooldown deactiveren als er lampen aan gaan"
   description: >
     Wanneer er lampen aan worden gezet, dan kan een eventuele cooldown
     timer worden gestopt.

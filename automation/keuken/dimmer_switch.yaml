@@ -12,9 +12,8 @@
       subtype: turn_on
       type: remote_button_long_press
   action:
-    - service: script.turn_on
-      data:
-        entity_id: script.trigger_power_up_event
+    service: script.trigger_power_up_event
+
 
 - id: keuken_dimmer_long_off
   alias: "[KEUKEN DIMMER] long 'off' triggert blackout"
@@ -28,9 +27,8 @@
       subtype: turn_off
       type: remote_button_long_press
   action:
-    - service: script.turn_on
-      data:
-        entity_id: script.trigger_blackout_event
+    - service: script.trigger_blackout_event
+
 
 - id: keuken_dimmer_on
   alias: "[KEUKEN DIMMER] 'on' activeert scene 'Koken'"
@@ -41,9 +39,10 @@
     subtype: turn_on
     type: remote_button_short_release
   action:
-  - data:
-      entity_id: scene.keuken_koken
-    service: scene.turn_on
+    service: script.activate_scene
+    data:
+      area: keuken
+      scene: keuken_koken
 
 
 - id: keuken_dimmer_up
@@ -56,9 +55,10 @@
       subtype: dim_up
       type: remote_button_short_release
   action:
-    - service: scene.turn_on
-      data:
-        entity_id: scene.keuken_gedimd
+    service: script.activate_scene
+    data:
+      area: keuken
+      scene: keuken_gedimd
 
 
 - id: keuken_dimmer_down
@@ -70,9 +70,10 @@
       subtype: dim_down
       type: remote_button_short_press
   action:
-    - service: scene.turn_on
-      data:
-        entity_id: scene.keuken_automatisch_nacht
+    service: script.activate_scene
+    data:
+      area: keuken
+      scene: keuken_automatisch_nacht
 
 
 - id: keuken_dimmer_off

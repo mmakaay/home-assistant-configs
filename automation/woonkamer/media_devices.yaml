@@ -27,4 +27,4 @@
   action:
     - service: script.turn_on
       data:
-        entity_id: script.zet_televisie_stroom_aan
+        entity_id: script.zet_tvkast_rechts_stroom_aan

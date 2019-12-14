@@ -68,10 +68,10 @@ recorder:
 #      - sensor.voltage_sags_phase_l2
 #      - sensor.voltage_sags_phase_l3
 #      - sensor.voltage_swells_phase_l1
-#      - switch.switch_for_tv_amp_and_pickup
-#      - switch.switch_for_tv_amp_and_pickup_2
-#      - sensor.switch_for_tv_amp_and_pickup_power
-#      - switch.switch_for_itv_ps4_netswitch_tvstrip_2
+#      - switch.stekker_tvkast_rechts
+#      - switch.stekker_tvkast_rechts_2
+#      - switch.stekker_tvkast_links
+#      - switch.stekker_tvkast_links_2
 #      - sensor.dar_voorkant_gft
 #      - sensor.dar_voorkant_papier
 #      - sensor.dar_voorkant_restafval
@@ -160,7 +160,7 @@ switch: !include_dir_list switches
 
 fritzbox:
   devices:
-    - host: fritzbox.home.makaay.nl
+    - host: !secret fritzbox-host
       username: !secret fritzbox-home-assistant-username
       password: !secret fritzbox-home-assistant-password
 

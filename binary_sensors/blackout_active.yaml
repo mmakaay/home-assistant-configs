@@ -12,7 +12,7 @@ sensors:
       - light.badkamer_groep_deconz
       - switch.stekker_links_van_de_bank
       - switch.stekker_bij_de_tuindeuren
-      - switch.switch_for_tv_amp_and_pickup
+      - switch.stekker_tvkast_rechts
       - switch.stekker_koffiezetappraat
     value_template: >-
         {{ (is_state("media_player.ps4", "off") or
@@ -25,5 +25,5 @@ sensors:
            is_state("switch.stekker_links_van_de_bank", "off") and
            is_state("switch.stekker_bij_de_tuindeuren", "off") and
            is_state("switch.stekker_koffiezetapparaat", "off") and
-           is_state("switch.switch_for_tv_amp_and_pickup", "off") }}
+           is_state("switch.stekker_tvkast_rechts", "off") }}
     icon_template: mdi:power-sleep

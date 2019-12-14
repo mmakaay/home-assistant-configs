@@ -1,0 +1,24 @@
+---
+platform: template
+switches:
+  gui_voordeur_buiten_licht:
+    friendly_name: Voordeur
+    value_template: >-
+        {{ is_state("switch.licht_voordeur_buiten", "on") }}
+    icon_template: mdi:table
+#    icon_template: >-
+#        {% if is_state("timer.gang", "active") %}
+#          mdi:timer 
+#        {% elif is_state("timer.gang_cooldown", "active") %}
+#          mdi:snowflake 
+#        {% else %}
+#          mdi:lightbulb
+#        {% endif %}
+    turn_on:
+      service: switch.turn_on
+      data:
+        entity_id: switch.licht_voordeur_buiten
+    turn_off:
+      service: switch.turn_off
+      data:
+        entity_id: switch.licht_voordeur_buiten

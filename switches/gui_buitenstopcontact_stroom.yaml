@@ -1,0 +1,16 @@
+---
+platform: template
+switches:
+  gui_buitenstopcontact_stroom:
+    friendly_name: Tuinlampjes
+    value_template: >-
+      {{ is_state("light.buitenstopcontact", "on") }}
+    icon_template: mdi:wall-sconce-flat
+    turn_on:
+      service: script.turn_on
+      data:
+        entity_id: script.zet_buitenstopcontact_stroom_aan
+    turn_off:
+      service: script.turn_on
+      data:
+        entity_id: script.zet_buitenstopcontact_stroom_uit

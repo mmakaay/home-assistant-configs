@@ -7,28 +7,28 @@
 
 platform: template
 lights:
-  gang_plafond_dimbaar:
-    friendly_name: Gang plafond (dimbaar)
+  toilet_plafond_dimbaar:
+    friendly_name: Toilet plafond (dimbaar)
     level_template: >
-      {% if is_state('light.gang_plafond', 'on') %}
-        {% if (state_attr('light.gang_plafond', 'brightness') > 100) %}
+      {% if is_state('light.toilet_plafond', 'on') %}
+        {% if (state_attr('light.toilet_plafond', 'brightness') > 100) %}
           255
         {% else %}
-          {{ ((state_attr('light.gang_plafond', 'brightness')|float)*255/100)|round }}
+          {{ ((state_attr('light.toilet_plafond', 'brightness')|float)*255/100)|round }}
         {% endif %}
       {% else %}
         0
       {% endif %}
     value_template: >
-      {% if is_state('light.gang_plafond', 'on') %}on{% else %}off{% endif %}
+      {% if is_state('light.toilet_plafond', 'on') %}on{% else %}off{% endif %}
     turn_on:
       service: light.turn_on
-      entity_id: light.gang_plafond
+      entity_id: light.toilet_plafond
     turn_off:
       service: light.turn_off
-      entity_id: light.gang_plafond
+      entity_id: light.toilet_plafond
     set_level:
       service: light.turn_on
-      entity_id: light.gang_plafond
+      entity_id: light.toilet_plafond
       data_template:
         brightness: "{{ (brightness|float/255*100)|int }}"

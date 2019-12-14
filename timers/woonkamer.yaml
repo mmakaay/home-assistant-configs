@@ -1,7 +1,3 @@
-woonkamer_warmup:
-  name: Gang woonkamer warmup timer
-  duration: 00:00:05
-  icon: mdi:fire
 woonkamer:
   name: Woonkamer timer
   duration: 00:05:00

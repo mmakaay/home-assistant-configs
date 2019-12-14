@@ -1,0 +1,31 @@
+---
+# This script is used to turn on a scene and cancel timers for
+# automatic lighting in the area. This script is used, because there
+# is no event available for turning on a scene. Otherwise I could
+# have reacted to that event to turn off timers. 
+#
+# Prerequisite for using this script is that the area has the expected
+# timers defined:
+#
+# - timer.{{ area }}
+# - timer.{{ area }}_cooldown
+
+activate_scene:
+  description: "Activate a scene"
+  fields:
+    area:
+      description: "The name of the area for which to activate the scene"
+      example: "kitchen"
+    scene:
+      description: "The name of the scene to activate"
+      example: "cooking"
+  sequence:
+    - service: scene.turn_on
+      data_template:
+        entity_id: "scene.{{ scene }}"
+    - service: timer.cancel
+      data_template:
+        entity_id: "timer.{{ area }}"
+    - service: timer.cancel
+      data_template:
+        entity_id: "timer.{{ area }}_cooldown"

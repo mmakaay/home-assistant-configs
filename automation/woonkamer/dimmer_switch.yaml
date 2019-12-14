@@ -12,9 +12,8 @@
       subtype: turn_on
       type: remote_button_long_press
   action:
-    - service: script.turn_on
-      data:
-        entity_id: script.trigger_power_up_event
+    service: script.trigger_power_up_event
+
 
 - id: woonkamer_dimmer_long_off
   alias: "[WOONKAMER DIMMER] long 'off' triggert blackout"
@@ -28,9 +27,8 @@
       subtype: turn_off
       type: remote_button_long_press
   action:
-    - service: script.turn_on
-      data:
-        entity_id: script.trigger_blackout_event
+    service: script.trigger_blackout_event
+
 
 - id: woonkamer_dimmer_on
   alias: "[WOONKAMER DIMMER] 'on' activeert scene 'Bingen'"
@@ -42,9 +40,10 @@
     subtype: turn_on
     type: remote_button_short_release
   action:
-  - data:
-      entity_id: scene.woonkamer_bingen
-    service: scene.turn_on
+    service: script.activate_scene
+    data:
+      area: woonkamer
+      scene: woonkamer_bingen
 
 
 - id: woonkamer_dimmer_off
@@ -73,9 +72,10 @@
     subtype: dim_up
     type: remote_button_short_release
   action:
-  - data:
-      entity_id: scene.woonkamer_klaprozen
-    service: scene.turn_on
+    service: script.activate_scene
+    data:
+      area: woonkamer
+      scene: woonkamer_klaprozen
 
 
 - id: woonkamer_dimmer_down
@@ -88,6 +88,7 @@
     subtype: dim_down
     type: remote_button_short_release
   action:
-  - data:
-      entity_id: scene.woonkamer_feet_up
-    service: scene.turn_on
+    service: script.activate_scene
+    data:
+      area: woonkamer
+      scene: woonkamer_feet_up

@@ -1,0 +1,16 @@
+---
+platform: template
+switches:
+  gui_tvkast_rechts_stroom:
+    friendly_name: TV/Amp
+    value_template: >-
+      {{ is_state("switch.stekker_tvkast_rechts", "on") }}
+    icon_template: mdi:flash
+    turn_on:
+      service: script.turn_on
+      data:
+        entity_id: script.zet_tvkast_rechts_stroom_aan
+    turn_off:
+      service: script.turn_on
+      data:
+        entity_id: script.zet_tvkast_rechts_stroom_uit

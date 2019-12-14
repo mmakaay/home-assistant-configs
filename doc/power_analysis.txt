@@ -1,0 +1,17 @@
+Measurements
+------------
+
+19.7    tv + amp standby, wifi AP aan
+46.7    tv aan -> 27 W
+48.7    amp aan -> 29 W
+48 +/-  tv beeld aan -> +/- 27 W, fluctueert
+79 +/-  tv beeld aan + amp ->  +/- 60 W max, flucteert
+
+
+Results
+-------
+
+TV              30 W
+Amp             30 W
+Phone + AP      20 W
+Pickup          ?? W

@@ -410,78 +410,299 @@
 - id: woonkamer_automatisch_ochtend
   name: Woonkamer (automatisch, ochtend)
   entities:
-    light.droogkap:
-      state: 'on'
-      brightness: 100
-      color_temp: 396
-    light.staande_lamp:
-      state: 'on'
-      brightness: 100
-      color_temp: 396
     light.achter_de_koelkast:
+      effect_list:
+      - colorloop
+      friendly_name: Achter de koelkast
+      is_deconz_group: false
       state: 'off'
+      supported_features: 61
     light.achter_tv_strip:
+      effect_list:
+      - colorloop
+      friendly_name: Achter TV strip
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
       state: 'off'
+      supported_features: 63
+    light.droogkap:
+      brightness: 100
+      color_temp: 396
+      effect_list:
+      - colorloop
+      friendly_name: Droogkap
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
     light.kast_boven:
-      state: 'off'
+      brightness: 196
+      color_temp: 457
+      effect_list:
+      - colorloop
+      friendly_name: Kast boven
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
     light.kast_midden:
       brightness: 123
       color_temp: 438
+      effect_list:
+      - colorloop
+      friendly_name: Kast midden
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
       state: 'on'
+      supported_features: 63
     light.kast_onder:
-      state: 'off'
+      brightness: 94
+      color_temp: 433
+      effect_list:
+      - colorloop
+      friendly_name: Kast onder
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
+    light.staande_lamp:
+      brightness: 100
+      color_temp: 396
+      effect_list:
+      - colorloop
+      friendly_name: Staande lamp
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
     light.zon:
+      effect_list:
+      - colorloop
+      friendly_name: Zon
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
       state: 'off'
+      supported_features: 63
 - id: woonkamer_automatisch_dag
   name: Woonkamer (automatisch, dag)
   entities:
-    light.droogkap:
-      state: 'on'
-      brightness: 100
-      color_temp: 396
-    light.staande_lamp:
-      state: 'on'
-      brightness: 100
-      color_temp: 396
     light.achter_de_koelkast:
+      effect_list:
+      - colorloop
+      friendly_name: Achter de koelkast
+      is_deconz_group: false
       state: 'off'
+      supported_features: 61
     light.achter_tv_strip:
+      effect_list:
+      - colorloop
+      friendly_name: Achter TV strip
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
       state: 'off'
-    light.kast_boven:
-      state: 'off'
-    light.kast_midden:
-      brightness: 123
-      color_temp: 438
+      supported_features: 63
+    light.droogkap:
+      brightness: 107
+      color_temp: 355
+      effect_list:
+      - colorloop
+      friendly_name: Droogkap
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
       state: 'on'
+      supported_features: 63
+    light.kast_boven:
+      brightness: 184
+      effect_list:
+      - colorloop
+      friendly_name: Kast boven
+      hs_color:
+      - 34.545
+      - 64.706
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 184
+      - 89
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.504
+      - 0.407
+    light.kast_midden:
+      brightness: 202
+      color_temp: 438
+      effect_list:
+      - colorloop
+      friendly_name: Kast midden
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
     light.kast_onder:
-      state: 'off'
+      brightness: 144
+      effect_list:
+      - colorloop
+      friendly_name: Kast onder
+      hs_color:
+      - 34.545
+      - 64.706
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 184
+      - 89
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.504
+      - 0.407
+    light.staande_lamp:
+      brightness: 100
+      color_temp: 396
+      effect_list:
+      - colorloop
+      friendly_name: Staande lamp
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
     light.zon:
-      state: 'off'
+      brightness: 95
+      effect_list:
+      - colorloop
+      friendly_name: Zon
+      hs_color:
+      - 35.21
+      - 65.49
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 186
+      - 88
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.503
+      - 0.41
 - id: woonkamer_automatisch_avond
   name: Woonkamer (automatisch, avond)
   entities:
-    light.droogkap:
-      state: 'on'
-      brightness: 100
-      color_temp: 396
-    light.staande_lamp:
-      state: 'on'
-      brightness: 100
-      color_temp: 396
     light.achter_de_koelkast:
+      effect_list:
+      - colorloop
+      friendly_name: Achter de koelkast
+      is_deconz_group: false
       state: 'off'
+      supported_features: 61
     light.achter_tv_strip:
+      effect_list:
+      - colorloop
+      friendly_name: Achter TV strip
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
       state: 'off'
+      supported_features: 63
+    light.droogkap:
+      brightness: 96
+      color_temp: 396
+      effect_list:
+      - colorloop
+      friendly_name: Droogkap
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
     light.kast_boven:
-      state: 'off'
+      brightness: 158
+      effect_list:
+      - colorloop
+      friendly_name: Kast boven
+      hs_color:
+      - 34.182
+      - 64.706
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 184
+      - 89
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.504
+      - 0.407
     light.kast_midden:
       brightness: 123
       color_temp: 438
+      effect_list:
+      - colorloop
+      friendly_name: Kast midden
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
       state: 'on'
+      supported_features: 63
     light.kast_onder:
-      state: 'off'
+      brightness: 142
+      effect_list:
+      - colorloop
+      friendly_name: Kast onder
+      hs_color:
+      - 34.182
+      - 64.706
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 184
+      - 89
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.504
+      - 0.407
+    light.staande_lamp:
+      brightness: 100
+      color_temp: 396
+      effect_list:
+      - colorloop
+      friendly_name: Staande lamp
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
     light.zon:
+      effect_list:
+      - colorloop
+      friendly_name: Zon
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
       state: 'off'
+      supported_features: 63
 - id: woonkamer_bingen
   name: Woonkamer Bingen
   entities:
@@ -538,28 +759,198 @@
 - id: toilet_automatisch_nacht
   name: Toilet (automatisch, nacht)
   entities:
-    light.toilet_plafond:
-      brightness: 96
-      color_temp: 427
+    light.toilet_plafond_dimbaar:
+      brightness: 110
+      friendly_name: Toilet plafond (dimbaar)
       state: 'on'
 - id: toilet_automatisch_ochtend
   name: Toilet (automatisch, ochtend)
   entities:
-    light.toilet_plafond:
-      brightness: 109
-      color_temp: 380
+    light.toilet_plafond_dimbaar:
+      brightness: 110
+      friendly_name: Toilet plafond (dimbaar)
       state: 'on'
 - id: toilet_automatisch_dag
   name: Toilet (automatisch, dag)
   entities:
-    light.toilet_plafond:
-      brightness: 183
-      color_temp: 338
+    light.toilet_plafond_dimbaar:
+      brightness: 178
+      friendly_name: Toilet plafond (dimbaar)
       state: 'on'
 - id: toilet_automatisch_avond
   name: Toilet (automatisch, avond)
   entities:
-    light.toilet_plafond:
-      brightness: 166
-      color_temp: 388
+    light.toilet_plafond_dimbaar:
+      brightness: 130
+      friendly_name: Toilet plafond (dimbaar)
+      state: 'on'
+- id: '1576336913861'
+  name: Woonkamer Kerst
+  entities:
+    light.achter_de_koelkast:
+      brightness: 18
+      effect_list:
+      - colorloop
+      friendly_name: Achter de koelkast
+      hs_color:
+      - 32.941
+      - 100
+      is_deconz_group: false
+      rgb_color:
+      - 255
+      - 139
+      - 0
+      state: 'on'
+      supported_features: 61
+      xy_color:
+      - 0.597
+      - 0.387
+    light.achter_tv_strip:
+      brightness: 98
+      effect_list:
+      - colorloop
+      friendly_name: Achter TV strip
+      hs_color:
+      - 135.529
+      - 100
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 0
+      - 255
+      - 65
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.17
+      - 0.7
+    light.droogkap:
+      brightness: 116
+      effect_list:
+      - colorloop
+      friendly_name: Droogkap
+      hs_color:
+      - 44.793
+      - 85.098
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 200
+      - 38
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.508
+      - 0.451
+    light.kast_boven:
+      brightness: 254
+      effect_list:
+      - colorloop
+      friendly_name: Kast boven
+      hs_color:
+      - 3.093
+      - 76.078
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 71
+      - 61
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.643
+      - 0.309
+    light.kast_midden:
+      brightness: 128
+      effect_list:
+      - colorloop
+      friendly_name: Kast midden
+      hs_color:
+      - 135.529
+      - 100
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 0
+      - 255
+      - 65
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.17
+      - 0.7
+    light.kast_onder:
+      brightness: 142
+      effect_list:
+      - colorloop
+      friendly_name: Kast onder
+      hs_color:
+      - 29.429
+      - 82.353
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 148
+      - 44
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.574
+      - 0.388
+    light.staande_lamp:
+      brightness: 92
+      effect_list:
+      - colorloop
+      friendly_name: Staande lamp
+      hs_color:
+      - 28.846
+      - 81.569
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 146
+      - 46
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.576
+      - 0.385
+    light.vaaslamp:
+      friendly_name: Vaaslamp
+      icon: mdi:blur-radial
+      state: 'on'
+      supported_features: 0
+    light.zon:
+      brightness: 57
+      effect_list:
+      - colorloop
+      friendly_name: Zon
+      hs_color:
+      - 28.846
+      - 81.569
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 146
+      - 46
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.576
+      - 0.385
+    switch.gui_tvkast_links_stroom:
+      friendly_name: TV kast links
+      icon: mdi:flash
       state: 'on'

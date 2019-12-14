@@ -54,47 +54,26 @@ views:
     type: vertical-stack
   - cards:
     - cards:
-      - card:
-          entity: script.trigger_blackout_event
-          hold_action:
-            action: none
-          icon: mdi:power-sleep
-          icon_height: 30px
-          name: Zet alles uit (zzz...)
-          show_icon: true
-          show_name: true
-          tap_action:
-            action: call-service
-            confirmation:
-              text: Zeker weten?
-            service: script.turn_on
-            service_data:
-              entity_id: script.trigger_blackout_event
-          theme: other-button
-          type: entity-button
-        conditions:
-        - entity: binary_sensor.blackout_active
-          state: 'off'
-        type: conditional
-      - card:
-          entity: script.trigger_power_up_event
-          hold_action:
-            action: none
-          icon: mdi:power
-          icon_height: 30px
-          show_icon: true
-          show_name: true
-          tap_action:
-            action: call-service
-            service: script.turn_on
-            service_data:
-              entity_id: script.trigger_power_up_event
-          theme: other-button
-          type: entity-button
-        conditions:
-        - entity: binary_sensor.blackout_active
-          state: 'on'
-        type: conditional
+      - entity: switch.gui_powerup
+        icon_height: 20px
+        tap_action:
+          action: call-service
+          service: switch.turn_on
+          service_data:
+            entity_id: switch.gui_powerup
+        theme: other-button
+        type: entity-button
+      - entity: switch.gui_powerdown
+        icon_height: 20px
+        tap_action:
+          action: call-service
+          confirmation:
+            text: Zeker weten?
+          service: switch.turn_on
+          service_data:
+            entity_id: switch.gui_powerdown
+        theme: other-button
+        type: entity-button
       type: horizontal-stack
     - content: WOONKAMER
       theme: separator
@@ -139,21 +118,9 @@ views:
             entity_id: scene.woonkamer_feet_up
         theme: light-button
         type: entity-button
-      - entity: switch.gui_woonkamer_licht
-        icon_height: 30px
-        tap_action:
-          action: toggle
-        theme: light-button
-        type: entity-button
       type: horizontal-stack
     - cards:
-      - entity: switch.gui_televisie_stroom
-        icon_height: 30px
-        tap_action:
-          action: toggle
-        theme: other-button
-        type: entity-button
-      - entity: switch.gui_bank_links_stroom
+      - entity: switch.gui_buitenstopcontact_stroom
         icon_height: 30px
         tap_action:
           action: toggle
@@ -165,9 +132,7 @@ views:
           action: toggle
         theme: other-button
         type: entity-button
-      type: horizontal-stack
-    - cards:
-      - entity: switch.gui_buitenstopcontact_stroom
+      - entity: switch.gui_woonkamer_licht
         icon_height: 30px
         tap_action:
           action: toggle
@@ -234,25 +199,25 @@ views:
         icon_height: 30px
         tap_action:
           action: toggle
-        theme: light-button
+        theme: other-button
         type: entity-button
       - entity: switch.gui_toilet_licht
         icon_height: 30px
         tap_action:
           action: toggle
-        theme: light-button
+        theme: other-button
         type: entity-button
       - entity: switch.gui_badkamer_licht
         icon_height: 30px
         tap_action:
           action: toggle
-        theme: light-button
+        theme: other-button
         type: entity-button
       - entity: switch.gui_slaapkamer_licht
         icon_height: 30px
         tap_action:
           action: toggle
-        theme: light-button
+        theme: other-button
         type: entity-button
       type: horizontal-stack
     type: vertical-stack
@@ -262,6 +227,7 @@ views:
     - entity: switch.gui_woonkamer_ambilite
     - entity: binary_sensor.hal_beweging
     - entity: sensor.stekker_koffiezetapparaat_power
+    - entity: binary_sensor.blackout_active
     show_header_toggle: false
     title: Experimenteel
     type: entities
@@ -279,7 +245,7 @@ views:
         top: 68%
       title: Vaaslamp
       type: state-icon
-    - entity: switch.switch_for_tv_amp_and_pickup
+    - entity: switch.stekker_tvkast_rechts
       style:
         --iron-icon-height: 30px
         --iron-icon-width: 30px
@@ -304,7 +270,7 @@ views:
         top: 39%
       title: Kerstlampjes buiten
       type: state-icon
-    - entity: switch.switch_for_itv_ps4_netswitch_tvstrip
+    - entity: switch.stekker_tvkast_links
       style:
         --iron-icon-height: 30px
         --iron-icon-width: 30px
@@ -480,13 +446,13 @@ views:
         left: 49%
         top: 1%
       type: state-label
-    - entity: sensor.switch_for_itv_ps4_netswitch_tvstrip_power
+    - entity: sensor.stekker_tvkast_links
       style:
         font-size: 11px
         left: 53.5%
         top: 62.7%
       type: state-label
-    - entity: sensor.switch_for_tv_amp_and_pickup_power
+    - entity: sensor.stekker_tvkast_rechts
       style:
         font-size: 11px
         left: 53.5%
@@ -1005,7 +971,7 @@ views:
     - entity: light.droogkap
     - entity: light.achter_de_koelkast
     - entity: light.vaaslamp
-      icon: mdi:lightbulb
+    - entity: switch.gui_buitenstopcontact_stroom
     title: Woonkamer
     type: entities
   - entities:
@@ -1018,17 +984,21 @@ views:
     title: Keuken
     type: entities
   - entities:
-    - entity: light.buitenstopcontact
-      name: Kerslampjes achter het huis
     - entity: light.gang_plafond_dimbaar
     - entity: light.toilet_plafond
     - entity: light.badkamer_plafond
     - entity: light.onder_het_bed
     title: Overige
     type: entities
-  icon: mdi:lightbulb
-  path: lampen
-  title: Lampen
+  - entities:
+    - entity: switch.gui_bank_links_stroom
+    - entity: switch.gui_tvkast_rechts_stroom
+    - entity: switch.gui_koffiezetapparaat_stroom
+    title: Stroom
+    type: entities
+  icon: mdi:toggle-switch-off-outline
+  path: switches
+  title: Switches
 - badges: []
   cards:
   - entity: sensor.dimmer_switch_battery_level
