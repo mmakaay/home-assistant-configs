@@ -1,0 +1,43 @@
+---
+# This set of automation rules takes care of automatic lighting in the garden.
+
+- id: tuin_licht_A
+  alias: "[TUIN LICHT] A. zet automatisch aan"
+  description: >
+    Zet het licht in de tuin aan als het schemert en wanneer er iemand
+    in huis is.
+  trigger:
+    - platform: state
+      entity_id: sun.sun
+      to: below_horizon 
+    - platform: state
+      entity_id: binary_sensor.iemand_in_huis
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon 
+    - condition: state
+      entity_id: binary_sensor.iemand_in_huis
+      state: 'on'
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.gui_buitenstopcontact_stroom
+  
+
+- id: tuin_licht_B
+  alias: "[TUIN LICHT] B. zet automatisch uit"
+  description: >
+    Zet het licht in de tuin automatisch uit wanneer het al een tijdje nacht
+    is geworden. Normaal gesproken zal het licht al wel door iemand uit zijn
+    gedaan. Dit is alleen maar een fallback optie, mocht dat niet gebeurd zijn.
+  trigger:
+    - platform: state
+      entity_id: sensor.periode_van_de_dag
+      to: 'nacht'
+      for: '03:00:00'
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.gui_buitenstopcontact_stroom

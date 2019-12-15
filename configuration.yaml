@@ -14,7 +14,7 @@ logbook:
 person:
 #script:
 #ssdp:
-#sun:
+sun:
 system_health:
 updater:
 #zeroconf:

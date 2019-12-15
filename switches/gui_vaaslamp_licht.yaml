@@ -2,8 +2,8 @@
 # plus and have it represented as a lamp (so it can be added to a light
 # group).
 platform: template
-lights:
-  vaaslamp:
+switches:
+  gui_vaaslamp_licht:
     friendly_name: Vaaslamp
     icon_template: mdi:blur-radial
     value_template: >

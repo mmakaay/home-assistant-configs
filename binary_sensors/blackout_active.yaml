@@ -2,7 +2,7 @@
 platform: template
 sensors:
   blackout_active:
-    friendly_name: All blackout feature-related devices are turned off
+    friendly_name: Blackout active
     entity_id:
       - media_player.ps4
       - light.woonkamer_groep_deconz
@@ -10,8 +10,11 @@ sensors:
       - light.gang_groep_deconz
       - light.toilet_groep_deconz
       - light.badkamer_groep_deconz
+      - switch.licht_hal_plafond
+      - switch.licht_voordeur_buiten
       - switch.stekker_links_van_de_bank
       - switch.stekker_bij_de_tuindeuren
+      - switch.stekker_tvkast_links
       - switch.stekker_tvkast_rechts
       - switch.stekker_koffiezetappraat
     value_template: >-
@@ -25,5 +28,8 @@ sensors:
            is_state("switch.stekker_links_van_de_bank", "off") and
            is_state("switch.stekker_bij_de_tuindeuren", "off") and
            is_state("switch.stekker_koffiezetapparaat", "off") and
+           is_state("switch.licht_hal_plafond", "off") and
+           is_state("switch.licht_voordeur_buiten", "off") and
+           is_state("switch.stekker_tvkast_links", "off") and
            is_state("switch.stekker_tvkast_rechts", "off") }}
     icon_template: mdi:power-sleep

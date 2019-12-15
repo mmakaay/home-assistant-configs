@@ -16,10 +16,10 @@
 
 
 - id: woonkamer_dimmer_long_off
-  alias: "[WOONKAMER DIMMER] long 'off' triggert blackout"
+  alias: "[WOONKAMER DIMMER] long 'off' triggert power down"
   description: >
     Wanneer de uit-knop van de dimmer lang wordt ingedrukt, dan wordt een
-    blackout event gestuurd om alles uit te zetten.
+    power down event gestuurd om alles uit te zetten.
   trigger:
     - device_id: 32d5b64e890f40879159f0c63b7c80fd
       domain: deconz
@@ -27,7 +27,7 @@
       subtype: turn_off
       type: remote_button_long_press
   action:
-    service: script.trigger_blackout_event
+    service: script.trigger_power_down_event
 
 
 - id: woonkamer_dimmer_on

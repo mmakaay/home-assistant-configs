@@ -14,7 +14,7 @@
     # power LED of the PS4 VR box. In speed, this one beats the
     # above integration.
     - platform: state
-      entity_id: switch.playstation4
+      entity_id: switch.ps4
       to: 'on'
 
     # Provided by the mediacontroller raspberry, based on viewing the

@@ -12,6 +12,10 @@
     - entity_id: binary_sensor.toilet_beweging
       platform: state
       to: 'on'
+  condition:
+    - condition: state
+      entity_id: timer.toilet_cooldown
+      state: 'idle'
   action:
     - service: scene.turn_on
       data_template:
@@ -68,3 +72,36 @@
     - service: light.turn_off
       data:
         entity_id: light.toilet_plafond
+
+- id: toilet_licht_D
+  alias: "[TOILET LICHT] D. cooldown activeren als het licht uitgaat"
+  description: >
+    Wanneer de lamp uitgaat op het toilet, dan willen we de bewegingssensor
+    even negeren, zodat eventuele beweging niet direct het licht weer aanzet.
+    Denk aan het scenario waarbij je met de hand het licht uitmaakt en dan
+    wegloopt (wat een beweging is, waarmee je het licht zou kunnen triggeren).
+  trigger:
+    - entity_id: light.toilet_plafond
+      platform: state
+      to: 'off'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.toilet
+    - service: timer.start
+      data:
+        entity_id: timer.toilet_cooldown
+
+- id: toilet_licht_E
+  alias: "[TOILET LICHT] E. cooldown deactiveren als het licht aangaat"
+  description: >
+    Wanneer de lamp aangaat op het toilet, dan kan een eventuele cooldown
+    timer worden gestopt.
+  trigger:
+    - entity_id: light.toilet_plafond
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.toilet_cooldown

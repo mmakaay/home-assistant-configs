@@ -1,0 +1,14 @@
+---
+platform: template
+sensors:
+  iemand_in_huis:
+    friendly_name: Iemand in huis
+    entity_id:
+      - person.maurice
+      - person.esther
+      - person.niek
+    value_template: >-
+        {{ is_state("person.maurice", "home") or
+           is_state("person.esther", "home") or
+           is_state("person.niek", "home") }}
+    icon_template: mdi:home-account

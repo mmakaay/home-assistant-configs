@@ -33,8 +33,8 @@ switches:
     turn_on:
       service: script.turn_on
       data:
-        entity_id: script.trigger_blackout_event
+        entity_id: script.trigger_power_down_event
     turn_off:
       service: script.turn_on
       data:
-        entity_id: script.trigger_blackout_event
+        entity_id: script.trigger_power_down_event

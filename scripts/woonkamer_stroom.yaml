@@ -44,6 +44,7 @@ zet_tvkast_rechts_stroom_uit:
     - service: switch.turn_off
       data:
         entity_id: switch.stekker_tvkast_rechts
+    - delay: 00:00:01
     - service: homeassistant.update_entity
       data:
         entity_id: switch.stekker_tvkast_rechts
@@ -66,6 +67,7 @@ zet_tvkast_links_stroom_uit:
     - service: switch.turn_off
       data:
         entity_id: switch.stekker_tvkast_links
+    - delay: 00:00:01
     - service: homeassistant.update_entity
       data:
         entity_id: switch.stekker_tvkast_links

@@ -1,0 +1,146 @@
+---
+- id: power_down_licht_keuken_uit
+  alias: "[POWER DOWN] Licht keuken uit"
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.keuken_groep_deconz
+
+- id: power_down_licht_woonkamer_uit
+  alias: "[POWER DOWN] Licht woonkamer uit"
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.woonkamer_groep_deconz
+    - service: switch.turn_off
+      data:
+        entity_id: switch.gui_vaaslamp_licht
+ 
+- id: power_down_licht_buiten_uit
+  alias: "[POWER DOWN] Licht buiten uit"
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.buitenstopcontact
+    - service: switch.turn_off
+      data:
+        entity_id: switch.licht_voordeur_buiten
+
+- id: power_down_licht_hal_uit
+  alias: "[POWER DOWN] Licht hal uit"
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.licht_hal_plafond
+    - service: switch.turn_off
+      data:
+        entity_id: switch.stekker_bij_de_deurbel
+
+- id: power_down_licht_gang_uit
+  alias: "[POWER DOWN] Licht gang uit"
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.gang_groep_deconz
+    # Stop the cooldown timer, so movement will trigger the light in the
+    # hallway to go on. If we triggered a power_down from within the living
+    # room, we want the hallway light to work when going to bed for example.
+    - wait_template: "{{ is_state('light.gang_groep_ha', 'off') }}"
+      timeout: 5      
+      continue_on_timeout: 'false'
+    - service: timer.cancel
+      data:
+        entity_id: timer.gang_cooldown
+
+- id: power_down_licht_toilet_uit
+  alias: "[POWER DOWN] Licht toilet uit"
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.toilet_groep_deconz
+    # Stop the cooldown timer, so movement will trigger the light in the
+    # toilet to go on. If we triggered a power_down from within the living
+    # room, we want the toilet light to work when going to bed for example
+    # (or of course if somebody was in the toilet at this point ;-)
+    - wait_template: "{{ is_state('light.toilet_groep_ha', 'off') }}"
+      timeout: 5      
+      continue_on_timeout: 'false'
+    - service: timer.cancel
+      data:
+        entity_id: timer.toilet_cooldown
+
+- id: power_down_licht_badkamer_uit
+  alias: "[POWER DOWN] Licht badkamer uit"
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.badkamer_groep_deconz
+
+- id: power_down_licht_slaapkamer_uit
+  alias: "[POWER DOWN] Licht slaapkamer uit"
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.slaapkamer_groep_deconz
+
+- id: power_down_ps4_uit
+  alias: "[POWER DOWN] PS4 uit"
+  description: >
+    Reageert op een 'power_down' event door de PS4 uit te zetten.
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.ps4
+
+- id: power_down_keuken_stroom_uit
+  alias: "[POWER DOWN] keuken stroom uit"
+  description: >
+    Reageert op een 'power_down' event door stroom uit te zetten in de keuken.
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: script.turn_on
+      data:
+        entity_id: script.zet_keuken_stroom_uit
+
+- id: power_down_woonkamer_stroom_uit
+  alias: "[POWER DOWN] woonkamer stroom uit"
+  description: >
+    Reageert op een 'power_down' event door stroom uit te zetten in de woonkamer.
+    Het script dat hiervoor wordt gestart zet ook de ambilite feature uit, aangezien
+    die geen nut meer heeft zodra de stroom van de tv af is.
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: script.turn_on
+      data:
+        entity_id: script.zet_woonkamer_stroom_uit
