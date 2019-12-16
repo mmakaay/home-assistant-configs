@@ -1,0 +1,4 @@
+switch_gui_kerst:
+  name: Transition timer voor switch.gui_kerst
+  duration: 00:00:02
+  icon: mdi:timer

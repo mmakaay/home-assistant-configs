@@ -4,8 +4,8 @@
 - id: tuin_licht_A
   alias: "[TUIN LICHT] A. zet automatisch aan"
   description: >
-    Zet 's avonds het licht in de tuin aan als het donker wordt en wanneer er
-    iemand in huis is.
+    Zet 's avonds het licht in de tuin aan als het donker wordt, er iemand in
+    huis is en de optie voor automatische terraslampjes aan staat.
   trigger:
     - platform: state
       entity_id: sun.sun
@@ -14,6 +14,9 @@
       entity_id: binary_sensor.iemand_in_huis
       to: 'on'
   condition:
+    - condition: state
+      entity_id: input_boolean.automatische_terraslampjes
+      state: 'on'
     - condition: state
       entity_id: sun.sun
       state: below_horizon 

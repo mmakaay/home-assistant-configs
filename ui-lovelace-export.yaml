@@ -54,16 +54,16 @@ views:
     type: vertical-stack
   - cards:
     - cards:
-      - entity: switch.gui_powerup
+      - entity: switch.gui_power_up
         icon_height: 20px
         tap_action:
           action: call-service
           service: switch.turn_on
           service_data:
-            entity_id: switch.gui_powerup
+            entity_id: switch.gui_power_up
         theme: other-button
         type: entity-button
-      - entity: switch.gui_powerdown
+      - entity: switch.gui_power_down
         icon_height: 20px
         tap_action:
           action: call-service
@@ -71,7 +71,7 @@ views:
             text: Zeker weten?
           service: switch.turn_on
           service_data:
-            entity_id: switch.gui_powerdown
+            entity_id: switch.gui_power_down
         theme: other-button
         type: entity-button
       type: horizontal-stack

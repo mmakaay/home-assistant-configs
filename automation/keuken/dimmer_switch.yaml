@@ -1,6 +1,6 @@
 ---
 - id: keuken_dimmer_long_on
-  alias: "[KEUKEN DIMMER] long 'on' trigger powerup"
+  alias: "[KEUKEN DIMMER] long 'on' trigger power up"
   description: >
     Wanneer de dimmer "on" knop lang wordt ingedrukt, dan wordt het power
     up event verstuurd om bijvoorbeeld de stroom op de TV te zetten en de

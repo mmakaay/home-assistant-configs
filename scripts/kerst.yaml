@@ -2,12 +2,18 @@
 zet_kerst_aan:
   alias: Zet Kerst aan
   sequence:
-    - service: switch.turn_on
+    - condition: state
+      entity_id: timer.switch_gui_kerst
+      state: idle
+    - service: script.turn_on
       data:
-        entity_id: switch.gui_terraslampjes
+        entity_id: script.start_kerst_transition_timer
     - service: switch.turn_on
       data:
         entity_id: switch.gui_vaaslamp_licht
+    - service: switch.turn_on
+      data:
+        entity_id: switch.gui_terraslampjes
     - service: switch.turn_on
       data:
         entity_id: switch.gui_kerstboom
@@ -19,15 +25,32 @@ zet_kerst_aan:
 zet_kerst_uit:
   alias: Zet Kerst uit
   sequence:
-    - service: switch.turn_off
+    - condition: state
+      entity_id: timer.switch_gui_kerst
+      state: idle
+    - service: script.turn_on
       data:
-        entity_id: switch.gui_terraslampjes
+        entity_id: script.start_kerst_transition_timer
     - service: switch.turn_off
       data:
         entity_id: switch.gui_vaaslamp_licht
+    - service: switch.turn_off
+      data:
+        entity_id: switch.gui_terraslampjes
     - service: switch.turn_off
       data:
         entity_id: switch.gui_kerstboom
     - service: switch.turn_off
       data:
         entity_id: switch.gui_hal_kerstlampjes
+
+
+start_kerst_transition_timer:
+  alias: Start Kerst transition timer
+  sequence:
+    - service: timer.cancel
+      data:
+        entity_id: timer.switch_gui_kerst
+    - service: timer.start
+      data:
+        entity_id: timer.switch_gui_kerst

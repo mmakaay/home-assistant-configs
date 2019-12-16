@@ -195,6 +195,7 @@ proximity:
 shopping_list:
 
 input_select: !include_dir_merge_named input_select
+input_boolean: !include_dir_merge_named input_boolean
 
 mqtt:
   broker: !secret mosquitto-host

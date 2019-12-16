@@ -28,7 +28,7 @@ zet_woonkamer_stroom_uit:
 
 
 zet_tvkast_rechts_stroom_aan:
-  alias: Zet televisie stroom aan
+  alias: Zet stekker rechts van de tv kast aan
   sequence:
     - service: switch.turn_on
       data:
@@ -36,14 +36,23 @@ zet_tvkast_rechts_stroom_aan:
     - service: homeassistant.update_entity
       data:
         entity_id: switch.stekker_tvkast_rechts
+    # Sometimes the update doesn't work right away, therefore an extra attempt here.
+    - delay: 00:00:01
+    - service: homeassistant.update_entity
+      data:
+        entity_id: switch.stekker_tvkast_rechts
 
 
 zet_tvkast_rechts_stroom_uit:
-  alias: Zet televisie stroom uit
+  alias: Zet stekker rechts van de tv kast aan
   sequence:
     - service: switch.turn_off
       data:
         entity_id: switch.stekker_tvkast_rechts
+    - service: homeassistant.update_entity
+      data:
+        entity_id: switch.stekker_tvkast_rechts
+    # Sometimes the update doesn't work right away, therefore an extra attempt here.
     - delay: 00:00:01
     - service: homeassistant.update_entity
       data:
@@ -51,7 +60,7 @@ zet_tvkast_rechts_stroom_uit:
 
 
 zet_tvkast_links_stroom_aan:
-  alias: Zet televisie stroom aan
+  alias: Zet stekker links van de tv kast aan
   sequence:
     - service: switch.turn_on
       data:
@@ -59,14 +68,23 @@ zet_tvkast_links_stroom_aan:
     - service: homeassistant.update_entity
       data:
         entity_id: switch.stekker_tvkast_links
+    # Sometimes the update doesn't work right away, therefore an extra attempt here.
+    - delay: 00:00:01
+    - service: homeassistant.update_entity
+      data:
+        entity_id: switch.stekker_tvkast_links
 
 
 zet_tvkast_links_stroom_uit:
-  alias: Zet televisie stroom uit
+  alias: Zet stekker links van de tv kast uit
   sequence:
     - service: switch.turn_off
       data:
         entity_id: switch.stekker_tvkast_links
+    - service: homeassistant.update_entity
+      data:
+        entity_id: switch.stekker_tvkast_links
+    # Sometimes the update doesn't work right away, therefore an extra attempt here.
     - delay: 00:00:01
     - service: homeassistant.update_entity
       data:
@@ -74,7 +92,7 @@ zet_tvkast_links_stroom_uit:
 
 
 zet_bank_links_stroom_aan:
-  alias: Zet bank_links stroom aan
+  alias: Zet stekker links van de bank aan
   sequence:
     - service: switch.turn_on
       data:
@@ -82,7 +100,7 @@ zet_bank_links_stroom_aan:
 
 
 zet_bank_links_stroom_uit:
-  alias: Zet bank_links stroom uit
+  alias: Zet stekker links van de bank uit
   sequence:
     - service: switch.turn_off
       data:

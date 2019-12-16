@@ -21,7 +21,7 @@
   action:
     - wait_template: >-
         {{ is_state("binary_sensor.keuken_beweging", "on") }}
-      timeout: 00:10:00
+      timeout: 00:01:00
       continue_on_timeout: 'false'
     - service: switch.turn_on
       data:
