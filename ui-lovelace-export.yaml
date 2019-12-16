@@ -134,6 +134,17 @@ views:
         - entity: binary_sensor.switch_kerst_actief
           state: 'on'
         type: conditional
+      - card:
+          entity: switch.gui_woonkamer_ventilator
+          icon_height: 30px
+          tap_action:
+            action: toggle
+          theme: other-button
+          type: entity-button
+        conditions:
+        - entity: switch.gui_woonkamer_ventilator
+          state_not: unavailable
+        type: conditional
       - entity: switch.gui_woonkamer_stroom
         icon_height: 30px
         tap_action:
@@ -295,14 +306,42 @@ views:
         top: 39%
       title: Kerstlampjes buiten
       type: state-icon
-    - entity: switch.stekker_tvkast_links
-      style:
-        --iron-icon-height: 30px
-        --iron-icon-width: 30px
-        left: 56%
-        top: 66%
-      title: ITV, PS4, netwerk
-      type: state-icon
+    - conditions:
+      - entity: switch.gui_tvkast_links_stroom
+        state_not: unavailable
+      elements:
+      - entity: switch.gui_tvkast_links_stroom
+        style:
+          --iron-icon-height: 30px
+          --iron-icon-width: 30px
+          left: 56%
+          top: 66%
+        type: state-icon
+      type: conditional
+    - conditions:
+      - entity: switch.gui_kerstboom
+        state_not: unavailable
+      elements:
+      - entity: switch.gui_kerstboom
+        style:
+          --iron-icon-height: 30px
+          --iron-icon-width: 30px
+          left: 54.5%
+          top: 66%
+        type: state-icon
+      type: conditional
+    - conditions:
+      - entity: switch.gui_woonkamer_ventilator
+        state_not: unavailable
+      elements:
+      - entity: switch.gui_woonkamer_ventilator
+        style:
+          --iron-icon-height: 30px
+          --iron-icon-width: 30px
+          left: 54.3%
+          top: 66%
+        type: state-icon
+      type: conditional
     - entity: light.kast_boven
       icon: mdi:circle
       style:
@@ -709,16 +748,34 @@ views:
         action: toggle
       title: Gang plafond
       type: state-icon
-    - entity: switch.gui_hal_kerstlampjes
-      style:
-        --iron-icon-height: 25px
-        --iron-icon-width: 205x
-        left: 67%
-        top: 88.4%
-      tap_action:
-        action: toggle
-      title: Gang plafond
-      type: state-icon
+    - conditions:
+      - entity: switch.gui_stekker_bij_de_deurbel
+        state_not: unavailable
+      elements:
+      - entity: switch.gui_stekker_bij_de_deurbel
+        style:
+          --iron-icon-height: 25px
+          --iron-icon-width: 205x
+          left: 63%
+          top: 78%
+        tap_action:
+          action: toggle
+        type: state-icon
+      type: conditional
+    - conditions:
+      - entity: switch.gui_hal_kerstlampjes
+        state_not: unavailable
+      elements:
+      - entity: switch.gui_hal_kerstlampjes
+        style:
+          --iron-icon-height: 25px
+          --iron-icon-width: 205x
+          left: 67%
+          top: 88.4%
+        tap_action:
+          action: toggle
+        type: state-icon
+      type: conditional
     - entity: switch.gui_voordeur_buiten_licht
       style:
         --iron-icon-height: 25px
@@ -989,14 +1046,15 @@ views:
     - entity: light.achter_de_koelkast
     - entity: switch.gui_vaaslamp_licht
     - entity: switch.gui_terraslampjes
+    - entity: switch.gui_kerstboom
     - entity: switch.gui_terraslampjes
       label: Stroom
       type: section
     - entity: switch.gui_bank_links_stroom
+    - entity: switch.gui_woonkamer_ventilator
     - entity: switch.gui_tvkast_rechts_stroom
       name: TV, versterker, pickup, telefoon
     - entity: switch.gui_tvkast_links_stroom
-    - entity: switch.gui_koffiezetapparaat_stroom
     state_filter:
     - operator: '!='
       value: unavailable
@@ -1008,6 +1066,9 @@ views:
     - entity: light.keukenspot4
     - entity: light.keukenspot5
     - entity: light.keukenspot6
+    - label: Stroom
+      type: section
+    - entity: switch.gui_koffiezetapparaat_stroom
     title: Keuken
     type: entities
   - entities:
@@ -1022,15 +1083,6 @@ views:
       value: unavailable
     title: Gang en hal
     type: entity-filter
-  - entities:
-    - entity: switch.gui_bank_links_stroom
-    - entity: switch.gui_tvkast_rechts_stroom
-      name: TV kast rechts (TV, versterker, pickup)
-    - entity: switch.gui_tvkast_links_stroom
-      name: TV kast links
-    - entity: switch.gui_koffiezetapparaat_stroom
-    title: Stroom
-    type: entities
   - entities:
     - entity: switch.gui_badkamer_licht
     - entity: light.onder_het_bed
