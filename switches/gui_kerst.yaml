@@ -1,0 +1,19 @@
+---
+platform: template
+switches:
+  gui_kerst:
+    friendly_name: Kerst
+    value_template: >-
+      {{ is_state("switch.gui_terraslampjes", "on") or
+         is_state("switch.gui_vaaslamp_licht", "on") or
+         is_state("switch.gui_kerstboom", "on") or
+         is_state("switch.gui_hal_kerstlampjes", "on") }}
+    icon_template: mdi:pine-tree
+    turn_on:
+      service: script.turn_on
+      data:
+        entity_id: script.zet_kerst_aan
+    turn_off:
+      service: script.turn_on
+      data:
+        entity_id: script.zet_kerst_uit

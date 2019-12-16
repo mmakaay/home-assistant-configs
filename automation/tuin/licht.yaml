@@ -4,8 +4,8 @@
 - id: tuin_licht_A
   alias: "[TUIN LICHT] A. zet automatisch aan"
   description: >
-    Zet het licht in de tuin aan als het schemert en wanneer er iemand
-    in huis is.
+    Zet 's avonds het licht in de tuin aan als het donker wordt en wanneer er
+    iemand in huis is.
   trigger:
     - platform: state
       entity_id: sun.sun
@@ -20,10 +20,13 @@
     - condition: state
       entity_id: binary_sensor.iemand_in_huis
       state: 'on'
+    - condition: state
+      entity_id: sensor.periode_van_de_dag
+      state: 'avond'
   action:
     - service: switch.turn_on
       data:
-        entity_id: switch.gui_buitenstopcontact_stroom
+        entity_id: switch.gui_terraslampjes
   
 
 - id: tuin_licht_B
@@ -40,4 +43,4 @@
   action:
     - service: switch.turn_off
       data:
-        entity_id: switch.gui_buitenstopcontact_stroom
+        entity_id: switch.gui_terraslampjes

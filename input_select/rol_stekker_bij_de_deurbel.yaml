@@ -1,0 +1,6 @@
+rol_stekker_bij_de_deurbel:
+  name: Rol stekker bij de deurbel
+  options:
+    - Anders
+    - Kerstlampjes
+  icon: mdi:flash

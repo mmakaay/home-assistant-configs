@@ -81,6 +81,15 @@ recorder:
 #      - sensor.dar_zijkant_vandaag
 #      - sensor.dar_zijkant_morgen
 
+history:
+  include:
+    entities:
+      - sensor.licht_hal_plafond_power
+      - sensor.licht_voordeur_buiten_power
+      - sensor.stekker_tvkast_links_power
+      - sensor.stekker_tvkast_rechts_power
+      - sensor.stekker_koffiezetapparaat_power
+
 #logger:
 #  default: debug
 
@@ -184,6 +193,8 @@ proximity:
     unit_of_measurement: km
 
 shopping_list:
+
+input_select: !include_dir_merge_named input_select
 
 mqtt:
   broker: !secret mosquitto-host

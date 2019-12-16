@@ -1,0 +1,17 @@
+---
+# For some switches in the house, the role changes through the year. For example
+# the switch to the left of the tv is linked to a Christmas tree around Christmas,
+# but hooked up to a fan in the summer. To accomodate for this in the GUI, the
+# Christmas switch button is only shown when Christmas ornaments are hooked up.
+
+platform: template
+sensors:
+  switch_kerst_actief:
+    friendly_name: Switch Kerst actief
+    entity_id:
+      - input_select.rol_stekker_bij_de_deurbel
+      - input_select.rol_stekker_tvkast_links
+    value_template: >-
+        {{ is_state("input_select.rol_stekker_bij_de_deurbel", "Kerstlampjes") or
+           is_state("input_select.rol_stekker_tvkast_links", "Kerstboom") }}
+    icon_template: mdi:pine-tree

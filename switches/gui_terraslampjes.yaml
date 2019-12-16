@@ -1,8 +1,8 @@
 ---
 platform: template
 switches:
-  gui_buitenstopcontact_stroom:
-    friendly_name: Tuinlampjes
+  gui_terraslampjes:
+    friendly_name: Terraslampjes
     value_template: >-
       {{ is_state("light.buitenstopcontact", "on") }}
     icon_template: mdi:wall-sconce-flat

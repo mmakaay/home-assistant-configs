@@ -1,0 +1,8 @@
+rol_stekker_tvkast_links:
+  name: Rol stekker tvkast links
+  options:
+    - Anders
+    - Kerstboom
+    - Ventilator
+  initial: Anders
+  icon: mdi:flash

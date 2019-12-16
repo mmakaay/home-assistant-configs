@@ -2,10 +2,46 @@
 platform: template
 switches:
   gui_tvkast_links_stroom:
-    friendly_name: TV kast links
+    friendly_name: Stekker links van de tv kast
+    availability_template: >-
+      {{ is_state("input_select.rol_stekker_tvkast_links", "Anders") }}
     value_template: >-
       {{ is_state("switch.stekker_tvkast_links", "on") }}
     icon_template: mdi:flash
+    turn_on:
+      service: script.turn_on
+      data:
+        entity_id: script.zet_tvkast_links_stroom_aan
+    turn_off:
+      service: script.turn_on
+      data:
+        entity_id: script.zet_tvkast_links_stroom_uit
+
+
+  gui_kerstboom:
+    friendly_name: Kerstboom
+    availability_template: >-
+      {{ is_state("input_select.rol_stekker_tvkast_links", "Kerstboom") }}
+    value_template: >-
+      {{ is_state("switch.stekker_tvkast_links", "on") }}
+    icon_template: mdi:pine-tree
+    turn_on:
+      service: script.turn_on
+      data:
+        entity_id: script.zet_tvkast_links_stroom_aan
+    turn_off:
+      service: script.turn_on
+      data:
+        entity_id: script.zet_tvkast_links_stroom_uit
+
+
+  gui_woonkamer_ventilator:
+    friendly_name: Ventilator
+    availability_template: >-
+      {{ is_state("input_select.rol_stekker_tvkast_links", "Ventilator") }}
+    value_template: >-
+      {{ is_state("switch.stekker_tvkast_links", "on") }}
+    icon_template: mdi:fan
     turn_on:
       service: script.turn_on
       data:

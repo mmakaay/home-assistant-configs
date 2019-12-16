@@ -87,9 +87,10 @@ views:
         name: Bingen
         tap_action:
           action: call-service
-          service: scene.turn_on
+          service: script.activate_scene
           service_data:
-            entity_id: scene.woonkamer_bingen
+            area: woonkamer
+            scene: woonkamer_bingen
         theme: light-button
         type: entity-button
       - entity: scene.woonkamer_klaprozen
@@ -100,9 +101,10 @@ views:
         name: Klaprozen
         tap_action:
           action: call-service
-          service: scene.turn_on
+          service: script.activate_scene
           service_data:
-            entity_id: scene.woonkamer_klaprozen
+            area: woonkamer
+            scene: woonkamer_klaprozen
         theme: light-button
         type: entity-button
       - entity: scene.woonkamer_feet_up
@@ -113,19 +115,25 @@ views:
         name: Feet up
         tap_action:
           action: call-service
-          service: scene.turn_on
+          service: script.activate_scene
           service_data:
-            entity_id: scene.woonkamer_feet_up
+            area: woonkamer
+            scene: woonkamer_feet_up
         theme: light-button
         type: entity-button
       type: horizontal-stack
     - cards:
-      - entity: switch.gui_buitenstopcontact_stroom
-        icon_height: 30px
-        tap_action:
-          action: toggle
-        theme: other-button
-        type: entity-button
+      - card:
+          entity: switch.gui_kerst
+          icon_height: 30px
+          tap_action:
+            action: toggle
+          theme: other-button
+          type: entity-button
+        conditions:
+        - entity: binary_sensor.switch_kerst_actief
+          state: 'on'
+        type: conditional
       - entity: switch.gui_woonkamer_stroom
         icon_height: 30px
         tap_action:
@@ -149,9 +157,10 @@ views:
         name: Koken
         tap_action:
           action: call-service
-          service: scene.turn_on
+          service: script.activate_scene
           service_data:
-            entity_id: scene.keuken_koken
+            area: keuken
+            scene: keuken_koken
         theme: light-button
         type: entity-button
       - entity: scene.keuken_gedimd
@@ -160,9 +169,10 @@ views:
         name: Gedimd
         tap_action:
           action: call-service
-          service: scene.turn_on
+          service: script.activate_scene
           service_data:
-            entity_id: scene.keuken_gedimd
+            area: keuken
+            scene: keuken_gedimd
         theme: light-button
         type: entity-button
       - entity: scene.keuken_automatisch_nacht
@@ -171,9 +181,10 @@ views:
         name: Nachtlicht
         tap_action:
           action: call-service
-          service: scene.turn_on
+          service: script.activate_scene
           service_data:
-            entity_id: scene.keuken_automatisch_nacht
+            area: keuken
+            scene: keuken_automatisch_nacht
         theme: light-button
         type: entity-button
       type: horizontal-stack
@@ -201,6 +212,20 @@ views:
           action: toggle
         theme: other-button
         type: entity-button
+      - entity: switch.gui_hal_plafond_licht
+        icon_height: 30px
+        tap_action:
+          action: toggle
+        theme: other-button
+        type: entity-button
+      - entity: switch.gui_voordeur_buiten_licht
+        icon_height: 30px
+        tap_action:
+          action: toggle
+        theme: other-button
+        type: entity-button
+      type: horizontal-stack
+    - cards:
       - entity: switch.gui_toilet_licht
         icon_height: 30px
         tap_action:
@@ -226,8 +251,8 @@ views:
     - entity: switch.settopbox
     - entity: switch.gui_woonkamer_ambilite
     - entity: binary_sensor.hal_beweging
-    - entity: sensor.stekker_koffiezetapparaat_power
-    - entity: binary_sensor.blackout_active
+    - entity: binary_sensor.iemand_in_huis
+    - entity: binary_sensor.switch_kerst_actief
     show_header_toggle: false
     title: Experimenteel
     type: entities
@@ -253,7 +278,7 @@ views:
         top: 88%
       title: TV, amp, pickup
       type: state-icon
-    - entity: switch.gui_buitenstopcontact_stroom
+    - entity: switch.gui_terraslampjes
       icon: mdi:wall-sconce-flat
       style:
         --iron-icon-height: 30px
@@ -445,13 +470,13 @@ views:
         left: 49%
         top: 1%
       type: state-label
-    - entity: sensor.stekker_tvkast_links
+    - entity: sensor.stekker_tvkast_links_power
       style:
         font-size: 11px
         left: 53.5%
         top: 62.7%
       type: state-label
-    - entity: sensor.stekker_tvkast_rechts
+    - entity: sensor.stekker_tvkast_rechts_power
       style:
         font-size: 11px
         left: 53.5%
@@ -519,8 +544,8 @@ views:
         style:
           --iron-icon-height: 25px
           --iron-icon-width: 25px
-          left: 68%
-          top: 88%
+          left: 81%
+          top: 85.4%
         type: state-icon
       type: conditional
     - conditions:
@@ -662,13 +687,44 @@ views:
         action: toggle
       title: Gang plafond
       type: state-icon
-    - entity: light.toilet_plafond
+    - entity: light.toilet_plafond_dimbaar
       icon: mdi:circle
       style:
         --iron-icon-height: 25px
         --iron-icon-width: 205x
         left: 83%
         top: 50%
+      tap_action:
+        action: toggle
+      title: Gang plafond
+      type: state-icon
+    - entity: switch.gui_hal_plafond_licht
+      icon: mdi:circle
+      style:
+        --iron-icon-height: 25px
+        --iron-icon-width: 205x
+        left: 75%
+        top: 88%
+      tap_action:
+        action: toggle
+      title: Gang plafond
+      type: state-icon
+    - entity: switch.gui_hal_kerstlampjes
+      style:
+        --iron-icon-height: 25px
+        --iron-icon-width: 205x
+        left: 67%
+        top: 88.4%
+      tap_action:
+        action: toggle
+      title: Gang plafond
+      type: state-icon
+    - entity: switch.gui_voordeur_buiten_licht
+      style:
+        --iron-icon-height: 25px
+        --iron-icon-width: 205x
+        left: 79%
+        top: 97.8%
       tap_action:
         action: toggle
       title: Gang plafond
@@ -920,6 +976,71 @@ views:
   title: Locatie
 - badges: []
   cards:
+  - card:
+      title: Woonkamer
+    entities:
+    - entity: light.achter_tv_strip
+    - entity: light.staande_lamp
+    - entity: light.zon
+    - entity: light.kast_boven
+    - entity: light.kast_midden
+    - entity: light.kast_onder
+    - entity: light.droogkap
+    - entity: light.achter_de_koelkast
+    - entity: switch.gui_vaaslamp_licht
+    - entity: switch.gui_terraslampjes
+    - entity: switch.gui_terraslampjes
+      label: Stroom
+      type: section
+    - entity: switch.gui_bank_links_stroom
+    - entity: switch.gui_tvkast_rechts_stroom
+      name: TV, versterker, pickup, telefoon
+    - entity: switch.gui_tvkast_links_stroom
+    - entity: switch.gui_koffiezetapparaat_stroom
+    state_filter:
+    - operator: '!='
+      value: unavailable
+    type: entity-filter
+  - entities:
+    - entity: light.keukenspot1
+    - entity: light.keukenspot2
+    - entity: light.keukenspot3
+    - entity: light.keukenspot4
+    - entity: light.keukenspot5
+    - entity: light.keukenspot6
+    title: Keuken
+    type: entities
+  - entities:
+    - entity: light.toilet_plafond_dimbaar
+    - entity: light.gang_plafond_dimbaar
+    - entity: switch.gui_hal_plafond_licht
+    - entity: switch.gui_hal_kerstlampjes
+    - entity: switch.gui_stekker_bij_de_deurbel
+    - entity: switch.gui_voordeur_buiten_licht
+    state_filter:
+    - operator: '!='
+      value: unavailable
+    title: Gang en hal
+    type: entity-filter
+  - entities:
+    - entity: switch.gui_bank_links_stroom
+    - entity: switch.gui_tvkast_rechts_stroom
+      name: TV kast rechts (TV, versterker, pickup)
+    - entity: switch.gui_tvkast_links_stroom
+      name: TV kast links
+    - entity: switch.gui_koffiezetapparaat_stroom
+    title: Stroom
+    type: entities
+  - entities:
+    - entity: switch.gui_badkamer_licht
+    - entity: light.onder_het_bed
+    title: Bovenverdieping
+    type: entities
+  icon: mdi:toggle-switch-off-outline
+  path: switches
+  title: Switches
+- badges: []
+  cards:
   - entity: weather.thuis
     name: Het weer
     type: weather-forecast
@@ -955,49 +1076,23 @@ views:
   - entities:
     - entity: sensor.ha_cpu_temperature
     type: entities
+  - entities:
+    - entity: sensor.stekker_tvkast_rechts_power
+      name: TV kast rechts
+    - entity: sensor.stekker_tvkast_links_power
+      name: TV kast links
+    - entity: sensor.stekker_koffiezetapparaat_power
+      name: Koffie
+    - entity: sensor.licht_hal_plafond_power
+      name: Lamp hal
+    - entity: sensor.licht_voordeur_buiten_power
+      name: Voordeur buitenlamp
+    hours_to_show: 24
+    refresh_interval: 0
+    type: history-graph
   icon: mdi:information-outline
   path: information
   title: Info
-- badges: []
-  cards:
-  - entities:
-    - entity: light.achter_tv_strip
-    - entity: light.staande_lamp
-    - entity: light.zon
-    - entity: light.kast_boven
-    - entity: light.kast_midden
-    - entity: light.kast_onder
-    - entity: light.droogkap
-    - entity: light.achter_de_koelkast
-    - entity: switch.gui_vaaslamp_licht
-    - entity: switch.gui_buitenstopcontact_stroom
-    title: Woonkamer
-    type: entities
-  - entities:
-    - entity: light.keukenspot1
-    - entity: light.keukenspot2
-    - entity: light.keukenspot2
-    - entity: light.keukenspot4
-    - entity: light.keukenspot5
-    - entity: light.keukenspot6
-    title: Keuken
-    type: entities
-  - entities:
-    - entity: light.gang_plafond_dimbaar
-    - entity: light.toilet_plafond
-    - entity: light.badkamer_plafond
-    - entity: light.onder_het_bed
-    title: Overige
-    type: entities
-  - entities:
-    - entity: switch.gui_bank_links_stroom
-    - entity: switch.gui_tvkast_rechts_stroom
-    - entity: switch.gui_koffiezetapparaat_stroom
-    title: Stroom
-    type: entities
-  icon: mdi:toggle-switch-off-outline
-  path: switches
-  title: Switches
 - badges: []
   cards:
   - entity: sensor.dimmer_switch_battery_level
@@ -1113,3 +1208,12 @@ views:
   icon: mdi:battery-20
   path: batterijen
   title: Batterijen
+- badges: []
+  cards:
+  - entities:
+    - entity: input_select.rol_stekker_tvkast_links
+    - entity: input_select.rol_stekker_bij_de_deurbel
+    type: entities
+  icon: mdi:settings
+  path: configuratie
+  title: Configuratie

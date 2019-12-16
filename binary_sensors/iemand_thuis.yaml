@@ -7,8 +7,12 @@ sensors:
       - person.maurice
       - person.esther
       - person.niek
+    # Some sensors might be triggered by the cat, so I only inspect a subset
+    # of these in the below condition.
     value_template: >-
         {{ is_state("person.maurice", "home") or
            is_state("person.esther", "home") or
-           is_state("person.niek", "home") }}
+           is_state("person.niek", "home") or
+           is_state("binary_sensor.toilet_beweging", "on") or
+           is_state("binary_sensor.gang_beweging", "on") }}
     icon_template: mdi:home-account
