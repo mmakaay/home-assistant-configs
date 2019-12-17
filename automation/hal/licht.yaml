@@ -1,0 +1,89 @@
+---
+# This automation is based on the Z-Wave BeNext DHS-ZW-SNMT-01 Multi Sensor.
+# I configured the device with "Mode Timeout" = 10 seconds and
+# "Switch off time" = 10 seconds. This way, it sends short motion events,
+# which make the automation here pretty simple.
+
+- id: hal_licht_A
+  alias: "[HAL LICHT] A. zet aan bij beweging"
+  description: >
+    Lamp aan en de timer (her)starten als er beweging wordt gedetecteerd.
+  trigger:
+    - entity_id: binary_sensor.hal_beweging
+      platform: state
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: timer.hal_cooldown
+      state: 'idle'
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.licht_hal_plafond
+    # cancel/start, because of this bug:
+    # https://github.com/home-assistant/home-assistant/issues/12013
+    - service: timer.cancel
+      data:
+        entity_id: timer.hal
+    - service: timer.start
+      data_template:
+        entity_id: timer.hal
+
+
+- id: hal_licht_B
+  alias: "[HAL LICHT] B. zet uit na een tijdje geen beweging"
+  description: >
+    Wanneer de timer afloopt en er is geen beweging in de ruimte, maak
+    dan het licht weer uit. De beweging cooldown timer wordt ook
+    uitgezet, omdat we best willen dat na dit event de lampen meteen
+    weer aangaan bij beweging.
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.hal
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.licht_hal_plafond
+    - wait_template: "{{ is_state('timer.hal_cooldown', 'active') }}"
+      timeout: 5
+      continue_on_timeout: 'false'
+    - service: timer.cancel
+      data:
+        entity_id: timer.hal_cooldown
+
+
+- id: hal_licht_C
+  alias: "[HAL LICHT] C. cooldown activeren als het licht uitgaat"
+  description: >
+    Wanneer de lamp uitgaat in de hal, dan willen we de bewegingssensor
+    even negeren, zodat eventuele beweging niet direct het licht weer aanzet.
+    Denk aan het scenario waarbij je met de hand het licht uitmaakt en dan
+    wegloopt (wat een beweging is, waarmee je het licht zou kunnen triggeren).
+  trigger:
+    - entity_id: switch.licht_hal_plafond
+      platform: state
+      to: 'off'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.hal
+    - service: timer.start
+      data:
+        entity_id: timer.hal_cooldown
+
+
+- id: hal_licht_D
+  alias: "[HAL LICHT] D. cooldown deactiveren als het licht aangaat"
+  description: >
+    Wanneer de lamp aangaat in de hal, dan kan een eventuele cooldown
+    timer worden gestopt.
+  trigger:
+    - entity_id: switch.licht_hal_plafond
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.hal_cooldown

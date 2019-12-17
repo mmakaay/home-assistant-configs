@@ -13,6 +13,9 @@
     - entity_id: binary_sensor.badkamer_beweging
       platform: state
       to: 'on'
+    - entity_id: binary_sensor.badkamer_wastafel_beweging
+      platform: state
+      to: 'on'
   action:
     - service: scene.turn_on
       data_template:
@@ -33,6 +36,7 @@
           {% else %}
             00:05:00
           {% endif %}
+
 
 - id: badkamer_lamp_B
   alias: "[BADKAMER LICHT] B. zet uit na een tijdje geen beweging"

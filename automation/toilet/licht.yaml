@@ -62,7 +62,10 @@
 - id: toilet_licht_C
   alias: "[TOILET LICHT] C. zet uit na een tijdje geen beweging"
   description: >
-    Wanneer de timer afloopt, maak de lamp dan weer uit.
+    Wanneer de timer afloopt en er is geen beweging in de ruimte, maak
+    dan het licht weer uit. De beweging cooldown timer wordt ook
+    uitgezet, omdat we best willen dat na dit event de lampen meteen
+    weer aangaan bij beweging.
   trigger:
     - platform: event
       event_type: timer.finished
@@ -72,6 +75,13 @@
     - service: light.turn_off
       data:
         entity_id: light.toilet_plafond
+    - wait_template: "{{ is_state('timer.toilet_cooldown', 'active') }}"
+      timeout: 5
+      continue_on_timeout: 'false'
+    - service: timer.cancel
+      data:
+        entity_id: timer.toilet_cooldown
+
 
 - id: toilet_licht_D
   alias: "[TOILET LICHT] D. cooldown activeren als het licht uitgaat"

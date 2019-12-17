@@ -1,0 +1,8 @@
+hal:
+  name: Hal timer
+  duration: 00:02:00
+  icon: mdi:timer
+hal_cooldown:
+  name: Hal motion cooldown timer
+  duration: 00:00:30
+  icon: mdi:snowflake

@@ -5,4 +5,4 @@ toilet:
 toilet_cooldown:
   name: Toilet motion cooldown timer
   duration: 00:00:10
-  icon: mdi:timer
+  icon: mdi:snowflake
