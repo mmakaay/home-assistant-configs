@@ -1,0 +1,105 @@
+---
+- id: recent_motion_keuken
+  alias: "[RECENT MOTION] keuken"
+  description: Recente beweging in de keuken
+  trigger:
+    - entity_id: binary_sensor.keuken_beweging
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.keuken_recent
+    - service: timer.start
+      data:
+        entity_id: timer.keuken_recent
+
+- id: recent_motion_woonkamer
+  alias: "[RECENT MOTION] woonkamer"
+  description: Recente beweging in de woonkamer
+  trigger:
+    - entity_id: binary_sensor.woonkamer_beweging
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.woonkamer_recent
+    - service: timer.start
+      data:
+        entity_id: timer.woonkamer_recent
+
+- id: recent_motion_gang
+  alias: "[RECENT MOTION] gang"
+  description: Recente beweging in de gang
+  trigger:
+    - entity_id: binary_sensor.gang_beweging
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.gang_recent
+    - service: timer.start
+      data:
+        entity_id: timer.gang_recent
+
+- id: recent_motion_toilet
+  alias: "[RECENT MOTION] toilet"
+  description: Recente beweging in de toilet
+  trigger:
+    - entity_id: binary_sensor.toilet_beweging
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.toilet_recent
+    - service: timer.start
+      data:
+        entity_id: timer.toilet_recent
+
+- id: recent_motion_hal
+  alias: "[RECENT MOTION] hal"
+  description: Recente beweging in de hal
+  trigger:
+    - entity_id: binary_sensor.hal_beweging
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.hal_recent
+    - service: timer.start
+      data:
+        entity_id: timer.hal_recent
+
+- id: recent_motion_trap
+  alias: "[RECENT MOTION] trap"
+  description: Recente beweging in de trap
+  trigger:
+    - entity_id: binary_sensor.trap_beweging
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.trap_recent
+    - service: timer.start
+      data:
+        entity_id: timer.trap_recent
+
+- id: recent_motion_slaapkamer
+  alias: "[RECENT MOTION] slaapkamer"
+  description: Recente beweging in de slaapkamer
+  trigger:
+    - entity_id: binary_sensor.slaapkamer_beweging
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.slaapkamer_recent
+    - service: timer.start
+      data:
+        entity_id: timer.slaapkamer_recent

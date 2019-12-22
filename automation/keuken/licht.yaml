@@ -17,7 +17,7 @@
     - entity_id: binary_sensor.keuken_beweging
       platform: state
       to: 'on'
-# This one isn't position well, it triggers on the hedge moving :-/
+# This one isn't positioned well, it triggers on the hedge moving :-/
 # Disable it for now, until the sensor is placed better.
 #    - entity_id: binary_sensor.achterdeur_beweging
 #      platform: state
@@ -33,13 +33,13 @@
       entity_id: timer.keuken_cooldown
       state: 'idle'
   action:
+    - service: timer.start
+      data:
+        entity_id: timer.keuken
     - service: scene.turn_on
       data_template:
         entity_id: >
           scene.keuken_automatisch_{{ states('sensor.periode_van_de_dag') }}
-    - service: timer.start
-      data:
-        entity_id: timer.keuken
 
 
 - id: keuken_licht_B
@@ -86,11 +86,12 @@
     - service: light.turn_off
       data:
         entity_id: light.keuken_groep_ha
-    - delay: 4
+    - wait_template: "{{ is_state('timer.keuken_cooldown', 'active') }}"
+      timeout: 5
+      continue_on_timeout: 'false'
     - service: timer.cancel
       data:
         entity_id: timer.keuken_cooldown
-
 
 - id: keuken_licht_D
   alias: "[KEUKEN LICHT] D. herstarten na timeout maar wel beweging"

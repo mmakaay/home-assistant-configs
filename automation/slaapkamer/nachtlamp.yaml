@@ -13,12 +13,6 @@
       entity_id: sensor.slaapkamer_lichtsterkte
       below: 2
   action:
-    - service: light.turn_on
-      data:
-        entity_id: light.onder_het_bed
-        brightness: 150
-        color_temp: 328
-        transition: 2
     # cancel/start, because of this bug:
     # https://github.com/home-assistant/home-assistant/issues/12013
     - service: timer.cancel
@@ -28,6 +22,12 @@
       data:
         entity_id: timer.slaapkamer
         duration: 00:01:00
+    - service: light.turn_on
+      data:
+        entity_id: light.onder_het_bed
+        brightness: 150
+        color_temp: 328
+        transition: 2
 
 
 - id: slaapkamer_nachtlamp_B

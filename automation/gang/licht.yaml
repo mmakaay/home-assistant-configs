@@ -3,12 +3,15 @@
   alias: "[GANG LICHT] A. zet aan bij beweging in het donker"
   description: >
     Maak het licht aan als het donker is en er beweging wordt
-    gedetecteerd (in de gang of op de trap).
+    gedetecteerd (in de gang of op de trap) or als iemand binnen komt.
   trigger:
     - entity_id: binary_sensor.gang_beweging
       platform: state
       to: 'on'
     - entity_id: binary_sensor.trap_beweging
+      platform: state
+      to: 'on'
+    - entity_id: binary_sensor.iemand_komt_binnen
       platform: state
       to: 'on'
   condition:
@@ -21,17 +24,20 @@
     - condition: state
       entity_id: timer.gang_cooldown
       state: 'idle'
+    - condition: state
+      entity_id: timer.gang
+      state: 'idle'
   action:
     - service: timer.start
       data:
         entity_id: timer.gang_warmup
+    - service: timer.start
+      data:
+        entity_id: timer.gang
     - service: scene.turn_on
       data_template:
         entity_id: >
           scene.gang_automatisch_{{ states('sensor.periode_van_de_dag') }}
-    - service: timer.start
-      data:
-        entity_id: timer.gang
 
 
 - id: gang_licht_B
@@ -127,6 +133,9 @@
     - entity_id: light.gang_groep_ha
       platform: state
   condition:
+    # Ignore changes in the lighting while the warmup timer is active.
+    # Otherwise the change in lighting would trigger cancelling the main
+    # timer right away.
     - condition: state
       entity_id: timer.gang_warmup
       state: 'idle'

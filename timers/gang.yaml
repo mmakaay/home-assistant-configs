@@ -10,3 +10,7 @@ gang_cooldown:
   name: Gang motion cooldown timer
   duration: 00:00:30
   icon: mdi:snowflake
+
+gang_recent:
+  name: Gang recente beweging
+  duration: 00:05:00

@@ -17,10 +17,6 @@
       platform: state
       to: 'on'
   action:
-    - service: scene.turn_on
-      data_template:
-        entity_id: >
-          scene.badkamer_automatisch_{{ states('sensor.periode_van_de_dag') }}
     # cancel/start, because of this bug:
     # https://github.com/home-assistant/home-assistant/issues/12013
     - service: timer.cancel
@@ -36,6 +32,10 @@
           {% else %}
             00:05:00
           {% endif %}
+    - service: scene.turn_on
+      data_template:
+        entity_id: >
+          scene.badkamer_automatisch_{{ states('sensor.periode_van_de_dag') }}
 
 
 - id: badkamer_lamp_B

@@ -11,29 +11,36 @@
 - id: woonkamer_licht_A
   alias: "[WOONKAMER LICHT] A. zet aan bij beweging in het donker"
   description: >
-    Zet het licht aan als het donker is en er beweging wordt gedetecteerd.
+    Zet het licht aan als het donker is en er beweging wordt
+    gedetecteerd in de ruimte of wanneer er iemand thuis komt.
   trigger:
     - entity_id: binary_sensor.woonkamer_beweging
+      platform: state
+      to: 'on'
+    - entity_id: binary_sensor.iemand_komt_binnen
       platform: state
       to: 'on'
   condition:
     - condition: numeric_state
       entity_id: sensor.woonkamer_lichtsterkte
-      below: 4
-    - condition: state
-      entity_id: light.woonkamer_groep_ha
-      state: 'off'
+      below: 2
     - condition: state
       entity_id: timer.woonkamer_cooldown
       state: 'idle'
+    - condition: state
+      entity_id: timer.woonkamer
+      state: 'idle'
+    - condition: state
+      entity_id: light.woonkamer_groep_ha
+      state: 'off'
   action:
+    - service: timer.start
+      data:
+        entity_id: timer.woonkamer
     - service: scene.turn_on
       data_template:
         entity_id: >
           scene.woonkamer_automatisch_{{ states('sensor.periode_van_de_dag') }}
-    - service: timer.start
-      data:
-        entity_id: timer.woonkamer
 
 
 - id: woonkamer_licht_B
@@ -80,7 +87,9 @@
     - service: light.turn_off
       data:
         entity_id: light.woonkamer_groep_ha
-    - delay: 4
+    - wait_template: "{{ is_state('timer.woonkamer_cooldown', 'active') }}"
+      timeout: 5
+      continue_on_timeout: 'false'
     - service: timer.cancel
       data:
         entity_id: timer.woonkamer_cooldown

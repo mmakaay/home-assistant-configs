@@ -2,6 +2,9 @@
 zet_woonkamer_licht_aan:
   alias: Zet woonkamer licht aan
   sequence:
+    - service: timer.cancel
+      data:
+        entity_id: timer.woonkamer
     - service: light.turn_on
       data:
         entity_id: light.woonkamer_groep_deconz

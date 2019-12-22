@@ -6,3 +6,7 @@ woonkamer_cooldown:
   name: Woonkamer motion cooldown timer
   duration: 00:00:30
   icon: mdi:snowflake
+
+woonkamer_recent:
+  name: Woonkamer recente beweging
+  duration: 00:05:00

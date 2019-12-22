@@ -17,10 +17,6 @@
       entity_id: timer.toilet_cooldown
       state: 'idle'
   action:
-    - service: scene.turn_on
-      data_template:
-        entity_id: >
-          scene.toilet_automatisch_{{ states('sensor.periode_van_de_dag') }}
     # cancel/start, because of this bug:
     # https://github.com/home-assistant/home-assistant/issues/12013
     - service: timer.cancel
@@ -29,7 +25,11 @@
     - service: timer.start
       data_template:
         entity_id: timer.toilet
-        duration: 00:10:00
+        duration: 00:15:00
+    - service: scene.turn_on
+      data_template:
+        entity_id: >
+          scene.toilet_automatisch_{{ states('sensor.periode_van_de_dag') }}
 
 - id: toilet_licht_B
   alias: "[TOILET LICHT] B. verkort timer bij beweging in de gang"

@@ -6,3 +6,7 @@ keuken_cooldown:
   name: Keuken motion cooldown timer
   duration: 00:00:30
   icon: mdi:snowflake
+
+keuken_recent:
+  name: Keuken recente beweging
+  duration: 00:05:00

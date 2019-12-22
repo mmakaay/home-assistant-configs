@@ -2,3 +2,7 @@ slaapkamer:
   name: Slaapkamer timer
   duration: 00:01:00
   icon: mdi:timer
+
+slaapkamer_recent:
+  name: Slaapkamer recente beweging
+  duration: 00:05:00

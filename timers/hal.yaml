@@ -6,3 +6,7 @@ hal_cooldown:
   name: Hal motion cooldown timer
   duration: 00:00:30
   icon: mdi:snowflake
+
+hal_recent:
+  name: Hal recente beweging
+  duration: 00:05:00

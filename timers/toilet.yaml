@@ -6,3 +6,7 @@ toilet_cooldown:
   name: Toilet motion cooldown timer
   duration: 00:00:10
   icon: mdi:snowflake
+
+toilet_recent:
+  name: Toilet recente beweging
+  duration: 00:05:00
