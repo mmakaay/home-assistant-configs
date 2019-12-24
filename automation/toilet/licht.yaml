@@ -1,13 +1,48 @@
 ---
 # This automation is based on the IKEA Trådfri motion sensorthat I use in my
 # toilet. This sensor reports "ON" for 1 minute, then "OFF" for 30 seconds when
-# detecing motion. The state "ON" is not kept when there is still motion going
-# on. While this is a bit basic, it does allow for a pretty simple automation.
+# detecing motion. The state "ON" is not kept when there is still motion going on.
 
-- id: toilet_licht_A
-  alias: "[TOILET LICHT] A. zet aan bij beweging"
+- id: toilet_licht_A1
+  alias: "[TOILET LICHT] A1. zet aan als de deur opengaat"
+  description: >
+    Lamp aan en de timer kort starten als de deur opengaat.
+    Dit is alleen maar om vlot het licht aan te hebben. Hierna neemt
+    de bewegingssensor het over in automation A2.
+  trigger:
+    - entity_id: binary_sensor.toiletdeur_open
+      platform: state
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: light.toilet_plafond
+      state: 'off'
+    - condition: state
+      entity_id: timer.toilet
+      state: 'idle'
+  action:
+    # cancel/start, because of this bug:
+    # https://github.com/home-assistant/home-assistant/issues/12013
+    - service: timer.cancel
+      data:
+        entity_id: timer.toilet
+    - service: timer.start
+      data_template:
+        entity_id: timer.toilet
+        duration: 00:02:00
+    - service: scene.turn_on
+      data_template:
+        entity_id: >
+          scene.toilet_automatisch_{{ states('sensor.periode_van_de_dag') }}
+
+
+- id: toilet_licht_A2
+  alias: "[TOILET LICHT] A2. zet aan bij beweging"
   description: >
     Lamp aan en de timer (her)starten als er beweging wordt gedetecteerd.
+    Wanneer de deur dicht is en er wordt beweging gedetecteerd, zet de
+    timer dan op extra lang om het bekende 'je zit lekker en het licht
+    gaat uit' te voorkomen.
   trigger:
     - entity_id: binary_sensor.toilet_beweging
       platform: state
@@ -25,11 +60,19 @@
     - service: timer.start
       data_template:
         entity_id: timer.toilet
-        duration: 00:15:00
+        duration: >-
+          {% if (is_state("binary_sensor.toiletdeur_open", "off") and
+                 (as_timestamp(states.binary_sensor.toilet_beweging.last_changed) -
+                 as_timestamp(states.binary_sensor.toiletdeur_open.last_changed) > 1)) %} 
+            00:30:00
+          {% else %}
+            00:10:00
+          {% endif %}
     - service: scene.turn_on
       data_template:
         entity_id: >
           scene.toilet_automatisch_{{ states('sensor.periode_van_de_dag') }}
+
 
 - id: toilet_licht_B
   alias: "[TOILET LICHT] B. verkort timer bij beweging in de gang"
@@ -40,6 +83,10 @@
     redelijke oplossing om de standaard toilet timer niet kort te hoeven
     zetten. De timer wordt niet zo kort gezet dat iemand per direct in
     het donker komt te zitten.
+    De timer wordt niet aangepast als er beweging is gedetecteerd op het
+    toilet nadat de deur gesloten is. In dat geval weten we zeker dat het
+    toilet bezet is.
+
   trigger:
     - entity_id: binary_sensor.gang_beweging
       platform: state
@@ -48,6 +95,15 @@
     - condition: state
       entity_id: timer.toilet
       state: 'active'
+    - condition: template
+      value_template: >-
+        {{
+          not (
+            is_state("binary_sensor.toiletdeur_open", "off") and
+            (as_timestamp(states.binary_sensor.toilet_beweging.last_changed) -
+             as_timestamp(states.binary_sensor.toiletdeur_open.last_changed) > 1) 
+          )
+        }}
   action:
     # cancel/start, because of this bug:
     # https://github.com/home-assistant/home-assistant/issues/12013
@@ -58,6 +114,7 @@
       data_template:
         entity_id: timer.toilet
         duration: 00:03:00
+
 
 - id: toilet_licht_C
   alias: "[TOILET LICHT] C. zet uit na een tijdje geen beweging"
@@ -101,6 +158,7 @@
     - service: timer.start
       data:
         entity_id: timer.toilet_cooldown
+
 
 - id: toilet_licht_E
   alias: "[TOILET LICHT] E. cooldown deactiveren als het licht aangaat"

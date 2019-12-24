@@ -103,3 +103,18 @@
     - service: timer.start
       data:
         entity_id: timer.slaapkamer_recent
+
+- id: recent_motion_achterdeur
+  alias: "[RECENT MOTION] achterdeur"
+  description: Recente beweging bij de achterdeur
+  trigger:
+    - entity_id: binary_sensor.achterdeur_beweging
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.achterdeur_recent
+    - service: timer.start
+      data:
+        entity_id: timer.achterdeur_recent

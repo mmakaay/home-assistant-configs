@@ -1,0 +1,14 @@
+- id: power_up_bank_rechts_on
+  alias: "[POWER UP SWITCH] 'on' triggert power up"
+  description: >-
+    Wanneer de knop wordt ingedrukt, dan wordt het power up event verstuurd
+    om bijvoorbeeld de stroom op de TV te zetten en de lampen aan te doen
+    als het donker is.
+  trigger:
+    - device_id: 0c636ecb09584394be709a43a349814c
+      domain: deconz
+      platform: device
+      subtype: turn_on
+      type: remote_button_short_press
+  action:
+    service: script.trigger_power_up_event

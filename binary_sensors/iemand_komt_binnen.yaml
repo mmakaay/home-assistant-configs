@@ -4,12 +4,12 @@ sensors:
   iemand_komt_binnen:
     friendly_name: Iemand komt binnen
     entity_id:
-      - binary_sensor.hal_beweging
+      - binary_sensor.voordeur_open
       - timer.hal_recent
       - timer.gang_recent
       - timer.trap_recent
     value_template: >-
-        {{ is_state("binary_sensor.hal_beweging", "on") and
+        {{ is_state("binary_sensor.voordeur_open", "on") and
            is_state("timer.hal_recent", "idle") and
            is_state("timer.gang_recent", "idle") and 
            is_state("timer.trap_recent", "idle") }}

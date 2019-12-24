@@ -739,7 +739,7 @@
   name: Toilet (automatisch, nacht)
   entities:
     light.toilet_plafond_dimbaar:
-      brightness: 18
+      brightness: 54
       friendly_name: Toilet plafond (dimbaar)
       state: 'on'
       supported_features: 1

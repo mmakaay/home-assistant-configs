@@ -125,6 +125,11 @@ views:
     - cards:
       - card:
           entity: switch.gui_kerst
+          hold_action:
+            action: call-service
+            service: switch.turn_on
+            service_data:
+              entity_id: switch.gui_kerst
           icon_height: 30px
           tap_action:
             action: toggle
@@ -146,12 +151,22 @@ views:
           state_not: unavailable
         type: conditional
       - entity: switch.gui_woonkamer_stroom
+        hold_action:
+          action: call-service
+          service: switch.turn_on
+          service_data:
+            entity_id: switch.gui_woonkamer_stroom
         icon_height: 30px
         tap_action:
           action: toggle
         theme: other-button
         type: entity-button
       - entity: switch.gui_woonkamer_licht
+        hold_action:
+          action: call-service
+          service: switch.turn_on
+          service_data:
+            entity_id: switch.gui_woonkamer_licht
         icon_height: 30px
         tap_action:
           action: toggle
@@ -207,6 +222,11 @@ views:
         theme: other-button
         type: entity-button
       - entity: switch.gui_keuken_licht
+        hold_action:
+          action: call-service
+          service: switch.turn_on
+          service_data:
+            entity_id: switch.gui_keuken_licht
         icon_height: 30px
         tap_action:
           action: toggle
@@ -261,9 +281,8 @@ views:
     - entity: switch.ps4
     - entity: switch.settopbox
     - entity: switch.gui_woonkamer_ambilite
-    - entity: binary_sensor.hal_beweging
+    - entity: binary_sensor.iemand_komt_binnen
     - entity: binary_sensor.iemand_in_huis
-    - entity: binary_sensor.switch_kerst_actief
     show_header_toggle: false
     title: Experimenteel
     type: entities
@@ -273,21 +292,21 @@ views:
 - badges: []
   cards:
   - elements:
-    - entity: switch.stekker_links_van_de_bank
+    - entity: switch.gui_stekker_links_van_de_bank
       style:
         --iron-icon-height: 30px
         --iron-icon-width: 30px
         left: 15%
         top: 68%
-      title: Vaaslamp
       type: state-icon
-    - entity: switch.stekker_tvkast_rechts
+    - entity: switch.gui_tvkast_rechts_stroom
       style:
         --iron-icon-height: 30px
         --iron-icon-width: 30px
         left: 56%
         top: 88%
-      title: TV, amp, pickup
+      tap_action:
+        action: toggle
       type: state-icon
     - entity: switch.gui_terraslampjes
       icon: mdi:wall-sconce-flat
@@ -296,7 +315,8 @@ views:
         --iron-icon-width: 30px
         left: 15%
         top: 9%
-      title: Kerstlampjes buiten
+      tap_action:
+        action: toggle
       type: state-icon
     - entity: switch.gui_koffiezetapparaat_stroom
       style:
@@ -304,7 +324,8 @@ views:
         --iron-icon-width: 30px
         left: 56%
         top: 39%
-      title: Kerstlampjes buiten
+      tap_action:
+        action: toggle
       type: state-icon
     - conditions:
       - entity: switch.gui_tvkast_links_stroom
@@ -328,6 +349,8 @@ views:
           --iron-icon-width: 30px
           left: 54.5%
           top: 66%
+        tap_action:
+          action: toggle
         type: state-icon
       type: conditional
     - conditions:
@@ -463,6 +486,18 @@ views:
           --iron-icon-width: 35px
           left: 53%
           top: 57%
+        type: state-icon
+      type: conditional
+    - conditions:
+      - entity: binary_sensor.iemand_komt_binnen
+        state: 'on'
+      elements:
+      - entity: binary_sensor.iemand_komt_binnen
+        style:
+          --iron-icon-height: 18px
+          --iron-icon-width: 18px
+          left: 65%
+          top: 98.3%
         type: state-icon
       type: conditional
     - conditions:
@@ -611,6 +646,19 @@ views:
           top: 46.5%
         type: state-icon
       type: conditional
+    - conditions:
+      - entity: binary_sensor.toiletdeur_open
+        state: 'on'
+      elements:
+      - entity: binary_sensor.iemand_komt_binnen
+        icon: mdi:slash-forward
+        style:
+          --iron-icon-height: 55px
+          --iron-icon-width: 55px
+          left: 72%
+          top: 49%
+        type: state-icon
+      type: conditional
     - entity: sensor.achterdeur_temperatuur
       style:
         font-size: 13px
@@ -715,38 +763,23 @@ views:
         action: toggle
       title: Keukenspot 6
       type: state-icon
-    - entity: light.gang_plafond_dimbaar
-      icon: mdi:square
+    - entity: switch.gui_gang_licht
       style:
         --iron-icon-height: 25px
-        --iron-icon-width: 205x
+        --iron-icon-width: 25x
         left: 68%
         top: 60%
       tap_action:
         action: toggle
-      title: Gang plafond
-      type: state-icon
-    - entity: light.toilet_plafond_dimbaar
-      icon: mdi:circle
-      style:
-        --iron-icon-height: 25px
-        --iron-icon-width: 205x
-        left: 83%
-        top: 50%
-      tap_action:
-        action: toggle
-      title: Gang plafond
       type: state-icon
     - entity: switch.gui_hal_plafond_licht
-      icon: mdi:circle
       style:
         --iron-icon-height: 25px
-        --iron-icon-width: 205x
+        --iron-icon-width: 25x
         left: 75%
         top: 88%
       tap_action:
         action: toggle
-      title: Gang plafond
       type: state-icon
     - conditions:
       - entity: switch.gui_stekker_bij_de_deurbel
@@ -755,7 +788,7 @@ views:
       - entity: switch.gui_stekker_bij_de_deurbel
         style:
           --iron-icon-height: 25px
-          --iron-icon-width: 205x
+          --iron-icon-width: 25x
           left: 63%
           top: 78%
         tap_action:
@@ -769,7 +802,7 @@ views:
       - entity: switch.gui_hal_kerstlampjes
         style:
           --iron-icon-height: 25px
-          --iron-icon-width: 205x
+          --iron-icon-width: 25x
           left: 67%
           top: 88.4%
         tap_action:
@@ -779,25 +812,22 @@ views:
     - entity: switch.gui_voordeur_buiten_licht
       style:
         --iron-icon-height: 25px
-        --iron-icon-width: 205x
+        --iron-icon-width: 25x
         left: 79%
         top: 97.8%
       tap_action:
         action: toggle
       title: Gang plafond
       type: state-icon
-    - conditions:
-      - entity: timer.toilet
-        state: active
-      elements:
-      - entity: timer.toilet
-        style:
-          --iron-icon-height: 25px
-          --iron-icon-width: 25px
-          left: 86.4%
-          top: 53.5%
-        type: state-icon
-      type: conditional
+    - entity: switch.gui_toilet_licht
+      style:
+        --iron-icon-height: 25px
+        --iron-icon-width: 25px
+        left: 83%
+        top: 50%
+      tap_action:
+        action: toggle
+      type: state-icon
     - conditions:
       - entity: timer.keuken
         state: active
@@ -846,31 +876,7 @@ views:
           top: 77%
         type: state-icon
       type: conditional
-    - conditions:
-      - entity: timer.gang
-        state: active
-      elements:
-      - entity: timer.gang
-        style:
-          --iron-icon-height: 25px
-          --iron-icon-width: 25px
-          left: 68%
-          top: 53.5%
-        type: state-icon
-      type: conditional
-    - conditions:
-      - entity: timer.gang_cooldown
-        state: active
-      elements:
-      - entity: timer.gang_cooldown
-        style:
-          --iron-icon-height: 25px
-          --iron-icon-width: 25px
-          left: 68%
-          top: 54%
-        type: state-icon
-      type: conditional
-    image: /local/blueprint_1stfloor.png
+    image: /local/blueprint_1stfloor_v2.png
     title: Beneden
     type: picture-elements
   - elements:
@@ -918,7 +924,7 @@ views:
         style:
           --iron-icon-height: 25px
           --iron-icon-width: 25px
-          left: 70%
+          left: 80.4%
           top: 88%
         type: state-icon
       type: conditional
@@ -930,7 +936,19 @@ views:
         style:
           --iron-icon-height: 25px
           --iron-icon-width: 25px
-          left: 83%
+          left: 86%
+          top: 88%
+        type: state-icon
+      type: conditional
+    - conditions:
+      - entity: binary_sensor.badkamer_spiegel_beweging
+        state: 'on'
+      elements:
+      - entity: binary_sensor.badkamer_spiegel_beweging
+        style:
+          --iron-icon-height: 25px
+          --iron-icon-width: 25px
+          left: 67%
           top: 88%
         type: state-icon
       type: conditional
@@ -939,7 +957,7 @@ views:
       style:
         --iron-icon-height: 28px
         --iron-icon-width: 28px
-        left: 76.6%
+        left: 74%
         top: 87.7%
       tap_action:
         action: toggle
@@ -956,7 +974,7 @@ views:
         action: toggle
       title: Lamp onder het bed
       type: state-icon
-    image: /local/blueprint_2ndfloor.png
+    image: /local/blueprint_2ndfloor_v2.png
     title: Boven
     type: picture-elements
   - card:
@@ -970,11 +988,37 @@ views:
     - timer.gang
     - timer.gang_cooldown
     - timer.toilet
+    - timer.toilet_cooldown
+    - timer.hal
+    - timer.hal_cooldown
     - timer.slaapkamer
     - timer.badkamer
     state_filter:
     - active
     type: entity-filter
+  - entities:
+    - entity: timer.slaapkamer_recent
+      name: Slaapkamer
+    - entity: timer.badkamer_recent
+      name: Badkamer
+    - entity: timer.trap_recent
+      name: Trap
+    - entity: timer.hal_recent
+      name: Hal
+    - entity: timer.toilet_recent
+      name: Toilet
+    - entity: timer.gang_recent
+      name: Gang
+    - entity: timer.woonkamer_recent
+      name: Woonkamer
+    - entity: timer.keuken_recent
+      name: Keuken
+    - entity: timer.achterdeur_recent
+      name: Achterdeur
+    hours_to_show: 2
+    refresh_interval: 20
+    title: Beweging in de laatste 2 uur
+    type: history-graph
   - entities:
     - entity: sensor.periode_van_de_dag
     type: entities
@@ -1071,7 +1115,9 @@ views:
     - entity: switch.gui_koffiezetapparaat_stroom
     title: Keuken
     type: entities
-  - entities:
+  - card:
+      title: Gang en hal
+    entities:
     - entity: light.toilet_plafond_dimbaar
     - entity: light.gang_plafond_dimbaar
     - entity: switch.gui_hal_plafond_licht
@@ -1111,23 +1157,6 @@ views:
     show_header_toggle: false
     title: Afvalkalender
     type: entities
-  - card:
-      content: 'Nieuwe versie: {{ state_attr("binary_sensor.updater", "newest_version")
-        }}
-
-        Release notes: [kijk op de website]({{ state_attr("binary_sensor.updater",
-        "release_notes") }})
-
-        '
-      title: Update beschikbaar voor Home Assistant!
-      type: markdown
-    conditions:
-    - entity: binary_sensor.updater
-      state: 'on'
-    type: conditional
-  - entities:
-    - entity: sensor.ha_cpu_temperature
-    type: entities
   - entities:
     - entity: sensor.stekker_tvkast_rechts_power
       name: TV kast rechts
@@ -1142,115 +1171,73 @@ views:
     hours_to_show: 24
     refresh_interval: 0
     type: history-graph
+  - entities:
+    - entity: sensor.ha_cpu_temperature
+    type: entities
+  - entities:
+    - entity: binary_sensor.iemand_in_huis
+    hours_to_show: 144
+    refresh_interval: 0
+    title: Iemand in huis (afgelopen 3 dagen)
+    type: history-graph
+  - card:
+      content: 'Nieuwe versie: {{ state_attr("binary_sensor.updater", "newest_version")
+        }}
+
+        Release notes: [kijk op de website]({{ state_attr("binary_sensor.updater",
+        "release_notes") }})
+
+        '
+      title: Update beschikbaar voor Home Assistant!
+      type: markdown
+    conditions:
+    - entity: binary_sensor.updater
+      state: 'on'
+    type: conditional
   icon: mdi:information-outline
   path: information
   title: Info
 - badges: []
   cards:
-  - entity: sensor.dimmer_switch_battery_level
+  - entities:
+    - entity: sensor.hal_batterij
+    - entity: sensor.bewegingssensor_gang_batterij
+    - entity: sensor.bewegingssensor_toilet_battery_level
+    - entity: sensor.bewegingssensor_woonkamer_batterij
+    - entity: sensor.bewegingssensor_keuken_batterij
+    - entity: sensor.bewegingssensor_trap_batterij
+    - entity: sensor.badkamer_spiegel_batterij
+    - entity: sensor.bewegingssensor_badkamer_battery_level
+    - entity: sensor.badkamer_wastafel_batterij
+    title: Bewegingssensors
+    type: entities
+  - entities:
+    - entity: sensor.voordeur_batterij
+    - entity: sensor.toiletdeur_batterij
+    - entity: sensor.achterdeur_batterij
+    - entity: sensor.tuindeuren_batterij
+    title: Deursensors
+    type: entities
+  - entities:
+    - entity: sensor.switch_power_down_voordeur_batterij
+    - entity: sensor.dimmer_switch_woonkamer_battery_level
+    - entity: sensor.dimmer_switch_battery_level
+    title: Switches
+    type: entities
+  - entity: sensor.letsencrypt_gitaar_net
     max: 100
     min: 0
-    name: Switch keuken
-    severity:
-      green: 10
-      red: 2
-      yellow: 5
-    theme: default
-    type: gauge
-  - entity: sensor.dimmer_switch_woonkamer_battery_level
-    max: 100
-    min: 0
-    name: Switch woonkamer
-    severity:
-      green: 10
-      red: 2
-      yellow: 5
-    theme: default
-    type: gauge
-  - entity: sensor.bewegingssensor_keuken_batterij
-    max: 100
-    min: 0
-    name: Sensor keuken
-    severity:
-      green: 10
-      red: 2
-      yellow: 5
-    theme: default
-    type: gauge
-  - entity: sensor.bewegingssensor_trap_batterij
-    max: 100
-    min: 0
-    name: Sensor trap
-    severity:
-      green: 10
-      red: 2
-      yellow: 5
-    theme: default
-    type: gauge
-  - entity: sensor.bewegingssensor_gang_batterij
-    max: 100
-    min: 0
-    name: Sensor gang
-    severity:
-      green: 10
-      red: 2
-      yellow: 5
-    theme: default
-    type: gauge
-  - entity: sensor.bewegingssensor_slaapkamer_batterij
-    max: 100
-    min: 0
-    name: Sensor slaapkamer
-    severity:
-      green: 10
-      red: 2
-      yellow: 5
-    theme: default
-    type: gauge
-  - entity: sensor.bewegingssensor_woonkamer_batterij
-    max: 100
-    min: 0
-    name: Sensor woonkamer
-    severity:
-      green: 10
-      red: 2
-      yellow: 5
-    theme: default
-    type: gauge
-  - entity: sensor.bewegingssensor_badkamer_battery_level
-    max: 100
-    min: 0
-    name: Sensor badkamer
-    severity:
-      green: 10
-      red: 2
-      yellow: 5
-    theme: default
-    type: gauge
-  - entity: sensor.bewegingssensor_toilet_battery_level
-    max: 100
-    min: 0
-    name: Sensor toilet
-    severity:
-      green: 10
-      red: 2
-      yellow: 5
-    theme: default
-    type: gauge
-  - entity: sensor.letsencrypt_makaay_nl
-    max: 100
-    min: 0
-    name: HOME certificate
+    name: VPS certificate
     severity:
       green: 21
       red: 7
       yellow: 14
     theme: default
     type: gauge
-  - entity: sensor.letsencrypt_gitaar_net
+  - entity: sensor.letsencrypt_makaay_nl
     max: 100
     min: 0
-    name: VPS certificate
+    name: HOME certificate
     severity:
       green: 21
       red: 7
@@ -1265,6 +1252,14 @@ views:
   - entities:
     - entity: input_select.rol_stekker_tvkast_links
     - entity: input_select.rol_stekker_bij_de_deurbel
+    show_header_toggle: false
+    title: Rollen stekkers
+    type: entities
+  - entities:
+    - entity: input_boolean.automatische_terraslampjes
+      name: Terraslampjes automatisch
+    show_header_toggle: false
+    title: Opties
     type: entities
   icon: mdi:settings
   path: configuratie

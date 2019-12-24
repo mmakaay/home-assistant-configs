@@ -11,7 +11,7 @@ switches:
         {% elif is_state("timer.gang_cooldown", "active") %}
           mdi:snowflake 
         {% else %}
-          mdi:lightbulb
+          mdi:square
         {% endif %}
     turn_on:
       service: light.turn_on

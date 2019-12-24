@@ -1,9 +1,13 @@
 ---
-# This automation is based on the IKEA Trådfri motion sensor.
+# This automation is based on multiple sensors.
+#
+# In the shower: IKEA Trådfri motion sensr
 # This sensor reports "ON" for 1 minute, then "OFF" for 30 seconds when
 # detecing motion. The state "ON" is not kept when there is still
-# motion going on. While this is a bit basic, it does allow for a pretty
-# simple automation.
+# motion going on.
+# 
+# Outside the shower: AQARA motion sensor
+# This sensor reports "ON" as long as there is motion.
 
 - id: badkamer_lamp_A
   alias: "[BADKAMER LICHT] A. zet aan bij beweging"
@@ -13,7 +17,7 @@
     - entity_id: binary_sensor.badkamer_beweging
       platform: state
       to: 'on'
-    - entity_id: binary_sensor.badkamer_wastafel_beweging
+    - entity_id: binary_sensor.badkamer_spiegel_beweging
       platform: state
       to: 'on'
   action:
@@ -39,15 +43,56 @@
 
 
 - id: badkamer_lamp_B
-  alias: "[BADKAMER LICHT] B. zet uit na een tijdje geen beweging"
+  alias: "[BADKAMER LICHT] B. uitzetten na timeout en geen beweging"
   description: >
-    Wanneer de timer afloopt, maak dan de lamp weer uit.
+    Wanneer de timer afloopt, en er is geen beweging in de ruimte, maak
+    dan het licht weer uit.
   trigger:
     - platform: event
       event_type: timer.finished
       event_data:
         entity_id: timer.badkamer
+  condition:
+    - condition: state
+      entity_id: binary_sensor.badkamer_beweging
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.badkamer_spiegel_beweging
+      state: 'off'
   action:
     - service: light.turn_off
       data:
         entity_id: light.badkamer_plafond
+
+
+- id: badkamer_lamp_C
+  alias: "[BADKAMER LICHT] C. herstarten na timeout maar wel beweging"
+  description: >
+    Wanneer de timer afloopt en er is beweging in de ruimte, herstart dan
+    de timer.
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.badkamer
+  condition:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.badkamer_spiegel_beweging
+          state: 'on'
+        - condition: state
+          entity_id: binary_sensor.badkamer_beweging
+          state: 'on'
+  action:
+    - service: timer.start
+      data_template:
+        entity_id: timer.badkamer
+        duration: >
+          {% if is_state("sensor.periode_van_de_dag", "avond") or
+                is_state("sensor.periode_van_de_dag", "nacht") %}
+            00:02:00
+          {% else %}
+            00:05:00
+          {% endif %}
+

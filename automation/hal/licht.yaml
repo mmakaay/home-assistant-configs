@@ -6,12 +6,16 @@
 # on as long as motion is detected.
 
 - id: hal_licht_A
-  alias: "[HAL LICHT] A. zet aan bij beweging"
+  alias: "[HAL LICHT] A. zet aan bij beweging of binnenkomst"
   description: >
-    Lamp aan en de timer (her)starten als er beweging wordt gedetecteerd.
+    Lamp aan en de timer (her)starten als er beweging wordt gedetecteerd
+    of als er iemand binnen komt.
   trigger:
-    - entity_id: binary_sensor.hal_beweging
-      platform: state
+    - platform: state
+      entity_id: binary_sensor.hal_beweging
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.iemand_komt_binnen
       to: 'on'
   condition:
     - condition: state
