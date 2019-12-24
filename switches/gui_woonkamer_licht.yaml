@@ -13,8 +13,10 @@ switches:
          is_state("light.kast_midden", "on") or
          is_state("light.kast_onder", "on") or
          is_state("light.zon", "on") or
-         is_state("light.buitenstopcontact", "on") or
-         is_state("switch.stekker_bij_de_tuindeuren", "on") or
+         (is_state("binary_sensor.kerst_modus", "off") and
+          is_state("light.buitenstopcontact", "on")) or
+         (is_state("binary_sensor.kerst_modus", "off") and
+          is_state("switch.stekker_bij_de_tuindeuren", "on")) or
          (is_state("switch.ambilite", "off") and (
            is_state("light.achter_tv_strip", "on") or
            is_state("light.staande_lamp", "on")

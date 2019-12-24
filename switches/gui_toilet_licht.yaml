@@ -11,7 +11,7 @@ switches:
       {% elif is_state("timer.toilet_cooldown", "active") %}
         mdi:snowflake 
       {% else %}
-        mdi:circle
+        mdi:lightbulb
       {% endif %}
     turn_on:
       service: light.turn_on

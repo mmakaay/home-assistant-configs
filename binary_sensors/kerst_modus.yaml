@@ -1,12 +1,12 @@
 ---
-# For some switches in the house, the role changes through the year. For example
-# the switch to the left of the tv is linked to a Christmas tree around Christmas,
+# For some plugs in the house, the role changes through the year. For example
+# the plug to the left of the tv is linked to a Christmas tree around Christmas,
 # but hooked up to a fan in the summer. To accomodate for this in the GUI, the
 # Christmas switch button is only shown when Christmas ornaments are hooked up.
 
 platform: template
 sensors:
-  switch_kerst_actief:
+  kerst_modus:
     friendly_name: Switch Kerst actief
     entity_id:
       - input_select.rol_stekker_bij_de_deurbel

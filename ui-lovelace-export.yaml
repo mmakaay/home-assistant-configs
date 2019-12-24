@@ -136,7 +136,7 @@ views:
           theme: other-button
           type: entity-button
         conditions:
-        - entity: binary_sensor.switch_kerst_actief
+        - entity: binary_sensor.kerst_modus
           state: 'on'
         type: conditional
       - card:
@@ -243,7 +243,7 @@ views:
           action: toggle
         theme: other-button
         type: entity-button
-      - entity: switch.gui_hal_plafond_licht
+      - entity: switch.gui_hal_licht
         icon_height: 30px
         tap_action:
           action: toggle
@@ -283,6 +283,7 @@ views:
     - entity: switch.gui_woonkamer_ambilite
     - entity: binary_sensor.iemand_komt_binnen
     - entity: binary_sensor.iemand_in_huis
+    - entity: switch.gui_hal_licht
     show_header_toggle: false
     title: Experimenteel
     type: entities
@@ -772,7 +773,7 @@ views:
       tap_action:
         action: toggle
       type: state-icon
-    - entity: switch.gui_hal_plafond_licht
+    - entity: switch.gui_hal_licht
       style:
         --iron-icon-height: 25px
         --iron-icon-width: 25x
@@ -905,30 +906,6 @@ views:
         type: state-icon
       type: conditional
     - conditions:
-      - entity: timer.slaapkamer
-        state: active
-      elements:
-      - entity: timer.slaapkamer
-        style:
-          --iron-icon-height: 25px
-          --iron-icon-width: 25px
-          left: 45.5%
-          top: 37%
-        type: state-icon
-      type: conditional
-    - conditions:
-      - entity: timer.badkamer
-        state: active
-      elements:
-      - entity: timer.badkamer
-        style:
-          --iron-icon-height: 25px
-          --iron-icon-width: 25px
-          left: 80.4%
-          top: 88%
-        type: state-icon
-      type: conditional
-    - conditions:
       - entity: binary_sensor.badkamer_beweging
         state: 'on'
       elements:
@@ -952,19 +929,17 @@ views:
           top: 88%
         type: state-icon
       type: conditional
-    - entity: light.badkamer_plafond
-      icon: mdi:circle
+    - entity: switch.gui_badkamer_licht
       style:
-        --iron-icon-height: 28px
-        --iron-icon-width: 28px
-        left: 74%
-        top: 87.7%
+        --iron-icon-height: 25px
+        --iron-icon-width: 25px
+        left: 76%
+        top: 87.9%
       tap_action:
         action: toggle
       title: Lamp badkamer plafond
       type: state-icon
-    - entity: light.onder_het_bed
-      icon: mdi:circle
+    - entity: switch.gui_slaapkamer_licht
       style:
         --iron-icon-height: 25px
         --iron-icon-width: 25px
@@ -972,7 +947,6 @@ views:
         top: 30.5%
       tap_action:
         action: toggle
-      title: Lamp onder het bed
       type: state-icon
     image: /local/blueprint_2ndfloor_v2.png
     title: Boven
@@ -1120,7 +1094,7 @@ views:
     entities:
     - entity: light.toilet_plafond_dimbaar
     - entity: light.gang_plafond_dimbaar
-    - entity: switch.gui_hal_plafond_licht
+    - entity: switch.gui_hal_licht
     - entity: switch.gui_hal_kerstlampjes
     - entity: switch.gui_stekker_bij_de_deurbel
     - entity: switch.gui_voordeur_buiten_licht
@@ -1209,6 +1183,7 @@ views:
     - entity: sensor.badkamer_spiegel_batterij
     - entity: sensor.bewegingssensor_badkamer_battery_level
     - entity: sensor.badkamer_wastafel_batterij
+    show_header_toggle: false
     title: Bewegingssensors
     type: entities
   - entities:
@@ -1216,12 +1191,14 @@ views:
     - entity: sensor.toiletdeur_batterij
     - entity: sensor.achterdeur_batterij
     - entity: sensor.tuindeuren_batterij
+    show_header_toggle: false
     title: Deursensors
     type: entities
   - entities:
     - entity: sensor.switch_power_down_voordeur_batterij
     - entity: sensor.dimmer_switch_woonkamer_battery_level
     - entity: sensor.dimmer_switch_battery_level
+    show_header_toggle: false
     title: Switches
     type: entities
   - entity: sensor.letsencrypt_gitaar_net

@@ -4,7 +4,7 @@ switches:
   gui_kerst:
     friendly_name: Kerst
     availability_template: >-
-      {{ is_state("binary_sensor.switch_kerst_actief", "on") }}
+      {{ is_state("binary_sensor.kerst_modus", "on") }}
     value_template: >-
       {{ is_state("switch.gui_terraslampjes", "on") or
          is_state("switch.gui_vaaslamp_licht", "on") or

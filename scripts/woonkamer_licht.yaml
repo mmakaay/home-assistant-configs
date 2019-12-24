@@ -31,12 +31,45 @@ zet_woonkamer_licht_uit:
     - service: light.turn_off
       data:
         entity_id: light.kast_midden
+    # Some conditional switch off actions. The conditional branching
+    # requires the subscripts to handle things.
+    - service: script.zet_woonkamer_licht_uit_vaaslamp
+    - service: script.zet_woonkamer_licht_uit_tuinlampjes
+    - service: script.zet_woonkamer_licht_uit_ambilite
+
+
+# When Christmas mode is currently active, then do not switch off the
+# 'vaaslamp' in the living room. That lamp is now controlled by the
+# Christmas on/off switch.
+zet_woonkamer_licht_uit_vaaslamp:
+  alias: "Zet woonkamer licht uit (vaaslamp)"
+  sequence:
+    - condition: state
+      entity_id: binary_sensor.kerst_modus
+      state: 'off'
     - service: switch.turn_off
       data:
         entity_id: switch.stekker_bij_de_tuindeuren
 
-    # When the ambilite feature is enabled, we don't turn off
-    # the ambilite-related lights.
+
+# When Christmas mode is currently active, then do not switch off the
+# 'tuinlampjes'. That lamp is now controlled by the Christmas on/off switch.
+zet_woonkamer_licht_uit_tuinlampjes:
+  alias: "Zet woonkamer licht uit (tuinlampjes)"
+  sequence:
+    - condition: state
+      entity_id: binary_sensor.kerst_modus
+      state: 'off'
+    - service: switch.turn_off
+      data:
+        entity_id: light.buitenstopcontact
+
+
+# When the ambilite feature is enabled, we don't turn off the
+# ambilite-related lights. Those lights are now controlled by ambilite.
+zet_woonkamer_licht_uit_ambilite:
+  alias: "Zet woonkamer licht uit (ambilite)"
+  sequence:
     - condition: state
       entity_id: switch.ambilite
       state: 'off'
