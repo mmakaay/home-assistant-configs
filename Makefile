@@ -37,3 +37,4 @@ lovelace-export:
 commit: lovelace-export
 	git add .
 	git commit
+	git push
