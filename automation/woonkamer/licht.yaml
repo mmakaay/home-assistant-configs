@@ -17,7 +17,7 @@
     - entity_id: binary_sensor.woonkamer_beweging
       platform: state
       to: 'on'
-    - entity_id: binary_sensor.iemand_komt_binnen
+    - entity_id: binary_sensor.iemand_komt_voor_binnen
       platform: state
       to: 'on'
   condition:

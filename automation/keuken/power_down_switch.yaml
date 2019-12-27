@@ -1,13 +1,13 @@
-- id: hal_power_off_knop
-  alias: "[HAL KNOP] trigger power down"
+- id: keuken_power_off_knop
+  alias: "[KEUKEN KNOP] trigger power down"
   description: >
-    Wanneer de knop in de gang wordt ingedrukt, dan wordt een
+    Wanneer de knop bij de keukendeur wordt gedrukt, dan wordt een
     power down event gestuurd om alles uit te zetten.
   trigger:
     - platform: device
-      device_id: 9e2503641e9a4918945387a1949486c1
+      device_id: a9c1592d53194782a674e65eba179eb6
       domain: deconz
-      subtype: turn_on
       type: remote_button_long_press
+      subtype: turn_on
   action:
     service: script.trigger_power_down_event

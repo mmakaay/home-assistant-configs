@@ -11,17 +11,15 @@
 - id: keuken_licht_A
   alias: "[KEUKEN LICHT] A. zet aan bij beweging in het donker"
   description: >
-    Licht aan als het donker is en er beweging wordt gedetecteerd. Ook beweging
-    buiten bij de achterdeur zorgt ervoor dat het licht aangaat.
+    Licht aan als het donker is en er beweging wordt gedetecteerd of wanneer
+    er iemand binnenkomt door de achterdeur.
   trigger:
     - entity_id: binary_sensor.keuken_beweging
       platform: state
       to: 'on'
-# This one isn't positioned well, it triggers on the hedge moving :-/
-# Disable it for now, until the sensor is placed better.
-#    - entity_id: binary_sensor.achterdeur_beweging
-#      platform: state
-#      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.iemand_komt_achter_binnen
+      to: 'on'
   condition:
     - condition: numeric_state
       entity_id: sensor.keuken_lichtsterkte

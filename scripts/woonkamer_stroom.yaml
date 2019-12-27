@@ -18,13 +18,10 @@ zet_woonkamer_stroom_uit:
         entity_id: script.zet_tvkast_rechts_stroom_uit
     - service: script.turn_on
       data:
-        entity_id: script.zet_tvkast_links_stroom_uit
-    - service: script.turn_on
-      data:
         entity_id: script.zet_bank_links_stroom_uit
-    - service: script.turn_on
+    - service: switch.turn_off
       data:
-        entity_id: script.zet_ambilite_uit
+        entity_id: switch.gui_tvkast_links_stroom
 
 
 zet_tvkast_rechts_stroom_aan:

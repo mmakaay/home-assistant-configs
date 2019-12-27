@@ -281,9 +281,9 @@ views:
     - entity: switch.ps4
     - entity: switch.settopbox
     - entity: switch.gui_woonkamer_ambilite
-    - entity: binary_sensor.iemand_komt_binnen
+    - entity: binary_sensor.iemand_komt_voor_binnen
+    - entity: binary_sensor.iemand_komt_achter_binnen
     - entity: binary_sensor.iemand_in_huis
-    - entity: switch.gui_hal_licht
     show_header_toggle: false
     title: Experimenteel
     type: entities
@@ -490,15 +490,27 @@ views:
         type: state-icon
       type: conditional
     - conditions:
-      - entity: binary_sensor.iemand_komt_binnen
+      - entity: binary_sensor.iemand_komt_voor_binnen
         state: 'on'
       elements:
-      - entity: binary_sensor.iemand_komt_binnen
+      - entity: binary_sensor.iemand_komt_voor_binnen
         style:
           --iron-icon-height: 18px
           --iron-icon-width: 18px
-          left: 65%
+          left: 64.4%
           top: 98.3%
+        type: state-icon
+      type: conditional
+    - conditions:
+      - entity: binary_sensor.iemand_komt_achter_binnen
+        state: 'on'
+      elements:
+      - entity: binary_sensor.iemand_komt_achter_binnen
+        style:
+          --iron-icon-height: 18px
+          --iron-icon-width: 18px
+          left: 64%
+          top: 12%
         type: state-icon
       type: conditional
     - conditions:
@@ -651,13 +663,64 @@ views:
       - entity: binary_sensor.toiletdeur_open
         state: 'on'
       elements:
-      - entity: binary_sensor.iemand_komt_binnen
+      - entity: binary_sensor.toiletdeur_open
         icon: mdi:slash-forward
         style:
           --iron-icon-height: 55px
           --iron-icon-width: 55px
           left: 72%
           top: 49%
+        type: state-icon
+      type: conditional
+    - conditions:
+      - entity: binary_sensor.voordeur_open
+        state: 'on'
+      elements:
+      - entity: binary_sensor.voordeur_open
+        icon: mdi:slash-forward
+        style:
+          --iron-icon-height: 55px
+          --iron-icon-width: 55px
+          left: 63%
+          top: 87.3%
+          transform: rotate(45deg)
+        type: state-icon
+      type: conditional
+    - conditions:
+      - entity: binary_sensor.achterdeur_open
+        state: 'on'
+      elements:
+      - entity: binary_sensor.achterdeur_open
+        icon: mdi:slash-forward
+        style:
+          --iron-icon-height: 65px
+          --iron-icon-width: 65px
+          left: 67%
+          top: 7%
+          transform: rotate(90deg)
+        type: state-icon
+      type: conditional
+    - conditions:
+      - entity: binary_sensor.tuindeuren_open
+        state: 'on'
+      elements:
+      - entity: binary_sensor.tuindeuren_open
+        icon: mdi:slash-forward
+        style:
+          --iron-icon-height: 65px
+          --iron-icon-width: 65px
+          left: 36%
+          top: 7%
+          transform: rotate(90deg)
+        type: state-icon
+      - entity: binary_sensor.tuindeuren_open
+        icon: mdi:slash-forward
+        style:
+          --iron-icon-height: 65px
+          --iron-icon-width: 65px
+          left: 16%
+          top: 6%
+          transform: rotate(45deg)
         type: state-icon
       type: conditional
     - entity: sensor.achterdeur_temperatuur
@@ -692,6 +755,12 @@ views:
         font-size: 15px
         left: 85.6%
         top: 5%
+      type: state-label
+    - entity: sensor.periode_van_de_dag
+      style:
+        font-size: 15px
+        left: 8%
+        top: 1%
       type: state-label
     - entity: sensor.br_symbol
       style:
@@ -890,7 +959,19 @@ views:
           --iron-icon-height: 25px
           --iron-icon-width: 25px
           left: 83%
-          top: 50%
+          top: 63%
+        type: state-icon
+      type: conditional
+    - conditions:
+      - entity: binary_sensor.overloop_beweging
+        state: 'on'
+      elements:
+      - entity: binary_sensor.overloop_beweging
+        style:
+          --iron-icon-height: 25px
+          --iron-icon-width: 25px
+          left: 69%
+          top: 63%
         type: state-icon
       type: conditional
     - conditions:
@@ -973,6 +1054,8 @@ views:
   - entities:
     - entity: timer.slaapkamer_recent
       name: Slaapkamer
+    - entity: timer.overloop_recent
+      name: Overloop
     - entity: timer.badkamer_recent
       name: Badkamer
     - entity: timer.trap_recent
@@ -989,6 +1072,8 @@ views:
       name: Keuken
     - entity: timer.achterdeur_recent
       name: Achterdeur
+    - entity: binary_sensor.iemand_komt_voor_binnen
+    - entity: binary_sensor.iemand_komt_achter_binnen
     hours_to_show: 2
     refresh_interval: 20
     title: Beweging in de laatste 2 uur
@@ -1174,30 +1259,50 @@ views:
 - badges: []
   cards:
   - entities:
-    - entity: sensor.hal_batterij
+    - entity: sensor.bewegingssensor_hal_batterij
+      name: Hal
     - entity: sensor.bewegingssensor_gang_batterij
-    - entity: sensor.bewegingssensor_toilet_battery_level
+      name: Gang
+    - entity: sensor.bewegingssensor_toilet_batterij
+      name: Toilet
     - entity: sensor.bewegingssensor_woonkamer_batterij
+      name: Woonkamer
     - entity: sensor.bewegingssensor_keuken_batterij
+      name: Keuken
     - entity: sensor.bewegingssensor_trap_batterij
+      name: Trap
     - entity: sensor.badkamer_spiegel_batterij
-    - entity: sensor.bewegingssensor_badkamer_battery_level
+      name: Badkamer spiegel
+    - entity: sensor.bewegingssensor_badkamer_batterij
+      name: Badkamer douche
     - entity: sensor.badkamer_wastafel_batterij
+      name: Badkamer wastafel
     show_header_toggle: false
     title: Bewegingssensors
     type: entities
   - entities:
     - entity: sensor.voordeur_batterij
+      name: Voordeur
     - entity: sensor.toiletdeur_batterij
+      name: Toiletdeur
     - entity: sensor.achterdeur_batterij
+      name: Achterdeur
     - entity: sensor.tuindeuren_batterij
+      name: Tuindeuren
     show_header_toggle: false
     title: Deursensors
     type: entities
   - entities:
     - entity: sensor.switch_power_down_voordeur_batterij
-    - entity: sensor.dimmer_switch_woonkamer_battery_level
-    - entity: sensor.dimmer_switch_battery_level
+      name: Power down voordeur
+    - entity: sensor.dimmer_switch_woonkamer_batterij
+      name: Dimmer woonkamer
+    - entity: sensor.switch_power_up_bank_rechts_batterij
+      name: Power up bank rechts
+    - entity: sensor.dimmer_switch_batterij
+      name: Dimmer keuken
+    - entity: sensor.switch_power_down_achterdeur_batterij
+      name: Power down achterdeur
     show_header_toggle: false
     title: Switches
     type: entities

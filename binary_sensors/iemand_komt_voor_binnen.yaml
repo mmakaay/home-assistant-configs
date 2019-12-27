@@ -1,8 +1,8 @@
 ---
 platform: template
 sensors:
-  iemand_komt_binnen:
-    friendly_name: Iemand komt binnen
+  iemand_komt_voor_binnen:
+    friendly_name: Iemand komt binnen door de voordeur
     entity_id:
       - binary_sensor.voordeur_open
       - timer.hal_recent

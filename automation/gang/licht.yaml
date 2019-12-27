@@ -3,7 +3,7 @@
   alias: "[GANG LICHT] A. zet aan bij beweging in het donker"
   description: >
     Maak het licht aan als het donker is en er beweging wordt
-    gedetecteerd (in de gang of op de trap) or als iemand binnen komt.
+    gedetecteerd (in de gang of op de trap) of als iemand binnen komt.
   trigger:
     - entity_id: binary_sensor.gang_beweging
       platform: state
@@ -11,7 +11,7 @@
     - entity_id: binary_sensor.trap_beweging
       platform: state
       to: 'on'
-    - entity_id: binary_sensor.iemand_komt_binnen
+    - entity_id: binary_sensor.iemand_komt_voor_binnen
       platform: state
       to: 'on'
   condition:

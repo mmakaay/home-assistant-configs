@@ -15,7 +15,7 @@
       entity_id: binary_sensor.hal_beweging
       to: 'on'
     - platform: state
-      entity_id: binary_sensor.iemand_komt_binnen
+      entity_id: binary_sensor.iemand_komt_voor_binnen
       to: 'on'
   condition:
     - condition: state

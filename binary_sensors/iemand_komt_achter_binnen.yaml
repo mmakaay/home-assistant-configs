@@ -1,0 +1,14 @@
+---
+platform: template
+sensors:
+  iemand_komt_achter_binnen:
+    friendly_name: Iemand komt binnen door de achterdeur
+    entity_id:
+      - binary_sensor.achterdeur_open
+      - timer.keuken_recent
+      - timer.woonkamer_recent
+    value_template: >-
+        {{ is_state("binary_sensor.achterdeur_open", "on") and
+           is_state("timer.keuken_recent", "idle") and
+           is_state("timer.woonkamer_recent", "idle") }}
+    icon_template: mdi:location-enter
