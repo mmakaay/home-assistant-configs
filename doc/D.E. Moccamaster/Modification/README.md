@@ -44,11 +44,15 @@ Based on this, I came up with the following plan:
   1. Replace the "on/off" toggle switch with a momentary switch (i.e. a switch that
      only makes contact when pressed)
   2. Replace the "extra hot" toggle switch with an indicator light.
-  3. Add a [FIBARO switch](https://www.fibaro.com/en/products/switches/) to the
-     internals of the coffee machine. This switch can be controlled via both Z-wave
-     and the momentary switch.
+  3. Add a smart switch to the internals of the coffee machine, which can be controlled
+     both remotely and using the momentary switch.
 
-## Materials
+A document that proved to be an invaluable resource for this mod, is the
+[spare part and safety document](../Documentation/Moccamaster%20manual%20spare%20parts.pdf).
+The document provides schematics for a wide range of Moccamaster models in both
+actual and logical layout. This helped a lot in planning the mod steps.
+
+## Required components
 
 I used a FIBARO switch 2. Of course, for you own project, you can use any switch
 that has the same kind of features, e.g. an icasa Zigbee switch. I used the FIBARO,
@@ -66,6 +70,77 @@ were a good alternative:
 
 <img src="images/replacement_switches_order.png" alt="Component order">
 
+As you can see, I also ordered a rocker switch. I wasn't fully sure if the
+momentary switch would be the best option. It turns out it was, and the rocker
+switch was not used.
+
+For connecting wires together, I made use of a few Wago welding clamps ("lasklemmen" in Dutch).
+I find this by far the easiest way to connect the wires in a non-destructive way.
+
+<img src="images/wago_welding_clamp.jpg" width="100px">
+
+Finally, I used a few pieces of additional PVC coated copper wire. I used the kind of
+wire that you would normally use in the electric installation of your house (since I had
+that lying around). These wires are a lot thicker than the wires that are already in
+the machine, so I don't have to worry about the wires heating up.
+
+## Mod steps
+
+Let's start with the machine as it was at the start of the project. The original
+buttons in place and still using a smart plug.
+
+<img src="images/IMG_20191228_135908.jpg" width="400px">
+
+Okay, let's get cracking. First, remove the four screws on the bottom.
+
+<img src="images/IMG_20191228_140252.jpg" width="400px">
+
+The clamp on the right side can now be removed. Instead of removing it,
+I just shifted it a bit, allowing the bottom plate to come free.
+
+<img src="images/IMG_20191228_140523.jpg" width="400px">
+
+Here's what the internals look like. On the left the power wire enters
+the machine. Switches are visible on top, the water heater is on the
+left and the heater plate is on the right.
+
+<img src="images/IMG_20191228_140552.jpg" width="400px">
+
+Here's a close up of the switch terminals. The top switch is the
+"on/off" switch, the bottom one is the "extra hot" switch.
+The terminals are lettered for reference in the rest of this document.
+
+  * __A__. the N terminal of the "on/off" switch, used by the light in the button.
+  * __B__. the Q terminal of the "on/off" switch, powering the device.
+  * __C__. the L terminal of the "on/off" switch, connected to the power cable L line.
+  * __D__. the L terminal of the "extra hot" switch, used for powering the light in
+           the button and the secondary heating element. There's a bit of a kludge on this
+           terminal, but that is simply two wires connected to the same terminal.
+  * __E__. the Q terminal of the "extra hot" switch, powering the secondary heating element.
+  * __F__. the N terminal of the "extra hot" switch, used by the light in the button.
+ 
+<img src="images/IMG_20191228_141119.jpg" width="400px">
+
+Disconnect terminal A on the "on/off" switch and clip off the cable lug ("kabelschoen" in Dutch).
+Strip the two wires.
+
+<img src="images/IMG_20191228_142219.jpg" width="400px">
+
+Push the two stripped wires in a welding clamp. Take a new wire (I used a blue one, since these
+wires are connected to the power cable N line), strip it and add it to the welding clamp as well.
+
+<img src="images/IMG_20191228_142453.jpg" width="400px">
+
+Time to install the FIBARO switch in the machine. I first stuck some double-sided tape to the bottom.
+
+<img src="images/IMG_20191228_142632.jpg" width="400px">
+
+Then I stuck the switch below the earth line in the back of the machine. I placed the switch between the 
+water cooker element and the heater plate, so it's as far away as possible from both heat sources.
+I'm not to worried about the heat, since I can touch the machine's metal housing on the ouside
+while the coffee is being made, without burning my fingers.
+
+<img src="images/IMG_20191228_143117.jpg" width="400px">
 
 
 
