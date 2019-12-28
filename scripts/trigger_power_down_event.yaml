@@ -1,4 +1,3 @@
----
 trigger_power_down_event:
   alias: Trigger power down event
   sequence:

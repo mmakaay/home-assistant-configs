@@ -1,4 +1,3 @@
----
 platform: template
 sensors:
   blackout_active:

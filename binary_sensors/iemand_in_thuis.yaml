@@ -1,4 +1,3 @@
----
 platform: template
 sensors:
   iemand_in_huis:

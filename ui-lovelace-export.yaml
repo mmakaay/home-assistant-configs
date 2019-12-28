@@ -284,6 +284,7 @@ views:
     - entity: binary_sensor.iemand_komt_voor_binnen
     - entity: binary_sensor.iemand_komt_achter_binnen
     - entity: binary_sensor.iemand_in_huis
+    - entity: binary_sensor.benext_dhs_zw_snmt_01_multi_sensor_sensor
     show_header_toggle: false
     title: Experimenteel
     type: entities
@@ -306,8 +307,6 @@ views:
         --iron-icon-width: 30px
         left: 56%
         top: 88%
-      tap_action:
-        action: toggle
       type: state-icon
     - entity: switch.gui_terraslampjes
       icon: mdi:wall-sconce-flat
@@ -364,6 +363,8 @@ views:
           --iron-icon-width: 30px
           left: 54.3%
           top: 66%
+        tap_action:
+          action: toggle
         type: state-icon
       type: conditional
     - entity: light.kast_boven

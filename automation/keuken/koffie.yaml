@@ -1,4 +1,3 @@
----
 - id: stroom_koffiezetapparaat_automatisch_aan
   alias: "[STROOM KOFFIEZETAPPARAAT] zet overdag aan bij beweging"
   description: >

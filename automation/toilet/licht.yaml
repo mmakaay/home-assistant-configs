@@ -1,4 +1,3 @@
----
 # This automation is based on the IKEA Trådfri motion sensorthat I use in my
 # toilet. This sensor reports "ON" for 1 minute, then "OFF" for 30 seconds when
 # detecing motion. The state "ON" is not kept when there is still motion going on.
@@ -19,6 +18,9 @@
       state: 'off'
     - condition: state
       entity_id: timer.toilet
+      state: 'idle'
+    - condition: state
+      entity_id: timer.toilet_cooldown
       state: 'idle'
   action:
     # cancel/start, because of this bug:

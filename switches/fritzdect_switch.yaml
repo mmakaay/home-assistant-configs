@@ -1,4 +1,3 @@
----
 # For integration with FRITZ!Box switches / power plugs.
 platform: fritzdect
 host: !secret fritzbox-host

@@ -1,4 +1,3 @@
----
 platform: template
 switches:
   gui_stekker_links_van_de_bank:

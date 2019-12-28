@@ -1,4 +1,3 @@
----
 # This automation is based on multiple sensors.
 #
 # In the shower: IKEA Trådfri motion sensr
@@ -12,7 +11,7 @@
 - id: badkamer_lamp_A
   alias: "[BADKAMER LICHT] A. zet aan bij beweging"
   description: >
-    Lamp aan en de timer (her)starten als er beweging wordt gedetecteerd.
+    Lamp aan als er beweging wordt gedetecteerd in de ruimte.
   trigger:
     - entity_id: binary_sensor.badkamer_beweging
       platform: state
@@ -20,61 +19,49 @@
     - entity_id: binary_sensor.badkamer_spiegel_beweging
       platform: state
       to: 'on'
+  condition:
+    - condition: state
+      entity_id: light.badkamer_groep_ha
+      state: 'off'
   action:
-    # cancel/start, because of this bug:
-    # https://github.com/home-assistant/home-assistant/issues/12013
-    - service: timer.cancel
-      data:
-        entity_id: timer.badkamer
-    - service: timer.start
-      data_template:
-        entity_id: timer.badkamer
-        duration: >
-          {% if is_state("sensor.periode_van_de_dag", "avond") or
-                is_state("sensor.periode_van_de_dag", "nacht") %}
-            00:02:00
-          {% else %}
-            00:05:00
-          {% endif %}
     - service: scene.turn_on
       data_template:
         entity_id: >
           scene.badkamer_automatisch_{{ states('sensor.periode_van_de_dag') }}
+    # In the morning, the light starts dim, but is made brighter over a period
+    # of a few minutes, like a wake-up light.
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: sensor.periode_van_de_dag
+          state: 'ochtend'
+        # alleen ochtend
+        - condition: state
+          entity_id: sensor.periode_van_de_dag
+          state: 'nacht'
+    - service: light.turn_on
+      data:
+        entity_id: light.badkamer_plafond
+        brightness: 140
+        transition: 300
 
 
 - id: badkamer_lamp_B
-  alias: "[BADKAMER LICHT] B. uitzetten na timeout en geen beweging"
+  alias: "[BADKAMER LICHT] B. timer (her)starten bij beweging"
   description: >
-    Wanneer de timer afloopt, en er is geen beweging in de ruimte, maak
-    dan het licht weer uit.
+    Wanneer er beweging is in de ruimte of wanneer de timer afloopt en er is
+    beweging in de ruimte, (her)start dan de timer.
   trigger:
     - platform: event
       event_type: timer.finished
       event_data:
         entity_id: timer.badkamer
-  condition:
-    - condition: state
-      entity_id: binary_sensor.badkamer_beweging
-      state: 'off'
-    - condition: state
-      entity_id: binary_sensor.badkamer_spiegel_beweging
-      state: 'off'
-  action:
-    - service: light.turn_off
-      data:
-        entity_id: light.badkamer_plafond
-
-
-- id: badkamer_lamp_C
-  alias: "[BADKAMER LICHT] C. herstarten na timeout maar wel beweging"
-  description: >
-    Wanneer de timer afloopt en er is beweging in de ruimte, herstart dan
-    de timer.
-  trigger:
-    - platform: event
-      event_type: timer.finished
-      event_data:
-        entity_id: timer.badkamer
+    - entity_id: binary_sensor.badkamer_beweging
+      platform: state
+      to: 'on'
+    - entity_id: binary_sensor.badkamer_spiegel_beweging
+      platform: state
+      to: 'on'
   condition:
     - condition: or
       conditions:
@@ -96,3 +83,25 @@
             00:05:00
           {% endif %}
 
+
+- id: badkamer_lamp_C
+  alias: "[BADKAMER LICHT] C. uitzetten na timeout en geen beweging"
+  description: >
+    Wanneer de timer afloopt, en er is geen beweging in de ruimte, maak
+    dan het licht weer uit.
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.badkamer
+  condition:
+    - condition: state
+      entity_id: binary_sensor.badkamer_beweging
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.badkamer_spiegel_beweging
+      state: 'off'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.badkamer_plafond

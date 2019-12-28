@@ -1,4 +1,3 @@
----
 zet_woonkamer_stroom_aan:
   alias: Zet woonkamer stroom aan 
   sequence:
@@ -16,12 +15,12 @@ zet_woonkamer_stroom_uit:
     - service: script.turn_on
       data:
         entity_id: script.zet_tvkast_rechts_stroom_uit
-    - service: script.turn_on
-      data:
-        entity_id: script.zet_bank_links_stroom_uit
     - service: switch.turn_off
       data:
         entity_id: switch.gui_tvkast_links_stroom
+    - service: script.turn_on
+      data:
+        entity_id: script.zet_bank_links_stroom_uit
 
 
 zet_tvkast_rechts_stroom_aan:

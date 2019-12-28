@@ -1,5 +1,5 @@
----
 # A templated sensor, used to extract the power usage from an AVM power switch.
+
 platform: template
 sensors:
   stekker_tvkast_rechts_power:

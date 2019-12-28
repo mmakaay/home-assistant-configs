@@ -1,4 +1,3 @@
----
 # This automation is based on the Z-Wave BeNext DHS-ZW-SNMT-01 Multi Sensor.
 # I configured the device with "Mode Timeout" = 10 seconds and
 # "Switch off time" = 10 seconds. This way, it does not stay active very long

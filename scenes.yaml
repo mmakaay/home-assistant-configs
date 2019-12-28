@@ -3,28 +3,28 @@
   entities:
     light.badkamer_plafond:
       brightness: 50
-      color_temp: 440
+      color_temp: 430
       state: 'on'
 - id: badkamer_automatisch_ochtend
   name: Badkamer (automatisch, ochtend)
   entities:
     light.badkamer_plafond:
       brightness: 60
-      color_temp: 423
+      color_temp: 420
       state: 'on'
 - id: badkamer_automatisch_dag
   name: Badkamer (automatisch, dag)
   entities:
     light.badkamer_plafond:
-      brightness: 94
-      color_temp: 359
+      brightness: 140
+      color_temp: 420
       state: 'on'
 - id: badkamer_automatisch_avond
   name: Badkamer (automatisch, avond)
   entities:
     light.badkamer_plafond:
       brightness: 60
-      color_temp: 423
+      color_temp: 430
       state: 'on'
 - id: gang_automatisch_nacht
   name: Gang (automatisch, nacht)

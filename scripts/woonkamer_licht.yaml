@@ -1,4 +1,3 @@
----
 zet_woonkamer_licht_aan:
   alias: Zet woonkamer licht aan
   sequence:

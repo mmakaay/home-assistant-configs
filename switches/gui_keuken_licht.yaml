@@ -1,4 +1,3 @@
----
 platform: template
 switches:
   gui_keuken_licht:

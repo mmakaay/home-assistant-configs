@@ -1,0 +1,5 @@
+# See scripts/ugly_delay.yaml for more info on the usage for this boolean.
+
+dummy:
+  name: Dummy boolean voor vieze timing hacks
+  icon: mdi:timer

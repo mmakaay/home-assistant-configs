@@ -1,4 +1,3 @@
----
 # This template light is used to accomodate for the limited range over which
 # the zigbee Icasa dimmer has effect on the dimmable LED light that I use.
 # The dimmer itself has a setting for the minimum power (which I use to

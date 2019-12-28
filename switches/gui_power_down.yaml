@@ -1,4 +1,3 @@
----
 platform: template
 switches:
   gui_power_down:

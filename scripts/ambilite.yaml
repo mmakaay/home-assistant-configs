@@ -1,4 +1,3 @@
----
 zet_ambilite_aan:
   sequence:
     - service: switch.turn_on

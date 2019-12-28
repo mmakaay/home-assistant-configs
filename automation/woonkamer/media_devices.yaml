@@ -1,4 +1,3 @@
----
 - id: media_devices_power_up_tv_and_amp_too
   alias: "[MEDIA DEVICE AAN] zet dan ook de TV en versterker aan"
   description: >

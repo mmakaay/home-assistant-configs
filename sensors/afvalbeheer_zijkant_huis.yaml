@@ -1,7 +1,7 @@
----
 # Using a secondary source, because that is in the side street where
 # we can leave our paper container on a different date than is used
 # for the front of the house.
+
 platform: afvalbeheer
 name: zijkant
 nameprefix: 1

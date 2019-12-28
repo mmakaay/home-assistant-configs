@@ -1,4 +1,3 @@
----
 # This sensor does not use any entity that would trigger an update.
 # Therefore, it is accompanied by a time-triggered automation
 # in automation/update_periode_van_de_dag.yaml.

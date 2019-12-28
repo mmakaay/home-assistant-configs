@@ -1,5 +1,5 @@
----
 # Measure the raspberry pi GPU temperature.
+
 platform: command_line
 name: HA GPU temperature
 command: ~/.homeassistant/bin/sensor.ha_gpu_temperature

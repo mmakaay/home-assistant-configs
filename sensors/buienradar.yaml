@@ -1,5 +1,5 @@
----
 # Fetch weather information from http://www.buienradar.nl/
+
 platform: buienradar
 monitored_conditions:
   - symbol

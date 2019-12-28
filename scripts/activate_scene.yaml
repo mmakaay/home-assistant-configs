@@ -1,4 +1,3 @@
----
 # This script is used to turn on a scene and cancel timers for
 # automatic lighting in the area. This script is used, because there
 # is no event available for turning on a scene. Otherwise I could

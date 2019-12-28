@@ -1,4 +1,3 @@
----
 platform: template
 sensors:
   iemand_komt_voor_binnen:
@@ -14,3 +13,4 @@ sensors:
            is_state("timer.gang_recent", "idle") and 
            is_state("timer.trap_recent", "idle") }}
     icon_template: mdi:location-enter
+    delay_off: 00:01:00

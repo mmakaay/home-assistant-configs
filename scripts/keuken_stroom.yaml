@@ -1,4 +1,3 @@
----
 zet_keuken_stroom_aan:
   alias: Zet keuken stroom aan 
   sequence:

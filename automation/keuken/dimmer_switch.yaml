@@ -1,4 +1,3 @@
----
 - id: keuken_dimmer_long_on
   alias: "[KEUKEN DIMMER] long 'on' trigger power up"
   description: >
