@@ -30,19 +30,14 @@
           scene.badkamer_automatisch_{{ states('sensor.periode_van_de_dag') }}
     # In the morning, the light starts dim, but is made brighter over a period
     # of a few minutes, like a wake-up light.
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: sensor.periode_van_de_dag
-          state: 'ochtend'
-        # alleen ochtend
-        - condition: state
-          entity_id: sensor.periode_van_de_dag
-          state: 'nacht'
+    - condition: state
+      entity_id: sensor.periode_van_de_dag
+      state: 'ochtend'
     - service: light.turn_on
       data:
         entity_id: light.badkamer_plafond
         brightness: 140
+        color_temp: 440
         transition: 300
 
 

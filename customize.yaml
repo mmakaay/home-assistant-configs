@@ -15,5 +15,5 @@ binary_sensor.badkamer_wastafel_beweging:
   icon: mdi:walk
 binary_sensor.overloop_beweging:
   icon: mdi:walk
-binary_sensor.werkkamer_beweging:
+binary_sensor.computerkamer_beweging:
   icon: mdi:walk

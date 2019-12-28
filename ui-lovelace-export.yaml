@@ -284,7 +284,6 @@ views:
     - entity: binary_sensor.iemand_komt_voor_binnen
     - entity: binary_sensor.iemand_komt_achter_binnen
     - entity: binary_sensor.iemand_in_huis
-    - entity: binary_sensor.benext_dhs_zw_snmt_01_multi_sensor_sensor
     show_header_toggle: false
     title: Experimenteel
     type: entities
@@ -976,6 +975,18 @@ views:
         type: state-icon
       type: conditional
     - conditions:
+      - entity: binary_sensor.computerkamer_beweging
+        state: 'on'
+      elements:
+      - entity: binary_sensor.computerkamer_beweging
+        style:
+          --iron-icon-height: 25px
+          --iron-icon-width: 25px
+          left: 37%
+          top: 76%
+        type: state-icon
+      type: conditional
+    - conditions:
       - entity: binary_sensor.slaapkamer_beweging
         state: 'on'
       elements:
@@ -1272,6 +1283,10 @@ views:
       name: Keuken
     - entity: sensor.bewegingssensor_trap_batterij
       name: Trap
+    - entity: sensor.overloop_batterij
+      name: Overloop
+    - entity: sensor.bewegingssensor_computerkamer_batterij
+      name: Computerkamer
     - entity: sensor.badkamer_spiegel_batterij
       name: Badkamer spiegel
     - entity: sensor.bewegingssensor_badkamer_batterij
