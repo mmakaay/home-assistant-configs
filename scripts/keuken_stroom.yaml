@@ -1,14 +1,6 @@
-zet_keuken_stroom_aan:
-  alias: Zet keuken stroom aan 
-  sequence:
-    - service: switch.turn_on
-      data:
-        entity_id: switch.stekker_koffiezetapparaat
-
-
 zet_keuken_stroom_uit:
   alias: Zet keuken stroom uit 
   sequence:
     - service: switch.turn_off
       data:
-        entity_id: switch.stekker_koffiezetapparaat
+        entity_id: switch.koffiezetapparaat

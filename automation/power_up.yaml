@@ -10,18 +10,6 @@
       data:
         entity_id: script.zet_woonkamer_stroom_aan
 
-- id: power_up_keuken_stroom_aan
-  alias: "[POWER UP] keuken stroom aan"
-  description: >
-    Reageert op een 'power_on' event door de stroom in de keuken in te schakelen.
-  trigger:
-    - platform: event
-      event_type: power_up
-  action:
-    - service: script.turn_on
-      data:
-        entity_id: script.zet_keuken_stroom_aan
-
 - id: power_up_lampen_woonkamer_aan
   alias: "[POWER UP] lampen in de woonkamer aan"
   description: >

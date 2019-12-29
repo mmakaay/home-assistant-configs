@@ -88,7 +88,7 @@ history:
       - sensor.licht_voordeur_buiten_power
       - sensor.stekker_tvkast_links_power
       - sensor.stekker_tvkast_rechts_power
-      - sensor.stekker_koffiezetapparaat_power
+      - sensor.koffiezetapparaat_power
 
 #logger:
 #  default: debug
