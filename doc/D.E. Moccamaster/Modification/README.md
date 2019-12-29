@@ -157,7 +157,7 @@ strip it and add it to the welding clamp as well.
 Strip the other end of the black wire and connect it to the Q-terminal of the FIBARO switch.
 
 Note that the wire that came off terminal B is quite short. That is why the welding clamp is quite a
-bit down on the following picture picture.
+bit down on the following picture.
 
 <img src="images/IMG_20191228_143913.jpg" width="400px">
 
