@@ -15,7 +15,7 @@ two basic use cases that I wanted to support:
 
 For use case 1, it would be best when the power plug was already on, so using the
 switch on the machine would turn it on right away, without having to fumble with
-an app to turn on the power plug as well. Not to hard. A basic "if somebody walks
+an app to turn on the power plug as well. Not too hard. A basic "if somebody walks
 into the kitchen, turn on the power plug" would do. However, this would not work
 for use case 2.
 
