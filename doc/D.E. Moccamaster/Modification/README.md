@@ -102,7 +102,7 @@ I just shifted it a bit, allowing the bottom plate to come free.
 
 Here's what the internals look like. On the left the power wire enters
 the machine. Switches are visible on top, the water heater is on the
-left and the heater plate is on the right.
+left and the hot plate is on the right.
 
 <img src="images/IMG_20191228_140552.jpg" width="400px">
 
@@ -139,7 +139,7 @@ Time to install the FIBARO switch in the machine. I first stick some double-side
 <img src="images/IMG_20191228_142632.jpg" width="400px">
 
 Then I stick the switch below the earth line in the back of the machine. I place the switch between the 
-water cooker element and the heater plate, so it's as far away as possible from both heat sources.
+water cooker element and the hot plate, so it's as far away as possible from both heat sources.
 I'm not too worried about the heat, since I can touch the machine's metal housing on the ouside
 while the coffee is being made, without burning my fingers.
 
