@@ -61,7 +61,7 @@ is small and therefore easy to fit.
 
 <img src="images/fibaro_switch.jpg" alt="FIBARO switch 2" width="150px">
 
-Finding a good momentary switch and indicator light was quite a hunt. Finding
+Finding a good snap-in style momentary switch and indicator light was quite a hunt. Finding
 spare parts is easy enough, but I wanted different components than the original.
 Eventually I figured out that [Arcolectric 6000 splash proof components](../Documentation/Arcolectric%20switches%206000%20splash%20proof.pdf) were the way to go.
 Unfortunately, it turned out to be somewhat impossible to find the specific
@@ -129,20 +129,62 @@ Strip the two wires.
 Push the two stripped wires in a welding clamp. Take a new wire (I used a blue one, since these
 wires are connected to the power cable N line), strip it and add it to the welding clamp as well.
 
+The other side of the blue wire is left as-is for now. It will go into the N-terminal of the FIBARO
+switch later on. Leaving it unconnected for now, makes moving the wires around easier.
+
 <img src="images/IMG_20191228_142453.jpg" width="400px">
 
-Time to install the FIBARO switch in the machine. I first stuck some double-sided tape to the bottom.
+Time to install the FIBARO switch in the machine. I first stick some double-sided tape to the bottom.
 
 <img src="images/IMG_20191228_142632.jpg" width="400px">
 
-Then I stuck the switch below the earth line in the back of the machine. I placed the switch between the 
+Then I stick the switch below the earth line in the back of the machine. I place the switch between the 
 water cooker element and the heater plate, so it's as far away as possible from both heat sources.
-I'm not to worried about the heat, since I can touch the machine's metal housing on the ouside
+I'm not too worried about the heat, since I can touch the machine's metal housing on the ouside
 while the coffee is being made, without burning my fingers.
 
 <img src="images/IMG_20191228_143117.jpg" width="400px">
 
+Disconnect terminal B from the "on/off" switch. In the picture you can see me using pliers
+to pull off the cable lug.
 
+<img src="images/IMG_20191228_143239.jpg" width="400px">
+
+Cut off the cable lug, strip the wire and push the wire in a welding clamp. Take a new wire (for this
+one I used black wire, since this is the switch wire that will be connected to the FIBARO Q terminal),
+strip it and add it to the welding clamp as well.
+
+Strip the other end of the black wire and connect it to the Q-terminal of the FIBARO switch.
+
+Note that the wire that came off terminal B is quite short. That is why the welding clamp is quite a
+bit down on the following picture picture.
+
+<img src="images/IMG_20191228_143913.jpg" width="400px">
+
+Disconnect terminal C from the "on/off" switch and cut off the cable lug.
+
+<img src="images/IMG_20191228_144038.jpg" width="400px">
+
+Strip the cable and push it in a welding clamp. Take a new wire (for this one I used brown wire, since
+this is the cable that runs to the power cable L line), strip it and add it to the welding clamp as well.
+
+Strip the other end of the brown wire and connect it to an L-terminal of the FIBARO switch.
+
+<img src="images/IMG_20191228_144422.jpg" width="400px">
+
+All three terminals of the "on/off" switch are now disconnected.
+Uninstall the snap-in switch. I use a screwdriver to squeeze the two tabs on the side
+(this takes some force) from the inside of the machine to the outside
+
+<img src="images/IMG_20191228_144812.jpg" width="400px">
+
+After this, remove the switch.
+
+<img src="images/IMG_20191228_144911.jpg" width="400px">
+
+Install the new momentary rocker switch by pushing it into the cutout.
+
+<img src="images/IMG_20191228_145033.jpg" width="400px">
 
 
 
