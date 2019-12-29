@@ -273,4 +273,37 @@ cup of coffee!
 
 <img src="images/IMG_20191228_163543.jpg" width="400px">
 
+## My Home Assistant config for the Moccamaster
+
+In Home Assistant, I use a template switch to wrap the functionality of the FIBARO switch.
+Here's the configuration that I use for it:
+
+```yaml
+platform: template
+switches:
+  gui_koffiezetapparaat_stroom:
+    friendly_name: Koffie
+    value_template: >-
+      {{ is_state("switch.koffiezetapparaat", "on") }}
+    # When the power usage is between 0W and 100W (in practice: a value
+    # really close to 57W), only the coffee maker's hot plate is active,
+    # which means that the coffee is ready for drinking. In this case,
+    # use a cup of coffee as the icon.
+    icon_template: >-
+      {% if states('sensor.koffiezetapparaat_power') | float > 0 and
+            states('sensor.koffiezetapparaat_power') | float < 100 %}
+        mdi:coffee
+      {% else %}
+        mdi:coffee-maker
+      {% endif %}
+    turn_on:
+      service: switch.turn_on
+      data:
+        entity_id: switch.koffiezetapparaat
+    turn_off:
+      service: switch.turn_off
+      data:
+        entity_id: switch.koffiezetapparaat
+```
+
 
