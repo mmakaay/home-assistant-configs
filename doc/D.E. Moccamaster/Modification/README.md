@@ -183,8 +183,94 @@ After this, remove the switch.
 <img src="images/IMG_20191228_144911.jpg" width="400px">
 
 Install the new momentary rocker switch by pushing it into the cutout.
+This switch will later on be connected to an L and the S1 terminal of the FIBARO switch,
+so it can be used to turn on and off the power of the machine.
 
 <img src="images/IMG_20191228_145033.jpg" width="400px">
 
+Disconnect terminal E of the "extra hot" switch. This is the switch wire that
+is used to turn on an extra heating element.
+
+<img src="images/IMG_20191228_151548.jpg" width="400px">
+
+Since I do not use the "extra hot" feature of the machine at all, I cut off the
+cable lug, and use some isolation tape to isolate the end of the wire and stick
+the wire to the brown L-wire of the heating plate.
+
+<img src="images/IMG_20191228_151838.jpg" width="400px">
+
+Disconnect the remaining terminals D and F of the "extra hot" switch. These two are
+left as-is and will be connected to the new indicator light.
+
+<img src="images/IMG_20191228_152319.jpg" width="400px">
+
+Remove the "extra hot" switch from the machine.
+
+<img src="images/IMG_20191228_152543.jpg" width="400px">
+
+Install the new indicator light by pushing it in the cutout.
+
+<img src="images/IMG_20191228_152652.jpg" width="400px">
+
+Reconnect the terminals D and F to the new indicator light terminals.
+
+<img src="images/IMG_20191228_152801.jpg" width="400px">
+
+Connect the blue wire that was left dangling at the beginning to the N-terminal of the
+FIBARO switch. The welding clamps can now be moved into their final positions.
+Because I used rather thick copper wire (which is quite stiff), this is an easy job.
+Simply bend the write into the required shape.
+
+<img src="images/IMG_20191228_153326.jpg" width="400px">
+
+Time for a safety check. After routing all the wires, make sure that the wires in
+the water cooker shaft are away from the heating.
+
+<img src="images/IMG_20191228_153349.jpg" width="400px">
+
+Now, all that is left is connecting the momentary switch to the FIBARO switch.
+
+Take two new wires (a brown one and a blue one). Strip them on one side and connect two
+cable lugs to them. You can use some fresh cable lugs, but I didn't have them. Therefore, I
+stripped down two of the cut off lugs, and soldered the two cables onto them instead.
+Eventually, I used some insulation tape to insulate the connectors.
+
+<img src="images/IMG_20191228_145223_steps.jpg" width="400px">
+
+Connect the two new wires with their cable lugs to the momentary switch.
+
+<img src="images/IMG_20191228_154346.jpg" width="400px">
+
+Connect the brown wire to the remaining L-terminal and the blue wire to the S1 terminal
+of the FIBARO switch. After doing this, here's what the FIBARO switch looks like:
+
+<img src="images/IMG_20191228_154430.jpg" width="400px">
+
+And here is the end result, all wires in place and routed:
+
+<img src="images/IMG_20191228_154657.jpg" width="400px">
+
+Close up the machine by reinstalling the bottom plate. The machine is ready for use.
+
+<img src="images/IMG_20191228_155525.jpg" width="400px">
+
+First a test to see if the switch works at all. Plug in the machine and press the momentary switch.
+If all went well, the indicator light will light up.
+
+<img src="images/IMG_20191228_155602.jpg" width="400px">
+
+Next, follow the procedure for adding the FIBARO switch to the home automation setup.
+I do so by going into the Z-wave control panel in Home Assistant, clicking on the button
+to add a new device and then pressing the momentary switch three times quickly in a row.
+
+After pairing the FIBARO switch, do the final test. First, prepare the coffee machine
+for brewing a cuppa. Then trigger the switch from home automation.
+
+<img src="images/IMG_20191228_163510.jpg" width="400px">
+
+If all went well, the machine starts brewing and you end up with a really nice
+cup of coffee!
+
+<img src="images/IMG_20191228_163543.jpg" width="400px">
 
 
