@@ -284,6 +284,12 @@ views:
     - entity: binary_sensor.iemand_komt_voor_binnen
     - entity: binary_sensor.iemand_komt_achter_binnen
     - entity: binary_sensor.iemand_in_huis
+    - entity: switch.benext_energy_switch_plus_switch
+    - entity: sensor.benext_energy_switch_plus_power
+      name: Test plug R
+    - entity: switch.benext_energy_switch_plus_switch_2
+    - entity: sensor.benext_energy_switch_plus_power_2
+      name: Test plug L
     show_header_toggle: false
     title: Experimenteel
     type: entities
@@ -514,6 +520,18 @@ views:
         type: state-icon
       type: conditional
     - conditions:
+      - entity: switch.settopbox
+        state_not: 'off'
+      elements:
+      - entity: switch.settopbox
+        style:
+          --iron-icon-height: 40px
+          --iron-icon-width: 40px
+          left: 45%
+          top: 79%
+        type: state-icon
+      type: conditional
+    - conditions:
       - entity: media_player.sony_bravia_tv
         state_not: 'off'
       elements:
@@ -569,22 +587,22 @@ views:
         left: 53.5%
         top: 84.5%
       type: state-label
-    - entity: sensor.stekker_koffiezetapparaat_power
+    - entity: sensor.koffiezetapparaat_power
       style:
         font-size: 11px
         left: 54.3%
         top: 35.6%
       type: state-label
     - conditions:
-      - entity: binary_sensor.achterdeur_beweging
+      - entity: binary_sensor.voordeur_beweging
         state: 'on'
       elements:
-      - entity: binary_sensor.woonkamer_beweging
+      - entity: binary_sensor.voordeur_beweging
         style:
           --iron-icon-height: 25px
           --iron-icon-width: 25px
-          left: 67%
-          top: 9%
+          left: 74%
+          top: 98%
         type: state-icon
       type: conditional
     - conditions:
@@ -723,7 +741,7 @@ views:
           transform: rotate(45deg)
         type: state-icon
       type: conditional
-    - entity: sensor.achterdeur_temperatuur
+    - entity: sensor.voordeur_temperatuur
       style:
         font-size: 13px
         left: 85%
@@ -1064,26 +1082,26 @@ views:
     - active
     type: entity-filter
   - entities:
-    - entity: timer.slaapkamer_recent
-      name: Slaapkamer
-    - entity: timer.overloop_recent
-      name: Overloop
-    - entity: timer.badkamer_recent
-      name: Badkamer
-    - entity: timer.trap_recent
-      name: Trap
+    - entity: timer.voordeur_recent
+      name: Voordeur
     - entity: timer.hal_recent
       name: Hal
-    - entity: timer.toilet_recent
-      name: Toilet
+    - entity: timer.trap_recent
+      name: Trap
+    - entity: timer.overloop_recent
+      name: Overloop
+    - entity: timer.slaapkamer_recent
+      name: Slaapkamer
+    - entity: timer.badkamer_recent
+      name: Badkamer
     - entity: timer.gang_recent
       name: Gang
+    - entity: timer.toilet_recent
+      name: Toilet
     - entity: timer.woonkamer_recent
       name: Woonkamer
     - entity: timer.keuken_recent
       name: Keuken
-    - entity: timer.achterdeur_recent
-      name: Achterdeur
     - entity: binary_sensor.iemand_komt_voor_binnen
     - entity: binary_sensor.iemand_komt_achter_binnen
     hours_to_show: 2
@@ -1233,12 +1251,13 @@ views:
       name: TV kast rechts
     - entity: sensor.stekker_tvkast_links_power
       name: TV kast links
-    - entity: sensor.stekker_koffiezetapparaat_power
+    - entity: sensor.koffiezetapparaat_power
       name: Koffie
     - entity: sensor.licht_hal_plafond_power
       name: Lamp hal
     - entity: sensor.licht_voordeur_buiten_power
       name: Voordeur buitenlamp
+    - entity: sensor.koffiezetapparaat_power
     hours_to_show: 24
     refresh_interval: 0
     type: history-graph
@@ -1271,14 +1290,16 @@ views:
 - badges: []
   cards:
   - entities:
+    - entity: sensor.voordeur_batterij
+      name: Voordeur
     - entity: sensor.bewegingssensor_hal_batterij
       name: Hal
     - entity: sensor.bewegingssensor_gang_batterij
       name: Gang
-    - entity: sensor.bewegingssensor_toilet_batterij
-      name: Toilet
     - entity: sensor.bewegingssensor_woonkamer_batterij
       name: Woonkamer
+    - entity: sensor.bewegingssensor_toilet_batterij
+      name: Toilet
     - entity: sensor.bewegingssensor_keuken_batterij
       name: Keuken
     - entity: sensor.bewegingssensor_trap_batterij

@@ -43,8 +43,18 @@
     - service: script.zet_tvkast_links_stroom_uit
     - service: script.zet_bank_links_stroom_uit
 
-- id: power_down_licht_buiten_uit
-  alias: "[POWER DOWN] Licht buiten uit"
+- id: power_down_licht_voordeur_uit
+  alias: "[POWER DOWN] Licht voordeur uit"
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.licht_voordeur_buiten
+
+- id: power_down_licht_tuin_uit
+  alias: "[POWER DOWN] Licht tuin uit"
   trigger:
     - platform: event
       event_type: power_down
@@ -52,9 +62,6 @@
     - service: light.turn_off
       data:
         entity_id: light.buitenstopcontact
-    - service: switch.turn_off
-      data:
-        entity_id: switch.licht_voordeur_buiten
 
 - id: power_down_licht_hal_uit
   alias: "[POWER DOWN] Licht hal uit"

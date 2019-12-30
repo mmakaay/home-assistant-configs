@@ -1,9 +1,3 @@
-# This automation is based on the Z-Wave BeNext DHS-ZW-SNMT-01 Multi Sensor.
-# I configured the device with "Mode Timeout" = 10 seconds and
-# "Switch off time" = 10 seconds. This way, it does not stay active very long
-# when no more motion occurs. It does however keep the motion sensor switched
-# on as long as motion is detected.
-
 - id: hal_licht_A
   alias: "[HAL LICHT] A. zet aan bij beweging of binnenkomst"
   description: >
@@ -35,31 +29,7 @@
 
 
 - id: hal_licht_B
-  alias: "[HAL LICHT] B. zet uit na een tijdje geen beweging"
-  description: >
-    Wanneer de timer afloopt en er is geen beweging in de ruimte, maak
-    dan het licht weer uit. De beweging cooldown timer wordt ook
-    uitgezet, omdat we best willen dat na dit event de lampen meteen
-    weer aangaan bij beweging.
-  trigger:
-    - platform: event
-      event_type: timer.finished
-      event_data:
-        entity_id: timer.hal
-  action:
-    - service: switch.turn_off
-      data:
-        entity_id: switch.licht_hal_plafond
-    - wait_template: "{{ is_state('timer.hal_cooldown', 'active') }}"
-      timeout: 5
-      continue_on_timeout: 'false'
-    - service: timer.cancel
-      data:
-        entity_id: timer.hal_cooldown
-
-
-- id: hal_licht_C
-  alias: "[HAL LICHT] C. uitzetten na timeout en geen beweging"
+  alias: "[HAL LICHT] B. uitzetten na timeout en geen beweging"
   description: >
     Wanneer de timer afloopt en er is geen beweging in de ruimte, maak
     dan het licht weer uit. De beweging cooldown timer wordt ook
@@ -86,8 +56,8 @@
         entity_id: timer.hal_cooldown
 
 
-- id: hal_licht_D
-  alias: "[HAL LICHT] D. herstarten na timeout maar wel beweging"
+- id: hal_licht_C
+  alias: "[HAL LICHT] C. herstarten na timeout maar wel beweging"
   description: >
     Wanneer de timer afloopt en er is beweging in de ruimte, herstart
     dan de timer.
@@ -106,8 +76,8 @@
         entity_id: timer.hal
 
 
-- id: hal_licht_E
-  alias: "[HAL LICHT] E. cooldown activeren als het licht uitgaat"
+- id: hal_licht_D
+  alias: "[HAL LICHT] D. cooldown activeren als het licht uitgaat"
   description: >
     Wanneer de lamp uitgaat in de hal, dan willen we de bewegingssensor
     even negeren, zodat eventuele beweging niet direct het licht weer aanzet.
@@ -127,8 +97,8 @@
         entity_id: timer.hal_cooldown
 
 
-- id: hal_licht_F
-  alias: "[HAL LICHT] F. cooldown deactiveren als het licht aangaat"
+- id: hal_licht_E
+  alias: "[HAL LICHT] E. cooldown deactiveren als het licht aangaat"
   description: >
     Wanneer de lamp aangaat in de hal, dan kan een eventuele cooldown
     timer worden gestopt.
