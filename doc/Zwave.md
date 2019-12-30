@@ -1,3 +1,5 @@
+# Node management 
+
 ## Add a node
 
 * Go to Configuration -> Z-Wave
@@ -16,11 +18,11 @@
   in the Z-Wave control panel
 * Restart Home Assistant to get this unknown device out of the list
 
-## Node configuration
+# Node configuration
 
 Below, I have documented the settings that I apply to my devices.
 
-### BeNext Energy Switch Plus
+## BeNext Energy Switch Plus
 
 * Entities
   * sensor.*_energy -> exclude
@@ -33,7 +35,7 @@ Below, I have documented the settings that I apply to my devices.
   * 9. Relay delay time = 1
   * 10. Light indicator = Led off
 
-*** BeNext MoLite motion sensor
+## BeNext MoLite motion sensor
 
 * Entities
   * sensor.*_alarm_level -> exclude
@@ -43,13 +45,22 @@ Below, I have documented the settings that I apply to my devices.
   * sensor.*_light_level -> include, polling intensity = 0
   * sensor.*_temperature -> include, polling intensity = 0
 * Node Config Options
+  * Wakeup interval = 60
   * 2. Mode timeout = 1
   * 3. Switch off time = 1
   * 4. Sensitivity = 127
   * 5. The mode = normal operation mode
   * 6. The temperature offset = 0
 
-*** FIBARO switch 2 (single)
+The default wakeup interval is 7200, but that doesn't work too well.
+Openzwave doesn't process the motion sensor "Basic SET" signals as
+long as the sensor has not been seen in an awake state.
+For information on this, see:
+https://github.com/OpenZWave/open-zwave/wiki/Basic-Command-Class
+An alternative could be to make use of zwave.node_event events, but
+I can't get them to work currently.
+
+## FIBARO switch 2 (single)
 
 * Entities
   * sensor.*_alarm_level -> exclude
@@ -69,7 +80,7 @@ Below, I have documented the settings that I apply to my devices.
   * 50. First channel - power reports = 10
   * 51. First channel - min. time between power reports = 10
 
-*** FIBARO switch 2 (dual)
+## FIBARO switch 2 (dual)
 
 * Entities
   * sensor.*_alarm_level -> exclude
