@@ -277,22 +277,6 @@ views:
         type: entity-button
       type: horizontal-stack
     type: vertical-stack
-  - entities:
-    - entity: switch.ps4
-    - entity: switch.settopbox
-    - entity: switch.gui_woonkamer_ambilite
-    - entity: binary_sensor.iemand_komt_voor_binnen
-    - entity: binary_sensor.iemand_komt_achter_binnen
-    - entity: binary_sensor.iemand_in_huis
-    - entity: switch.benext_energy_switch_plus_switch
-    - entity: sensor.benext_energy_switch_plus_power
-      name: Test plug R
-    - entity: switch.benext_energy_switch_plus_switch_2
-    - entity: sensor.benext_energy_switch_plus_power_2
-      name: Test plug L
-    show_header_toggle: false
-    title: Experimenteel
-    type: entities
   icon: mdi:home
   path: default_view
   title: Home
@@ -1247,6 +1231,23 @@ views:
     title: Afvalkalender
     type: entities
   - entities:
+    - entity: switch.ps4
+    - entity: switch.settopbox
+    - entity: switch.gui_woonkamer_ambilite
+    - entity: binary_sensor.iemand_komt_voor_binnen
+    - entity: binary_sensor.iemand_komt_achter_binnen
+    - entity: binary_sensor.iemand_in_huis
+    - entity: switch.benext_energy_switch_plus_switch
+    - entity: sensor.benext_energy_switch_plus_power
+      name: Test plug R
+    - entity: switch.benext_energy_switch_plus_switch_2
+    - entity: sensor.benext_energy_switch_plus_power_2
+      name: Test plug L
+    - entity: sensor.koffiezetapparaat
+    show_header_toggle: false
+    title: Experimenteel
+    type: entities
+  - entities:
     - entity: sensor.stekker_tvkast_rechts_power
       name: TV kast rechts
     - entity: sensor.stekker_tvkast_links_power
@@ -1270,6 +1271,30 @@ views:
     refresh_interval: 0
     title: Iemand in huis (afgelopen 3 dagen)
     type: history-graph
+  - entities:
+    - entity: sensor.voordeur_temperatuur
+      name: Voordeur (buiten)
+    - entity: sensor.gang_temperatuur
+      name: Gang
+    - entity: sensor.trap_temperatuur
+      name: Trap
+    - entity: sensor.overloop_temperatuur
+      name: Overloop
+    - entity: sensor.slaapkamer_temperatuur
+      name: Slaapkamer
+    - entity: sensor.woonkamer_temperatuur
+      name: Woonkamer
+    - entity: sensor.keuken_temperatuur
+      name: Keuken
+    - entity: sensor.stekker_tvkast_links_temperature
+      name: Stekker tvkast links
+    - entity: sensor.stekker_tvkast_rechts_temperature
+      name: Stekker tvkast rechts
+    - entity: sensor.badkamer_wastafel_temperatuur
+      name: Niet gebruikt (ligt in woonkamer)
+    show_header_toggle: false
+    title: Temperatuursensors
+    type: entities
   - card:
       content: 'Nieuwe versie: {{ state_attr("binary_sensor.updater", "newest_version")
         }}

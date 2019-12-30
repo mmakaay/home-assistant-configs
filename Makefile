@@ -1,4 +1,6 @@
-all:
+all: file_permissions
+
+file_permissions:
 	chown -hR homeassistant:homeassistant .
 	find . -type f -exec chmod 640 {} \;
 	find ./bin -type f -exec chmod 750 {} \;

@@ -1,0 +1,24 @@
+# A templated sensor, used to provide a derived state for the coffee machine.
+# The coffee machine has a FIBARO switch built into it, and that switch reports
+# power usage. Based on the power usage, a state can be derived:
+#
+# - no power : the machine is off
+# - around 1400W : water is being cooked
+# - around 60W : only the hot plate is active, so the coffee is ready
+#
+# For a description of my FIBARO / coffee machine hack, take look at:
+# https://github.com/mmakaay/home-assistant-configs/tree/master/doc/D.E.%20Moccamaster/Modification 
+
+platform: template
+sensors:
+  koffiezetapparaat:
+    friendly_name: Status koffiezetapparaat
+    value_template: >-
+      {% if is_state('switch.koffiezetapparaat', 'off') %}
+        off
+      {% elif states('sensor.koffiezetapparaat_power') | float > 0 and 
+              states('sensor.koffiezetapparaat_power') | float < 100 %}
+        ready
+      {% else %}
+        busy
+      {% endif %}
