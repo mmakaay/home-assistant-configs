@@ -2,6 +2,9 @@ platform: template
 switches:
   gui_koffiezetapparaat_stroom:
     friendly_name: Koffie
+    entity_id:
+      - sensor.date_time
+      - sensor.koffiezetapparaat
     value_template: >-
       {{ not is_state("sensor.koffiezetapparaat", "off") }}
     # 40 seconds delay for the coffee icon, to take into account that there

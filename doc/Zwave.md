@@ -40,9 +40,9 @@ Below, I have documented the settings that I apply to my devices.
 * Entities
   * sensor.*_alarm_level -> exclude
   * sensor.*_alarm_type -> exclude
-  * binary_sensor.*_presence -> include, polling intensity = 0
   * sensor.*_battery_level -> include, polling intensity = 0
-  * sensor.*_light_level -> include, polling intensity = 0
+  * sensor.*_luminance -> include, polling intensity = 0
+  * binary_sensor.*_sensor -> include, polling intensity = 0
   * sensor.*_temperature -> include, polling intensity = 0
 * Node Config Options
   * Wakeup interval = 60

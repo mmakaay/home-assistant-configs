@@ -41,7 +41,7 @@
     - platform: state
       entity_id: sensor.periode_van_de_dag
       to: 'nacht'
-      for: '03:00:00'
+      for: '02:00:00'
   action:
     - service: switch.turn_off
       data:

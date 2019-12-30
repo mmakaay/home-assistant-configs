@@ -1290,8 +1290,7 @@ views:
       name: Stekker tvkast links
     - entity: sensor.stekker_tvkast_rechts_temperature
       name: Stekker tvkast rechts
-    - entity: sensor.badkamer_wastafel_temperatuur
-      name: Niet gebruikt (ligt in woonkamer)
+    - entity: sensor.benext_dhs_zw_snmt_01_multi_sensor_temperature
     show_header_toggle: false
     title: Temperatuursensors
     type: entities
@@ -1337,7 +1336,7 @@ views:
       name: Badkamer spiegel
     - entity: sensor.bewegingssensor_badkamer_batterij
       name: Badkamer douche
-    - entity: sensor.badkamer_wastafel_batterij
+    - entity: sensor.benext_dhs_zw_snmt_01_multi_sensor_battery_level
       name: Badkamer wastafel
     show_header_toggle: false
     title: Bewegingssensors
