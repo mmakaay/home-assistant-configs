@@ -90,8 +90,8 @@ history:
       - sensor.stekker_tvkast_rechts_power
       - sensor.koffiezetapparaat_power
 
-#logger:
-#  default: debug
+logger:
+  default: warn
 
 # Expose a Prometheus metrics endpoint.
 prometheus:

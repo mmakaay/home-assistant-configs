@@ -1,6 +1,6 @@
 # This automation is based on multiple sensors.
 #
-# In the shower: IKEA Trådfri motion sensr
+# In the shower: IKEA Tradfri motion sensor
 # This sensor reports "ON" for 1 minute, then "OFF" for 30 seconds when
 # detecing motion. The state "ON" is not kept when there is still
 # motion going on.
@@ -8,7 +8,7 @@
 # Outside the shower: AQARA motion sensor
 # This sensor reports "ON" as long as there is motion.
 
-- id: badkamer_lamp_A
+- id: badkamer_licht_A
   alias: "[BADKAMER LICHT] A. zet aan bij beweging"
   description: >
     Lamp aan als er beweging wordt gedetecteerd in de ruimte.
@@ -41,7 +41,7 @@
         transition: 300
 
 
-- id: badkamer_lamp_B
+- id: badkamer_licht_B
   alias: "[BADKAMER LICHT] B. timer (her)starten bij beweging"
   description: >
     Wanneer er beweging is in de ruimte of wanneer de timer afloopt en er is
@@ -79,7 +79,7 @@
           {% endif %}
 
 
-- id: badkamer_lamp_C
+- id: badkamer_licht_C
   alias: "[BADKAMER LICHT] C. uitzetten na timeout en geen beweging"
   description: >
     Wanneer de timer afloopt, en er is geen beweging in de ruimte, maak

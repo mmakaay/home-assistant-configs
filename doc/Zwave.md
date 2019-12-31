@@ -26,9 +26,9 @@ Below, I have documented the settings that I apply to my devices.
 
 * Entities
   * sensor.*_energy -> exclude
-  * sensor.*_power -> include, polling intensity = 2
+  * sensor.*_power -> include, polling intensity = 1
   * sensor.*_previous_reading -> exclude
-  * switch.*_switch -> include, polling intensity = 0 
+  * switch.*_switch -> include, polling intensity = 1
 * Node Config Options
   * 2. Measure decimals = 2
   * 4. Startup with last known socket status = Last state

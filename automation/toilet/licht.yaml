@@ -2,14 +2,16 @@
 # toilet. This sensor reports "ON" for 1 minute, then "OFF" for 30 seconds when
 # detecing motion. The state "ON" is not kept when there is still motion going on.
 
-- id: toilet_licht_A1
-  alias: "[TOILET LICHT] A1. zet aan als de deur opengaat"
+- id: toilet_licht_A
+  alias: "[TOILET LICHT] A. zet aan bij beweging of als de deur opengaat"
   description: >
-    Lamp aan en de timer kort starten als de deur opengaat.
-    Dit is alleen maar om vlot het licht aan te hebben. Hierna neemt
-    de bewegingssensor het over in automation A2.
+    Lamp aan als de deur opengaat of als er beweging wordt gedetecteerd,
+    tenzij de cooldown timer actief is.
   trigger:
     - entity_id: binary_sensor.toiletdeur_open
+      platform: state
+      to: 'on'
+    - entity_id: binary_sensor.toilet_beweging
       platform: state
       to: 'on'
   condition:
@@ -17,35 +19,27 @@
       entity_id: light.toilet_plafond
       state: 'off'
     - condition: state
-      entity_id: timer.toilet
-      state: 'idle'
-    - condition: state
       entity_id: timer.toilet_cooldown
       state: 'idle'
   action:
-    # cancel/start, because of this bug:
-    # https://github.com/home-assistant/home-assistant/issues/12013
-    - service: timer.cancel
-      data:
-        entity_id: timer.toilet
-    - service: timer.start
-      data_template:
-        entity_id: timer.toilet
-        duration: 00:02:00
     - service: scene.turn_on
       data_template:
         entity_id: >
           scene.toilet_automatisch_{{ states('sensor.periode_van_de_dag') }}
 
 
-- id: toilet_licht_A2
-  alias: "[TOILET LICHT] A2. zet aan bij beweging"
+- id: toilet_licht_B
+  alias: "[TOILET LICHT] B. timer (her)starten"
   description: >
-    Lamp aan en de timer (her)starten als er beweging wordt gedetecteerd.
-    Wanneer de deur dicht is en er wordt beweging gedetecteerd, zet de
-    timer dan op extra lang om het bekende 'je zit lekker en het licht
-    gaat uit' te voorkomen.
+    Wanneer de deur opengaat of er beweging wordt gedetecteerd, (her)start
+    dan de timer, tenzij de cooldown timer actief is.
+    Wanneer de deur dicht is en er beweging is gedetecteerd nadat de
+    deur dichtging, zet de timer dan op extra lang om het bekende
+    'je zit lekker en het licht gaat uit'-effect te voorkomen.
   trigger:
+    - entity_id: binary_sensor.toiletdeur_open
+      platform: state
+      to: 'on'
     - entity_id: binary_sensor.toilet_beweging
       platform: state
       to: 'on'
@@ -70,14 +64,10 @@
           {% else %}
             00:10:00
           {% endif %}
-    - service: scene.turn_on
-      data_template:
-        entity_id: >
-          scene.toilet_automatisch_{{ states('sensor.periode_van_de_dag') }}
 
 
-- id: toilet_licht_B
-  alias: "[TOILET LICHT] B. verkort timer bij beweging in de gang"
+- id: toilet_licht_C
+  alias: "[TOILET LICHT] C. verkort timer bij beweging in de gang"
   description: >
     Als de toilet timer actief is, en er wordt beweging gedetecteerd
     in de gang, dan kan het zijn dat iemand van het toilet naar de gang
@@ -88,7 +78,6 @@
     De timer wordt niet aangepast als er beweging is gedetecteerd op het
     toilet nadat de deur gesloten is. In dat geval weten we zeker dat het
     toilet bezet is.
-
   trigger:
     - entity_id: binary_sensor.gang_beweging
       platform: state
@@ -113,13 +102,13 @@
       data:
         entity_id: timer.toilet
     - service: timer.start
-      data_template:
+      data:
         entity_id: timer.toilet
         duration: 00:03:00
 
 
-- id: toilet_licht_C
-  alias: "[TOILET LICHT] C. zet uit na een tijdje geen beweging"
+- id: toilet_licht_D
+  alias: "[TOILET LICHT] D. zet uit na een tijdje geen beweging"
   description: >
     Wanneer de timer afloopt en er is geen beweging in de ruimte, maak
     dan het licht weer uit. De beweging cooldown timer wordt ook
@@ -142,16 +131,16 @@
         entity_id: timer.toilet_cooldown
 
 
-- id: toilet_licht_D
-  alias: "[TOILET LICHT] D. cooldown activeren als het licht uitgaat"
+- id: toilet_licht_E
+  alias: "[TOILET LICHT] E. cooldown activeren als het licht uitgaat"
   description: >
     Wanneer de lamp uitgaat op het toilet, dan willen we de bewegingssensor
     even negeren, zodat eventuele beweging niet direct het licht weer aanzet.
     Denk aan het scenario waarbij je met de hand het licht uitmaakt en dan
     wegloopt (wat een beweging is, waarmee je het licht zou kunnen triggeren).
   trigger:
-    - entity_id: light.toilet_plafond
-      platform: state
+    - platform: state
+      entity_id: light.toilet_plafond
       to: 'off'
   action:
     - service: timer.cancel
@@ -162,11 +151,14 @@
         entity_id: timer.toilet_cooldown
 
 
-- id: toilet_licht_E
-  alias: "[TOILET LICHT] E. cooldown deactiveren als het licht aangaat"
+- id: toilet_licht_F
+  alias: "[TOILET LICHT] F. cooldown deactiveren als het licht aangaat"
   description: >
     Wanneer de lamp aangaat op het toilet, dan kan een eventuele cooldown
-    timer worden gestopt.
+    timer worden gestopt. Dit is van toepassing wanneer iemand met de hand
+    het licht aandoet. Ook wordt de timer gestart met een kleine waarde.
+    Wanneer langer licht nodig is, dan wordt dit door de andere
+    regels opgevangen.
   trigger:
     - entity_id: light.toilet_plafond
       platform: state
@@ -175,3 +167,7 @@
     - service: timer.cancel
       data:
         entity_id: timer.toilet_cooldown
+    - service: timer.start
+      data:
+        entity_id: timer.toilet
+        duration: 00:03:00
