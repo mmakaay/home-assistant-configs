@@ -1,4 +1,4 @@
 #!/bin/sh
 
 gpu=$(vcgencmd measure_temp)
-echo $gpu | cut -d= -f2 | cut -d. -f1
+echo $gpu | cut -d= -f2 | cut -d\' -f1

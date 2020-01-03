@@ -3,4 +3,5 @@
 platform: command_line
 name: HA GPU temperature
 command: ~/.homeassistant/bin/sensor.ha_gpu_temperature
+value_template: "{{ value | float }}"
 unit_of_measurement: "°C"
