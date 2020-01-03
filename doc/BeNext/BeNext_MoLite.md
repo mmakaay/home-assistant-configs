@@ -38,7 +38,7 @@ I use the following settings:
   * __sensor.benext_dhs_zw_snmt_01_multi_sensor_battery_level__: include with polling intensity = 255
   * __sensor.benext_dhs_zw_snmt_01_multi_sensor_luminance__: include with polling intensity = 180
   * __binary_sensor.benext_dhs_zw_snmt_01_multi_sensor_sensor__: include with polling intensity = 0
-  * __sensor.benext_dhs_zw_snmt_01_multi_sensor_temperature__: include with polling intensity = 60
+  * __sensor.benext_dhs_zw_snmt_01_multi_sensor_temperature__: include with polling intensity = 30
 
 The alarm_type and alarm_level might not yet be available. They might
 show up as an entity with "unknown" in the name. If this happens, follow
@@ -58,7 +58,7 @@ zwave:
   polling_interval: 10000
 ```
 
-Based on this configuration, I poll the temperature every 10 minutes, the luminance
+Based on this configuration, I poll the temperature every 5 minutes, the luminance
 every half hour and the battery level every 42.5 minute, given that 255 is the
 maximum allowed value for polling_intensity.
 
