@@ -35,15 +35,32 @@ I use the following settings:
 
   * __sensor.benext_dhs_zw_snmt_01_multi_sensor_alarm_level__: exclude
   * __sensor.benext_dhs_zw_snmt_01_multi_sensor_alarm_type__: exclude
-  * __sensor.benext_dhs_zw_snmt_01_multi_sensor_battery_level__: include with polling intensity = 0
-  * __sensor.benext_dhs_zw_snmt_01_multi_sensor_luminance__: include with polling intensity = 0
+  * __sensor.benext_dhs_zw_snmt_01_multi_sensor_battery_level__: include with polling intensity = 255
+  * __sensor.benext_dhs_zw_snmt_01_multi_sensor_luminance__: include with polling intensity = 180
   * __binary_sensor.benext_dhs_zw_snmt_01_multi_sensor_sensor__: include with polling intensity = 0
-  * __sensor.benext_dhs_zw_snmt_01_multi_sensor_temperature__: include with polling intensity = 0
+  * __sensor.benext_dhs_zw_snmt_01_multi_sensor_temperature__: include with polling intensity = 60
 
 The alarm_type and alarm_level might not yet be available. They might
 show up as an entity with "unknown" in the name. If this happens, follow
 the rest of the steps and get back here later. By then, they will likely be
 discovered.
+
+The polling intensities for the non-binary sensors is required to have the
+sensor values updated. These sensors do not actively report their values.
+The polling intensity setting relates to the polling_interval setting that can
+be setup in Home Assistant's `configuration.yaml` file. Here's my configuration:
+
+```yaml
+zwave:
+  # Run a polling cycle every 10 seconds. Z-Wave node entities can configure
+  # a polling intensity, which relates to this option. A polling intensity
+  # of 1 means "poll every 10 seconds", 6 means "poll every minute", etc.
+  polling_interval: 10000
+```
+
+Based on this configuration, I poll the temperature every 10 minutes, the luminance
+every half hour and the battery level every 42.5 minute, given that 255 is the
+maximum allowed value for polling_intensity.
 
 ## Configure settings
 
@@ -85,9 +102,11 @@ when compared to the default of 7200 seconds, but I have good reasons to do so:
      and for this the sensor must be awake, so openzwave can retrieve the required
      meta-data.
 
-About the first point: Below you find log lines that you will find in your
-OZW_Log.txt log file when the sensor has not yet fully been activated (timestamps
-omitted for readability) and motion is detected:
+__About the second point__
+
+Below you find log lines that you will find in your OZW_Log.txt log file when the
+sensor has not yet fully been activated (timestamps omitted for readability) and
+motion is detected:
 
 ```
 Detail, Node015,   Received: 0x01, 0x0b, 0x00, 0x04, 0x00, 0x0f, 0x03, 0x20, 0x01, 0xff, 0xc1, 0x00, 0xe3
@@ -120,6 +139,10 @@ An alternative could be to make use of zwave.node_event events, but
 I can't get them to work currently.
 
 ## Force a configuration update of the sensor
+
+At this point, the configuration is ready. However, this configuration might not
+have been sent to the motion sensor, since the sensor needs to be awake for this
+to work. 
 
 To force a configuration update, remove the back panel and put it back. This triggers
 the sensor to report itself as awake. After this, the configuration on the sensor
