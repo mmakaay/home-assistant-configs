@@ -60,6 +60,11 @@ sensor reports motion while there's motion and stops reporting quickly after the
 motion ends. In my option, that is the most useful setup for integrating with
 Home Assistant automation rules.
 
+Note: When briefly triggering the motion sensor with these configuration values, 
+the sensor will report motion for about 10 seconds, before turning off. One
+would expect a lower time, based on the documentation of the configuration
+parameters, but 10 seconds is useful enough to not bother about it.
+
 ## Configure wakeup time 
 
 Under "Node Config Options" set the wakeup interval to 15 (seconds). This is quite low
@@ -108,6 +113,11 @@ made to refresh the data using the SensorBinaryCmd_Get command, however that one
 is not executed but queued, since the sensor is not awake at this moment.
 This is not a problem for the operaiton of the sensor, although the logging seems
 to indicate a problem.
+
+For information on this behavior, see:
+https://github.com/OpenZWave/open-zwave/wiki/Basic-Command-Class
+An alternative could be to make use of zwave.node_event events, but
+I can't get them to work currently.
 
 ## Force a configuration update of the sensor
 
