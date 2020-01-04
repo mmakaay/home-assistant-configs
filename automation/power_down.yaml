@@ -30,6 +30,11 @@
     - service: switch.turn_off
       data:
         entity_id: switch.gui_vaaslamp_licht
+    # Note: might be unavailable, because it is switched off by hand too.
+    - service: light.turn_off
+      data:
+        entity_id: light.leeslampje_bank
+
 
 - id: power_down_woonkamer_stroom_uit
   alias: "[POWER DOWN] woonkamer stroom uit"
@@ -146,3 +151,16 @@
     - service: media_player.turn_off
       data:
         entity_id: media_player.ps4
+
+- id: power_down_beepbeep_als_alles_uitstaat
+  alias: "[POWER DOWN] 'beepbeep' als alles uitstaat"
+  description: >
+    Laat ter bevestiging dat alles uit staat een 'beepbeep' signaal
+    horen. Op deze manier kun je als je weggaat horen of de power
+    down opdracht (bijv. met de knop bij de voordeur) gelukt is.
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.blackout_active
+      to: 'on'
+  action:
+    - service: shell_command.beepbeep

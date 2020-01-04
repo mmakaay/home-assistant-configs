@@ -22,9 +22,6 @@
     - condition: state
       entity_id: binary_sensor.iemand_in_huis
       state: 'on'
-    - condition: state
-      entity_id: sensor.periode_van_de_dag
-      state: 'avond'
   action:
     - service: switch.turn_on
       data:

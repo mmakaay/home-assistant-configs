@@ -31,6 +31,9 @@ zwave:
   # of 1 means "poll every 10 seconds", 6 means "poll every minute", etc.
   polling_interval: 10000
 
+shell_command:
+  beepbeep: ~/.homeassistant/bin/beepbeep
+
 recorder:
   db_url: postgresql://@/homeassistant
   purge_keep_days: 1

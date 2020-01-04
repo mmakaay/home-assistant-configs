@@ -1,3 +1,7 @@
+# "Leeslampje" uses "not state 'on'", because that one is
+# turned off and on by hand, making it unavailable at times,
+# which is as good as off.
+
 platform: template
 sensors:
   blackout_active:
@@ -9,8 +13,11 @@ sensors:
       - light.gang_groep_deconz
       - light.toilet_groep_deconz
       - light.badkamer_groep_deconz
+      - light.onder_het_bed
+      - light.leeslampje_bank
       - switch.koffiezetappraat
       - switch.licht_hal_plafond
+      - switch.stekker_bij_de_deurbel
       - switch.licht_voordeur_buiten
       - switch.stekker_links_van_de_bank
       - switch.stekker_bij_de_tuindeuren
@@ -24,10 +31,13 @@ sensors:
            is_state("light.gang_groep_deconz", "off") and
            is_state("light.toilet_groep_deconz", "off") and
            is_state("light.badkamer_groep_deconz", "off") and
+           is_state("light.onder_het_bed", "off") and
+           not is_state("light.leeslampje_bank", "on") and
            is_state("switch.stekker_links_van_de_bank", "off") and
            is_state("switch.stekker_bij_de_tuindeuren", "off") and
            is_state("switch.koffiezetapparaat", "off") and
            is_state("switch.licht_hal_plafond", "off") and
+           is_state("switch.switch.stekker_bij_de_deurbel", "off") and
            is_state("switch.licht_voordeur_buiten", "off") and
            is_state("switch.stekker_tvkast_links", "off") and
            is_state("switch.stekker_tvkast_rechts", "off") }}

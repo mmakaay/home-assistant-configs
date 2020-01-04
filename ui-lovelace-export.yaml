@@ -373,7 +373,7 @@ views:
         --iron-icon-height: 25px
         --iron-icon-width: 25px
         left: 15%
-        top: 82%
+        top: 83%
       tap_action:
         action: toggle
       title: Midden
@@ -384,13 +384,25 @@ views:
         --iron-icon-height: 25px
         --iron-icon-width: 25px
         left: 15%
-        top: 87%
+        top: 89%
       tap_action:
         action: toggle
-      title: Onbovender
+      title: Onder
+      type: state-icon
+    - entity: light.leeslampje_bank
+      icon: mdi:track-light
+      style:
+        --iron-icon-height: 30px
+        --iron-icon-width: 30px
+        left: 17%
+        top: 86%
+        transform: rotate(180deg)
+      tap_action:
+        action: toggle
+      title: Onder
       type: state-icon
     - entity: light.zon
-      icon: mdi:circle
+      icon: mdi:ceiling-light
       style:
         --iron-icon-height: 33px
         --iron-icon-width: 33px
@@ -977,6 +989,18 @@ views:
         type: state-icon
       type: conditional
     - conditions:
+      - entity: binary_sensor.waskamer_beweging
+        state: 'on'
+      elements:
+      - entity: binary_sensor.waskamer_beweging
+        style:
+          --iron-icon-height: 25px
+          --iron-icon-width: 25px
+          left: 72%
+          top: 29%
+        type: state-icon
+      type: conditional
+    - conditions:
       - entity: binary_sensor.computerkamer_beweging
         state: 'on'
       elements:
@@ -1074,8 +1098,12 @@ views:
       name: Trap
     - entity: timer.overloop_recent
       name: Overloop
+    - entity: timer.waskamer_recent
+      name: Waskamer
     - entity: timer.slaapkamer_recent
       name: Slaapkamer
+    - entity: timer.computerkamer_recent
+      name: Werkkamer
     - entity: timer.badkamer_recent
       name: Badkamer
     - entity: timer.gang_recent
@@ -1086,8 +1114,10 @@ views:
       name: Woonkamer
     - entity: timer.keuken_recent
       name: Keuken
-    - entity: binary_sensor.iemand_komt_voor_binnen
     - entity: binary_sensor.iemand_komt_achter_binnen
+      name: Achter binnen
+    - entity: binary_sensor.iemand_komt_voor_binnen
+      name: Voor binnen
     hours_to_show: 2
     refresh_interval: 20
     title: Beweging in de laatste 2 uur
@@ -1162,6 +1192,7 @@ views:
     - entity: light.droogkap
     - entity: light.achter_de_koelkast
     - entity: switch.gui_vaaslamp_licht
+    - entity: light.leeslampje_bank
     - entity: switch.gui_terraslampjes
     - entity: switch.gui_kerstboom
     - entity: switch.gui_terraslampjes
@@ -1252,24 +1283,12 @@ views:
       name: TV kast rechts
     - entity: sensor.stekker_tvkast_links_power
       name: TV kast links
-    - entity: sensor.koffiezetapparaat_power
-      name: Koffie
     - entity: sensor.licht_hal_plafond_power
       name: Lamp hal
     - entity: sensor.licht_voordeur_buiten_power
       name: Voordeur buitenlamp
-    - entity: sensor.koffiezetapparaat_power
     hours_to_show: 24
     refresh_interval: 0
-    type: history-graph
-  - entities:
-    - entity: sensor.ha_cpu_temperature
-    type: entities
-  - entities:
-    - entity: binary_sensor.iemand_in_huis
-    hours_to_show: 144
-    refresh_interval: 0
-    title: Iemand in huis (afgelopen 3 dagen)
     type: history-graph
   - entities:
     - entity: sensor.voordeur_temperatuur
@@ -1280,8 +1299,12 @@ views:
       name: Trap
     - entity: sensor.overloop_temperatuur
       name: Overloop
+    - entity: sensor.waskamer_temperatuur
+      name: Waskamer
     - entity: sensor.slaapkamer_temperatuur
       name: Slaapkamer
+    - entity: sensor.computerkamer_temperatuur
+      name: Computerkamer
     - entity: sensor.woonkamer_temperatuur
       name: Woonkamer
     - entity: sensor.keuken_temperatuur
@@ -1294,6 +1317,12 @@ views:
     show_header_toggle: false
     title: Temperatuursensors
     type: entities
+  - entities:
+    - entity: binary_sensor.iemand_in_huis
+    hours_to_show: 3
+    refresh_interval: 0
+    title: Iemand in huis (afgelopen 3 uur)
+    type: history-graph
   - card:
       content: 'Nieuwe versie: {{ state_attr("binary_sensor.updater", "newest_version")
         }}
@@ -1308,6 +1337,42 @@ views:
     - entity: binary_sensor.updater
       state: 'on'
     type: conditional
+  - entities:
+    - entity: sensor.koffiezetapparaat
+    hours_to_show: 24
+    refresh_interval: 0
+    title: Koffiezetapparaat
+    type: history-graph
+  - entities:
+    - entity: sensor.ha_cpu_temperature
+    hours_to_show: 1
+    refresh_interval: 30
+    type: history-graph
+  - entities:
+    - entity: sensor.waskamer_temperatuur
+      name: Waskamer
+    - entity: sensor.computerkamer_temperatuur
+      name: Computerkamer
+    - entity: sensor.overloop_temperatuur
+      name: Overloop
+    - entity: sensor.benext_dhs_zw_snmt_01_multi_sensor_temperature
+      name: Ongebruikt
+    - entity: sensor.gang_temperatuur
+      name: Gang
+    - entity: sensor.keuken_temperatuur
+      name: Keuken
+    - entity: sensor.slaapkamer_temperatuur
+      name: Slaapkamer
+    - entity: sensor.trap_temperatuur
+      name: Trap
+    - entity: sensor.waskamer_temperatuur
+      name: Waskamer
+    - entity: sensor.woonkamer_temperatuur
+      name: Woonkamer
+    hours_to_show: 24
+    refresh_interval: 60
+    title: Temperatuur
+    type: history-graph
   icon: mdi:information-outline
   path: information
   title: Info
@@ -1332,12 +1397,14 @@ views:
       name: Overloop
     - entity: sensor.bewegingssensor_computerkamer_batterij
       name: Computerkamer
+    - entity: sensor.bewegingssensor_waskamer_batterij
+      name: Waskamer
     - entity: sensor.badkamer_spiegel_batterij
       name: Badkamer spiegel
     - entity: sensor.bewegingssensor_badkamer_batterij
       name: Badkamer douche
     - entity: sensor.benext_dhs_zw_snmt_01_multi_sensor_battery_level
-      name: Badkamer wastafel
+      name: Ongebruikte BeNext sensor
     show_header_toggle: false
     title: Bewegingssensors
     type: entities

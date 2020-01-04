@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+
+# Piezzo buzzer connection diagram:  
+#                                   
+#                                    .--.
+#                   .---------------|-   |
+#                   |  .------------|+   |
+#                   |  |             `--'
+#                 GND  BCM23        BEEP!
+#                   |  |
+# 2  4  6  8 10 12 14 16 18 ...
+# .  .  .  .  .  .  .  .  .
+# 
+# .  .  .  .  .  .  .  .  .
+# 1  3  5  7  9 11 13 15 17 ...
+#
+
+import RPi.GPIO as GPIO
+from time import sleep
+
+BUZZER_GPIO = 23
+
+try:
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(BUZZER_GPIO,GPIO.OUT)
+
+    GPIO.output(BUZZER_GPIO,GPIO.HIGH)
+    sleep(0.1)
+    GPIO.output(BUZZER_GPIO,GPIO.LOW)
+    sleep(0.15)
+    GPIO.output(BUZZER_GPIO,GPIO.HIGH)
+    sleep(0.2)
+    GPIO.output(BUZZER_GPIO,GPIO.LOW)
+except Exception as e:
+    print("Exception: %s: %s" % (typeof(e).__name__, str(e)))
+finally:
+    GPIO.cleanup()
+    print("Done beeping")
+    

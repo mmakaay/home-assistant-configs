@@ -19,3 +19,7 @@ binary_sensor.computerkamer_beweging:
   icon: mdi:walk
 binary_sensor.waskamer_beweging:
   icon: mdi:walk
+binary_sensor.benext_dhs_zw_snmt_01_multi_sensor_sensor_2:
+  icon: mdi:walk
+binary_sensor.benext_dhs_zw_snmt_01_multi_sensor_sensor:
+  icon: mdi:walk
