@@ -17,6 +17,9 @@ First, pair the motion sensor with the controller:
   * Now put the back panel back on the motion sensor. It will
     single-blink a few times, after which the LED will light up for a
     second to confirm that it can communicate to the Z-Wave network.
+    When the LED blinks quickly a few times at the end, then communication
+    failed. Remove the back panel and add it back when this happens,
+    to retry the connection.
   * Click "HEAL NETWORK".
 
 After these steps, the sensor should be visible on the Z-Wave control
@@ -31,6 +34,10 @@ to Home Assistant. To do so, select the new sensor under "Nodes".
 Then select the entities below it one at a time and update 
 settings.
 
+_Note: Some of the above entities might not be available in the list. I regularly
+have to restart the Z-Wave network to let the discovery process do its job.
+I do so by restarting Home Assistant._
+
 I use the following settings:
 
   * __sensor.benext_dhs_zw_snmt_01_multi_sensor_alarm_level__: exclude
@@ -40,12 +47,7 @@ I use the following settings:
   * __binary_sensor.benext_dhs_zw_snmt_01_multi_sensor_sensor__: include with polling intensity = 0
   * __sensor.benext_dhs_zw_snmt_01_multi_sensor_temperature__: include with polling intensity = 30
 
-The alarm_type and alarm_level might not yet be available. They might
-show up as an entity with "unknown" in the name. If this happens, follow
-the rest of the steps and get back here later. By then, they will likely be
-discovered.
-
-The polling intensities for the non-binary sensors is required to have the
+The polling intensities for the non-binary sensors are required to have the
 sensor values updated. These sensors do not actively report their values.
 The polling intensity setting relates to the polling_interval setting that can
 be setup in Home Assistant's `configuration.yaml` file. Here's my configuration:
@@ -61,6 +63,10 @@ zwave:
 Based on this configuration, I poll the temperature every 5 minutes, the luminance
 every half hour and the battery level every 42.5 minute, given that 255 is the
 maximum allowed value for polling_intensity.
+
+One thing that I noticed, is that more sensors updates are logged during times when
+motion is being detected. So if you see more updates than expected based on the
+polling intensities, check if this was at times that motion was detected.
 
 ## Configure settings
 
@@ -85,7 +91,8 @@ parameters, but 10 seconds is useful enough to not bother about it.
 ## Configure wakeup time 
 
 Under "Node Config Options" set the wakeup interval to 15 (seconds). This is quite low
-when compared to the default of 7200 seconds, but I have good reasons to do so:
+when compared to the default of 7200 seconds (used for saving batteries), but I have
+good reasons to do so:
 
   1. __Configuration changes can only be transferred to the sensor at times
      when the sensor is reporting itself as awake.__ When configuration changes are made
@@ -99,7 +106,7 @@ when compared to the default of 7200 seconds, but I have good reasons to do so:
      sensor has reported itself awake__. The reason seems to be that the sensor only sends
      a Basic SET to its associated device(s) (in this case the Z-Wave controller)
      and not a Report. Openzwave needs to learn how to interpret the Basic SET message,
-     and for this the sensor must be awake, so openzwave can retrieve the required
+     and for this the sensor must be awake, so openzwave can retrieve the sensor's
      meta-data.
 
 __About the second point__
@@ -147,6 +154,10 @@ to work.
 To force a configuration update, remove the back panel and put it back. This triggers
 the sensor to report itself as awake. After this, the configuration on the sensor
 should be updated.
+
+If you want to verify if this is the case, reload the Z-wave control panel page,
+select the new sensor and go over the entities and sensors to see if all settings
+have been applied as expected.
 
 ## Test the sensor
 
