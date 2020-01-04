@@ -25,6 +25,7 @@ install:
 	echo "Please run:"
 	echo "$ ./srv/homeassistant/bin/activate"
 	echo "$ pip3 install psycopg2"
+	echo "$ pip3 install RPi.GPIO"
 
 install_afvalbeheer:
 	mkdir -p repos
