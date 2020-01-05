@@ -8,6 +8,7 @@
       data:
         entity_id: light.keuken_groep_deconz
 
+
 - id: power_down_keuken_stroom_uit
   alias: "[POWER DOWN] keuken stroom uit"
   description: >
@@ -17,6 +18,7 @@
       event_type: power_down
   action:
     - service: script.zet_keuken_stroom_uit
+
 
 - id: power_down_licht_woonkamer_uit
   alias: "[POWER DOWN] Licht woonkamer uit"
@@ -48,6 +50,7 @@
     - service: script.zet_tvkast_links_stroom_uit
     - service: script.zet_bank_links_stroom_uit
 
+
 - id: power_down_licht_voordeur_uit
   alias: "[POWER DOWN] Licht voordeur uit"
   trigger:
@@ -58,6 +61,7 @@
       data:
         entity_id: switch.licht_voordeur_buiten
 
+
 - id: power_down_licht_tuin_uit
   alias: "[POWER DOWN] Licht tuin uit"
   trigger:
@@ -67,6 +71,7 @@
     - service: light.turn_off
       data:
         entity_id: light.buitenstopcontact
+
 
 - id: power_down_licht_hal_uit
   alias: "[POWER DOWN] Licht hal uit"
@@ -80,6 +85,7 @@
     - service: switch.turn_off
       data:
         entity_id: switch.stekker_bij_de_deurbel
+
 
 - id: power_down_licht_gang_uit
   alias: "[POWER DOWN] Licht gang uit"
@@ -99,6 +105,7 @@
     - service: timer.cancel
       data:
         entity_id: timer.gang_cooldown
+
 
 - id: power_down_licht_toilet_uit
   alias: "[POWER DOWN] Licht toilet uit"
@@ -120,6 +127,7 @@
       data:
         entity_id: timer.toilet_cooldown
 
+
 - id: power_down_licht_badkamer_uit
   alias: "[POWER DOWN] Licht badkamer uit"
   trigger:
@@ -130,6 +138,7 @@
       data:
         entity_id: light.badkamer_groep_deconz
 
+
 - id: power_down_licht_slaapkamer_uit
   alias: "[POWER DOWN] Licht slaapkamer uit"
   trigger:
@@ -139,6 +148,7 @@
     - service: light.turn_off
       data:
         entity_id: light.slaapkamer_groep_deconz
+
 
 - id: power_down_ps4_uit
   alias: "[POWER DOWN] PS4 uit"
@@ -152,6 +162,30 @@
       data:
         entity_id: media_player.ps4
 
+
+- id: power_down_beepbeep_als_alles_al_uitstond
+  alias: "[POWER DOWN] 'beepbeep' als alles al uitstond"
+  description: >
+    Laat ter bevestiging dat alles uit staat een 'beepbeep' signaal
+    horen. Op deze manier kun je als je weggaat horen of de power
+    down opdracht (bijv. met de knop bij de voordeur) gelukt is.
+  trigger:
+    - platform: event
+      event_type: power_down
+  condition:
+    - condition: state
+      entity_id: binary_sensor.blackout_active
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.beepbeep_na_power_down
+      state: 'on'
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.beepbeep_na_power_down
+    - service: shell_command.beepbeep
+
+
 - id: power_down_beepbeep_als_alles_uitstaat
   alias: "[POWER DOWN] 'beepbeep' als alles uitstaat"
   description: >
@@ -162,5 +196,12 @@
     - platform: state
       entity_id: binary_sensor.blackout_active
       to: 'on'
+  condition:
+    - condition: state
+      entity_id: input_boolean.beepbeep_na_power_down
+      state: 'on'
   action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.beepbeep_na_power_down
     - service: shell_command.beepbeep

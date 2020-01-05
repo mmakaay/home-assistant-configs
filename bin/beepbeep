@@ -27,9 +27,9 @@ try:
     GPIO.output(BUZZER_GPIO,GPIO.HIGH)
     sleep(0.1)
     GPIO.output(BUZZER_GPIO,GPIO.LOW)
-    sleep(0.15)
+    sleep(0.1)
     GPIO.output(BUZZER_GPIO,GPIO.HIGH)
-    sleep(0.2)
+    sleep(0.1)
     GPIO.output(BUZZER_GPIO,GPIO.LOW)
 except Exception as e:
     print("Exception: %s: %s" % (typeof(e).__name__, str(e)))

@@ -37,7 +37,7 @@ sensors:
            is_state("switch.stekker_bij_de_tuindeuren", "off") and
            is_state("switch.koffiezetapparaat", "off") and
            is_state("switch.licht_hal_plafond", "off") and
-           is_state("switch.switch.stekker_bij_de_deurbel", "off") and
+           is_state("switch.stekker_bij_de_deurbel", "off") and
            is_state("switch.licht_voordeur_buiten", "off") and
            is_state("switch.stekker_tvkast_links", "off") and
            is_state("switch.stekker_tvkast_rechts", "off") }}

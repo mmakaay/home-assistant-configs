@@ -10,4 +10,4 @@
       type: remote_button_long_press
       subtype: turn_on
   action:
-    service: script.trigger_power_down_event
+    service: script.trigger_power_down_event_with_beepbeep

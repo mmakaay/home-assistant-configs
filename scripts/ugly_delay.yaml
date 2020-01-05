@@ -5,18 +5,26 @@
 ugly_delay:
   sequence:
     - service: input_boolean.turn_on
-      entity_id: input_boolean.dummy
+      data:
+        entity_id: input_boolean.dummy
     - service: input_boolean.turn_off
-      entity_id: input_boolean.dummy
+      data:
+        entity_id: input_boolean.dummy
     - service: input_boolean.turn_on
-      entity_id: input_boolean.dummy
+      data:
+        entity_id: input_boolean.dummy
     - service: input_boolean.turn_off
-      entity_id: input_boolean.dummy
+      data:
+        entity_id: input_boolean.dummy
     - service: input_boolean.turn_on
-      entity_id: input_boolean.dummy
+      data:
+        entity_id: input_boolean.dummy
     - service: input_boolean.turn_off
-      entity_id: input_boolean.dummy
+      data:
+        entity_id: input_boolean.dummy
     - service: input_boolean.turn_on
-      entity_id: input_boolean.dummy
+      data:
+        entity_id: input_boolean.dummy
     - service: input_boolean.turn_off
-      entity_id: input_boolean.dummy
+      data:
+        entity_id: input_boolean.dummy

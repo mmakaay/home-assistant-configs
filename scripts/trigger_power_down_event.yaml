@@ -3,3 +3,12 @@ trigger_power_down_event:
   sequence:
     - event: power_down
       event_data: {}
+
+trigger_power_down_event_with_beepbeep:
+  alias: Trigger power down event with beepbeep
+  sequence:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.beepbeep_na_power_down
+    - event: power_down
+      event_data: {}
