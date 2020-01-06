@@ -88,6 +88,14 @@ the sensor will report motion for about 10 seconds, before turning off. One
 would expect a lower time, based on the documentation of the configuration
 parameters, but 10 seconds is useful enough to not bother about it.
 
+There is also a setting __6. The temperature offset__. This one does not seem to
+change anythings actively. Maybe the BeNext bridge reads this value from the sensor,
+in order to apply the offset to the read temperature value? I tried setting the
+value to both -3 and +3. The configuration value was updated successfully in both
+cases, but the reported temperature remained the same. Therefore, I just leave that
+settings to zero now and take care of correcting temperature values using a
+template sensor in Home Assistant.
+
 ## Configure wakeup time 
 
 Under "Node Config Options" set the wakeup interval to 15 (seconds). This is quite low
@@ -108,6 +116,10 @@ good reasons to do so:
      and not a Report. Openzwave needs to learn how to interpret the Basic SET message,
      and for this the sensor must be awake, so openzwave can retrieve the sensor's
      meta-data.
+
+Note: I have no insights yet on how this affects the battery usage. When it turns out
+that the batteries are drained too quickly using this setting, I might start using a
+higher value.
 
 __About the second point__
 
