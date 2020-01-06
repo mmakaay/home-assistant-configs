@@ -1291,29 +1291,42 @@ views:
     refresh_interval: 0
     type: history-graph
   - entities:
+    - entity: sensor.voordeur_buiten_temperatuur
+      name: Voordeur (bewegingssensor, buiten)
     - entity: sensor.voordeur_temperatuur
-      name: Voordeur (buiten)
+      name: Voordeur (deursensor, binnen)
+    - entity: sensor.hal_temperatuur
+      name: Hal (bewegingssensor)
     - entity: sensor.gang_temperatuur
-      name: Gang
+      name: Gang (bewegingssensor)
+    - entity: sensor.toiletdeur_temperatuur
+      name: Toilet (deursensor)
     - entity: sensor.trap_temperatuur
-      name: Trap
+      name: Trap (bewegingssensor)
     - entity: sensor.overloop_temperatuur
-      name: Overloop
+      name: Overloop (bewegingssensor)
     - entity: sensor.waskamer_temperatuur
-      name: Waskamer
+      name: Waskamer (bewegingssensor)
     - entity: sensor.slaapkamer_temperatuur
-      name: Slaapkamer
+      name: Slaapkamer (bewegingssensor)
+    - entity: sensor.badkamer_temperatuur
+      name: Badkamer (bewegingssensor)
     - entity: sensor.computerkamer_temperatuur
-      name: Computerkamer
+      name: Computerkamer (bewegingssensor)
     - entity: sensor.woonkamer_temperatuur
-      name: Woonkamer
+      name: Woonkamer (bewegingssensor)
     - entity: sensor.keuken_temperatuur
-      name: Keuken
+      name: Keuken (bewegingssensor)
+    - entity: sensor.achterdeur_temperatuur
+      name: Achterdeur (deursensor)
+    - entity: sensor.tuindeuren_temperatuur
+      name: Tuindeuren (deursensor)
     - entity: sensor.stekker_tvkast_links_temperature
-      name: Stekker tvkast links
+      name: Stekker tvkast links (stekker)
     - entity: sensor.stekker_tvkast_rechts_temperature
-      name: Stekker tvkast rechts
+      name: Stekker tvkast rechts (stekker)
     - entity: sensor.benext_dhs_zw_snmt_01_multi_sensor_temperature
+      name: Ongebruikt
     show_header_toggle: false
     title: Temperatuursensors
     type: entities
@@ -1346,7 +1359,7 @@ views:
     type: history-graph
   - entities:
     - entity: sensor.ha_cpu_temperature
-    hours_to_show: 1
+    hours_to_show: 24
     refresh_interval: 30
     type: history-graph
   - entities:
@@ -1370,6 +1383,16 @@ views:
       name: Waskamer
     - entity: sensor.woonkamer_temperatuur
       name: Woonkamer
+    - entity: sensor.achterdeur_temperatuur
+      name: Achterdeur
+    - entity: sensor.tuindeuren_temperatuur
+      name: Tuindeuren
+    - entity: sensor.voordeur_temperatuur
+      name: Voordeur
+    - entity: sensor.toiletdeur_temperatuur
+      name: Toiletdeur
+    - entity: sensor.voordeur_buiten_temperatuur
+      name: Voordeur (buiten)
     hours_to_show: 24
     refresh_interval: 60
     title: Temperatuur
@@ -1380,8 +1403,8 @@ views:
 - badges: []
   cards:
   - entities:
-    - entity: sensor.voordeur_batterij
-      name: Voordeur
+    - entity: sensor.bewegingssensor_voordeur_buiten_batterij
+      name: Voordeur buiten
     - entity: sensor.bewegingssensor_hal_batterij
       name: Hal
     - entity: sensor.bewegingssensor_gang_batterij
