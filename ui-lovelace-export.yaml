@@ -590,10 +590,10 @@ views:
         top: 35.6%
       type: state-label
     - conditions:
-      - entity: binary_sensor.voordeur_beweging
+      - entity: binary_sensor.voordeur_buiten_beweging
         state: 'on'
       elements:
-      - entity: binary_sensor.voordeur_beweging
+      - entity: binary_sensor.voordeur_buiten_beweging
         style:
           --iron-icon-height: 25px
           --iron-icon-width: 25px
@@ -1118,9 +1118,9 @@ views:
       name: Achter binnen
     - entity: binary_sensor.iemand_komt_voor_binnen
       name: Voor binnen
-    hours_to_show: 2
+    hours_to_show: 4
     refresh_interval: 20
-    title: Beweging in de laatste 2 uur
+    title: Beweging in de laatste 4 uur
     type: history-graph
   - entities:
     - entity: sensor.periode_van_de_dag
@@ -1396,6 +1396,16 @@ views:
     hours_to_show: 24
     refresh_interval: 60
     title: Temperatuur
+    type: history-graph
+  - entities:
+    - entity: sensor.woonkamer_temperatuur
+      name: Basis (woonkamer HUE sensor)
+    - entity: sensor.overloop_temperatuur
+    - entity: sensor.waskamer_temperatuur
+    - entity: sensor.computerkamer_temperatuur
+    hours_to_show: 6
+    refresh_interval: 10
+    title: Temperatuur ijken
     type: history-graph
   icon: mdi:information-outline
   path: information

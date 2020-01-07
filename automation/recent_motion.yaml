@@ -170,7 +170,7 @@
   alias: "[RECENT MOTION] voordeur"
   description: Recente beweging bij de voordeur
   trigger:
-    - entity_id: binary_sensor.voordeur_beweging
+    - entity_id: binary_sensor.voordeur_buiten_beweging
       platform: state
       to: 'on'
   action:

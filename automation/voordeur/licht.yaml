@@ -6,7 +6,7 @@
     heeft iemand met de hand de lamp aangemaakt.
   trigger:
     - platform: state
-      entity_id: binary_sensor.voordeur_beweging
+      entity_id: binary_sensor.voordeur_buiten_beweging
       to: 'on'
   condition:
     - condition: state
@@ -30,7 +30,7 @@
     De timer herstarten als er beweging wordt gedetecteerd.
   trigger:
     - platform: state
-      entity_id: binary_sensor.voordeur_beweging
+      entity_id: binary_sensor.voordeur_buiten_beweging
       to: 'on'
   condition:
     - condition: state
@@ -58,7 +58,7 @@
         entity_id: timer.voordeur
   condition:
     - condition: state
-      entity_id: binary_sensor.voordeur_beweging
+      entity_id: binary_sensor.voordeur_buiten_beweging
       state: 'off'
   action:
     - service: switch.turn_off
@@ -77,7 +77,7 @@
         entity_id: timer.voordeur
   condition:
     - condition: state
-      entity_id: binary_sensor.voordeur_beweging
+      entity_id: binary_sensor.voordeur_buiten_beweging
       state: 'on'
   action:
     - service: timer.start
