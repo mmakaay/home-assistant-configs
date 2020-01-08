@@ -99,8 +99,8 @@ every minute.
 Under "Node Config Options" configure the following settings:
 
   * __2. Measure Decimals__: 1
-  * __4. Startup with last known socket status: Last state
-  * __10. Light indicator: do what pleases you, by default is use 'Off'
+  * __4. Startup with last known socket status__: Last state
+  * __10. Light indicator__: do what pleases you, by default is use 'Off'
 
 There are some other settings available, but I haven't seen my plugs behave
 differently after changing their values.
