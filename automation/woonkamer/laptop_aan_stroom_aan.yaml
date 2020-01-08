@@ -1,0 +1,11 @@
+- id: laptop_aan_stroom_aan
+  alias: "[LAPTOP AAN] zet dan ook de stroom aan voor de voeding"
+  description: >
+    Wanneer een laptop wordt aangezet, zet dan de stroomvooriening
+    voor de voeding aan.
+  trigger:
+    - platform: state
+      entity_id: device_tracker.werklaptop_wifi_maurice
+      to: 'home'
+  action:
+    - service: script.zet_bank_links_stroom_aan

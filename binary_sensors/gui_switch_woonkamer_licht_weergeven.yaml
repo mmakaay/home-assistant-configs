@@ -1,0 +1,15 @@
+# This binary sensor is used to decide whether or not the switch for
+# the living room lights should be shown in the GUI. Rules are:
+#
+# 1. lights off -> hide
+# 2. lights on manually -> show
+# 3. lights on timer -> show
+# 4. lights on cooldown timer -> show
+
+platform: template
+sensors:
+  gui_switch_woonkamer_licht_weergeven:
+    friendly_name: GUI switch woonkamer licht weergeven
+    value_template: >-
+      {{ is_state("light.woonkamer_groep_ha", "on") or
+         is_state("timer.woonkamer_cooldown", "active") }}

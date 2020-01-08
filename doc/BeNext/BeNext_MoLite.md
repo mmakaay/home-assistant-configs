@@ -31,7 +31,7 @@ like "BeNext DHS-ZW-SNMT-01 Multi Sensor (Node:XXX Complete)", where
 
 After pairing the sensor, configure the entities that must be exposed
 to Home Assistant. To do so, select the new sensor under "Nodes".
-Then select the entities below it one at a time and update 
+Then select the entities below it one at a time and update their
 settings.
 
 _Note: Some of the above entities might not be available in the list. I regularly
@@ -43,26 +43,26 @@ I use the following settings:
   * __sensor.benext_dhs_zw_snmt_01_multi_sensor_alarm_level__: exclude
   * __sensor.benext_dhs_zw_snmt_01_multi_sensor_alarm_type__: exclude
   * __sensor.benext_dhs_zw_snmt_01_multi_sensor_battery_level__: include with polling intensity = 255
-  * __sensor.benext_dhs_zw_snmt_01_multi_sensor_luminance__: include with polling intensity = 180
+  * __sensor.benext_dhs_zw_snmt_01_multi_sensor_luminance__: exclude
   * __binary_sensor.benext_dhs_zw_snmt_01_multi_sensor_sensor__: include with polling intensity = 0
   * __sensor.benext_dhs_zw_snmt_01_multi_sensor_temperature__: include with polling intensity = 30
 
-The polling intensities for the non-binary sensors are required to have the
-sensor values updated. These sensors do not actively report their values.
-The polling intensity setting relates to the polling_interval setting that can
-be setup in Home Assistant's `configuration.yaml` file. Here's my configuration:
+The polling intensities for the sensors are required to have the sensor values
+updated. These sensors do not actively report their values. The polling
+intensity setting relates to the polling_interval setting that can be setup
+in Home Assistant's `configuration.yaml` file. Here's my configuration:
 
 ```yaml
 zwave:
-  # Run a polling cycle every 10 seconds. Z-Wave node entities can configure
+  # Run a polling cycle every minute. Z-Wave node entities can configure
   # a polling intensity, which relates to this option. A polling intensity
-  # of 1 means "poll every 10 seconds", 6 means "poll every minute", etc.
-  polling_interval: 10000
+  # of 1 means "poll every minute", 60 means "poll every hour", etc.
+  polling_interval: 60000
 ```
 
-Based on this configuration, I poll the temperature every 5 minutes, the luminance
-every half hour and the battery level every 42.5 minute, given that 255 is the
-maximum allowed value for polling_intensity.
+Based on this configuration, I poll the temperature every half hour and the
+battery level about 6 times per day (255 is the maximum allowed value for
+polling_intensity).
 
 One thing that I noticed, is that more sensors updates are logged during times when
 motion is being detected. So if you see more updates than expected based on the
@@ -98,7 +98,7 @@ template sensor in Home Assistant.
 
 ## Configure wakeup time 
 
-Under "Node Config Options" set the wakeup interval to 15 (seconds). This is quite low
+Under "Node Config Options" set the wakeup interval to 300 (seconds). This is quite low
 when compared to the default of 7200 seconds (used for saving batteries), but I have
 good reasons to do so:
 
@@ -201,3 +201,6 @@ it to an area if you like. There's no harm in not linking it to an area.
 
 Secondly, click on the settings icon for every available entity and update
 the description and the entity ID.
+
+You can disable entities that you do not use here, so you won't find them
+in the rest of the Home Assistant interface.

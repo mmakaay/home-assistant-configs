@@ -943,51 +943,31 @@ views:
         action: toggle
       type: state-icon
     - conditions:
-      - entity: timer.keuken
-        state: active
+      - entity: binary_sensor.gui_switch_keuken_licht_weergeven
+        state: 'on'
       elements:
-      - entity: timer.keuken
+      - entity: switch.gui_keuken_licht
         style:
           --iron-icon-height: 25px
           --iron-icon-width: 25px
           left: 72%
           top: 29%
+        tap_action:
+          action: toggle
         type: state-icon
       type: conditional
     - conditions:
-      - entity: timer.keuken_cooldown
-        state: active
+      - entity: binary_sensor.gui_switch_woonkamer_licht_weergeven
+        state: 'on'
       elements:
-      - entity: timer.keuken_cooldown
-        style:
-          --iron-icon-height: 25px
-          --iron-icon-width: 25px
-          left: 72%
-          top: 29%
-        type: state-icon
-      type: conditional
-    - conditions:
-      - entity: timer.woonkamer
-        state: active
-      elements:
-      - entity: timer.woonkamer
+      - entity: switch.gui_woonkamer_licht
         style:
           --iron-icon-height: 25px
           --iron-icon-width: 25px
           left: 37%
           top: 77%
-        type: state-icon
-      type: conditional
-    - conditions:
-      - entity: timer.woonkamer_cooldown
-        state: active
-      elements:
-      - entity: timer.woonkamer_cooldown
-        style:
-          --iron-icon-height: 25px
-          --iron-icon-width: 25px
-          left: 37%
-          top: 77%
+        tap_action:
+          action: toggle
         type: state-icon
       type: conditional
     image: /local/blueprint_1stfloor_v2.png
@@ -1097,6 +1077,36 @@ views:
       tap_action:
         action: toggle
       type: state-icon
+    - entity: sensor.badkamer_temperatuur
+      style:
+        font-size: 11px
+        left: 76%
+        top: 92%
+      type: state-label
+    - entity: sensor.waskamer_temperatuur
+      style:
+        font-size: 11px
+        left: 80.5%
+        top: 40.6%
+      type: state-label
+    - entity: sensor.computerkamer_temperatuur
+      style:
+        font-size: 11px
+        left: 27%
+        top: 92%
+      type: state-label
+    - entity: sensor.slaapkamer_temperatuur
+      style:
+        font-size: 11px
+        left: 47%
+        top: 18%
+      type: state-label
+    - entity: sensor.overloop_temperatuur
+      style:
+        font-size: 11px
+        left: 69%
+        top: 72%
+      type: state-label
     image: /local/blueprint_2ndfloor_v2.png
     title: Boven
     type: picture-elements
@@ -1104,16 +1114,17 @@ views:
       show_header_toggle: false
       type: entities
     entities:
-    - timer.keuken
-    - timer.keuken_cooldown
-    - timer.woonkamer
-    - timer.woonkamer_cooldown
+    - timer.voordeur_buiten
+    - timer.hal
+    - timer.hal_cooldown
     - timer.gang
     - timer.gang_cooldown
     - timer.toilet
     - timer.toilet_cooldown
-    - timer.hal
-    - timer.hal_cooldown
+    - timer.woonkamer
+    - timer.woonkamer_cooldown
+    - timer.keuken
+    - timer.keuken_cooldown
     - timer.slaapkamer
     - timer.badkamer
     state_filter:
@@ -1295,16 +1306,7 @@ views:
     - entity: switch.ps4
     - entity: switch.settopbox
     - entity: switch.gui_woonkamer_ambilite
-    - entity: binary_sensor.iemand_komt_voor_binnen
-    - entity: binary_sensor.iemand_komt_achter_binnen
     - entity: binary_sensor.iemand_in_huis
-    - entity: switch.benext_energy_switch_plus_switch
-    - entity: sensor.benext_energy_switch_plus_power
-      name: Test plug R
-    - entity: switch.benext_energy_switch_plus_switch_2
-    - entity: sensor.benext_energy_switch_plus_power_2
-      name: Test plug L
-    - entity: sensor.koffiezetapparaat
     show_header_toggle: false
     title: Experimenteel
     type: entities
@@ -1317,8 +1319,16 @@ views:
       name: Lamp hal
     - entity: sensor.licht_voordeur_buiten_power
       name: Voordeur buitenlamp
-    hours_to_show: 24
-    refresh_interval: 0
+    - entity: sensor.stekker_opnsense_router_power
+      name: Router
+    - entity: sensor.stekker_synology_backup_power
+      name: NAS Backup
+    - entity: sensor.stekker_synology_power
+      name: NAS
+    - entity: sensor.stekker_fritzbox_power
+      name: FRITZ!Box
+    hours_to_show: 1
+    refresh_interval: 60
     type: history-graph
   - entities:
     - entity: sensor.voordeur_buiten_temperatuur
@@ -1430,8 +1440,10 @@ views:
   - entities:
     - entity: sensor.woonkamer_temperatuur
       name: Basis (woonkamer HUE sensor)
-    hours_to_show: 6
-    refresh_interval: 10
+    - entity: sensor.benext_dhs_zw_snmt_01_multi_sensor_temperature
+    - entity: sensor.benext_dhs_zw_snmt_01_multi_sensor_temperature_2
+    hours_to_show: 1
+    refresh_interval: 60
     title: Temperatuur ijken
     type: history-graph
   icon: mdi:information-outline
