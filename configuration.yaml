@@ -26,10 +26,10 @@ http:
   trusted_proxies: !secret http-proxy-ip-address
 
 zwave:
-  # Run a polling cycle every 10 seconds. Z-Wave node entities can configure
+  # Run a polling cycle every 60 seconds. Z-Wave node entities can configure
   # a polling intensity, which relates to this option. A polling intensity
-  # of 1 means "poll every 10 seconds", 6 means "poll every minute", etc.
-  polling_interval: 10000
+  # of 1 means "poll every minute", 10 means "poll every 10 minutes", etc.
+  polling_interval: 60000
 
 shell_command:
   beepbeep: ~/.homeassistant/bin/beepbeep

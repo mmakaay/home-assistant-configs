@@ -1,0 +1,8 @@
+voordeur_buiten:
+  name: Voordeur buiten timer
+  duration: 00:05:00
+  icon: mdi:timer
+
+voordeur_buiten_recent:
+  name: Voordeur buiten recente beweging
+  duration: 00:05:00

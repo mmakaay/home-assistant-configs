@@ -1,0 +1,8 @@
+# A templated sensor, used to extract and calibrate the temperature from
+# a BeNext MoLite motion sensor.
+
+platform: template
+sensors:
+  computerkamer_temperatuur:
+    value_template: "{{ (states('sensor.computerkamer_temperatuur_ongekalibreerd') | float - 5.4) | round(1) }}"
+    unit_of_measurement: "°C"

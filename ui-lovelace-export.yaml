@@ -737,7 +737,7 @@ views:
           transform: rotate(45deg)
         type: state-icon
       type: conditional
-    - entity: sensor.voordeur_temperatuur
+    - entity: sensor.voordeur_buiten_temperatuur
       style:
         font-size: 13px
         left: 85%
@@ -748,6 +748,36 @@ views:
         font-size: 13px
         left: 36%
         top: 62%
+      type: state-label
+    - entity: sensor.toiletdeur_temperatuur
+      style:
+        font-size: 10px
+        left: 82.5%
+        top: 54%
+      type: state-label
+    - entity: sensor.achterdeur_temperatuur
+      style:
+        font-size: 10px
+        left: 72%
+        top: 19.5%
+      type: state-label
+    - entity: sensor.tuindeuren_temperatuur
+      style:
+        font-size: 10px
+        left: 28%
+        top: 19.5%
+      type: state-label
+    - entity: sensor.hal_temperatuur
+      style:
+        font-size: 10px
+        left: 75%
+        top: 84.5%
+      type: state-label
+    - entity: sensor.voordeur_temperatuur
+      style:
+        font-size: 10px
+        left: 75%
+        top: 92.4%
       type: state-label
     - entity: sensor.gang_temperatuur
       style:
@@ -1090,7 +1120,7 @@ views:
     - active
     type: entity-filter
   - entities:
-    - entity: timer.voordeur_recent
+    - entity: timer.voordeur_buiten_recent
       name: Voordeur
     - entity: timer.hal_recent
       name: Hal
@@ -1393,16 +1423,13 @@ views:
       name: Toiletdeur
     - entity: sensor.voordeur_buiten_temperatuur
       name: Voordeur (buiten)
-    hours_to_show: 24
+    hours_to_show: 1
     refresh_interval: 60
     title: Temperatuur
     type: history-graph
   - entities:
     - entity: sensor.woonkamer_temperatuur
       name: Basis (woonkamer HUE sensor)
-    - entity: sensor.overloop_temperatuur
-    - entity: sensor.waskamer_temperatuur
-    - entity: sensor.computerkamer_temperatuur
     hours_to_show: 6
     refresh_interval: 10
     title: Temperatuur ijken

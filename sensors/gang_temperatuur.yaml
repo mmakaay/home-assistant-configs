@@ -1,0 +1,8 @@
+# A templated sensor, used to extract and calibrate the temperature from
+# a HUE motion sensor.
+
+platform: template
+sensors:
+  gang_temperatuur:
+    value_template: "{{ (states('sensor.gang_temperatuur_ongekalibreerd') | float + 1.2) | round(1) }}"
+    unit_of_measurement: "°C"

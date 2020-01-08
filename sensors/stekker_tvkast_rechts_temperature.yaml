@@ -1,4 +1,5 @@
-# A templated sensor, used to extract the temperature from an AVM power switch.
+# A templated sensor, used to extract and calibrate the temperature from
+# an AVM power switch.
 
 platform: template
 sensors:

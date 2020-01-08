@@ -1,5 +1,5 @@
 - id: voordeur_licht_A
-  alias: "[VOORDEUR LICHT] A. zet aan bij beweging"
+  alias: "[VOORDEUR BUITEN BUITEN LICHT] A. zet aan bij beweging"
   description: >
     Zet de lamp bij de voordeur aan bij beweging als het donker genoeg is.
     Doe niks als de lamp al aanstaat zonder dat de timer actief is, want dan
@@ -10,22 +10,25 @@
       to: 'on'
   condition:
     - condition: state
-      entity_id: timer.voordeur
+      entity_id: switch.licht_voordeur_buiten
+      state: 'off'
+    - condition: state
+      entity_id: timer.voordeur_buiten
       state: 'idle'
     - condition: numeric_state
-      entity_id: sensor.voordeur_lichtsterkte
+      entity_id: sensor.voordeur_buiten_lichtsterkte
       below: 50
   action:
     - service: timer.start
       data_template:
-        entity_id: timer.voordeur
+        entity_id: timer.voordeur_buiten
     - service: switch.turn_on
       data:
         entity_id: switch.licht_voordeur_buiten
 
 
 - id: voordeur_licht_B
-  alias: "[VOORDEUR LICHT] B. herstart de timer bij beweging"
+  alias: "[VOORDEUR BUITEN LICHT] B. herstart de timer bij beweging"
   description: >
     De timer herstarten als er beweging wordt gedetecteerd.
   trigger:
@@ -34,28 +37,28 @@
       to: 'on'
   condition:
     - condition: state
-      entity_id: timer.voordeur
+      entity_id: timer.voordeur_buiten
       state: 'active'
   action:
     # cancel/start, because of this bug:
     # https://github.com/home-assistant/home-assistant/issues/12013
     - service: timer.cancel
       data:
-        entity_id: timer.voordeur
+        entity_id: timer.voordeur_buiten
     - service: timer.start
       data_template:
-        entity_id: timer.voordeur
+        entity_id: timer.voordeur_buiten
 
 
 - id: voordeur_licht_C
-  alias: "[VOORDEUR LICHT] C. uitzetten na timeout en geen beweging"
+  alias: "[VOORDEUR BUITEN LICHT] C. uitzetten na timeout en geen beweging"
   description: >
     Wanneer de timer afloopt en er is geen beweging, maak dan het licht weer uit.
   trigger:
     - platform: event
       event_type: timer.finished
       event_data:
-        entity_id: timer.voordeur
+        entity_id: timer.voordeur_buiten
   condition:
     - condition: state
       entity_id: binary_sensor.voordeur_buiten_beweging
@@ -67,14 +70,14 @@
 
 
 - id: voordeur_licht_D
-  alias: "[VOORDEUR LICHT] D. herstarten na timeout maar wel beweging"
+  alias: "[VOORDEUR BUITEN LICHT] D. herstarten na timeout maar wel beweging"
   description: >
     Wanneer de timer afloopt en er is beweging, herstart dan de timer.
   trigger:
     - platform: event
       event_type: timer.finished
       event_data:
-        entity_id: timer.voordeur
+        entity_id: timer.voordeur_buiten
   condition:
     - condition: state
       entity_id: binary_sensor.voordeur_buiten_beweging
@@ -82,4 +85,4 @@
   action:
     - service: timer.start
       data:
-        entity_id: timer.voordeur
+        entity_id: timer.voordeur_buiten

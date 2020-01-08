@@ -170,13 +170,13 @@
   alias: "[RECENT MOTION] voordeur"
   description: Recente beweging bij de voordeur
   trigger:
-    - entity_id: binary_sensor.voordeur_buiten_beweging
-      platform: state
+    - platform: state
+      entity_id: binary_sensor.voordeur_buiten_beweging
       to: 'on'
   action:
     - service: timer.cancel
       data:
-        entity_id: timer.voordeur_recent
+        entity_id: timer.voordeur_buiten_recent
     - service: timer.start
       data:
-        entity_id: timer.voordeur_recent
+        entity_id: timer.voordeur_buiten_recent

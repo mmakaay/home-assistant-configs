@@ -1,0 +1,8 @@
+# A templated sensor, used to extract and calibrate the temperature from
+# a BeNext MoLite motion sensor.
+
+platform: template
+sensors:
+  waskamer_temperatuur:
+    value_template: "{{ (states('sensor.waskamer_temperatuur_ongekalibreerd') | float - 2.1) | round(1) }}"
+    unit_of_measurement: "°C"

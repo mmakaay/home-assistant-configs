@@ -1,7 +1,8 @@
-# A templated sensor, used to extract the temperature from an AQARA door sensor.
+# A templated sensor, used to extract and calibrate the temperature from
+# an AQARA door sensor.
 
 platform: template
 sensors:
   voordeur_temperatuur:
-    value_template: "{{ state_attr('binary_sensor.voordeur_open', 'temperature') }}"
+    value_template: "{{ (state_attr('binary_sensor.voordeur_open', 'temperature') | float - 2.6) | round(1) }}"
     unit_of_measurement: "°C"
