@@ -2,7 +2,7 @@
 # the kitchen lights should be shown in the GUI. Rules are:
 #
 # 1. lights off -> hide
-# 2. lights on manually -> show
+# 2. lights on manually -> hide
 # 3. lights on timer -> show
 # 4. lights on cooldown timer -> show
 
@@ -11,5 +11,5 @@ sensors:
   gui_switch_keuken_licht_weergeven:
     friendly_name: GUI switch keuken licht weergeven
     value_template: >-
-      {{ is_state("light.keuken_groep_ha", "on") or
+      {{ is_state("timer.keuken", "active") or
          is_state("timer.keuken_cooldown", "active") }}
