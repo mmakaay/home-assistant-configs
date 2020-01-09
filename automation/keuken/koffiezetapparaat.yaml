@@ -1,0 +1,23 @@
+- id: koffiezetapparaat_automatisch_uit
+  alias: "[KOFFIEZETAPPARAAT] zet automatisch uit"
+  description: >
+    Zet het koffiezetapparaat automatisch uit nadat het warmhoudpitje
+    meer dan 2.5 uur heeft aangestaan. De koffie is na die tijd toch
+    niet echt lekker meer te noemen.
+  trigger:
+    - entity_id: sensor.koffiezetapparaat
+      platform: state
+      to: 'ready'
+      for: 02:30:00
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.koffiezetapparaat
+    - service: persistent_notification.create
+      data:
+        message: >-
+          Het koffiezetapparaat had langer dan 2,5 uur aangestaan.
+          Die koffie is vast niet lekker meer. Als de koffie langer
+          warmgehouden moet worden, zet dan de stroom van het
+          koffiezetapparaat weer aan.
+        title: Koffiezetapparaat uitgezet
