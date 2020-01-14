@@ -108,20 +108,20 @@
   name: Keuken (automatisch, nacht)
   entities:
     light.keukenspot1:
-      brightness: 5
-      color_temp: 367
-      state: 'on'
-    light.keukenspot2:
-      brightness: 5
-      color_temp: 367
+      brightness: 10
+      color_temp: 450
       state: 'on'
     light.keukenspot3:
-      brightness: 5
-      color_temp: 367
+      brightness: 10
+      color_temp: 450
       state: 'on'
-    light.keukenspot4:
-      state: 'off'
     light.keukenspot5:
+      brightness: 10
+      color_temp: 450
+      state: 'on'
+    light.keukenspot2:
+      state: 'off'
+    light.keukenspot4:
       state: 'off'
     light.keukenspot6:
       state: 'off'
