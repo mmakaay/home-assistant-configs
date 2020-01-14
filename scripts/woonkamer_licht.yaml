@@ -59,7 +59,7 @@ zet_woonkamer_licht_uit_tuinlampjes:
     - condition: state
       entity_id: binary_sensor.kerst_modus
       state: 'off'
-    - service: switch.turn_off
+    - service: light.turn_off
       data:
         entity_id: light.buitenstopcontact
 
