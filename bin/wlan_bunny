@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# Address: 02:90:26:4A:98:49
+# Channel:11
+# Frequency:2.462 GHz (Channel 11)
+# Quality=57/70  Signal level=-53 dBm
+# Encryption key:off
+# ESSID:"nabaztag49"
+# Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s
+# Mode:Ad-Hoc
+# Extra:tsf=0000000000000000
+# Extra: Last beacon: 40ms ago
+# IE: Unknown: 000A6E6162617A7461673439
+# IE: Unknown: 010482848B96
+# IE: Unknown: 03010B
+# IE: Unknown: 06020000
+# IE: Unknown: 050400010000
+
+echo "Stop wpa_supplicant"
+sudo systemctl stop wpa_supplicant
+
+sudo ifconfig wlan0 up
+
+echo "Checking for bunny network"
+NETWORK=$(sudo iwlist wlan0 scan|perl -ne 'print if m/ESSID:"nabaztag\d+"/' |cut -d\" -f2)
+if [ "$NETWORK" = "" ]; then
+    echo "Cannot find network :-("
+    exit 1
+fi
+echo "Network is: $NETWORK"
+
+sudo iwconfig wlan0 essid "$NETWORK"
+sudo iwconfig wlan0 mode ad-hoc
+sudo iwconfig wlan0 channel 11
+sudo ifconfig wlan0 192.168.0.2 netmask 255.255.255.0
+
+exit
+
+echo "Wriing wpa_supplicant config: $CONFIG"
+
+CONFIG=/etc/wpa_supplicant/wpa_supplicant.conf
+
+sudo rm $CONFIG
+echo "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev" | sudo tee -a $CONFIG
+echo "update_config=1" | sudo tee -a $CONFIG
+echo "country=NL" | sudo tee -a $CONFIG
+echo "network={" | sudo tee -a $CONFIG
+echo "    ssid=\"$NETWORK\"" | sudo tee -a $CONFIG
+echo "    key_mgmt=NONE" | sudo tee -a $CONFIG
+echo "}" | sudo tee -a $CONFIG
+
+echo "Start wpa_supplicant"
+sudo systemctl start wpa_supplicant
+
+

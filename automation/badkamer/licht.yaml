@@ -11,7 +11,8 @@
 - id: badkamer_licht_A
   alias: "[BADKAMER LICHT] A. zet aan bij beweging"
   description: >
-    Lamp aan als er beweging wordt gedetecteerd in de ruimte.
+    Lamp aan als er beweging wordt gedetecteerd in de ruimte, tenzij
+    de cooldown timer actief is.
   trigger:
     - entity_id: binary_sensor.badkamer_beweging
       platform: state
@@ -21,8 +22,11 @@
       to: 'on'
   condition:
     - condition: state
-      entity_id: light.badkamer_groep_ha
+      entity_id: light.badkamer_plafond
       state: 'off'
+    - condition: state
+      entity_id: timer.badkamer_cooldown
+      state: 'idle'
   action:
     - service: scene.turn_on
       data_template:
@@ -83,7 +87,9 @@
   alias: "[BADKAMER LICHT] C. uitzetten na timeout en geen beweging"
   description: >
     Wanneer de timer afloopt, en er is geen beweging in de ruimte, maak
-    dan het licht weer uit.
+    dan het licht weer uit. De beweging cooldown timer wordt ook
+    uitgezet, omdat we best willen dat na dit event de lampen meteen
+    weer aangaan bij beweging.
   trigger:
     - platform: event
       event_type: timer.finished
@@ -100,3 +106,51 @@
     - service: light.turn_off
       data:
         entity_id: light.badkamer_plafond
+    - wait_template: "{{ is_state('timer.badkamer_cooldown', 'active') }}"
+      timeout: 5
+      continue_on_timeout: 'false'
+    - service: timer.cancel
+      data:
+        entity_id: timer.badkamer_cooldown
+
+
+- id: badkamer_licht_D
+  alias: "[BADKAMER LICHT] D. cooldown activeren als het licht uitgaat"
+  description: >
+    Wanneer de lamp uitgaat in de badkamer, dan willen we de bewegingssensor
+    even negeren, zodat eventuele beweging niet direct het licht weer aanzet.
+    Denk aan het scenario waarbij je met de hand het licht uitmaakt en dan
+    wegloopt (wat een beweging is, waarmee je het licht zou kunnen triggeren).
+  trigger:
+    - platform: state
+      entity_id: light.badkamer_plafond
+      to: 'off'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.badkamer
+    - service: timer.start
+      data:
+        entity_id: timer.badkamer_cooldown
+
+
+- id: badkamer_licht_E
+  alias: "[BADKAMER LICHT] E. cooldown deactiveren als het licht aangaat"
+  description: >
+    Wanneer de lamp aangaat in de badkamer, dan kan een eventuele cooldown
+    timer worden gestopt. Dit is van toepassing wanneer iemand met de hand
+    het licht aandoet. Ook wordt de timer gestart met een kleine waarde.
+    Wanneer langer licht nodig is, dan wordt dit door de andere
+    regels opgevangen.
+  trigger:
+    - entity_id: light.badkamer_plafond
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.badkamer_cooldown
+    - service: timer.start
+      data:
+        entity_id: timer.badkamer
+        duration: 00:03:00

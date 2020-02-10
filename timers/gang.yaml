@@ -2,10 +2,12 @@ gang_warmup:
   name: Gang scene warmup timer
   duration: 00:00:05
   icon: mdi:fire
+
 gang:
   name: Gang timer
   duration: 00:05:00
   icon: mdi:timer
+
 gang_cooldown:
   name: Gang motion cooldown timer
   duration: 00:00:30

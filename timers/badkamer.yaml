@@ -3,6 +3,11 @@ badkamer:
   duration: 00:05:00
   icon: mdi:timer
 
+badkamer_cooldown:
+  name: Badkamer motion cooldown timer
+  duration: 00:00:15
+  icon: mdi:snowflake
+
 badkamer_recent:
   name: Badkamer recente beweging
   duration: 00:05:00

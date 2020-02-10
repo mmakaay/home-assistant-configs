@@ -4,5 +4,5 @@
 platform: template
 sensors:
   hal_temperatuur:
-    value_template: "{{ (state_attr('binary_sensor.hal_beweging', 'temperature')  | float - 8.0) | round(1) }}"
+    value_template: "{{ (state_attr('binary_sensor.hal_beweging', 'temperature')  | float - 10.0) | round(1) }}"
     unit_of_measurement: "°C"

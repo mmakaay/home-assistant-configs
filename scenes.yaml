@@ -26,6 +26,27 @@
       brightness: 60
       color_temp: 430
       state: 'on'
+- id: badkamer_fel
+  name: Badkamer (fel licht)
+  entities:
+    light.badkamer_plafond:
+      brightness: 200
+      color_temp: 400
+      state: 'on'
+- id: badkamer_normaal
+  name: Badkamer (normaal licht)
+  entities:
+    light.badkamer_plafond:
+      brightness: 140
+      color_temp: 400
+      state: 'on'
+- id: badkamer_gedimd
+  name: Badkamer (gedimd licht)
+  entities:
+    light.badkamer_plafond:
+      brightness: 60
+      color_temp: 400
+      state: 'on'
 - id: gang_automatisch_nacht
   name: Gang (automatisch, nacht)
   entities:

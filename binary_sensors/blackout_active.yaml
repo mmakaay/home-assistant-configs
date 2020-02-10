@@ -6,23 +6,6 @@ platform: template
 sensors:
   blackout_active:
     friendly_name: Blackout active
-    entity_id:
-      - media_player.ps4
-      - light.woonkamer_groep_deconz
-      - light.keuken_groep_deconz
-      - light.gang_groep_deconz
-      - light.toilet_groep_deconz
-      - light.badkamer_groep_deconz
-      - light.onder_het_bed
-      - light.leeslampje_bank
-      - switch.koffiezetappraat
-      - switch.licht_hal_plafond
-      - switch.stekker_bij_de_deurbel
-      - switch.licht_voordeur_buiten
-      - switch.stekker_links_van_de_bank
-      - switch.stekker_bij_de_tuindeuren
-      - switch.stekker_tvkast_links
-      - switch.stekker_tvkast_rechts
     value_template: >-
         {{ (is_state("media_player.ps4", "off") or
             is_state("media_player.ps4", "standby")) and
