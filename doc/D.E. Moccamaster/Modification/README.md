@@ -59,6 +59,15 @@ that has the same kind of features, e.g. an icasa Zigbee switch. I used the FIBA
 because I have Z-wave support in my Home Assistant setup and because the switch
 is small and therefore easy to fit.
 
+___IMPORTANT___: this will only work if you're on a 220V network, so for example not in
+the us where 110V is used. The FIBARO switch has an overcurrent protection of 11A. The
+coffee machine has a peak power usage of about 1400W (when water is being cooked).
+On a 110V network, the current will exceed 11A and the switch will turn itself off after
+a few seconds. Check out this [discussion on the subject with Marty in this thread](https://community.home-assistant.io/t/coffee-machine-moccamaster-z-wave-hack/158520/12)
+If you want to make this work on 110V, you'll have to find a switch that can handle
+the required currect (about 14A or more) or drive a separate slave relay from the
+FIBARO switch.
+
 <img src="images/fibaro_switch.jpg" alt="FIBARO switch 2" width="150px">
 
 Finding a good snap-in style momentary switch and indicator light was quite a hunt. Finding
