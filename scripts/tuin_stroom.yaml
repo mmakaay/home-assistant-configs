@@ -1,0 +1,14 @@
+zet_buitenstopcontact_stroom_aan:
+  alias: Zet buitenstopcontact stroom aan
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.buitenstopcontact
+
+
+zet_buitenstopcontact_stroom_uit:
+  alias: Zet buitenstopcontact stroom uit
+  sequence:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.buitenstopcontact

@@ -61,7 +61,7 @@ zet_woonkamer_licht_uit_tuinlampjes:
       state: 'off'
     - service: light.turn_off
       data:
-        entity_id: light.buitenstopcontact
+        entity_id: switch.buitenstopcontact
 
 
 # When the ambilite feature is enabled, we don't turn off the

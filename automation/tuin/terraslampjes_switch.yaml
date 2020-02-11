@@ -1,0 +1,15 @@
+- id: woonkamer_terraslampjes_switch_toggle
+  alias: "[WOONKAMER KNOP TERRASLAMPJES] toggle terraslampjes"
+  description: >
+    Wanneer de knop in de woonkamer wordt ingedrukt, dan worden de
+    terraslampjes aan- of uitgeschakeld.
+  trigger:
+    - device_id: 5e1425cdc66b47b4a40bf2bc4955caf1
+      domain: deconz
+      platform: device
+      type: remote_button_short_press
+      subtype: turn_on
+  action:
+    - service: switch.toggle
+      data:
+        entity_id: switch.gui_terraslampjes

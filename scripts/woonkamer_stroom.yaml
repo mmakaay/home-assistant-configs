@@ -101,19 +101,3 @@ zet_bank_links_stroom_uit:
     - service: switch.turn_off
       data:
         entity_id: switch.stekker_links_van_de_bank
-
-
-zet_buitenstopcontact_stroom_aan:
-  alias: Zet buitenstopcontact stroom aan
-  sequence:
-    - service: light.turn_on
-      data:
-        entity_id: light.buitenstopcontact
-
-
-zet_buitenstopcontact_stroom_uit:
-  alias: Zet buitenstopcontact stroom uit
-  sequence:
-    - service: light.turn_off
-      data:
-        entity_id: light.buitenstopcontact

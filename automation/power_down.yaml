@@ -70,7 +70,7 @@
   action:
     - service: light.turn_off
       data:
-        entity_id: light.buitenstopcontact
+        entity_id: switch.buitenstopcontact
 
 
 - id: power_down_licht_hal_uit
