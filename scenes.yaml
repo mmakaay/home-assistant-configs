@@ -16,7 +16,7 @@
   name: Badkamer (automatisch, dag)
   entities:
     light.badkamer_plafond:
-      brightness: 140
+      brightness: 150
       color_temp: 400
       state: 'on'
 - id: badkamer_automatisch_avond
@@ -26,11 +26,25 @@
       brightness: 60
       color_temp: 430
       state: 'on'
-- id: badkamer_normaal
-  name: Badkamer (helder licht)
+- id: badkamer_dimmer_switch_helder_licht
+  name: Badkamer (dimmer switch, helder licht)
   entities:
     light.badkamer_plafond:
       brightness: 200
+      color_temp: 380
+      state: 'on'
+- id: badkamer_dimmer_switch_normaal_licht
+  name: Badkamer (dimmer switch, normaal licht)
+  entities:
+    light.badkamer_plafond:
+      brightness: 150
+      color_temp: 380
+      state: 'on'
+- id: badkamer_dimmer_switch_gedimd_licht
+  name: Badkamer (dimmer switch, gedimd licht)
+  entities:
+    light.badkamer_plafond:
+      brightness: 80
       color_temp: 380
       state: 'on'
 - id: gang_automatisch_nacht

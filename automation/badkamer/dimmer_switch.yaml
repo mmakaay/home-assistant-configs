@@ -2,16 +2,14 @@
   alias: "[BADKAMER DIMMER] 'on' activeert scene 'Badkamer (helder licht)'"
   description: ''
   trigger:
-  - device_id: c4032a8a0554487db090d7dd720fa80e
-    domain: deconz
-    platform: device
-    type: remote_button_short_release
-    subtype: turn_on
+    - device_id: c4032a8a0554487db090d7dd720fa80e
+      domain: deconz
+      platform: device
+      subtype: turn_on
+      type: remote_button_short_release
   action:
-    service: script.activate_scene
-    data:
-      area: badkamer
-      scene: badkamer_normaal
+    - scene: scene.badkamer_dimmer_switch_helder_licht
+
 
 - id: badkamer_dimmer_up
   alias: "[BADKAMER DIMMER] 'up' activeert scene 'Badkamer (normaal licht)'"
@@ -20,13 +18,11 @@
   - device_id: c4032a8a0554487db090d7dd720fa80e
     domain: deconz
     platform: device
-    type: remote_button_short_release
     subtype: dim_up
+    type: remote_button_short_release
   action:
-    service: script.activate_scene
-    data:
-      area: badkamer
-      scene: badkamer_automatisch_dag
+    - scene: scene.badkamer_dimmer_switch_normaal_licht
+
 
 - id: badkamer_dimmer_down
   alias: "[BADKAMER DIMMER] 'down' activeert scene 'Badkamer (gedimd licht)'"
@@ -38,10 +34,8 @@
     type: remote_button_short_release
     subtype: dim_down
   action:
-    service: script.activate_scene
-    data:
-      area: badkamer
-      scene: badkamer_automatisch_avond
+    - scene: scene.badkamer_dimmer_switch_gedimd_licht
+
 
 - id: badkamer_dimmer_off
   alias: "[BADKAMER DIMMER] 'off' zet licht in de badkamer uit"
@@ -56,6 +50,7 @@
   - service: light.turn_off
     data:
       entity_id: light.badkamer_plafond
+
 
 - id: badkamer_dimmer_long_off
   alias: "[BADKAMER DIMMER] long 'off' triggert power down"

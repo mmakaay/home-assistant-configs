@@ -55,10 +55,7 @@
     subtype: turn_off
     type: remote_button_short_release
   action:
-  - device_id: b6686897806344baac29b494f949ae4b
-    domain: light
-    entity_id: light.woonkamer_groep_deconz
-    type: turn_off
+  - service: script.zet_woonkamer_licht_uit
 
 
 - id: woonkamer_dimmer_up
