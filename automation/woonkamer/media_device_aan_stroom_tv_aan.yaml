@@ -1,0 +1,30 @@
+# Disabled for now, because sometimes this one seemed to trigger automatically.
+# This might be the PS4 updating or so.
+
+#- id: media_devices_power_up_tv_and_amp_too
+#  alias: "[MEDIA DEVICE AAN] zet dan ook de TV en versterker aan"
+#  description: >
+#    Wanneer een media device wordt aangezet, maar de stroom voor de TV en
+#    versterker staat uit, zet deze dan aan.
+#  trigger:
+#    # Provided by the PS4 API.
+#    - platform: state
+#      entity_id: media_player.ps4
+#      to: 'on'
+#
+#    # Provided by the mediacontroller raspberry, based on viewing the
+#    # power LED of the PS4 VR box. In speed, this one beats the
+#    # above integration.
+#    - platform: state
+#      entity_id: switch.ps4
+#      to: 'on'
+#
+#    # Provided by the mediacontroller raspberry, based on viewing the
+#    # power LED of the KPN settopbox. This box has no API whatsoever,
+#    # so this is our only way to detect the box being turned on :-(
+#    - platform: state
+#      entity_id: switch.settopbox
+#      to: 'on'
+#
+#  action:
+#    - service: script.zet_tvkast_rechts_stroom_aan

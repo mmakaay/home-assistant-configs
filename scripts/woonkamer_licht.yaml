@@ -33,7 +33,7 @@ zet_woonkamer_licht_uit:
     # Some conditional switch off actions. The conditional branching
     # requires the subscripts to handle things.
     - service: script.zet_woonkamer_licht_uit_vaaslamp
-    - service: script.zet_woonkamer_licht_uit_tuinlampjes
+    - service: script.zet_woonkamer_licht_uit_terraslampjes
     - service: script.zet_woonkamer_licht_uit_ambilite
 
 
@@ -52,14 +52,14 @@ zet_woonkamer_licht_uit_vaaslamp:
 
 
 # When Christmas mode is currently active, then do not switch off the
-# 'tuinlampjes'. That lamp is now controlled by the Christmas on/off switch.
-zet_woonkamer_licht_uit_tuinlampjes:
-  alias: "Zet woonkamer licht uit (tuinlampjes)"
+# 'terraslampjes'. That lamp is now controlled by the Christmas on/off switch.
+zet_woonkamer_licht_uit_terraslampjes:
+  alias: "Zet woonkamer licht uit (terraslampjes)"
   sequence:
     - condition: state
       entity_id: binary_sensor.kerst_modus
       state: 'off'
-    - service: light.turn_off
+    - service: switch.turn_off
       data:
         entity_id: switch.buitenstopcontact
 
