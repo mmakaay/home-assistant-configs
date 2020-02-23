@@ -61,10 +61,34 @@
     - service: timer.start
       data:
         entity_id: timer.keuken
-  
+
 
 - id: keuken_licht_C
-  alias: "[KEUKEN LICHT] C. uitzetten na timeout en geen beweging"
+  alias: "[KEUKEN LICHT] C. herstart timer bij beweging bij het aanrecht"
+  description: >
+    Als de timer actief is, en er wordt beweging gedetecteerd bij het
+    aanrecht, herstart dan de timer, zodat het licht langer actief blijft.
+  trigger:
+    - entity_id: binary_sensor.keuken_aanrecht_beweging
+      platform: state
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: timer.keuken
+      state: 'active'
+  action:
+    # cancel/start, because of this bug:
+    # https://github.com/home-assistant/home-assistant/issues/12013
+    - service: timer.cancel
+      data:
+        entity_id: timer.keuken
+    - service: timer.start
+      data:
+        entity_id: timer.keuken
+  
+
+- id: keuken_licht_D
+  alias: "[KEUKEN LICHT] D. uitzetten na timeout en geen beweging"
   description: >
     Wanneer de timer afloopt en er is geen beweging in de ruimte, maak
     dan het licht weer uit. De beweging cooldown timer wordt ook
@@ -88,8 +112,8 @@
       data:
         entity_id: timer.keuken_cooldown
 
-- id: keuken_licht_D
-  alias: "[KEUKEN LICHT] D. herstarten na timeout maar wel beweging"
+- id: keuken_licht_E
+  alias: "[KEUKEN LICHT] E. herstarten na timeout maar wel beweging"
   description: >
     Wanneer de timer afloopt en er is beweging in de ruimte, herstart
     dan de timer.
@@ -108,8 +132,8 @@
         entity_id: timer.keuken
 
 
-- id: keuken_licht_E
-  alias: "[KEUKEN LICHT] E. cooldown activeren als alle lampen uit gaan"
+- id: keuken_licht_F
+  alias: "[KEUKEN LICHT] F. cooldown activeren als alle lampen uit gaan"
   description: >
     Wanneer alle lampen uitgaan in de keuken, dan willen we de bewegingssensors
     even negeren, zodat eventuele beweging niet direct het licht weer
@@ -129,8 +153,8 @@
         entity_id: timer.keuken_cooldown
 
 
-- id: keuken_licht_F
-  alias: "[KEUKEN LICHT] F. cooldown deactiveren als er lampen aan gaan"
+- id: keuken_licht_G
+  alias: "[KEUKEN LICHT] G. cooldown deactiveren als er lampen aan gaan"
   description: >
     Wanneer er lampen aan worden gezet, dan kan een eventuele cooldown
     timer worden gestopt.
