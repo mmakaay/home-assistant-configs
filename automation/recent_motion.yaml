@@ -5,6 +5,9 @@
     - entity_id: binary_sensor.keuken_beweging
       platform: state
       to: 'on'
+    - entity_id: binary_sensor.keuken_aanrecht_beweging
+      platform: state
+      to: 'on'
   action:
     - service: timer.cancel
       data:

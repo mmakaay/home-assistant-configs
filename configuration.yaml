@@ -107,49 +107,25 @@ logger:
 prometheus:
   namespace: hass
   filter:
-    include_domains:
-      - binary_sensor
-      - sensor
-    exclude_entities:
-      - sensor.dar_voorkant_gft
-      - sensor.dar_voorkant_papier
-      - sensor.dar_voorkant_restafval
-      - sensor.dar_voorkant_vandaag
-      - sensor.dar_voorkant_morgen
-      - sensor.dar_zijkant_papier
-      - sensor.dar_zijkant_vandaag
-      - sensor.dar_zijkant_morgen
-      - sensor.power_consumption_phase_l1
-      - sensor.power_consumption_phase_l2
-      - sensor.power_consumption_phase_l3
-      - sensor.power_production
-      - sensor.power_production_low
-      - sensor.power_production_normal
-      - sensor.power_production_phase_l1
-      - sensor.power_production_phase_l2
-      - sensor.power_production_phase_l3
-      - sensor.power_tariff
-      - sensor.voltage_phase_l1
-      - sensor.voltage_phase_l2
-      - sensor.voltage_phase_l3
-      - sensor.voltage_sags_phase_l1
-      - sensor.voltage_sags_phase_l2
-      - sensor.voltage_sags_phase_l3
-      - sensor.voltage_swells_phase_l1
-      - sensor.br_pressure
-      - sensor.br_humidity
-      - sensor.br_symbol
-      - sensor.br_wind_speed
-      - sensor.last_update_trigger
-      - sensor.bssid
-      - sensor.connection_type
-      - sensor.sim_1
-      - sensor.ssid
-      - sensor.geocoded_location
-      - sensor.periode_van_de_dag
-      - binary_sensor.woonkamer_lights_active
-      - binary_sensor.woonkamer_power_active
-      - binary_sensor.keuken_lights_active
+    include_entities:
+      - sensor.koffiezetapparaat_power
+      - sensor.power_consumption
+      - sensor.hourly_gas_consumption
+      - sensor.gas_consumption
+      - sensor.woonkamer_temperatuur
+      - sensor.badkamer_temperatuur
+      - sensor.gang_temperatuur
+      - sensor.hal_temperatuur
+      - sensor.voordeur_temperatuur
+      - sensor.tuindeuren_temperatuur
+      - sensor.trap_temperatuur
+      - sensor.toiletdeur_temperatuur
+      - sensor.stekker_tvkast_rechts_temperature
+      - sensor.stekker_tvkast_links_temperature
+      - sensor.slaapkamer_temperatuur
+      - sensor.keuken_temperatuur
+      - sensor.overloop_temperatuur
+      - sensor.hal_temperatuur
 
 frontend:
   themes: !include themes.yaml

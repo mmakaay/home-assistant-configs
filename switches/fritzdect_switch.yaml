@@ -1,5 +1,0 @@
-# For integration with FRITZ!Box switches / power plugs.
-platform: fritzdect
-host: !secret fritzbox-host
-username: !secret fritzbox-home-assistant-username
-password: !secret fritzbox-home-assistant-password
