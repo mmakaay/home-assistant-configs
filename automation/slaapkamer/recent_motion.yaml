@@ -1,0 +1,14 @@
+- id: recent_motion_slaapkamer
+  alias: "[RECENT MOTION] slaapkamer"
+  description: Recente beweging in de slaapkamer
+  trigger:
+    - entity_id: binary_sensor.slaapkamer_beweging
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.slaapkamer_recent
+    - service: timer.start
+      data:
+        entity_id: timer.slaapkamer_recent

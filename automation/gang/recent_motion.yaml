@@ -1,0 +1,14 @@
+- id: recent_motion_gang
+  alias: "[RECENT MOTION] gang"
+  description: Recente beweging in de gang
+  trigger:
+    - entity_id: binary_sensor.gang_beweging
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.gang_recent
+    - service: timer.start
+      data:
+        entity_id: timer.gang_recent

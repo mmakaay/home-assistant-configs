@@ -1,0 +1,14 @@
+- id: recent_motion_overloop
+  alias: "[RECENT MOTION] overloop"
+  description: Recente beweging op de overloop
+  trigger:
+    - entity_id: binary_sensor.overloop_beweging
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.overloop_recent
+    - service: timer.start
+      data:
+        entity_id: timer.overloop_recent

@@ -1,0 +1,17 @@
+- id: recent_motion_badkamer
+  alias: "[RECENT MOTION] badkamer"
+  description: Recente beweging in de badkamer
+  trigger:
+    - entity_id: binary_sensor.badkamer_beweging
+      platform: state
+      to: 'on'
+    - entity_id: binary_sensor.badkamer_spiegel_beweging
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.badkamer_recent
+    - service: timer.start
+      data:
+        entity_id: timer.badkamer_recent

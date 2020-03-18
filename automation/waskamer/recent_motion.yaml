@@ -1,0 +1,14 @@
+- id: recent_motion_waskamer
+  alias: "[RECENT MOTION] waskamer"
+  description: Recente beweging in de waskamer
+  trigger:
+    - entity_id: binary_sensor.waskamer_beweging
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.waskamer_recent
+    - service: timer.start
+      data:
+        entity_id: timer.waskamer_recent

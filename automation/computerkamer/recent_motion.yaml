@@ -1,0 +1,59 @@
+- id: recent_motion_computerkamer_A
+  alias: "[RECENT MOTION] computerkamer"
+  description: Recente beweging in de computerkamer
+  trigger:
+    - entity_id: binary_sensor.computerkamer_beweging
+      platform: state
+      to: 'on'
+    - entity_id: binary_sensor.computerkamer_maurice_beweging
+      platform: state
+      to: 'on'
+    - entity_id: binary_sensor.computerkamer_esther_beweging
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.computerkamer_recent
+    - service: timer.start
+      data:
+        entity_id: timer.computerkamer_recent
+
+- id: recent_motion_computerkamer_B
+  alias: "[RECENT MOTION] computerkamer, timer herstart"
+  description: >
+    Wanneer er beweging is in de ruimte of wanneer de timer afloopt en er is
+    beweging in de ruimte, (her)start dan de timer.
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.computerkamer_recent
+    - entity_id: binary_sensor.computerkamer_beweging
+      platform: state
+      to: 'on'
+    - entity_id: binary_sensor.computerkamer_maurice_beweging
+      platform: state
+      to: 'on'
+    - entity_id: binary_sensor.computerkamer_esther_beweging
+      platform: state
+      to: 'on'
+  condition:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.computerkamer_beweging
+          state: 'on'
+        - condition: state
+          entity_id: binary_sensor.computerkamer_maurice_beweging
+          state: 'on'
+        - condition: state
+          entity_id: binary_sensor.computerkamer_esther_beweging
+          state: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.computerkamer_recent
+    - service: timer.start
+      data:
+        entity_id: timer.computerkamer_recent

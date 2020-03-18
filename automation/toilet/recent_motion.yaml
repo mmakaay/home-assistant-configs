@@ -1,0 +1,14 @@
+- id: recent_motion_toilet
+  alias: "[RECENT MOTION] toilet"
+  description: Recente beweging in de toilet
+  trigger:
+    - entity_id: binary_sensor.toilet_beweging
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.toilet_recent
+    - service: timer.start
+      data:
+        entity_id: timer.toilet_recent

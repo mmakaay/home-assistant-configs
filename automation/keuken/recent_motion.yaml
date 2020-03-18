@@ -1,0 +1,17 @@
+- id: recent_motion_keuken
+  alias: "[RECENT MOTION] keuken"
+  description: Recente beweging in de keuken
+  trigger:
+    - entity_id: binary_sensor.keuken_beweging
+      platform: state
+      to: 'on'
+    - entity_id: binary_sensor.keuken_aanrecht_beweging
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.keuken_recent
+    - service: timer.start
+      data:
+        entity_id: timer.keuken_recent

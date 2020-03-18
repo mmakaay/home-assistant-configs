@@ -1,0 +1,14 @@
+- id: recent_motion_hal
+  alias: "[RECENT MOTION] hal"
+  description: Recente beweging in de hal
+  trigger:
+    - entity_id: binary_sensor.hal_beweging
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.hal_recent
+    - service: timer.start
+      data:
+        entity_id: timer.hal_recent

@@ -1,0 +1,14 @@
+- id: recent_motion_trap
+  alias: "[RECENT MOTION] trap"
+  description: Recente beweging op de trap
+  trigger:
+    - entity_id: binary_sensor.trap_beweging
+      platform: state
+      to: 'on'
+  action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.trap_recent
+    - service: timer.start
+      data:
+        entity_id: timer.trap_recent

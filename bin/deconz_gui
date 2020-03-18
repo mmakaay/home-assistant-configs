@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sudo systemctl stop deconz
+sudo deCONZ --http-port=80 --dev=/dev/conbee2
+sudo systemctl start deconz
