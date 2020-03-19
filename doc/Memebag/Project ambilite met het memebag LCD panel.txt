@@ -1,0 +1,55 @@
+
+
+
+    GND R1  G1  B1  GND R2  G2  B2  GND NC  NC    VCC    VCC
+ +-------------------------------------------------------------+
+ |  GND R1  G1  B1  GND R2  G2  B2  GND -   -   -   5V  -   -  |
+ |                                                             |
+ |                                                             |
+ |                                                             |
+ |                                                             |
+ |                                                             |
+ |                                                             |
+ |  GND A   B   C   D   E   GND CK  ST  OE     G       G       |
+ +-------------------------------------------------------------+
+    GND A   B   C   D   E   GND CLK LAT OE  GND GND GND GND
+
+
+Dit gebruikt de terminals van HUB75E. Pinout daarvan:
+
+     R1     G1
+     B1     GND
+     R2     G2
+     B2     E
+     A      B
+     C      D
+     CLK    LAT
+     OE     GND
+
+Driver project op github:
+https://github.com/hzeller/rpi-rgb-led-matrix/
+
+Mapping naar Raspberry Pi, bij aansluiten van 1 panel:
+https://github.com/hzeller/rpi-rgb-led-matrix/blob/master/wiring.md
+
+      1     2
+      3     4
+      5     6 GND
+  LAT 7     8 
+      9    10 E
+  CLK 11   12 OE
+   G1 13   14 
+    A 15   16 B
+      17   18 C
+   B2 19   20
+   G2 21   22 D
+   R1 23   24 R2
+      25   26 B1
+      27   28
+      29   30
+      31   32
+      33   34
+      35   36
+      37   38
+      39   40
+      
