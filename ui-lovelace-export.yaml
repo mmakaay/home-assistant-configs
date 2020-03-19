@@ -124,6 +124,17 @@ views:
       type: horizontal-stack
     - cards:
       - card:
+          entity: switch.gui_terraslampjes
+          icon_height: 30px
+          tap_action:
+            action: toggle
+          theme: other-button
+          type: entity-button
+        conditions:
+        - entity: input_boolean.automatische_terraslampjes
+          state: 'off'
+        type: conditional
+      - card:
           entity: switch.gui_kerst
           hold_action:
             action: call-service
@@ -283,6 +294,72 @@ views:
 - badges: []
   cards:
   - elements:
+    - entity: timer.woonkamer_recent
+      image: /local/transparent.png
+      state_image:
+        active: /local/beneden_v1/activiteit_woonkamer.png
+      style:
+        height: 100%
+        left: 50%
+        top: 50%
+        width: 100%
+      title: null
+      type: image
+    - entity: timer.keuken_recent
+      image: /local/transparent.png
+      state_image:
+        active: /local/beneden_v1/activiteit_keuken.png
+      style:
+        height: 100%
+        left: 50%
+        top: 50%
+        width: 100%
+      title: null
+      type: image
+    - entity: timer.gang_recent
+      image: /local/transparent.png
+      state_image:
+        active: /local/beneden_v1/activiteit_gang.png
+      style:
+        height: 100%
+        left: 50%
+        top: 50%
+        width: 100%
+      title: null
+      type: image
+    - entity: timer.trap_recent
+      image: /local/transparent.png
+      state_image:
+        active: /local/beneden_v1/activiteit_trap.png
+      style:
+        height: 100%
+        left: 50%
+        top: 50%
+        width: 100%
+      title: null
+      type: image
+    - entity: timer.toilet_recent
+      image: /local/transparent.png
+      state_image:
+        active: /local/beneden_v1/activiteit_toilet.png
+      style:
+        height: 100%
+        left: 50%
+        top: 50%
+        width: 100%
+      title: null
+      type: image
+    - entity: timer.hal_recent
+      image: /local/transparent.png
+      state_image:
+        active: /local/beneden_v1/activiteit_hal.png
+      style:
+        height: 100%
+        left: 50%
+        top: 50%
+        width: 100%
+      title: null
+      type: image
     - entity: switch.gui_stekker_links_van_de_bank
       style:
         --iron-icon-height: 30px
@@ -399,7 +476,7 @@ views:
         transform: rotate(180deg)
       tap_action:
         action: toggle
-      title: Onder
+      title: Leeslampje
       type: state-icon
     - entity: light.zon
       icon: mdi:ceiling-light
@@ -569,25 +646,7 @@ views:
       style:
         font-size: 15px
         left: 49%
-        top: 1%
-      type: state-label
-    - entity: sensor.stekker_tvkast_links_power
-      style:
-        font-size: 11px
-        left: 53.5%
-        top: 62.7%
-      type: state-label
-    - entity: sensor.stekker_tvkast_rechts_power
-      style:
-        font-size: 11px
-        left: 53.5%
-        top: 84.5%
-      type: state-label
-    - entity: sensor.koffiezetapparaat_power
-      style:
-        font-size: 11px
-        left: 54.3%
-        top: 35.6%
+        top: 2%
       type: state-label
     - conditions:
       - entity: binary_sensor.voordeur_buiten_beweging
@@ -611,6 +670,18 @@ views:
           --iron-icon-width: 25px
           left: 38%
           top: 52%
+        type: state-icon
+      type: conditional
+    - conditions:
+      - entity: binary_sensor.keuken_aanrecht_beweging
+        state: 'on'
+      elements:
+      - entity: binary_sensor.keuken_aanrecht_beweging
+        style:
+          --iron-icon-height: 25px
+          --iron-icon-width: 25px
+          left: 85%
+          top: 38.5%
         type: state-icon
       type: conditional
     - conditions:
@@ -671,6 +742,20 @@ views:
           --iron-icon-width: 25px
           left: 79.5%
           top: 46.5%
+        type: state-icon
+      type: conditional
+    - conditions:
+      - entity: binary_sensor.kelderdeur_open
+        state: 'on'
+      elements:
+      - entity: binary_sensor.kelderdeur_open
+        icon: mdi:slash-forward
+        style:
+          --iron-icon-height: 55px
+          --iron-icon-width: 55px
+          left: 72%
+          top: 58%
+          transform: rotate(131deg)
         type: state-icon
       type: conditional
     - conditions:
@@ -741,7 +826,7 @@ views:
       style:
         font-size: 13px
         left: 85%
-        top: 1%
+        top: 2%
       type: state-label
     - entity: sensor.woonkamer_temperatuur
       style:
@@ -803,8 +888,8 @@ views:
     - entity: sensor.periode_van_de_dag
       style:
         font-size: 15px
-        left: 8%
-        top: 1%
+        left: 17%
+        top: 2%
       type: state-label
     - entity: sensor.br_symbol
       style:
@@ -970,10 +1055,77 @@ views:
           action: toggle
         type: state-icon
       type: conditional
-    image: /local/blueprint_1stfloor_v2.png
+    image: /local/beneden_v1/plattegrond.png
+    theme: Floorplan
     title: Beneden
     type: picture-elements
   - elements:
+    - entity: timer.computerkamer_recent
+      image: /local/transparent.png
+      state_image:
+        active: /local/boven_v1/activiteit_computerkamer.png
+      style:
+        height: 100%
+        left: 50%
+        top: 50%
+        width: 100%
+      title: null
+      type: image
+    - entity: timer.overloop_recent
+      image: /local/transparent.png
+      state_image:
+        active: /local/boven_v1/activiteit_overloop.png
+      style:
+        height: 100%
+        left: 50%
+        top: 50%
+        width: 100%
+      title: null
+      type: image
+    - entity: timer.trap_recent
+      image: /local/transparent.png
+      state_image:
+        active: /local/boven_v1/activiteit_trap.png
+      style:
+        height: 100%
+        left: 50%
+        top: 50%
+        width: 100%
+      title: null
+      type: image
+    - entity: timer.slaapkamer_recent
+      image: /local/transparent.png
+      state_image:
+        active: /local/boven_v1/activiteit_slaapkamer.png
+      style:
+        height: 100%
+        left: 50%
+        top: 50%
+        width: 100%
+      title: null
+      type: image
+    - entity: timer.waskamer_recent
+      image: /local/transparent.png
+      state_image:
+        active: /local/boven_v1/activiteit_waskamer.png
+      style:
+        height: 100%
+        left: 50%
+        top: 50%
+        width: 100%
+      title: null
+      type: image
+    - entity: timer.badkamer_recent
+      image: /local/transparent.png
+      state_image:
+        active: /local/boven_v1/activiteit_badkamer.png
+      style:
+        height: 100%
+        left: 50%
+        top: 50%
+        width: 100%
+      title: null
+      type: image
     - conditions:
       - entity: binary_sensor.trap_beweging
         state: 'on'
@@ -1018,10 +1170,65 @@ views:
         style:
           --iron-icon-height: 25px
           --iron-icon-width: 25px
-          left: 37%
+          left: 47%
+          top: 66%
+        type: state-icon
+      type: conditional
+    - conditions:
+      - entity: binary_sensor.computerkamer_maurice_beweging
+        state: 'on'
+      elements:
+      - entity: binary_sensor.computerkamer_maurice_beweging
+        icon: mdi:alpha-m-circle
+        style:
+          --iron-icon-height: 25px
+          --iron-icon-width: 25px
+          left: 47%
           top: 76%
         type: state-icon
       type: conditional
+    - conditions:
+      - entity: binary_sensor.computerkamer_esther_beweging
+        state: 'on'
+      elements:
+      - entity: binary_sensor.computerkamer_esther_beweging
+        icon: mdi:alpha-e-circle
+        style:
+          --iron-icon-height: 25px
+          --iron-icon-width: 25px
+          left: 26%
+          top: 76%
+        type: state-icon
+      type: conditional
+    - entity: light.computerkamerspot1
+      icon: mdi:track-light
+      style:
+        --iron-icon-height: 25px
+        --iron-icon-width: 25px
+        left: 41%
+        top: 77%
+      title: Lamp badkamer plafond
+      type: state-icon
+    - entity: light.computerkamerspot2
+      icon: mdi:track-light
+      style:
+        --iron-icon-height: 25px
+        --iron-icon-width: 25px
+        left: 30%
+        top: 70%
+        transform: rotate(180deg)
+      title: Lamp badkamer plafond
+      type: state-icon
+    - entity: light.computerkamerspot3
+      icon: mdi:track-light
+      style:
+        --iron-icon-height: 25px
+        --iron-icon-width: 25px
+        left: 30%
+        top: 76%
+        transform: rotate(120deg)
+      title: Lamp badkamer plafond
+      type: state-icon
     - conditions:
       - entity: binary_sensor.slaapkamer_beweging
         state: 'on'
@@ -1107,7 +1314,36 @@ views:
         left: 69%
         top: 72%
       type: state-label
-    image: /local/blueprint_2ndfloor_v2.png
+    - entity: sensor.dcp_7070dw_black_toner_remaining
+      prefix: 'Toner: '
+      style:
+        font-size: 10px
+        left: 21%
+        top: 62%
+      type: state-label
+    - entity: sensor.dcp_7070dw_drum_remaining_life
+      prefix: 'Drum: '
+      style:
+        font-size: 10px
+        left: 21%
+        top: 64.5%
+      type: state-label
+    - entity: sensor.dcp_7070dw_page_counter
+      prefix: 'Teller: '
+      style:
+        font-size: 10px
+        left: 21%
+        top: 67%
+      type: state-label
+    - entity: sensor.dcp_7070dw_status
+      style:
+        --iron-icon-height: 25px
+        --iron-icon-width: 25px
+        left: 23.5%
+        top: 53.3%
+      type: state-icon
+    image: /local/boven_v1/plattegrond.png
+    theme: Floorplan
     title: Boven
     type: picture-elements
   - card:
@@ -1127,10 +1363,15 @@ views:
     - timer.keuken_cooldown
     - timer.slaapkamer
     - timer.badkamer
+    - timer.badkamer_cooldown
     state_filter:
     - active
     type: entity-filter
   - entities:
+    - entity: binary_sensor.vibratiesensor_deurbel
+      name: Dingdong!
+    - entity: binary_sensor.iemand_komt_voor_binnen
+      name: Voor binnen
     - entity: timer.voordeur_buiten_recent
       name: Voordeur
     - entity: timer.hal_recent
@@ -1157,15 +1398,10 @@ views:
       name: Keuken
     - entity: binary_sensor.iemand_komt_achter_binnen
       name: Achter binnen
-    - entity: binary_sensor.iemand_komt_voor_binnen
-      name: Voor binnen
-    hours_to_show: 4
+    hours_to_show: 6
     refresh_interval: 20
-    title: Beweging in de laatste 4 uur
+    title: Activiteit in de laatste 6 uur
     type: history-graph
-  - entities:
-    - entity: sensor.periode_van_de_dag
-    type: entities
   icon: mdi:floor-plan
   path: floorplan
   title: floorplan
@@ -1221,69 +1457,6 @@ views:
   title: Locatie
 - badges: []
   cards:
-  - card:
-      title: Woonkamer
-    entities:
-    - entity: light.achter_tv_strip
-    - entity: light.staande_lamp
-    - entity: light.zon
-    - entity: light.kast_boven
-    - entity: light.kast_midden
-    - entity: light.kast_onder
-    - entity: light.droogkap
-    - entity: light.achter_de_koelkast
-    - entity: switch.gui_vaaslamp_licht
-    - entity: light.leeslampje_bank
-    - entity: switch.gui_terraslampjes
-    - entity: switch.gui_kerstboom
-    - entity: switch.gui_terraslampjes
-      label: Stroom
-      type: section
-    - entity: switch.gui_bank_links_stroom
-    - entity: switch.gui_woonkamer_ventilator
-    - entity: switch.gui_tvkast_rechts_stroom
-      name: TV, versterker, pickup, telefoon
-    - entity: switch.gui_tvkast_links_stroom
-    state_filter:
-    - operator: '!='
-      value: unavailable
-    type: entity-filter
-  - entities:
-    - entity: light.keukenspot1
-    - entity: light.keukenspot2
-    - entity: light.keukenspot3
-    - entity: light.keukenspot4
-    - entity: light.keukenspot5
-    - entity: light.keukenspot6
-    - label: Stroom
-      type: section
-    - entity: switch.gui_koffiezetapparaat_stroom
-    title: Keuken
-    type: entities
-  - card:
-      title: Gang en hal
-    entities:
-    - entity: light.toilet_plafond_dimbaar
-    - entity: light.gang_plafond_dimbaar
-    - entity: switch.gui_hal_licht
-    - entity: switch.gui_hal_kerstlampjes
-    - entity: switch.gui_stekker_bij_de_deurbel
-    - entity: switch.gui_voordeur_buiten_licht
-    state_filter:
-    - operator: '!='
-      value: unavailable
-    title: Gang en hal
-    type: entity-filter
-  - entities:
-    - entity: switch.gui_badkamer_licht
-    - entity: light.onder_het_bed
-    title: Bovenverdieping
-    type: entities
-  icon: mdi:toggle-switch-off-outline
-  path: switches
-  title: Switches
-- badges: []
-  cards:
   - entity: weather.thuis
     name: Het weer
     type: weather-forecast
@@ -1310,26 +1483,6 @@ views:
     show_header_toggle: false
     title: Experimenteel
     type: entities
-  - entities:
-    - entity: sensor.stekker_tvkast_rechts_power
-      name: TV kast rechts
-    - entity: sensor.stekker_tvkast_links_power
-      name: TV kast links
-    - entity: sensor.licht_hal_plafond_power
-      name: Lamp hal
-    - entity: sensor.licht_voordeur_buiten_power
-      name: Voordeur buitenlamp
-    - entity: sensor.stekker_opnsense_router_power
-      name: Router
-    - entity: sensor.stekker_synology_backup_power
-      name: NAS Backup
-    - entity: sensor.stekker_synology_power
-      name: NAS
-    - entity: sensor.stekker_fritzbox_power
-      name: FRITZ!Box
-    hours_to_show: 1
-    refresh_interval: 60
-    type: history-graph
   - entities:
     - entity: sensor.voordeur_buiten_temperatuur
       name: Voordeur (bewegingssensor, buiten)
@@ -1365,8 +1518,6 @@ views:
       name: Stekker tvkast links (stekker)
     - entity: sensor.stekker_tvkast_rechts_temperature
       name: Stekker tvkast rechts (stekker)
-    - entity: sensor.benext_dhs_zw_snmt_01_multi_sensor_temperature
-      name: Ongebruikt
     show_header_toggle: false
     title: Temperatuursensors
     type: entities
@@ -1391,13 +1542,6 @@ views:
       state: 'on'
     type: conditional
   - entities:
-    - entity: sensor.koffiezetapparaat
-    - entity: sensor.koffiezetapparaat_power
-    hours_to_show: 24
-    refresh_interval: 0
-    title: Koffiezetapparaat
-    type: history-graph
-  - entities:
     - entity: sensor.ha_cpu_temperature
     hours_to_show: 24
     refresh_interval: 30
@@ -1409,8 +1553,6 @@ views:
       name: Computerkamer
     - entity: sensor.overloop_temperatuur
       name: Overloop
-    - entity: sensor.benext_dhs_zw_snmt_01_multi_sensor_temperature
-      name: Ongebruikt
     - entity: sensor.gang_temperatuur
       name: Gang
     - entity: sensor.keuken_temperatuur
@@ -1433,22 +1575,45 @@ views:
       name: Toiletdeur
     - entity: sensor.voordeur_buiten_temperatuur
       name: Voordeur (buiten)
-    hours_to_show: 1
+    hours_to_show: 4
     refresh_interval: 60
     title: Temperatuur
     type: history-graph
   - entities:
-    - entity: sensor.woonkamer_temperatuur
-      name: Basis (woonkamer HUE sensor)
-    - entity: sensor.benext_dhs_zw_snmt_01_multi_sensor_temperature
-    - entity: sensor.benext_dhs_zw_snmt_01_multi_sensor_temperature_2
-    hours_to_show: 1
+    - entity: sensor.power_consumption
+    hours_to_show: 24
     refresh_interval: 60
-    title: Temperatuur ijken
+    title: Stroomverbruik
+    type: history-graph
+  - entities:
+    - entity: sensor.stekker_tvkast_rechts_power
+      name: TV kast rechts
+    - entity: sensor.stekker_tvkast_links_power
+      name: TV kast links
+    - entity: sensor.licht_hal_plafond_power
+      name: Lamp hal
+    - entity: sensor.licht_voordeur_buiten_power
+      name: Voordeur buitenlamp
+    - entity: sensor.stekker_synology_power
+      name: NAS
+    hours_to_show: 6
+    refresh_interval: 60
+    title: Stroomverbruik apparaten
+    type: history-graph
+  - entities:
+    - entity: sensor.koffiezetapparaat
+    - entity: sensor.koffiezetapparaat_power
+    - entity: sensor.koffiezetapparaat_heat
+    hours_to_show: 24
+    refresh_interval: 0
+    title: Koffiezetapparaat
     type: history-graph
   icon: mdi:information-outline
   path: information
   title: Info
+  visible:
+  - user: 6aee588ba8944517bae8be19ac464db1
+  - user: 5657eabd76b547eda1abc70f373dee3e
 - badges: []
   cards:
   - entities:
@@ -1464,20 +1629,24 @@ views:
       name: Toilet
     - entity: sensor.bewegingssensor_keuken_batterij
       name: Keuken
+    - entity: sensor.bewegingssensor_keuken_aanrecht_batterij
+      name: Keuken aanrecht
     - entity: sensor.bewegingssensor_trap_batterij
       name: Trap
     - entity: sensor.overloop_batterij
       name: Overloop
-    - entity: sensor.bewegingssensor_computerkamer_batterij
-      name: Computerkamer
     - entity: sensor.bewegingssensor_waskamer_batterij
       name: Waskamer
     - entity: sensor.badkamer_spiegel_batterij
       name: Badkamer spiegel
     - entity: sensor.bewegingssensor_badkamer_batterij
       name: Badkamer douche
-    - entity: sensor.benext_dhs_zw_snmt_01_multi_sensor_battery_level
-      name: Ongebruikte BeNext sensor
+    - entity: sensor.bewegingssensor_computerkamer_batterij
+      name: Computerkamer
+    - entity: sensor.computerkamer_maurice_batterij
+      name: Computerkamer werkplek Maurice
+    - entity: sensor.computerkamer_esther_batterij
+      name: Computerkamer werkplek Esther
     show_header_toggle: false
     title: Bewegingssensors
     type: entities
@@ -1490,20 +1659,27 @@ views:
       name: Achterdeur
     - entity: sensor.tuindeuren_batterij
       name: Tuindeuren
+    - entity: sensor.deursensor_kelder_battery_level
+      name: Kelder
     show_header_toggle: false
+    theme: Backend-selected
     title: Deursensors
     type: entities
   - entities:
-    - entity: sensor.switch_power_down_voordeur_batterij
-      name: Power down voordeur
-    - entity: sensor.dimmer_switch_woonkamer_batterij
-      name: Dimmer woonkamer
     - entity: sensor.switch_power_up_bank_rechts_batterij
       name: Power up bank rechts
-    - entity: sensor.dimmer_switch_batterij
-      name: Dimmer keuken
+    - entity: sensor.switch_power_down_voordeur_batterij
+      name: Power down voordeur
     - entity: sensor.switch_power_down_achterdeur_batterij
       name: Power down achterdeur
+    - entity: sensor.dimmer_switch_woonkamer_batterij
+      name: Dimmer woonkamer
+    - entity: sensor.dimmer_switch_badkamer_battery_level
+      name: Dimmer badkamer
+    - entity: sensor.dimmer_switch_batterij
+      name: Dimmer keuken
+    - entity: sensor.switch_switch_terraslampjes
+      name: Switch terraslampjes
     show_header_toggle: false
     title: Switches
     type: entities
@@ -1527,9 +1703,24 @@ views:
       yellow: 14
     theme: default
     type: gauge
+  - entities:
+    - entity: sensor.battery_level
+      name: iPhone Esther
+    - entity: sensor.privetelefoon_maurice_batterij
+      name: FairPHone Maurice
+    title: Telefoons
+    type: entities
+  - entities:
+    - entity: sensor.vibratiesensor_deurbel_battery_level
+      name: Deurbel
+    title: Trillingssensors
+    type: entities
   icon: mdi:battery-20
   path: batterijen
   title: Batterijen
+  visible:
+  - user: 6aee588ba8944517bae8be19ac464db1
+  - user: 5657eabd76b547eda1abc70f373dee3e
 - badges: []
   cards:
   - entities:

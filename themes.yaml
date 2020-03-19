@@ -20,3 +20,4 @@ Floorplan:
   state-icon-active-color: "#fbd150"
   state-icon-unavailable-color: var(--disabled-text-color)
   divider-color: "#eeeeee"
+  card-background-color: white
