@@ -796,22 +796,37 @@
       state: 'on'
     switch.stekker_bij_de_deurbel:
       state: 'on'
-- id: 'computerkamer_automatisch_avond'
+- id: computerkamer_automatisch_avond
   name: Computerkamer (automatisch avond)
   entities:
     light.computerkamerspot1:
-      brightness: 70
-      color_temp: 300
+      brightness: 101
+      color_temp: 387
+      friendly_name: Computerkamerspot1
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
       state: 'on'
+      supported_features: 43
     light.computerkamerspot2:
-      brightness: 30
-      color_temp: 400
+      brightness: 90
+      color_temp: 373
+      friendly_name: Computerkamerspot2
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
       state: 'on'
+      supported_features: 43
     light.computerkamerspot3:
-      brightness: 120
-      color_temp: 300
+      brightness: 138
+      color_temp: 328
+      friendly_name: Computerkamerspot3
+      is_deconz_group: false
+      max_mireds: 500
+      min_mireds: 153
       state: 'on'
-- id: 'computerkamer_automatisch_overdag'
+      supported_features: 43
+- id: computerkamer_automatisch_overdag
   name: Computerkamer (automatisch overdag)
   entities:
     light.computerkamerspot1:

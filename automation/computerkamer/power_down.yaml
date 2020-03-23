@@ -1,0 +1,9 @@
+- id: power_down_licht_computerkamer_uit
+  alias: "[POWER DOWN] Licht computerkamer uit"
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.computerkamer_groep_deconz

@@ -1,28 +1,23 @@
 # A script to turn the lights in the kitchen off one-by-one to give it a
 # bit of a dimming effect.
-zet_keuken_licht_ut:
+zet_keuken_licht_uit:
   alias: Zet keuken licht uit
   sequence:
     - service: light.turn_off
       data:
         entity_id: light.keukenspot6
-    - service: script.ugly_delay
     - service: light.turn_off
       data:
         entity_id: light.keukenspot5
-    - service: script.ugly_delay
     - service: light.turn_off
       data:
         entity_id: light.keukenspot4
-    - service: script.ugly_delay
     - service: light.turn_off
       data:
         entity_id: light.keukenspot3
-    - service: script.ugly_delay
     - service: light.turn_off
       data:
         entity_id: light.keukenspot2
-    - service: script.ugly_delay
     - service: light.turn_off
       data:
         entity_id: light.keukenspot1

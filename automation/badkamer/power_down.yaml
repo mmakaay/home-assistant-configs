@@ -1,0 +1,9 @@
+- id: power_down_licht_badkamer_uit
+  alias: "[POWER DOWN] Licht badkamer uit"
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.badkamer_groep_deconz

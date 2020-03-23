@@ -1,0 +1,18 @@
+- id: power_down_licht_gang_uit
+  alias: "[POWER DOWN] Licht gang uit"
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.gang_groep_deconz
+    # Stop the cooldown timer, so movement will trigger the light in the
+    # hallway to go on. If we triggered a power_down from within the living
+    # room, we want the hallway light to work when going to bed for example.
+    - wait_template: "{{ is_state('timer.gang_cooldown', 'active') }}"
+      timeout: 5      
+      continue_on_timeout: 'false'
+    - service: timer.cancel
+      data:
+        entity_id: timer.gang_cooldown

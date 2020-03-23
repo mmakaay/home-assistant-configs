@@ -131,11 +131,36 @@ frontend:
   themes: !include themes.yaml
 
 # These must be included like stated here, in order to make
-# it possible to edit these customization through the GUI.
+# it possible to edit these customizations through the GUI.
 script: !include_dir_merge_named scripts/
 scene: !include scenes.yaml
+
 homeassistant:
+  # This one must be included like stated here, in order to make
+  # it possible to edit these customizations through the GUI.
   customize: !include customize.yaml
+
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      allow_bypass_login: true
+      trusted_network:
+        - 192.168.100.0/25
+      trusted_users:
+        192.168.100.1: mauricem
+        192.168.100.2: mauricem 
+        192.168.100.3: estherb
+        192.168.100.4: estherb 
+        192.168.100.5: estherb
+        192.168.100.6: estherb 
+        192.168.100.7: estherb
+        192.168.100.8: estherb 
+        192.168.100.9: mauricem
+        192.168.100.10: mauricem 
+        192.168.100.11: mauricem
+        192.168.100.12: mauricem 
+        192.168.100.13: estherb
+        192.168.100.14: estherb
 
 # Automation old is for manual automation files. The 
 # auomations.yaml is used for automations that are

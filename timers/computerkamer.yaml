@@ -1,3 +1,13 @@
+computerkamer:
+  name: Computerkamer
+  duration: 00:10:00
+  icon: mdi:timer
+
+computerkamer_cooldown:
+  name: Computerkamer motion cooldown timer
+  duration: 00:00:10
+  icon: mdi:snowflake
+
 computerkamer_recent:
   name: Computerkamer recente beweging
   duration: 00:05:00

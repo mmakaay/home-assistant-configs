@@ -107,7 +107,7 @@
       entity_id: binary_sensor.keuken_aanrecht_beweging
       state: 'off'
   action:
-    - service: script.zet_keuken_licht_ut
+    - service: script.zet_keuken_licht_uit
     - wait_template: "{{ is_state('timer.keuken_cooldown', 'active') }}"
       timeout: 5
       continue_on_timeout: 'false'

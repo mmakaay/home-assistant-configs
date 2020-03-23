@@ -1,0 +1,29 @@
+- id: power_down_licht_woonkamer_uit
+  alias: "[POWER DOWN] Licht woonkamer uit"
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.woonkamer_groep_deconz
+    - service: switch.turn_off
+      data:
+        entity_id: switch.gui_vaaslamp_licht
+    # Note: might be unavailable, because it is switched off by hand too.
+    - service: light.turn_off
+      data:
+        entity_id: light.leeslampje_bank
+
+
+- id: power_down_woonkamer_stroom_uit
+  alias: "[POWER DOWN] woonkamer stroom uit"
+  description: >
+    Reageert op een 'power_down' event door stroom uit te zetten in de woonkamer.
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: script.zet_tvkast_rechts_stroom_uit
+    - service: script.zet_tvkast_links_stroom_uit
+    - service: script.zet_bank_links_stroom_uit

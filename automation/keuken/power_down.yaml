@@ -1,0 +1,20 @@
+- id: power_down_licht_keuken_uit
+  alias: "[POWER DOWN] Licht keuken uit"
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.keuken_groep_deconz
+
+
+- id: power_down_keuken_stroom_uit
+  alias: "[POWER DOWN] keuken stroom uit"
+  description: >
+    Reageert op een 'power_down' event door stroom uit te zetten in de keuken.
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: script.zet_keuken_stroom_uit

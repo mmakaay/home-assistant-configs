@@ -1,0 +1,11 @@
+- id: power_down_ps4_uit
+  alias: "[POWER DOWN] PS4 uit"
+  description: >
+    Reageert op een 'power_down' event door de PS4 uit te zetten.
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.ps4

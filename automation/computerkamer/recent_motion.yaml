@@ -22,8 +22,8 @@
 - id: recent_motion_computerkamer_B
   alias: "[RECENT MOTION] computerkamer, timer herstart"
   description: >
-    Wanneer er beweging is in de ruimte of wanneer de timer afloopt en er is
-    beweging in de ruimte, (her)start dan de timer.
+    Wanneer er beweging is in de ruimte of wanneer een timer afloopt en er is
+    beweging in de ruimte, (her)start dan de timers.
   trigger:
     - platform: event
       event_type: timer.finished

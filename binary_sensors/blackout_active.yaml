@@ -15,6 +15,7 @@ sensors:
            is_state("light.gang_groep_deconz", "off") and
            is_state("light.toilet_groep_deconz", "off") and
            is_state("light.badkamer_groep_deconz", "off") and
+           is_state("light.computerkamer_groep_deconz", "off") and
            is_state("light.onder_het_bed", "off") and
            not is_state("light.leeslampje_bank", "on") and
            is_state("switch.stekker_links_van_de_bank", "off") and

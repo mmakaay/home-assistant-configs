@@ -1,0 +1,42 @@
+- id: power_down_beepbeep_als_alles_al_uitstond
+  alias: "[POWER DOWN] 'beepbeep' als alles al uitstond"
+  description: >
+    Laat ter bevestiging dat alles uit staat een 'beepbeep' signaal
+    horen. Op deze manier kun je als je weggaat horen of de power
+    down opdracht (bijv. met de knop bij de voordeur) gelukt is.
+  trigger:
+    - platform: event
+      event_type: power_down
+  condition:
+    - condition: state
+      entity_id: binary_sensor.blackout_active
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.beepbeep_na_power_down
+      state: 'on'
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.beepbeep_na_power_down
+    - service: shell_command.beepbeep
+
+
+- id: power_down_beepbeep_als_alles_uitstaat
+  alias: "[POWER DOWN] 'beepbeep' als alles uitstaat"
+  description: >
+    Laat ter bevestiging dat alles uit staat een 'beepbeep' signaal
+    horen. Op deze manier kun je als je weggaat horen of de power
+    down opdracht (bijv. met de knop bij de voordeur) gelukt is.
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.blackout_active
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: input_boolean.beepbeep_na_power_down
+      state: 'on'
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.beepbeep_na_power_down
+    - service: shell_command.beepbeep

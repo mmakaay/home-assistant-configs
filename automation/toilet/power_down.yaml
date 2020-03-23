@@ -1,0 +1,19 @@
+- id: power_down_licht_toilet_uit
+  alias: "[POWER DOWN] Licht toilet uit"
+  trigger:
+    - platform: event
+      event_type: power_down
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.toilet_groep_deconz
+    # Stop the cooldown timer, so movement will trigger the light in the
+    # toilet to go on. If we triggered a power_down from within the living
+    # room, we want the toilet light to work when going to bed for example
+    # (or of course if somebody was in the toilet at this point ;-)
+    - wait_template: "{{ is_state('timer.toilet_cooldown', 'active') }}"
+      timeout: 5      
+      continue_on_timeout: 'false'
+    - service: timer.cancel
+      data:
+        entity_id: timer.toilet_cooldown
